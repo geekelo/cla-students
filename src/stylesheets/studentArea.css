@@ -1,0 +1,97 @@
+
+/* Main Student Area */
+.student-area-container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Left Side Nav */
+.student-side-nav {
+  width: 250px;
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: absolute;
+  height: 100%;
+}
+
+.student-nav-list {
+  list-style-type: none;
+  width: 100%;
+}
+
+.student-nav-list li {
+  margin: 20px 0;
+}
+
+.student-nav-link {
+  color: white;
+  font-size: 18px;
+  text-transform: capitalize;
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.student-nav-link:hover {
+  background-color: rgba(140, 109, 207, 0.771);
+}
+
+/* Right Display Area */
+.student-display-area {
+  margin-left: 250px;
+  padding: 30px;
+  flex: 1;
+  background-color: #ffffff;
+  height: 100%;
+}
+
+.student-display-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.student-display-message {
+  font-size: 18px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .student-area-container {
+    flex-direction: column;
+  }
+
+  .student-side-nav {
+    width: 100%;
+    position: relative;
+    flex-direction: row;
+    justify-content: space-around;
+    height: auto;
+    padding: 10px 0;
+  }
+
+  .student-nav-list {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+
+  .student-nav-list li {
+    margin: 0;
+  }
+
+  .student-nav-link {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .student-display-area {
+    margin-left: 0;
+    padding: 20px;
+  }
+}

@@ -1,0 +1,70 @@
+.landing {
+  height: 100vh;
+  background-image: url('../assets/videos/cla-landing.gif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: #fff;
+  text-align: center;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(69, 46, 121, 0.551);
+}
+
+.content {
+  z-index: 1;
+  display: flex;
+  width: 80%;
+  flex-direction: column;
+  padding: 20px;
+  margin: auto;
+  margin-top: 9%;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.tagline {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #442e79;
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+  width: 200px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.cta-button:hover {
+  background-color: #442e79;
+  color: #fff;
+}
