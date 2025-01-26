@@ -1,0 +1,8 @@
+{
+  "courses": [
+    { "id": 1, "name": "Introduction to Programming", "locked": false },
+    { "id": 2, "name": "Advanced JavaScript", "locked": true },
+    { "id": 3, "name": "React Basics", "locked": false }
+  ]
+}
+
