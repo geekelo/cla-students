@@ -1,0 +1,9 @@
+{
+  "assignments": [
+    { "id": 1, "name": "Assignment 1", "status": "pending", "marked": false, "locked": false },
+    { "id": 2, "name": "Assignment 2", "status": "submitted", "marked": false, "locked": false },
+    { "id": 3, "name": "Assignment 3", "status": "marked", "marked": true, "locked": false },
+    { "id": 4, "name": "Assignment 4", "status": "pending", "marked": false, "locked": true },
+    { "id": 5, "name": "Assignment 5", "status": "submitted", "marked": false, "locked": true }
+  ] 
+}
