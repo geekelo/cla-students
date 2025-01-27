@@ -39,9 +39,9 @@ function FooterSection() {
               </p>
             </div>
             <div>
-              <h6>Mision</h6>
+              <h6>Mission</h6>
               <p className="text-justify">
-                Our Mission is to develop Christain-driven leaders who are
+                Our Mission is to develop Christian-driven leaders who are
                 adaptive in bringing change and influential in advancing God&apos;s
                 kingdom on earth.
               </p>
@@ -64,7 +64,7 @@ function FooterSection() {
               </li>
               <li>
                 <p to="/facaulties" className="links">
-                  Facaulties
+                  Faculties
                 </p>
               </li>
               <li>
@@ -75,11 +75,6 @@ function FooterSection() {
               <li>
                 <p to="/contact" className="links">
                   Contact
-                </p>
-              </li>
-              <li>
-                <p to="/features" className="links">
-                  Features
                 </p>
               </li>
               <li>
