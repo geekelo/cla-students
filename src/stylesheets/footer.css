@@ -99,8 +99,10 @@
 }
 
 .site-footer hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
   border-top: #bbb;
-  border-color: rgb(197, 168, 1);
+  border-color: #bea7ff ;
   opacity: 0.5;
 }
 
@@ -170,6 +172,14 @@
   margin-right: 0;
   border-radius: 100%;
   background-color: #33353d;
+}
+
+.mission-vision {
+  display: flex;
+  flex: 30%;
+  text-align: left;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .site-footer .social-icons a:active,

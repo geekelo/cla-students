@@ -6,7 +6,7 @@ function Header() {
   return (
     <header className="header">
       <div className="logo-container">
-        <img src="/logo.png" alt="Logo" className="logo" />
+        <img src="/JJRSF purple.png" alt="Logo" className="logo" />
       </div>
       <nav className="nav">
         <ul className="nav-list">
@@ -16,8 +16,13 @@ function Header() {
             </a>
           </li>
           <li className="nav-item">
-            <a href="#contact" className="nav-link">
-              Contact
+            <a href="#programs" className="nav-link">
+              Programs
+            </a>
+          </li>
+          <li className="nav-item">
+            <a href="#facauties" className="nav-link">
+              Facaulties
             </a>
           </li>
           <li className="nav-item">
@@ -26,8 +31,8 @@ function Header() {
             </a>
           </li>
           <li className="nav-item">
-            <a href="#courses" className="nav-link">
-              Courses
+            <a href="#contact" className="nav-link">
+              Contact
             </a>
           </li>
           <li className="nav-item">
