@@ -1,0 +1,107 @@
+/* Submissions Section Wrapper */
+.submissions-section-wrapper {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Tabs */
+.submissions-tabs {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-button.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.tab-button:hover {
+  background-color: #e0e0e0;
+}
+
+/* Submissions Section Content */
+.submissions-section-content {
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Submissions List */
+.submissions-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.submission-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submission-item:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.02);
+}
+
+.submission-text {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.submission-date {
+  font-size: 0.9rem;
+  color: gray;
+}
+
+/* No Submissions Message */
+.no-submissions {
+  text-align: center;
+  font-size: 1rem;
+  color: #666;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .submissions-section-wrapper {
+    padding: 15px;
+  }
+
+  .tab-button {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+
+  .submission-item {
+    padding: 10px;
+  }
+}

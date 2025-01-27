@@ -1,0 +1,109 @@
+/* Calendar container styles */
+.calendar-container {
+  background-color: #f7f9fc;
+  padding: 40px;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Header Styles */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.calendar-title {
+  font-size: 36px;
+  font-weight: bold;
+  color: #333;
+}
+
+.date-filter {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+}
+
+.date-filter:focus {
+  border-color: #5a67d8;
+}
+
+/* Events List */
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.event-card {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.event-card:hover {
+  transform: scale(1.05);
+}
+
+.event-date {
+  font-size: 18px;
+  color: #333;
+  font-weight: bold;
+}
+
+.event-day {
+  font-size: 20px;
+  color: #3b8b3a;
+}
+
+.event-details {
+  flex-grow: 1;
+  margin-left: 20px;
+}
+
+.event-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #444;
+}
+
+.event-description {
+  font-size: 16px;
+  color: #555;
+  margin-top: 8px;
+}
+
+.event-title,
+.event-description {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .calendar-container {
+    padding: 20px;
+  }
+
+  .events-list {
+    gap: 10px;
+  }
+
+  .event-card {
+    padding: 15px;
+  }
+
+  .event-title {
+    font-size: 20px;
+  }
+
+  .event-description {
+    font-size: 14px;
+  }
+}

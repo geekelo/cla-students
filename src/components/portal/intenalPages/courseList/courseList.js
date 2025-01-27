@@ -36,13 +36,12 @@ function CourseList({ courses }) {
   );
 }
 
-// Prop Validation
 CourseList.propTypes = {
   courses: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired, // Unique identifier
-      name: PropTypes.string.isRequired, // Course name
-      locked: PropTypes.bool.isRequired, // Lock status
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      locked: PropTypes.bool.isRequired,
     }),
   ).isRequired,
 };

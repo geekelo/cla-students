@@ -6,19 +6,9 @@ import ExtraCourses from './extraCourses';
 function Courses() {
   const [activeTab, setActiveTab] = useState('program');
 
-  const renderSection = () => {
-    switch (activeTab) {
-      case 'program':
-        return <ProgramCourses />;
-      case 'extra':
-        return <ExtraCourses />;
-      default:
-        return null;
-    }
-  };
-
   return (
-    <div className="courses-container">
+    <div className="courses-page">
+      {/* Top Navigation */}
       <div className="courses-nav">
         <button
           type="button"
@@ -35,7 +25,11 @@ function Courses() {
           Extra Courses
         </button>
       </div>
-      <div className="courses-content">{renderSection()}</div>
+
+      {/* Content Section */}
+      <div className="courses-content">
+        {activeTab === 'program' ? <ProgramCourses /> : <ExtraCourses />}
+      </div>
     </div>
   );
 }
