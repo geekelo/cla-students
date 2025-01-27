@@ -9,12 +9,11 @@ import Submissions from './intenalPages/submissions/index';
 import InstructorDesk from './intenalPages/instructorDesk/index';
 
 function StudentArea() {
-  const [activePage, setActivePage] = useState('profile');
+  const [activePage, setActivePage] = useState('dashboard');
 
   // Add this function to determine button class
-  const getButtonClass = (pageName) => {
-    return `student-nav-link ${activePage === pageName ? 'active' : ''}`;
-  };
+  const getButtonClass = (pageName) => `student-nav-link ${activePage === pageName ? 'active' : ''}`;
+
 
   // Render content based on the active page
   const renderContent = () => {
