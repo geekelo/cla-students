@@ -27,11 +27,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80%;
+  width: 100%;
   flex-direction: column;
   padding: 20px;
   margin: auto;
-  margin-top: 12%;
+  height: 73vh;
+  /* margin-top: 12%; */
   font-family: 'Poppins', sans-serif;
 }
 
@@ -43,11 +44,11 @@
 
 .subtitle {
   font-size: 2rem;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 .tagline {
-  font-size: 1.5rem;
+  font-size: 1rem;
   margin-bottom: 30px;
   line-height: 1.6;
 }
