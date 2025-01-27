@@ -1,0 +1,8 @@
+{
+  "events" : [
+      { "id": 1, "title": "Event 1", "description": "This is the first event.", "date": "2025-01-28" },
+      { "id": 2, "title": "Event 2", "description": "This is the second event.", "date": "2025-01-25" },
+      { "id": 3, "title": "Event 3", "description": "This is the third event.", "date": "2025-02-10" },
+      { "id": 4, "title": "Event 4", "description": "This is the fourth event.", "date": "2025-02-05" }
+    ]
+}

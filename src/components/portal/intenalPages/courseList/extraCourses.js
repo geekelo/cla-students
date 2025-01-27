@@ -2,23 +2,26 @@ import React, { useState } from 'react';
 import CourseList from './courseList';
 
 function ExtraCourses() {
-  const [activeStatus, setActiveStatus] = useState('active');
+  const [activeStatus, setActiveStatus] = useState('done');
 
   const courses = {
     done: [
       { id: 1, name: 'Photography Essentials', locked: false },
+      { id: 2, name: 'Art History Basics', locked: false },
     ],
     active: [
-      { id: 2, name: 'Creative Writing', locked: false },
-      { id: 3, name: 'Public Speaking', locked: true },
+      { id: 3, name: 'Creative Writing', locked: false },
+      { id: 4, name: 'Public Speaking', locked: true },
     ],
     pending: [
-      { id: 4, name: 'Financial Planning Basics', locked: true },
+      { id: 5, name: 'Financial Planning Basics', locked: true },
+      { id: 6, name: 'Digital Marketing 101', locked: true },
     ],
   };
 
   return (
     <div className="extra-courses">
+      {/* Tab Navigation for Status */}
       <div className="course-status-nav">
         <button
           type="button"
@@ -42,6 +45,8 @@ function ExtraCourses() {
           Pending
         </button>
       </div>
+
+      {/* Course List */}
       <CourseList courses={courses[activeStatus]} />
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import '../../../../stylesheets/calendar.css';
+import '../../../../stylesheets/calender.css';
 
 function Calendar({ events }) {
   const [filteredEvents, setFilteredEvents] = useState(events);
@@ -23,7 +23,7 @@ function Calendar({ events }) {
   };
 
   // Sort events by date (closest to farthest)
-  const sortedEvents = filteredEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
+  const sortedEvents = filteredEvents?.sort((a, b) => new Date(a.date) - new Date(b.date));
 
   return (
     <div className="calendar-container">
@@ -38,7 +38,7 @@ function Calendar({ events }) {
       </div>
 
       <div className="events-list">
-        {sortedEvents.length > 0 ? (
+        {sortedEvents?.length > 0 ? (
           sortedEvents.map((event) => (
             <div key={event.id} className="event-card">
               <div className="event-date">
