@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import '../../stylesheets/studentArea.css';
-import Profile from './intenalPages/profile/profile';
+import Profile from './intenalPages/profile/index';
 import Courses from './intenalPages/courseList/index';
 import Assignments from './intenalPages/assignments/index';
-import Dashboard from './intenalPages/dashboard';
+import Dashboard from './intenalPages/dashboard/index';
+import Calendar from './intenalPages/calender/index';
 
 function StudentArea() {
   const [activePage, setActivePage] = useState('profile');
@@ -20,7 +21,7 @@ function StudentArea() {
       case 'dashboard':
         return <Dashboard />;
       case 'calendar':
-        return <div className="student-display-area">Calendar Page Content</div>;
+        return <Calendar />;
       default:
         return (
           <div className="student-display-area">
@@ -83,7 +84,7 @@ function StudentArea() {
               className="student-nav-link"
               aria-label="View Calendar"
             >
-              Calendar
+              Live Classes
             </button>
           </li>
         </ul>
