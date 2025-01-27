@@ -13,7 +13,7 @@
 
 .dashboard-title {
   font-size: 36px;
-  color: #333;
+  color: rgba(68,46,121,255) ;
   margin: 0;
 }
 
@@ -60,7 +60,7 @@
 .notices-title {
   font-size: 24px;
   font-weight: bold;
-  color: rgb(91, 65, 151);
+  color: rgba(68,46,121,255) ;
   margin-bottom: 20px;
   display: flex;
   align-items: center;
@@ -68,7 +68,7 @@
 }
 
 .notice-icon {
-  color: rgb(91, 65, 151);
+  color: rgba(68,46,121,255) ;
 }
 
 .notices-list {
