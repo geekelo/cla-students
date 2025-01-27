@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 // import { p } from 'react-router-dom';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faLinkedin,
   faTwitter,
   faYoutube,
-} from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope, faGlobe } from "@fortawesome/free-solid-svg-icons";
-import "../stylesheets/footer.css";
+} from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope, faGlobe } from '@fortawesome/free-solid-svg-icons';
+import '../stylesheets/footer.css';
 // import footerlogo from '../../assets/footerlogo.png';
 
 // FooterSection component
@@ -42,7 +42,7 @@ function FooterSection() {
               <h6>Mision</h6>
               <p className="text-justify">
                 Our Mission is to develop Christain-driven leaders who are
-                adaptive in bringing change and influential in advancing God’s
+                adaptive in bringing change and influential in advancing God&apos;s
                 kingdom on earth.
               </p>
             </div>
