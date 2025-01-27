@@ -57,7 +57,7 @@
   flex: 1;
   background-color: #ffffff;
   height: 100%;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .student-display-title {
