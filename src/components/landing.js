@@ -1,5 +1,5 @@
-import React from "react";
-import "../stylesheets/landing.css";
+import React from 'react';
+import '../stylesheets/landing.css';
 
 function Landing() {
   return (
@@ -9,7 +9,7 @@ function Landing() {
           <h1 className="title">CHRISTIAN LEADERSHIP ACADEMY</h1>
           <h2 className="subtitle">JJRS FOUNDATION EDUCATION SUPPORT INITIATIVE</h2>
           <p className="tagline">
-            Our academy is committed to providing high-quality, faith-based training to students worldwide.
+            Our academy is committed to providing high-quality, faith-based training to students .
           </p>
           <a href="#apply" className="cta-button">
             APPLY HERE

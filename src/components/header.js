@@ -6,7 +6,7 @@ function Header() {
   return (
     <header className="header">
       <div className="logo-container">
-        <img src="/logo.png" alt="Logo" className="logo" />
+        <img src="/JJRSF purple.png" alt="Logo" className="logo" />
       </div>
       <nav className="nav">
         <ul className="nav-list">
