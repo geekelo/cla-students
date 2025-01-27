@@ -87,7 +87,6 @@ function FooterSection() {
                   Privacy Policy
                 </p>
               </li>
-              
             </ul>
           </div>
         </div>

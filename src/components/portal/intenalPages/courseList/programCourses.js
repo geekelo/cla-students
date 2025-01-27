@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CourseList from './courseList';
 
 function ProgramCourses() {
-  const [activeStatus, setActiveStatus] = useState('active');
+  const [activeStatus, setActiveStatus] = useState('done');
 
   const courses = {
     done: [
@@ -20,6 +20,7 @@ function ProgramCourses() {
 
   return (
     <div className="program-courses">
+      {/* Tab Navigation for Status */}
       <div className="course-status-nav">
         <button
           type="button"
@@ -43,6 +44,8 @@ function ProgramCourses() {
           Pending
         </button>
       </div>
+
+      {/* Course List */}
       <CourseList courses={courses[activeStatus]} />
     </div>
   );

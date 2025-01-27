@@ -1,0 +1,140 @@
+/* Assignments Section */
+.assignments-section {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+/* Tabs */
+.assignments-tabs {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+  gap: 10px;
+  flex-wrap: wrap; /* Allow tabs to wrap on small screens */
+}
+
+.tab-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 120px; /* Ensures tabs have a minimum size */
+}
+
+.tab-button.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.tab-button:hover {
+  background-color: #e0e0e0;
+}
+
+/* Assignments List */
+.assignments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Assignment Item */
+.assignment-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%; /* Ensure assignments take full width */
+}
+
+.assignment-item:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.02);
+}
+
+.assignment-name {
+  font-size: 1rem;
+  font-weight: bold;
+  word-break: break-word; /* Prevents long words from overflowing */
+}
+
+.lock-icon {
+  font-size: 0.9rem;
+  color: gray;
+}
+
+/* No Assignments Message */
+.no-assignments {
+  text-align: center;
+  font-size: 1rem;
+  color: #666;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .assignments-section {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  .assignments-tabs {
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .tab-button {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    min-width: 100px; /* Ensure tabs don't shrink too much */
+  }
+
+  .assignment-item {
+    padding: 12px;
+  }
+
+  .assignment-name {
+    font-size: 0.95rem;
+  }
+
+  .no-assignments {
+    font-size: 0.9rem;
+  }
+}
+
+/* Very Small Screens (phones) */
+@media (max-width: 480px) {
+  .assignments-section {
+    margin: 5px;
+    padding: 10px;
+  }
+
+  .tab-button {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    min-width: 80px;
+  }
+
+  .assignment-item {
+    padding: 10px;
+  }
+
+  .assignment-name {
+    font-size: 0.9rem;
+  }
+
+  .no-assignments {
+    font-size: 0.8rem;
+  }
+}

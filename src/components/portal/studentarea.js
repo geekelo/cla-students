@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import '../../stylesheets/studentArea.css';
-import Profile from './intenalPages/profile/profile';
+import Profile from './intenalPages/profile/index';
 import Courses from './intenalPages/courseList/index';
 import Assignments from './intenalPages/assignments/index';
-import Dashboard from './intenalPages/dashboard';
+import Dashboard from './intenalPages/dashboard/index';
+import Calendar from './intenalPages/calender/index';
+import Submissions from './intenalPages/submissions/index';
+import InstructorDesk from './intenalPages/instructorDesk/index';
 
 function StudentArea() {
   const [activePage, setActivePage] = useState('profile');
@@ -19,8 +22,12 @@ function StudentArea() {
         return <Assignments />;
       case 'dashboard':
         return <Dashboard />;
+      case 'submissions':
+        return <Submissions />;
       case 'calendar':
-        return <div className="student-display-area">Calendar Page Content</div>;
+        return <Calendar />;
+      case 'instructorDesk':
+        return <InstructorDesk />;
       default:
         return (
           <div className="student-display-area">
@@ -39,11 +46,21 @@ function StudentArea() {
           <li>
             <button
               type="button"
-              onClick={() => setActivePage('profile')}
+              onClick={() => setActivePage('dashboard')}
               className="student-nav-link"
-              aria-label="View Profile"
+              aria-label="View Dashboard"
             >
-              Profile
+              Progress Board
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              onClick={() => setActivePage('instructorDesk')}
+              className="student-nav-link"
+              aria-label="View My Desk"
+            >
+              My Desk
             </button>
           </li>
           <li>
@@ -69,11 +86,11 @@ function StudentArea() {
           <li>
             <button
               type="button"
-              onClick={() => setActivePage('dashboard')}
+              onClick={() => setActivePage('submissions')}
               className="student-nav-link"
-              aria-label="View Dashboard"
+              aria-label="View Submissions"
             >
-              Progress Board
+              Submissions
             </button>
           </li>
           <li>
@@ -83,7 +100,17 @@ function StudentArea() {
               className="student-nav-link"
               aria-label="View Calendar"
             >
-              Calendar
+              Live Classes
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              onClick={() => setActivePage('profile')}
+              className="student-nav-link"
+              aria-label="View Profile"
+            >
+              Profile
             </button>
           </li>
         </ul>
