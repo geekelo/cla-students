@@ -16,8 +16,13 @@ function Header() {
             </a>
           </li>
           <li className="nav-item">
-            <a href="#contact" className="nav-link">
-              Contact
+            <a href="#programs" className="nav-link">
+              Programs
+            </a>
+          </li>
+          <li className="nav-item">
+            <a href="#facauties" className="nav-link">
+              Facaulties
             </a>
           </li>
           <li className="nav-item">
@@ -26,13 +31,8 @@ function Header() {
             </a>
           </li>
           <li className="nav-item">
-            <a href="#courses" className="nav-link">
-              Courses
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="#facauties" className="nav-link">
-              Facaulties
+            <a href="#contact" className="nav-link">
+              Contact
             </a>
           </li>
           <li className="nav-item">

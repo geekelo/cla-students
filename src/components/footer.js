@@ -58,6 +58,21 @@ function FooterSection() {
                 </p>
               </li>
               <li>
+                <p to="/courses" className="links">
+                  Courses
+                </p>
+              </li>
+              <li>
+                <p to="/facaulties" className="links">
+                  Facaulties
+                </p>
+              </li>
+              <li>
+                <p to="/faqs" className="links">
+                  Help | FAQs
+                </p>
+              </li>
+              <li>
                 <p to="/contact" className="links">
                   Contact
                 </p>
@@ -72,21 +87,7 @@ function FooterSection() {
                   Privacy Policy
                 </p>
               </li>
-              <li>
-                <p to="/facaulties" className="links">
-                  Facaulties
-                </p>
-              </li>
-              <li>
-                <p to="/courses" className="links">
-                  Courses
-                </p>
-              </li>
-              <li>
-                <p to="/faqs" className="links">
-                  Help | FAQs
-                </p>
-              </li>
+              
             </ul>
           </div>
         </div>
