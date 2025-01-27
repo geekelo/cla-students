@@ -55,7 +55,7 @@
   margin-left: 250px;
   padding: 30px;
   flex: 1;
-  background-color: #ffffff;
+  background-color: rgb(246, 244, 249);
   height: 100%;
   overflow-y: scroll;
 }
