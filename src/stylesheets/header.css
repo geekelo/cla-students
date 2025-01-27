@@ -43,7 +43,7 @@
 .nav-link {
   color: rgba(68,46,121,255) ;
   text-decoration: none;
-  font-size: 30px;
+  font-size: 18px;
   font-weight: 500;
   transition: color 0.3s;
 }
