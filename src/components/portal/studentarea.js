@@ -1,4 +1,14 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faChartLine,
+  faBook,
+  faClipboardList,
+  faInbox,
+  faVideo,
+  faUser,
+  faLaptop,
+} from '@fortawesome/free-solid-svg-icons';
 import '../../stylesheets/studentArea.css';
 import Profile from './intenalPages/profile/index';
 import Courses from './intenalPages/courseList/index';
@@ -51,7 +61,7 @@ function StudentArea() {
               className={getButtonClass('dashboard')}
               aria-label="View Dashboard"
             >
-              Progress Board
+              <FontAwesomeIcon icon={faChartLine} className="nav-icon" /> Progress Board
             </button>
           </li>
           <li>
@@ -61,7 +71,7 @@ function StudentArea() {
               className={getButtonClass('instructorDesk')}
               aria-label="View My Desk"
             >
-              My Desk
+              <FontAwesomeIcon icon={faLaptop} className="nav-icon" /> My Desk
             </button>
           </li>
           <li>
@@ -71,7 +81,7 @@ function StudentArea() {
               className={getButtonClass('courses')}
               aria-label="View Courses"
             >
-              Courses
+              <FontAwesomeIcon icon={faBook} className="nav-icon" /> Courses
             </button>
           </li>
           <li>
@@ -81,7 +91,7 @@ function StudentArea() {
               className={getButtonClass('assignments')}
               aria-label="View Assignments"
             >
-              Assignments
+              <FontAwesomeIcon icon={faClipboardList} className="nav-icon" /> Assignments
             </button>
           </li>
           <li>
@@ -91,7 +101,7 @@ function StudentArea() {
               className={getButtonClass('submissions')}
               aria-label="View Submissions"
             >
-              Submissions
+              <FontAwesomeIcon icon={faInbox} className="nav-icon" /> Submissions
             </button>
           </li>
           <li>
@@ -101,7 +111,7 @@ function StudentArea() {
               className={getButtonClass('calendar')}
               aria-label="View Calendar"
             >
-              Live Classes
+              <FontAwesomeIcon icon={faVideo} className="nav-icon" /> Live Classes
             </button>
           </li>
           <li>
@@ -111,7 +121,7 @@ function StudentArea() {
               className={getButtonClass('profile')}
               aria-label="View Profile"
             >
-              Profile
+              <FontAwesomeIcon icon={faUser} className="nav-icon" /> Profile
             </button>
           </li>
         </ul>

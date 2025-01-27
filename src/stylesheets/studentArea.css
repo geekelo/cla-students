@@ -104,3 +104,8 @@
     padding: 20px;
   }
 }
+
+.nav-icon {
+  margin-right: 10px;
+  width: 16px;
+}

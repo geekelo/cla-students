@@ -86,7 +86,7 @@
 }
 
 .site-footer h6 {
-  color: #fff;
+  color:  rgb(246, 244, 249);
   font-size: 16px;
   text-transform: uppercase;
   margin-top: 5px;
@@ -113,6 +113,7 @@
 .footerlogo {
   width: 50%;
 }
+
 
 .social-icons {
   width: 100%;
