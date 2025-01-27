@@ -7,9 +7,9 @@ function LoginPage() {
       <div className="login-wrapper">
         {/* Left Column */}
         <div className="login-left">
-          <img src="/logo.png" alt="Logo" className="login-logo" />
+          <img src="/lightBg.png" alt="Logo" className="login-logo" />
           <h2 className="login-welcome">Welcome Back!</h2>
-          <p className="login-message">Sign in to access your account and explore more features.</p>
+          <p className="login-message">Sign in to access your account and explore more courses.</p>
         </div>
 
         {/* Right Column */}
