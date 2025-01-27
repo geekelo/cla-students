@@ -25,7 +25,7 @@ function FooterSection() {
               providing high-quality, faith-based training to students
               worldwide. In the first year of running this program, all our
               courses will be free for all students. We aim to foster a
-              supportive environment where believers can grow spiritually
+              supportive environment where believers can grow spiritually.
             </p>
           </div>
 
@@ -101,7 +101,7 @@ function FooterSection() {
             <div>
               {/* <img src={footerlogo} className="footerlogo" alt="logo" /> */}
               <p className="copyright-text">
-                Copyright &copy; 2024 All Rights Reserved by &nbsp;
+                Copyright &copy; 2025 All Rights Reserved by &nbsp;
                 <a href="https://geekelo.com.ng">JJRSF CLA</a>
               </p>
             </div>
