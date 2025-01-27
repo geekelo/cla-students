@@ -9,9 +9,10 @@ import Submissions from './intenalPages/submissions/index';
 import InstructorDesk from './intenalPages/instructorDesk/index';
 
 function StudentArea() {
-  const [activePage, setActivePage] = useState('profile');
+  const [activePage, setActivePage] = useState('dashboard');
 
-  // Render content based on the active page
+  const getButtonClass = (pageName) => `student-nav-link ${activePage === pageName ? 'active' : ''}`;
+
   const renderContent = () => {
     switch (activePage) {
       case 'profile':
@@ -47,7 +48,7 @@ function StudentArea() {
             <button
               type="button"
               onClick={() => setActivePage('dashboard')}
-              className="student-nav-link"
+              className={getButtonClass('dashboard')}
               aria-label="View Dashboard"
             >
               Progress Board
@@ -57,7 +58,7 @@ function StudentArea() {
             <button
               type="button"
               onClick={() => setActivePage('instructorDesk')}
-              className="student-nav-link"
+              className={getButtonClass('instructorDesk')}
               aria-label="View My Desk"
             >
               My Desk
@@ -67,7 +68,7 @@ function StudentArea() {
             <button
               type="button"
               onClick={() => setActivePage('courses')}
-              className="student-nav-link"
+              className={getButtonClass('courses')}
               aria-label="View Courses"
             >
               Courses
@@ -77,7 +78,7 @@ function StudentArea() {
             <button
               type="button"
               onClick={() => setActivePage('assignments')}
-              className="student-nav-link"
+              className={getButtonClass('assignments')}
               aria-label="View Assignments"
             >
               Assignments
@@ -87,7 +88,7 @@ function StudentArea() {
             <button
               type="button"
               onClick={() => setActivePage('submissions')}
-              className="student-nav-link"
+              className={getButtonClass('submissions')}
               aria-label="View Submissions"
             >
               Submissions
@@ -97,7 +98,7 @@ function StudentArea() {
             <button
               type="button"
               onClick={() => setActivePage('calendar')}
-              className="student-nav-link"
+              className={getButtonClass('calendar')}
               aria-label="View Calendar"
             >
               Live Classes
@@ -107,7 +108,7 @@ function StudentArea() {
             <button
               type="button"
               onClick={() => setActivePage('profile')}
-              className="student-nav-link"
+              className={getButtonClass('profile')}
               aria-label="View Profile"
             >
               Profile
