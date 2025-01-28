@@ -1,8 +1,150 @@
 {
-  "courses": [
-    { "id": 1, "name": "Introduction to Programming", "locked": false },
-    { "id": 2, "name": "Advanced JavaScript", "locked": true },
-    { "id": 3, "name": "React Basics", "locked": false }
+  "done": [
+    {
+      "id": 1,
+      "name": "Photography Essentials",
+      "locked": false,
+      "topics": [
+        {
+          "id": 1,
+          "title": "Introduction to React",
+          "description": "Learn what React is and why it is useful, including an overview of its core features and use cases."
+        },
+        {
+          "id": 2,
+          "title": "JSX Basics",
+          "description": "Understand how JSX works in React, including its syntax, rules, and how to incorporate it into components."
+        },
+        {
+          "id": 3,
+          "title": "State and Props",
+          "description": "Learn about state and props in React components and how they enable dynamic and reusable code."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Art History Basics",
+      "locked": false,
+      "topics": [
+        {
+          "id": 1,
+          "title": "Introduction to React",
+          "description": "Learn what React is and why it is useful, including an overview of its core features and use cases."
+        },
+        {
+          "id": 2,
+          "title": "JSX Basics",
+          "description": "Understand how JSX works in React, including its syntax, rules, and how to incorporate it into components."
+        },
+        {
+          "id": 3,
+          "title": "State and Props",
+          "description": "Learn about state and props in React components and how they enable dynamic and reusable code."
+        },
+        {
+          "id": 4,
+          "title": "Component Lifecycle",
+          "description": "Explore the lifecycle methods in React and how they are used for managing component behavior."
+        },
+        {
+          "id": 5,
+          "title": "Handling Events",
+          "description": "Understand how to handle user interactions and events in React applications."
+        }
+      ]
+    }
+  ],
+  "active": [
+    {
+      "id": 3,
+      "name": "Creative Writing",
+      "locked": false,
+      "topics": [
+        {
+          "id": 1,
+          "title": "Introduction to React",
+          "description": "Learn what React is and why it is useful, including an overview of its core features and use cases."
+        },
+        {
+          "id": 2,
+          "title": "JSX Basics",
+          "description": "Understand how JSX works in React, including its syntax, rules, and how to incorporate it into components."
+        },
+        {
+          "id": 3,
+          "title": "State and Props",
+          "description": "Learn about state and props in React components and how they enable dynamic and reusable code."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Public Speaking",
+      "locked": true,
+      "topics": [
+        {
+          "id": 1,
+          "title": "Introduction to React",
+          "description": "Learn what React is and why it is useful, including an overview of its core features and use cases."
+        },
+        {
+          "id": 2,
+          "title": "JSX Basics",
+          "description": "Understand how JSX works in React, including its syntax, rules, and how to incorporate it into components."
+        },
+        {
+          "id": 3,
+          "title": "State and Props",
+          "description": "Learn about state and props in React components and how they enable dynamic and reusable code."
+        }
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "id": 5,
+      "name": "Financial Planning Basics",
+      "locked": true,
+      "topics": [
+        {
+          "id": 1,
+          "title": "Introduction to React",
+          "description": "Learn what React is and why it is useful, including an overview of its core features and use cases."
+        },
+        {
+          "id": 2,
+          "title": "JSX Basics",
+          "description": "Understand how JSX works in React, including its syntax, rules, and how to incorporate it into components."
+        },
+        {
+          "id": 3,
+          "title": "State and Props",
+          "description": "Learn about state and props in React components and how they enable dynamic and reusable code."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Digital Marketing 101",
+      "locked": true,
+      "topics": [
+        {
+          "id": 1,
+          "title": "Introduction to React",
+          "description": "Learn what React is and why it is useful, including an overview of its core features and use cases."
+        },
+        {
+          "id": 2,
+          "title": "JSX Basics",
+          "description": "Understand how JSX works in React, including its syntax, rules, and how to incorporate it into components."
+        },
+        {
+          "id": 3,
+          "title": "State and Props",
+          "description": "Learn about state and props in React components and how they enable dynamic and reusable code."
+        }
+      ]
+    }
   ]
 }
-

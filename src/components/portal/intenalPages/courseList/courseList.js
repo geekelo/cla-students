@@ -1,18 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 function CourseList({ courses }) {
+  const navigate = useNavigate(); // Initialize the navigate function
+
   const handleCourseClick = (course) => {
     if (course.locked) {
       alert(`${course.name} is locked! Complete prerequisites first.`);
     } else {
       // Redirect to the course page
-      window.location.href = `/courses/${course.id}`;
+      navigate(`/portal/courses/${course.id}`, { state: { course } });
     }
   };
 
+  console.log(courses);
+
   return (
     <div className="course-list">
+     
       {courses.map((course) => (
         <button
           key={course.id}
