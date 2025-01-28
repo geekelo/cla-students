@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import SubmissionsSection from './submissionsSection';
 import '../../../../stylesheets/submissions.css'; // Include the styles
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHourglassHalf, faCheckDouble } from '@fortawesome/free-solid-svg-icons';
 
 function Submissions({ submissions }) {
   const [activeTab, setActiveTab] = useState('unmarked'); // Default tab
@@ -21,14 +23,14 @@ function Submissions({ submissions }) {
             className={`tab-button ${activeTab === 'unmarked' ? 'active' : ''}`}
             onClick={() => setActiveTab('unmarked')}
           >
-            Unmarked
+            <FontAwesomeIcon icon={faHourglassHalf} className="me-2" /> Unmarked
           </button>
           <button
             type="button"
             className={`tab-button ${activeTab === 'marked' ? 'active' : ''}`}
             onClick={() => setActiveTab('marked')}
           >
-            Marked
+            <FontAwesomeIcon icon={faCheckDouble} className="me-2" /> Marked
           </button>
         </div>
 
