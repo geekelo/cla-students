@@ -44,6 +44,9 @@
   font-family: 'Poppins', sans-serif;
 }
 
+
+/* Both hover and active states will use the same color */
+.student-nav-link:hover,
 .student-nav-link.active {
   background-color: rgba(140, 109, 207, 0.771);
 }
