@@ -1,52 +1,27 @@
 import React, { useState } from 'react';
 import CourseList from './courseList';
+import StatusButtons from './StatusButtons';
 
 function ExtraCourses() {
   const [activeStatus, setActiveStatus] = useState('done');
 
   const courses = {
     done: [
-      { id: 1, name: 'Photography Essentials', locked: false },
-      { id: 2, name: 'Art History Basics', locked: false },
+      { id: 6, name: 'UI/UX Design Basics', locked: false },
+      { id: 7, name: 'Digital Marketing', locked: false },
     ],
     active: [
-      { id: 3, name: 'Creative Writing', locked: false },
-      { id: 4, name: 'Public Speaking', locked: true },
+      { id: 8, name: 'Project Management', locked: false },
+      { id: 9, name: 'Business Analytics', locked: true },
     ],
     pending: [
-      { id: 5, name: 'Financial Planning Basics', locked: true },
-      { id: 6, name: 'Digital Marketing 101', locked: true },
+      { id: 10, name: 'Artificial Intelligence', locked: true },
     ],
   };
 
   return (
     <div className="extra-courses">
-      {/* Tab Navigation for Status */}
-      <div className="course-status-nav">
-        <button
-          type="button"
-          onClick={() => setActiveStatus('done')}
-          className={`status-btn ${activeStatus === 'done' ? 'active' : ''}`}
-        >
-          Done
-        </button>
-        <button
-          type="button"
-          onClick={() => setActiveStatus('active')}
-          className={`status-btn ${activeStatus === 'active' ? 'active' : ''}`}
-        >
-          Active
-        </button>
-        <button
-          type="button"
-          onClick={() => setActiveStatus('pending')}
-          className={`status-btn ${activeStatus === 'pending' ? 'active' : ''}`}
-        >
-          Pending
-        </button>
-      </div>
-
-      {/* Course List */}
+      <StatusButtons activeStatus={activeStatus} setActiveStatus={setActiveStatus} />
       <CourseList courses={courses[activeStatus]} />
     </div>
   );

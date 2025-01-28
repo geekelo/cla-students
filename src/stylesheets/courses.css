@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 .courses-page {
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  font-family: 'Poppins', sans-serif;
 }
 
 .courses-nav {
@@ -14,13 +17,15 @@
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 5px;
-  background-color: #f0f0f0;
+  background-color: rgba(184, 163, 229, 0.2);
+  color: #000;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
 }
 
 .courses-nav-btn.active {
-  background-color: #007bff;
+  background-color: rgba(68,46,121,255);
   color: white;
 }
 
@@ -43,12 +48,17 @@
   border-radius: 5px;
   cursor: pointer;
   background-color: #f0f0f0;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
 }
 
 .status-btn.active {
-  background-color: #28a745;
+  background-color: rgba(152, 132, 198, 0.871);
   color: white;
+}
+
+.status-btn .me-2 {
+  margin-right: 0.5rem;
 }
 
 .course-list {
