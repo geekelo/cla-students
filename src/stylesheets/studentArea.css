@@ -44,10 +44,15 @@
   font-family: 'Poppins', sans-serif;
 }
 
+
 /* Both hover and active states will use the same color */
 .student-nav-link:hover,
 .student-nav-link.active {
   background-color: rgba(140, 109, 207, 0.771);
+}
+
+.student-nav-link:hover{
+  background-color: rgba(152, 132, 198, 0.871);
 }
 
 /* Right Display Area */
@@ -55,9 +60,9 @@
   margin-left: 250px;
   padding: 30px;
   flex: 1;
-  background-color: #ffffff;
+  background-color: rgb(246, 244, 249);
   height: 100%;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .student-display-title {
@@ -103,4 +108,9 @@
     margin-left: 0;
     padding: 20px;
   }
+}
+
+.nav-icon {
+  margin-right: 10px;
+  width: 16px;
 }

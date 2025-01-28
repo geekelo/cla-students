@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell } from '@fortawesome/free-solid-svg-icons';
 import '../../../../stylesheets/dashboard.css';
 
 function Dashboard() {
@@ -13,13 +15,13 @@ function Dashboard() {
 
   const notices = [
     { id: 1, title: 'Important Announcement', content: 'Your final exam is scheduled for next week. Make sure to review all the materials.' },
-    { id: 2, title: 'Assignment Deadline', content: 'The deadline for Assignment 6 is this Friday. Don’t forget to submit it!' },
+    { id: 2, title: 'Assignment Deadline', content: 'The deadline for Assignment 6 is this Friday. Don\'t forget to submit it!' },
   ];
 
   return (
     <div className="dashboard-container">
       <div className="dashboard-header">
-        <h1 className="dashboard-title">Your Dashboard</h1>
+        <h1 className="dashboard-title">Your Progress Board</h1>
         <p className="dashboard-subtitle">Quick overview of your progress and updates</p>
       </div>
 
@@ -60,7 +62,9 @@ function Dashboard() {
       </div>
 
       <div className="dashboard-notices">
-        <h2 className="notices-title">Notices</h2>
+        <h2 className="notices-title">
+          <FontAwesomeIcon icon={faBell} className="notice-icon" /> Announcements
+        </h2>
         <ul className="notices-list">
           {notices.map((notice) => (
             <li key={notice.id} className="notice-item">

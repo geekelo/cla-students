@@ -19,7 +19,7 @@ function FooterSection() {
         <div className="row">
           {/* First column: Information for guests */}
           <div className="column-one-text">
-            <h6>About</h6>
+            <h6 className="footer-headers">About</h6>
             <p className="text-justify">
               Christian Leadership Academy (CLA) is an academy committed to
               providing high-quality, faith-based training to students
@@ -32,14 +32,16 @@ function FooterSection() {
           {/* Second column: Information for organizers */}
           <div className="mission-vision">
             <div className="">
-              <h6>Vision</h6>
+              <h6 className="footer-headers">Vision</h6>
               <p className="text-justify">
                 To produce servant-transformational leaders who bring true
                 change in every endeavour of life.
               </p>
             </div>
             <div>
+    <h6 className="footer-headers">Mision</h6>
               <h6>Mission</h6>
+
               <p className="text-justify">
                 Our Mission is to develop Christian-driven leaders who are
                 adaptive in bringing change and influential in advancing God&apos;s
@@ -50,7 +52,7 @@ function FooterSection() {
 
           {/* Third column: Quick links to other pages */}
           <div className="column-one-link">
-            <h6>Quick Links</h6>
+            <h6 className="footer-headers">Quick Links</h6>
             <ul className="footer-links">
               <li>
                 <p to="/about" className="links">
