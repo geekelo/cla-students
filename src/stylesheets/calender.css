@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 /* Calendar container styles */
 .calendar-container {
-  background-color: #f7f9fc;
+  background-color: #ede7f4;
   padding: 40px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 /* Header Styles */
@@ -15,8 +17,9 @@
 
 .calendar-title {
   font-size: 36px;
-  font-weight: bold;
+  font-weight: 600;
   color: #333;
+  font-family: 'Poppins', sans-serif;
 }
 
 .date-filter {
@@ -25,6 +28,7 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   outline: none;
+  font-family: 'Poppins', sans-serif;
 }
 
 .date-filter:focus {
@@ -36,6 +40,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .event-card {
@@ -67,6 +72,7 @@
 .event-details {
   flex-grow: 1;
   margin-left: 20px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .event-title {

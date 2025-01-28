@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import AssignmentItem from './assignmentItem';
 import '../../../../stylesheets/assignments.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClock, faCheckCircle, faClipboardCheck } from '@fortawesome/free-solid-svg-icons';
 
 function Assignments({ assignments }) {
   const [activeTab, setActiveTab] = useState('pending'); // Default tab is 'pending'
@@ -26,21 +28,21 @@ function Assignments({ assignments }) {
           className={`tab-button ${activeTab === 'pending' ? 'active' : ''}`}
           onClick={() => handleTabClick('pending')}
         >
-          Pending
+          <FontAwesomeIcon icon={faClock} className="me-2" /> Pending
         </button>
         <button
           type="button"
           className={`tab-button ${activeTab === 'submitted' ? 'active' : ''}`}
           onClick={() => handleTabClick('submitted')}
         >
-          Submitted
+          <FontAwesomeIcon icon={faClipboardCheck} className="me-2" /> Submitted
         </button>
         <button
           type="button"
           className={`tab-button ${activeTab === 'marked' ? 'active' : ''}`}
           onClick={() => handleTabClick('marked')}
         >
-          Marked
+          <FontAwesomeIcon icon={faCheckCircle} className="me-2" /> Marked
         </button>
       </div>
       <div className="assignments-list">
