@@ -1,21 +1,13 @@
 import React, { useState } from 'react';
 import CourseList from './courseList';
 
-function ProgramCourses() {
+function ProgramCourses({ courses }) {
   const [activeStatus, setActiveStatus] = useState('done');
 
-  const courses = {
-    done: [
-      { id: 1, name: 'Introduction to Programming', locked: false },
-      { id: 2, name: 'Algorithms & Data Structures', locked: false },
-    ],
-    active: [
-      { id: 3, name: 'React Basics', locked: false },
-      { id: 4, name: 'Node.js Fundamentals', locked: true },
-    ],
-    pending: [
-      { id: 5, name: 'Advanced Machine Learning', locked: true },
-    ],
+  const categorizedCourses = {
+    done: courses.filter((course) => course.locked === false),
+    active: courses.filter((course) => course.locked === true), 
+    pending: courses.filter((course) => course.locked === true)
   };
 
   return (
@@ -46,7 +38,7 @@ function ProgramCourses() {
       </div>
 
       {/* Course List */}
-      <CourseList courses={courses[activeStatus]} />
+      <CourseList courses={categorizedCourses[activeStatus]} />
     </div>
   );
 }

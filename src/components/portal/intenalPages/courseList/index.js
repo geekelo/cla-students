@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import '../../../../stylesheets/courses.css';
 import ProgramCourses from './programCourses';
 import ExtraCourses from './extraCourses';
+import courseData from '../../../../data/courseList.json';
+
 
 function Courses() {
   const [activeTab, setActiveTab] = useState('program');
@@ -28,7 +30,7 @@ function Courses() {
 
       {/* Content Section */}
       <div className="courses-content">
-        {activeTab === 'program' ? <ProgramCourses /> : <ExtraCourses />}
+        {activeTab === 'program' ? <ProgramCourses courses={courseData.courses} /> : <ExtraCourses />}
       </div>
     </div>
   );
