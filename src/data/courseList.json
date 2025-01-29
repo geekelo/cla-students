@@ -83,6 +83,7 @@
     {
       "id": 2,
       "name": "Art History Basics",
+      "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "locked": false,
       "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "topics": [
@@ -175,6 +176,7 @@
     {
       "id": 3,
       "name": "Creative Writing",
+      "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "locked": false,
       "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "topics": [
@@ -255,6 +257,7 @@
     {
       "id": 4,
       "name": "Public Speaking",
+      "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "locked": true,
       "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "topics": [
@@ -337,6 +340,7 @@
     {
       "id": 5,
       "name": "Financial Planning Basics",
+      "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "locked": true,
       "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "topics": [
@@ -417,6 +421,7 @@
     {
       "id": 6,
       "name": "Digital Marketing 101",
+      "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "locked": true,
       "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "topics": [
