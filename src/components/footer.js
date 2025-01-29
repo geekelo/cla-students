@@ -39,9 +39,7 @@ function FooterSection() {
               </p>
             </div>
             <div>
-    <h6 className="footer-headers">Mision</h6>
-              <h6>Mission</h6>
-
+            <h6 className="footer-headers">Mission</h6>
               <p className="text-justify">
                 Our Mission is to develop Christian-driven leaders who are
                 adaptive in bringing change and influential in advancing God&apos;s
