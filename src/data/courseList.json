@@ -3,6 +3,7 @@
     {
       "id": 1,
       "name": "Photography Essentials",
+      "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "locked": false,
       "topics": [
         {
@@ -20,12 +21,70 @@
           "title": "State and Props",
           "description": "Learn about state and props in React components and how they enable dynamic and reusable code."
         }
+      ],
+      "assignments": [
+        {
+          "id": 1,
+          "title": "React Basics Quiz",
+          "description": "A short quiz to test your understanding of React basics.",
+          "date_of_submission": "2023-10-15",
+          "course_id": 1,
+          "course_title": "Photography Essentials",
+          "facilitator_id": 101,
+          "name_of_facilitator": "John Doe"
+        },
+        {
+          "id": 2,
+          "title": "React Component Exercise",
+          "description": "Create a simple React component using JSX.",
+          "date_of_submission": "2023-10-20",
+          "course_id": 1,
+          "course_title": "Photography Essentials",
+          "facilitator_id": 101,
+          "name_of_facilitator": "John Doe"
+        }
+      ],
+      "liveClasses": [
+        {
+          "id": 1,
+          "date": "2023-11-15",
+          "time": "10:00 AM",
+          "name": "Introduction to React",
+          "course_id": 1,
+          "course_name": "Photography Essentials",
+          "name_of_facilitator": "John Doe",
+          "duration": "2 hours",
+          "zoom_link": "https://zoom.us/j/123456789"
+        },
+        {
+          "id": 2,
+          "date": "2023-11-20",
+          "time": "2:00 PM",
+          "name": "Advanced JSX Techniques",
+          "course_id": 2,
+          "course_name": "Art History Basics",
+          "name_of_facilitator": "Jane Smith",
+          "duration": "1.5 hours",
+          "zoom_link": "https://zoom.us/j/987654321"
+        },
+        {
+          "id": 3,
+          "date": "2023-12-05",
+          "time": "4:00 PM",
+          "name": "State and Props Deep Dive",
+          "course_id": 3,
+          "course_name": "Creative Writing",
+          "name_of_facilitator": "Michael Brown",
+          "duration": "3 hours",
+          "zoom_link": "https://zoom.us/j/543216789"
+        }
       ]
     },
     {
       "id": 2,
       "name": "Art History Basics",
       "locked": false,
+      "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "topics": [
         {
           "id": 1,
@@ -52,6 +111,63 @@
           "title": "Handling Events",
           "description": "Understand how to handle user interactions and events in React applications."
         }
+      ],
+      "assignments": [
+        {
+          "id": 1,
+          "title": "React Basics Quiz",
+          "description": "A short quiz to test your understanding of React basics.",
+          "date_of_submission": "2023-10-15",
+          "course_id": 1,
+          "course_title": "Photography Essentials",
+          "facilitator_id": 101,
+          "name_of_facilitator": "John Doe"
+        },
+        {
+          "id": 2,
+          "title": "React Component Exercise",
+          "description": "Create a simple React component using JSX.",
+          "date_of_submission": "2023-10-20",
+          "course_id": 1,
+          "course_title": "Photography Essentials",
+          "facilitator_id": 101,
+          "name_of_facilitator": "John Doe"
+        }
+      ],
+      "liveClasses": [
+        {
+          "id": 1,
+          "date": "2023-11-15",
+          "time": "10:00 AM",
+          "name": "Introduction to React",
+          "course_id": 1,
+          "course_name": "Photography Essentials",
+          "name_of_facilitator": "John Doe",
+          "duration": "2 hours",
+          "zoom_link": "https://zoom.us/j/123456789"
+        },
+        {
+          "id": 2,
+          "date": "2023-11-20",
+          "time": "2:00 PM",
+          "name": "Advanced JSX Techniques",
+          "course_id": 2,
+          "course_name": "Art History Basics",
+          "name_of_facilitator": "Jane Smith",
+          "duration": "1.5 hours",
+          "zoom_link": "https://zoom.us/j/987654321"
+        },
+        {
+          "id": 3,
+          "date": "2023-12-05",
+          "time": "4:00 PM",
+          "name": "State and Props Deep Dive",
+          "course_id": 3,
+          "course_name": "Creative Writing",
+          "name_of_facilitator": "Michael Brown",
+          "duration": "3 hours",
+          "zoom_link": "https://zoom.us/j/543216789"
+        }
       ]
     }
   ],
@@ -60,6 +176,7 @@
       "id": 3,
       "name": "Creative Writing",
       "locked": false,
+      "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "topics": [
         {
           "id": 1,
@@ -76,12 +193,70 @@
           "title": "State and Props",
           "description": "Learn about state and props in React components and how they enable dynamic and reusable code."
         }
+      ],
+      "assignments": [
+        {
+          "id": 1,
+          "title": "React Basics Quiz",
+          "description": "A short quiz to test your understanding of React basics.",
+          "date_of_submission": "2023-10-15",
+          "course_id": 1,
+          "course_title": "Photography Essentials",
+          "facilitator_id": 101,
+          "name_of_facilitator": "John Doe"
+        },
+        {
+          "id": 2,
+          "title": "React Component Exercise",
+          "description": "Create a simple React component using JSX.",
+          "date_of_submission": "2023-10-20",
+          "course_id": 1,
+          "course_title": "Photography Essentials",
+          "facilitator_id": 101,
+          "name_of_facilitator": "John Doe"
+        }
+      ],
+      "liveClasses": [
+        {
+          "id": 1,
+          "date": "2023-11-15",
+          "time": "10:00 AM",
+          "name": "Introduction to React",
+          "course_id": 1,
+          "course_name": "Photography Essentials",
+          "name_of_facilitator": "John Doe",
+          "duration": "2 hours",
+          "zoom_link": "https://zoom.us/j/123456789"
+        },
+        {
+          "id": 2,
+          "date": "2023-11-20",
+          "time": "2:00 PM",
+          "name": "Advanced JSX Techniques",
+          "course_id": 2,
+          "course_name": "Art History Basics",
+          "name_of_facilitator": "Jane Smith",
+          "duration": "1.5 hours",
+          "zoom_link": "https://zoom.us/j/987654321"
+        },
+        {
+          "id": 3,
+          "date": "2023-12-05",
+          "time": "4:00 PM",
+          "name": "State and Props Deep Dive",
+          "course_id": 3,
+          "course_name": "Creative Writing",
+          "name_of_facilitator": "Michael Brown",
+          "duration": "3 hours",
+          "zoom_link": "https://zoom.us/j/543216789"
+        }
       ]
     },
     {
       "id": 4,
       "name": "Public Speaking",
       "locked": true,
+      "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "topics": [
         {
           "id": 1,
@@ -97,6 +272,63 @@
           "id": 3,
           "title": "State and Props",
           "description": "Learn about state and props in React components and how they enable dynamic and reusable code."
+        }
+      ],
+      "assignments": [
+        {
+          "id": 1,
+          "title": "React Basics Quiz",
+          "description": "A short quiz to test your understanding of React basics.",
+          "date_of_submission": "2023-10-15",
+          "course_id": 1,
+          "course_title": "Photography Essentials",
+          "facilitator_id": 101,
+          "name_of_facilitator": "John Doe"
+        },
+        {
+          "id": 2,
+          "title": "React Component Exercise",
+          "description": "Create a simple React component using JSX.",
+          "date_of_submission": "2023-10-20",
+          "course_id": 1,
+          "course_title": "Photography Essentials",
+          "facilitator_id": 101,
+          "name_of_facilitator": "John Doe"
+        }
+      ],
+      "liveClasses": [
+        {
+          "id": 1,
+          "date": "2023-11-15",
+          "time": "10:00 AM",
+          "name": "Introduction to React",
+          "course_id": 1,
+          "course_name": "Photography Essentials",
+          "name_of_facilitator": "John Doe",
+          "duration": "2 hours",
+          "zoom_link": "https://zoom.us/j/123456789"
+        },
+        {
+          "id": 2,
+          "date": "2023-11-20",
+          "time": "2:00 PM",
+          "name": "Advanced JSX Techniques",
+          "course_id": 2,
+          "course_name": "Art History Basics",
+          "name_of_facilitator": "Jane Smith",
+          "duration": "1.5 hours",
+          "zoom_link": "https://zoom.us/j/987654321"
+        },
+        {
+          "id": 3,
+          "date": "2023-12-05",
+          "time": "4:00 PM",
+          "name": "State and Props Deep Dive",
+          "course_id": 3,
+          "course_name": "Creative Writing",
+          "name_of_facilitator": "Michael Brown",
+          "duration": "3 hours",
+          "zoom_link": "https://zoom.us/j/543216789"
         }
       ]
     }
@@ -106,6 +338,7 @@
       "id": 5,
       "name": "Financial Planning Basics",
       "locked": true,
+      "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "topics": [
         {
           "id": 1,
@@ -122,12 +355,70 @@
           "title": "State and Props",
           "description": "Learn about state and props in React components and how they enable dynamic and reusable code."
         }
+      ],
+      "assignments": [
+        {
+          "id": 1,
+          "title": "React Basics Quiz",
+          "description": "A short quiz to test your understanding of React basics.",
+          "date_of_submission": "2023-10-15",
+          "course_id": 1,
+          "course_title": "Photography Essentials",
+          "facilitator_id": 101,
+          "name_of_facilitator": "John Doe"
+        },
+        {
+          "id": 2,
+          "title": "React Component Exercise",
+          "description": "Create a simple React component using JSX.",
+          "date_of_submission": "2023-10-20",
+          "course_id": 1,
+          "course_title": "Photography Essentials",
+          "facilitator_id": 101,
+          "name_of_facilitator": "John Doe"
+        }
+      ],
+      "liveClasses": [
+        {
+          "id": 1,
+          "date": "2023-11-15",
+          "time": "10:00 AM",
+          "name": "Introduction to React",
+          "course_id": 1,
+          "course_name": "Photography Essentials",
+          "name_of_facilitator": "John Doe",
+          "duration": "2 hours",
+          "zoom_link": "https://zoom.us/j/123456789"
+        },
+        {
+          "id": 2,
+          "date": "2023-11-20",
+          "time": "2:00 PM",
+          "name": "Advanced JSX Techniques",
+          "course_id": 2,
+          "course_name": "Art History Basics",
+          "name_of_facilitator": "Jane Smith",
+          "duration": "1.5 hours",
+          "zoom_link": "https://zoom.us/j/987654321"
+        },
+        {
+          "id": 3,
+          "date": "2023-12-05",
+          "time": "4:00 PM",
+          "name": "State and Props Deep Dive",
+          "course_id": 3,
+          "course_name": "Creative Writing",
+          "name_of_facilitator": "Michael Brown",
+          "duration": "3 hours",
+          "zoom_link": "https://zoom.us/j/543216789"
+        }
       ]
     },
     {
       "id": 6,
       "name": "Digital Marketing 101",
       "locked": true,
+      "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "topics": [
         {
           "id": 1,
@@ -143,6 +434,63 @@
           "id": 3,
           "title": "State and Props",
           "description": "Learn about state and props in React components and how they enable dynamic and reusable code."
+        }
+      ],
+      "assignments": [
+        {
+          "id": 1,
+          "title": "React Basics Quiz",
+          "description": "A short quiz to test your understanding of React basics.",
+          "date_of_submission": "2023-10-15",
+          "course_id": 1,
+          "course_title": "Photography Essentials",
+          "facilitator_id": 101,
+          "name_of_facilitator": "John Doe"
+        },
+        {
+          "id": 2,
+          "title": "React Component Exercise",
+          "description": "Create a simple React component using JSX.",
+          "date_of_submission": "2023-10-20",
+          "course_id": 1,
+          "course_title": "Photography Essentials",
+          "facilitator_id": 101,
+          "name_of_facilitator": "John Doe"
+        }
+      ],
+      "liveClasses": [
+        {
+          "id": 1,
+          "date": "2023-11-15",
+          "time": "10:00 AM",
+          "name": "Introduction to React",
+          "course_id": 1,
+          "course_name": "Photography Essentials",
+          "name_of_facilitator": "John Doe",
+          "duration": "2 hours",
+          "zoom_link": "https://zoom.us/j/123456789"
+        },
+        {
+          "id": 2,
+          "date": "2023-11-20",
+          "time": "2:00 PM",
+          "name": "Advanced JSX Techniques",
+          "course_id": 2,
+          "course_name": "Art History Basics",
+          "name_of_facilitator": "Jane Smith",
+          "duration": "1.5 hours",
+          "zoom_link": "https://zoom.us/j/987654321"
+        },
+        {
+          "id": 3,
+          "date": "2023-12-05",
+          "time": "4:00 PM",
+          "name": "State and Props Deep Dive",
+          "course_id": 3,
+          "course_name": "Creative Writing",
+          "name_of_facilitator": "Michael Brown",
+          "duration": "3 hours",
+          "zoom_link": "https://zoom.us/j/543216789"
         }
       ]
     }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import TopicsAccordion from './topicsAccordion';
 import '../../../../../stylesheets/courseDetails.css';
 
@@ -8,9 +8,19 @@ function CourseDetails() {
   const location = useLocation(); // Access the location object
   const { course } = location.state || {}; // Extract the course data from state
   const [topics, setTopics] = useState(course.topics || []);
+  const navigate = useNavigate();
 
+  console.log(course.assignments);
   if (!course) {
     return <div>Course not found!</div>;
+  }
+
+  const handleAssignmentClick = (assignments) => {
+    navigate(`/portal/assignments/${course.id}`, { state: { assignments: [...assignments] } });
+  }
+
+  const handleLiveClassesClick = (liveClasses) => {
+    navigate(`/portal/events/${course.id}`, { state: { liveClasses: [...liveClasses] } });
   }
 
   // Add topic
@@ -42,7 +52,7 @@ function CourseDetails() {
         </p>
         <div className="course-stats">
           <p>Number of Topics: <strong>{topics.length}</strong></p>
-          <p>Number of Assignments: <strong>{course.assignments}</strong></p>
+          <p>Number of Assignments: <strong>{course.assignments.length}</strong></p>
           <p>Pending Live Classes: <strong>{course.pendingLiveClasses}</strong></p>
         </div>
       </div>
@@ -75,6 +85,12 @@ function CourseDetails() {
             <p>No topics added yet.</p>
           )}
         </div>
+      </div>
+
+      <div className="course-extra-actions">
+        <p>For this course only:</p>
+        <button onClick={() => handleAssignmentClick(course?.assignments)}>Assignments</button>
+        <button onClick={() => handleLiveClassesClick(course?.liveClasses)}>Live Classes</button>
       </div>
     </div>
   );
