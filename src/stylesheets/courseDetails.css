@@ -1,158 +1,412 @@
-/* General Page Styles */
-.course-page {
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
-  color: #333;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.course-details {
+  padding: 2rem;
+  font-family: 'Poppins', sans-serif;
 }
 
 /* Header Section */
 .course-header {
-  text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
+}
+
+.course-title-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .course-title {
-  font-size: 2rem;
-  color: #007bff;
-  margin-bottom: 10px;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: rgba(68,46,121,255);
+  margin: 0;
 }
 
-.course-info p {
-  font-size: 1rem;
-  margin: 5px 0;
+.course-info-grid {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(68,46,121,0.1);
 }
 
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #666;
+}
+
+.info-item strong {
+  color: #333;
+  font-weight: 500;
+}
+
+.info-item i {
+  color: rgba(68,46,121,255);
+  font-size: 1.2rem;
+}
+
+/* Action Buttons */
 .course-actions {
   display: flex;
-  gap: 10px;
-  margin-top: 20px;
-  justify-content: center;
+  gap: 1rem;
+  align-items: center;
 }
 
-.course-actions button {
-  padding: 10px 15px;
-  font-size: 1rem;
+.action-icon {
+  background: none;
   border: none;
-  border-radius: 8px;
+  font-size: 1.5rem;
+  color: rgba(68,46,121,255);
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
 }
 
-.edit-course-btn {
-  background-color: #007bff;
-  color: white;
+.action-icon:hover {
+  transform: scale(1.1);
+  color: rgba(152, 132, 198, 0.871);
 }
 
-.delete-course-btn {
-  background-color: #dc3545;
-  color: white;
+.delete-icon:hover {
+  color: #dc3545;
 }
 
-.add-live-class-btn {
-  background-color: #28a745;
-  color: white;
+.add-live-btn {
+  padding: 0.5rem 1.2rem;
+  border: 2px solid rgba(68,46,121,255);
+  border-radius: 5px;
+  background: none;
+  color: rgba(68,46,121,255);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.course-actions button:hover {
-  transform: scale(1.05);
+.add-live-btn:hover {
+  background-color: rgba(68,46,121,0.1);
+  transform: translateY(-2px);
+}
+
+.add-live-btn .icon {
+  font-size: 1rem;
 }
 
 /* Topics Section */
 .topics-section {
-  margin-top: 30px;
+  margin-top: 2rem;
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-.topics-section h2 {
+.topics-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.topics-header h2 {
   font-size: 1.5rem;
-  color: #333;
-  margin-bottom: 20px;
+  font-weight: 600;
+  color: rgba(68,46,121,255);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
 }
 
-.add-topic-btn {
-  display: inline-block;
-  background-color: #007bff;
+.topics-header h2::before {
+  content: '📚';
+  font-size: 1.4rem;
+}
+
+.add-topic {
+  background-color: rgba(68,46,121,255);
   color: white;
-  padding: 10px 20px;
-  font-size: 1rem;
   border: none;
-  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.add-topic-btn:hover {
-  background-color: #0056b3;
+.add-topic:hover {
+  background-color: rgba(152, 132, 198, 0.871);
+  transform: translateY(-2px);
 }
 
 /* Topics List */
 .topics-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .topic-item {
   background-color: white;
-  border: 1px solid #ddd;
+  border: 1px solid #e0e0e0;
   border-radius: 8px;
-  margin-bottom: 10px;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.topic-item:hover {
+  border-color: rgba(68,46,121,0.3);
+  box-shadow: 0 2px 8px rgba(68,46,121,0.1);
 }
 
 .topic-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 15px;
+  padding: 1rem 1.5rem;
   cursor: pointer;
-}
-
-.accordion-toggle {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-.delete-topic-btn {
-  background-color: #dc3545;
-  color: white;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.8rem;
+  background: white;
   transition: background-color 0.3s ease;
 }
 
-.delete-topic-btn:hover {
-  background-color: #a71d2a;
+.topic-header:hover {
+  background-color: #f8f9fa;
 }
 
-/* Topic Details */
-.topic-details {
-  padding: 15px;
-  background-color: #f5f5f5;
+.topic-title-section {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.topic-number {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(68,46,121,0.1);
+  color: rgba(68,46,121,255);
+  border-radius: 50%;
   font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.topic-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+  margin: 0;
+}
+
+.topic-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.edit-topic,
+.delete-topic {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
+  opacity: 0.7;
+}
+
+.edit-topic {
+  color: rgba(68,46,121,255);
+}
+
+.edit-topic:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  color: rgba(152, 132, 198, 0.871);
+}
+
+.delete-topic {
+  color: #dc3545;
+}
+
+.delete-topic:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.topic-toggle-btn {
+  background: none;
+  border: none;
+  color: rgba(68,46,121,255);
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.topic-toggle-btn.open {
+  transform: rotate(180deg);
+}
+
+.topic-content {
+  padding: 1.5rem;
+  background-color: white;
+  border-top: 1px solid #e0e0e0;
+  color: #666;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.topic-description {
+  margin-bottom: 1rem;
+}
+
+.topic-resources {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #e0e0e0;
+}
+
+.topic-resources h4 {
+  color: rgba(68,46,121,255);
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+}
+
+.resource-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.resource-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.resource-item i {
+  color: rgba(68,46,121,255);
+}
+
+.no-topics {
+  text-align: center;
+  color: #666;
+  padding: 1.5rem;
+  font-size: 0.95rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px dashed rgba(68,46,121,0.2);
+}
+
+.course-description {
+  margin-bottom: 2rem;
+}
+
+.course-description h3 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: rgba(68,46,121,255);
+  margin-bottom: 0.8rem;
+}
+
+.course-description p {
+  color: #444;
+  line-height: 1.6;
+  font-size: 1rem;
+  margin: 0;
+  font-weight: 400;
+  max-width: 800px;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .course-actions {
+  .course-title-container {
     flex-direction: column;
-    gap: 10px;
+    align-items: flex-start;
+    gap: 1rem;
   }
 
-  .add-topic-btn {
+  .course-title {
+    font-size: 1.8rem;
+  }
+
+  .course-actions {
     width: 100%;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(68,46,121,0.1);
   }
 
-  .delete-topic-btn {
+  .course-info-grid {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .add-live-btn {
+    font-size: 0.85rem;
+    padding: 0.4rem 1rem;
+  }
+
+  .action-icon {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .course-details {
+    padding: 1rem;
+  }
+
+  .course-title {
+    font-size: 1.5rem;
+  }
+
+  .course-actions {
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+
+  .add-live-btn {
+    width: 100%;
+    justify-content: center;
+    order: 1;
+  }
+
+  .topics-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .topic-title {
     font-size: 1rem;
+  }
+
+  .topic-content {
+    padding: 1rem;
+  }
+
+  .resource-list {
+    gap: 0.6rem;
   }
 }
