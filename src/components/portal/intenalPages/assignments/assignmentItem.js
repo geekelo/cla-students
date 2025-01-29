@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 function AssignmentItem({ assignment }) {
-  const handleClick = () => {
-    alert(`Clicked on Assignment: ${assignment.name}`);
+  const navigate = useNavigate();
+  const handleView = () => {
+    navigate(`/portal/assignment/${assignment.id}`, { state: { assignment } });
   };
 
   return (
@@ -11,8 +13,8 @@ function AssignmentItem({ assignment }) {
       className="assignment-item"
       role="button"
       tabIndex={0}
-      onClick={handleClick}
-      onKeyDown={(e) => (e.key === 'Enter' ? handleClick() : null)}
+      onClick={() => handleView(assignment)}
+      onKeyDown={(e) => (e.key === 'Enter' ?  handleView(assignment) : null)}
     >
       <span className="assignment-name">{assignment.name}</span>
       {assignment.locked && <span className="lock-icon">🔒 Locked</span>}

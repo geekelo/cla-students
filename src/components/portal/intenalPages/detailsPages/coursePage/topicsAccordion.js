@@ -28,7 +28,7 @@ function TopicsAccordion({ topic, onDelete, index }) {
       <div className="topic-header" onClick={toggleAccordion}>
         <div className="topic-title-section">
           <span className="topic-number">{index + 1}</span>
-          <h3 className="topic-title">{topic.title}</h3>
+          <h3 className="topic-title">{topic.name}</h3>
         </div>
         <div className="topic-actions">
           <button
@@ -92,7 +92,7 @@ function TopicsAccordion({ topic, onDelete, index }) {
 TopicsAccordion.propTypes = {
   topic: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     description: PropTypes.string,
   }).isRequired,
   onDelete: PropTypes.func.isRequired,

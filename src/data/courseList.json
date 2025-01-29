@@ -8,24 +8,24 @@
       "topics": [
         {
           "id": 1,
-          "title": "Introduction to React",
+          "name": "Introduction to React",
           "description": "Learn what React is and why it is useful, including an overview of its core features and use cases."
         },
         {
           "id": 2,
-          "title": "JSX Basics",
+          "name": "JSX Basics",
           "description": "Understand how JSX works in React, including its syntax, rules, and how to incorporate it into components."
         },
         {
           "id": 3,
-          "title": "State and Props",
+          "name": "State and Props",
           "description": "Learn about state and props in React components and how they enable dynamic and reusable code."
         }
       ],
       "assignments": [
         {
           "id": 1,
-          "title": "React Basics Quiz",
+          "name": "React Basics Quiz",
           "status": "pending",
           "description": "A short quiz to test your understanding of React basics.",
           "date_of_submission": "2023-10-15",
@@ -36,7 +36,7 @@
         },
         {
           "id": 2,
-          "title": "React Component Exercise",
+          "name": "React Component Exercise",
           "status": "marked",
           "description": "Create a simple React component using JSX.",
           "date_of_submission": "2023-10-20",
@@ -90,34 +90,34 @@
       "topics": [
         {
           "id": 1,
-          "title": "Introduction to React",
+          "name": "Introduction to React",
           "description": "Learn what React is and why it is useful, including an overview of its core features and use cases."
         },
         {
           "id": 2,
-          "title": "JSX Basics",
+          "name": "JSX Basics",
           "description": "Understand how JSX works in React, including its syntax, rules, and how to incorporate it into components."
         },
         {
           "id": 3,
-          "title": "State and Props",
+          "name": "State and Props",
           "description": "Learn about state and props in React components and how they enable dynamic and reusable code."
         },
         {
           "id": 4,
-          "title": "Component Lifecycle",
+          "name": "Component Lifecycle",
           "description": "Explore the lifecycle methods in React and how they are used for managing component behavior."
         },
         {
           "id": 5,
-          "title": "Handling Events",
+          "name": "Handling Events",
           "description": "Understand how to handle user interactions and events in React applications."
         }
       ],
       "assignments": [
         {
           "id": 1,
-          "title": "React Basics Quiz",
+          "name": "React Basics Quiz",
           "status": "submitted",
           "description": "A short quiz to test your understanding of React basics.",
           "date_of_submission": "2023-10-15",
@@ -128,7 +128,7 @@
         },
         {
           "id": 2,
-          "title": "React Component Exercise",
+          "name": "React Component Exercise",
           "status": "pending",
           "description": "Create a simple React component using JSX.",
           "date_of_submission": "2023-10-20",
@@ -184,24 +184,24 @@
       "topics": [
         {
           "id": 1,
-          "title": "Introduction to React",
+          "name": "Introduction to React",
           "description": "Learn what React is and why it is useful, including an overview of its core features and use cases."
         },
         {
           "id": 2,
-          "title": "JSX Basics",
+          "name": "JSX Basics",
           "description": "Understand how JSX works in React, including its syntax, rules, and how to incorporate it into components."
         },
         {
           "id": 3,
-          "title": "State and Props",
+          "name": "State and Props",
           "description": "Learn about state and props in React components and how they enable dynamic and reusable code."
         }
       ],
       "assignments": [
         {
           "id": 1,
-          "title": "React Basics Quiz",
+          "name": "React Basics Quiz",
           "status": "pending",
           "description": "A short quiz to test your understanding of React basics.",
           "date_of_submission": "2023-10-15",
@@ -212,7 +212,7 @@
         },
         {
           "id": 2,
-          "title": "React Component Exercise",
+          "name": "React Component Exercise",
           "status": "submitted",
           "description": "Create a simple React component using JSX.",
           "date_of_submission": "2023-10-20",
@@ -266,24 +266,24 @@
       "topics": [
         {
           "id": 1,
-          "title": "Introduction to React",
+          "name": "Introduction to React",
           "description": "Learn what React is and why it is useful, including an overview of its core features and use cases."
         },
         {
           "id": 2,
-          "title": "JSX Basics",
+          "name": "JSX Basics",
           "description": "Understand how JSX works in React, including its syntax, rules, and how to incorporate it into components."
         },
         {
           "id": 3,
-          "title": "State and Props",
+          "name": "State and Props",
           "description": "Learn about state and props in React components and how they enable dynamic and reusable code."
         }
       ],
       "assignments": [
         {
           "id": 1,
-          "title": "React Basics Quiz",
+          "name": "React Basics Quiz",
           "status": "marked",
           "description": "A short quiz to test your understanding of React basics.",
           "date_of_submission": "2023-10-15",
@@ -294,7 +294,7 @@
         },
         {
           "id": 2,
-          "title": "React Component Exercise",
+          "name": "React Component Exercise",
           "description": "Create a simple React component using JSX.",
           "date_of_submission": "2023-10-20",
           "course_id": 1,
@@ -346,28 +346,27 @@
       "name": "Financial Planning Basics",
       "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "locked": true,
-      "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "topics": [
         {
           "id": 1,
-          "title": "Introduction to React",
+          "name": "Introduction to React",
           "description": "Learn what React is and why it is useful, including an overview of its core features and use cases."
         },
         {
           "id": 2,
-          "title": "JSX Basics",
+          "name": "JSX Basics",
           "description": "Understand how JSX works in React, including its syntax, rules, and how to incorporate it into components."
         },
         {
           "id": 3,
-          "title": "State and Props",
+          "name": "State and Props",
           "description": "Learn about state and props in React components and how they enable dynamic and reusable code."
         }
       ],
       "assignments": [
         {
           "id": 1,
-          "title": "React Basics Quiz",
+          "name": "React Basics Quiz",
           "description": "A short quiz to test your understanding of React basics.",
           "date_of_submission": "2023-10-15",
           "course_id": 1,
@@ -377,7 +376,7 @@
         },
         {
           "id": 2,
-          "title": "React Component Exercise",
+          "name": "React Component Exercise",
           "description": "Create a simple React component using JSX.",
           "date_of_submission": "2023-10-20",
           "course_id": 1,
@@ -430,24 +429,24 @@
       "topics": [
         {
           "id": 1,
-          "title": "Introduction to React",
+          "name": "Introduction to React",
           "description": "Learn what React is and why it is useful, including an overview of its core features and use cases."
         },
         {
           "id": 2,
-          "title": "JSX Basics",
+          "name": "JSX Basics",
           "description": "Understand how JSX works in React, including its syntax, rules, and how to incorporate it into components."
         },
         {
           "id": 3,
-          "title": "State and Props",
+          "name": "State and Props",
           "description": "Learn about state and props in React components and how they enable dynamic and reusable code."
         }
       ],
       "assignments": [
         {
           "id": 1,
-          "title": "React Basics Quiz",
+          "name": "React Basics Quiz",
           "description": "A short quiz to test your understanding of React basics.",
           "date_of_submission": "2023-10-15",
           "course_id": 1,
@@ -457,7 +456,7 @@
         },
         {
           "id": 2,
-          "title": "React Component Exercise",
+          "name": "React Component Exercise",
           "description": "Create a simple React component using JSX.",
           "date_of_submission": "2023-10-20",
           "course_id": 1,

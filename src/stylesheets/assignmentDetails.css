@@ -1,0 +1,150 @@
+/* assignmentDetails.css */
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f7fa;
+  color: #333;
+}
+
+/* Main Container */
+.assignment-details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+.assignment-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 800px;
+  padding: 30px;
+  text-align: center;
+}
+
+/* Assignment Title */
+.assignment-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Assignment Info Section */
+.assignment-info {
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.assignment-info p {
+  font-size: 1rem;
+  margin: 8px 0;
+}
+
+.assignment-info strong {
+  color: #555;
+}
+
+.status {
+  font-weight: bold;
+}
+
+.status.marked {
+  color: #28a745; /* Green */
+}
+
+.status.unmarked {
+  color: #dc3545; /* Red */
+}
+
+/* Form Styles */
+.assignment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+label {
+  font-size: 1rem;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="file"] {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 15px;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="file"]:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+button.submit-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 400px;
+}
+
+button.submit-button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .assignment-card {
+    padding: 20px;
+  }
+
+  .assignment-title {
+    font-size: 1.6rem;
+  }
+
+  .assignment-info p {
+    font-size: 0.9rem;
+  }
+
+  .form-group {
+    width: 100%;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="file"],
+  button.submit-button {
+    max-width: 100%;
+  }
+}
