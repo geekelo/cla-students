@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
 function CourseList({ courses }) {
-  const navigate = useNavigate(); // Initialize the navigate function
+  const navigate = useNavigate();
 
   const handleCourseClick = (course) => {
     if (course.locked) {
@@ -13,8 +13,6 @@ function CourseList({ courses }) {
       navigate(`/portal/courses/${course.id}`, { state: { course } });
     }
   };
-
-  console.log(courses);
 
   return (
     <div className="course-list">

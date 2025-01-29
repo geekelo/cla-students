@@ -30,7 +30,7 @@ function CourseDetails() {
   }
 
   const handleAssignmentClick = (assignments) => {
-    navigate(`/portal/assignments/${course.id}`, { state: { assignments: [...assignments] } });
+    navigate(`/portal/assignments/${course.id}`, { state: { assignments } });
   };
 
   const handleLiveClassesClick = (liveClasses) => {

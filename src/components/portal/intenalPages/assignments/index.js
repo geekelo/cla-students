@@ -1,28 +1,42 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useParams, useLocation } from 'react-router-dom';
 import AssignmentItem from './assignmentItem';
 import '../../../../stylesheets/assignments.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faCheckCircle, faClipboardCheck } from '@fortawesome/free-solid-svg-icons';
 
-function Assignments({ assignments }) {
-  const [activeTab, setActiveTab] = useState('pending'); // Default tab is 'pending'
+function Assignments() {
+  const { id } = useParams();
+  const location = useLocation();
+  const { assignments } = location.state || {};
+  const [activeTab, setActiveTab] = useState('all');
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
+
+  console.log(id);
 
   // Filter assignments for each tab
   const filteredAssignments = assignments?.filter((assignment) => {
     if (activeTab === 'pending') return assignment.status === 'pending' && !assignment.locked;
     if (activeTab === 'submitted') return assignment.status === 'submitted' && !assignment.locked;
     if (activeTab === 'marked') return assignment.status === 'marked' || assignment.locked;
+    if (activeTab === 'all') return assignment.status === 'marked' || assignment.status === 'submitted' || assignment.status === 'pending' || assignment.locked;
     return false;
   });
 
   return (
     <section className="assignments-section">
       <div className="assignments-tabs">
+        <button
+          type="button"
+          className={`tab-button ${activeTab === 'all' ? 'active' : ''}`}
+          onClick={() => handleTabClick('all')}
+        >
+          <FontAwesomeIcon icon={faCheckCircle} className="me-2" /> ALL
+        </button>
         <button
           type="button"
           className={`tab-button ${activeTab === 'pending' ? 'active' : ''}`}
