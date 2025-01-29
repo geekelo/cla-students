@@ -12,7 +12,10 @@ import {
   faBookOpen,
   faClipboardList,
   faVideo,
-  faPlus
+  faPlus,
+  faAngleDown,
+  faListCheck,
+  faVideoCamera
 } from '@fortawesome/free-solid-svg-icons';
 
 function CourseDetails() {
@@ -28,7 +31,7 @@ function CourseDetails() {
 
   const handleAssignmentClick = (assignments) => {
     navigate(`/portal/assignments/${course.id}`, { state: { assignments: [...assignments] } });
-  }
+  };
 
   const handleLiveClassesClick = (liveClasses) => {
     navigate(`/portal/events/${course.id}`, { state: { liveClasses: [...liveClasses] } });
@@ -117,7 +120,7 @@ function CourseDetails() {
           </div>
           <div className="info-item">
             <FontAwesomeIcon icon={faClipboardList} />
-            <span>Number of Assignments: <strong>{course.assignments}</strong></span>
+            <span>Number of Assignments: <strong>{course?.assignments.length}</strong></span>
           </div>
           <div className="info-item">
             <FontAwesomeIcon icon={faVideo} />
@@ -163,9 +166,21 @@ function CourseDetails() {
       </div>
 
       <div className="course-extra-actions">
-        <p>For this course only:</p>
-        <button onClick={() => handleAssignmentClick(course?.assignments)}>Assignments</button>
-        <button onClick={() => handleLiveClassesClick(course?.liveClasses)}>Live Classes</button>
+        <p><FontAwesomeIcon icon={faAngleDown} style={{ marginRight: '10px' }} /> For this course :</p>
+        <button 
+          type="button"
+          className="action-button purple-btn"
+          onClick={() => handleAssignmentClick(course?.assignments)}
+        >
+          <FontAwesomeIcon icon={faListCheck} style={{ marginRight: '10px' }} /> See Assignments
+        </button>
+        <button 
+          type="button"
+          className="action-button purple-btn"
+          onClick={() => handleLiveClassesClick(course?.liveClasses)}
+        >
+          <FontAwesomeIcon icon={faVideoCamera} style={{ marginRight: '10px' }} /> View Live Classes
+        </button>
       </div>
     </div>
   );
