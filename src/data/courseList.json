@@ -26,6 +26,7 @@
         {
           "id": 1,
           "title": "React Basics Quiz",
+          "status": "pending",
           "description": "A short quiz to test your understanding of React basics.",
           "date_of_submission": "2023-10-15",
           "course_id": 1,
@@ -36,6 +37,7 @@
         {
           "id": 2,
           "title": "React Component Exercise",
+          "status": "marked",
           "description": "Create a simple React component using JSX.",
           "date_of_submission": "2023-10-20",
           "course_id": 1,
@@ -85,7 +87,6 @@
       "name": "Art History Basics",
       "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "locked": false,
-      "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "topics": [
         {
           "id": 1,
@@ -117,6 +118,7 @@
         {
           "id": 1,
           "title": "React Basics Quiz",
+          "status": "submitted",
           "description": "A short quiz to test your understanding of React basics.",
           "date_of_submission": "2023-10-15",
           "course_id": 1,
@@ -127,6 +129,7 @@
         {
           "id": 2,
           "title": "React Component Exercise",
+          "status": "pending",
           "description": "Create a simple React component using JSX.",
           "date_of_submission": "2023-10-20",
           "course_id": 1,
@@ -178,7 +181,6 @@
       "name": "Creative Writing",
       "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "locked": false,
-      "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "topics": [
         {
           "id": 1,
@@ -200,6 +202,7 @@
         {
           "id": 1,
           "title": "React Basics Quiz",
+          "status": "pending",
           "description": "A short quiz to test your understanding of React basics.",
           "date_of_submission": "2023-10-15",
           "course_id": 1,
@@ -210,6 +213,7 @@
         {
           "id": 2,
           "title": "React Component Exercise",
+          "status": "submitted",
           "description": "Create a simple React component using JSX.",
           "date_of_submission": "2023-10-20",
           "course_id": 1,
@@ -259,7 +263,6 @@
       "name": "Public Speaking",
       "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "locked": true,
-      "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "topics": [
         {
           "id": 1,
@@ -281,6 +284,7 @@
         {
           "id": 1,
           "title": "React Basics Quiz",
+          "status": "marked",
           "description": "A short quiz to test your understanding of React basics.",
           "date_of_submission": "2023-10-15",
           "course_id": 1,
@@ -423,7 +427,6 @@
       "name": "Digital Marketing 101",
       "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "locked": true,
-      "description": "Learn the basics of photography, including camera settings, composition, and lighting techniques.",
       "topics": [
         {
           "id": 1,
