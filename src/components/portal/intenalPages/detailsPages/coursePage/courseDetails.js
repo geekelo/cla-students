@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import TopicsAccordion from './topicsAccordion';
 import '../../../../../stylesheets/courseDetails.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -19,15 +19,22 @@ function CourseDetails() {
   const { id } = useParams();
   const location = useLocation();
   const { course } = location.state || {};
-  const [topics, setTopics] = useState(course?.topics || []);
-
-  // Add console log to debug
-  console.log('Course Data:', course);
+  const [topics, setTopics] = useState(course.topics || []);
+  const navigate = useNavigate();
 
   if (!course) {
     return <div>Course not found!</div>;
   }
 
+  const handleAssignmentClick = (assignments) => {
+    navigate(`/portal/assignments/${course.id}`, { state: { assignments: [...assignments] } });
+  }
+
+  const handleLiveClassesClick = (liveClasses) => {
+    navigate(`/portal/events/${course.id}`, { state: { liveClasses: [...liveClasses] } });
+  }
+
+  // Add topic
   const handleAddTopic = () => {
     const newTopic = prompt('Enter a new topic title:');
     if (newTopic) {
@@ -153,6 +160,12 @@ function CourseDetails() {
             </div>
           )}
         </div>
+      </div>
+
+      <div className="course-extra-actions">
+        <p>For this course only:</p>
+        <button onClick={() => handleAssignmentClick(course?.assignments)}>Assignments</button>
+        <button onClick={() => handleLiveClassesClick(course?.liveClasses)}>Live Classes</button>
       </div>
     </div>
   );
