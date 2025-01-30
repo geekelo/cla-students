@@ -17,6 +17,7 @@ import {
   faListCheck,
   faVideoCamera
 } from '@fortawesome/free-solid-svg-icons';
+import Sidebar from '../../../sidebar';
 
 function CourseDetails() {
   const { id } = useParams();
@@ -69,118 +70,123 @@ function CourseDetails() {
   };
 
   return (
-    <div className="course-details">
-      {/* Header Section */}
-      <div className="course-header">
-        <div className="course-title-container">
-          <h1 className="course-title">{course.name}</h1>
-          <div className="course-actions">
-            <button 
-              type="button" 
-              className="action-icon" 
-              onClick={handleEditCourse}
-              title="Edit Course"
-            >
-              <FontAwesomeIcon icon={faEdit} />
-            </button>
-            <button 
-              type="button" 
-              className="action-icon delete-icon" 
-              onClick={handleDeleteCourse}
-              title="Delete Course"
-            >
-              <FontAwesomeIcon icon={faTrash} />
-            </button>
-            <button
-              type="button"
-              className="add-live-btn"
-              onClick={handleAddLive}
-            >
-              <FontAwesomeIcon icon={faPlus} className="icon" /> Schedule a live class
-            </button>
-          </div>
-        </div>
-        
-        <div className="course-info-grid">
-          <div className="info-item">
-            <FontAwesomeIcon icon={faUser} />
-            <span>Facilitator: <strong>{course.facilitator}</strong></span>
-          </div>
-          <div className="info-item">
-            <FontAwesomeIcon icon={faIdCard} />
-            <span>Course ID: <strong>{id}</strong></span>
-          </div>
-          <div className="info-item">
-            <FontAwesomeIcon icon={faCalendarAlt} />
-            <span>Created on: <strong>{course.dateCreated}</strong></span>
-          </div>
-          <div className="info-item">
-            <FontAwesomeIcon icon={faBookOpen} />
-            <span>Number of Topics: <strong>{topics.length}</strong></span>
-          </div>
-          <div className="info-item">
-            <FontAwesomeIcon icon={faClipboardList} />
-            <span>Number of Assignments: <strong>{course?.assignments.length}</strong></span>
-          </div>
-          <div className="info-item">
-            <FontAwesomeIcon icon={faVideo} />
-            <span>Pending Live Classes: <strong>{course.pendingLiveClasses}</strong></span>
-          </div>
-        </div>
-
-        {/* Course Description Section */}
-        <div className="course-description">
-          <h3>Description :</h3>
-          <p>
-            {course.description 
-              ? course.description 
-              : 'No description available for this course.'}
-          </p>
-        </div>
-      </div>
-
-      {/* Topics Section */}
-      <div className="topics-section">
-        <div className="topics-header">
-          <h2>Topics</h2>
-          <button className="add-topic" onClick={handleAddTopic}>
-            <FontAwesomeIcon icon={faPlus} className="icon" /> Add Topic
-          </button>
-        </div>
-        <div className="topics-list">
-          {topics.length > 0 ? (
-            topics.map((topic, index) => (
-              <TopicsAccordion
-                key={topic.id}
-                topic={topic}
-                onDelete={() => handleDeleteTopic(topic.id)}
-                index={index}
-              />
-            ))
-          ) : (
-            <div className="no-topics">
-              No topics have been added to this course yet.
+    <div className="student-area-container">
+      <Sidebar />
+      <div className="student-display-area">
+        <div className="course-details">
+          {/* Header Section */}
+          <div className="course-header">
+            <div className="course-title-container">
+              <h1 className="course-title">{course.name}</h1>
+              <div className="course-actions">
+                <button 
+                  type="button" 
+                  className="action-icon" 
+                  onClick={handleEditCourse}
+                  title="Edit Course"
+                >
+                  <FontAwesomeIcon icon={faEdit} />
+                </button>
+                <button 
+                  type="button" 
+                  className="action-icon delete-icon" 
+                  onClick={handleDeleteCourse}
+                  title="Delete Course"
+                >
+                  <FontAwesomeIcon icon={faTrash} />
+                </button>
+                <button
+                  type="button"
+                  className="add-live-btn"
+                  onClick={handleAddLive}
+                >
+                  <FontAwesomeIcon icon={faPlus} className="icon" /> Schedule a live class
+                </button>
+              </div>
             </div>
-          )}
-        </div>
-      </div>
+            
+            <div className="course-info-grid">
+              <div className="info-item">
+                <FontAwesomeIcon icon={faUser} />
+                <span>Facilitator: <strong>{course.facilitator}</strong></span>
+              </div>
+              <div className="info-item">
+                <FontAwesomeIcon icon={faIdCard} />
+                <span>Course ID: <strong>{id}</strong></span>
+              </div>
+              <div className="info-item">
+                <FontAwesomeIcon icon={faCalendarAlt} />
+                <span>Created on: <strong>{course.dateCreated}</strong></span>
+              </div>
+              <div className="info-item">
+                <FontAwesomeIcon icon={faBookOpen} />
+                <span>Number of Topics: <strong>{topics.length}</strong></span>
+              </div>
+              <div className="info-item">
+                <FontAwesomeIcon icon={faClipboardList} />
+                <span>Number of Assignments: <strong>{course?.assignments.length}</strong></span>
+              </div>
+              <div className="info-item">
+                <FontAwesomeIcon icon={faVideo} />
+                <span>Pending Live Classes: <strong>{course.pendingLiveClasses}</strong></span>
+              </div>
+            </div>
 
-      <div className="course-extra-actions">
-        <p><FontAwesomeIcon icon={faAngleDown} style={{ marginRight: '10px' }} /> For this course :</p>
-        <button 
-          type="button"
-          className="action-button purple-btn"
-          onClick={() => handleAssignmentClick(course?.assignments)}
-        >
-          <FontAwesomeIcon icon={faListCheck} style={{ marginRight: '10px' }} /> See Assignments
-        </button>
-        <button 
-          type="button"
-          className="action-button purple-btn"
-          onClick={() => handleLiveClassesClick(course?.liveClasses)}
-        >
-          <FontAwesomeIcon icon={faVideoCamera} style={{ marginRight: '10px' }} /> View Live Classes
-        </button>
+            {/* Course Description Section */}
+            <div className="course-description">
+              <h3>Description :</h3>
+              <p>
+                {course.description 
+                  ? course.description 
+                  : 'No description available for this course.'}
+              </p>
+            </div>
+          </div>
+
+          {/* Topics Section */}
+          <div className="topics-section">
+            <div className="topics-header">
+              <h2>Topics</h2>
+              <button className="add-topic" onClick={handleAddTopic}>
+                <FontAwesomeIcon icon={faPlus} className="icon" /> Add Topic
+              </button>
+            </div>
+            <div className="topics-list">
+              {topics.length > 0 ? (
+                topics.map((topic, index) => (
+                  <TopicsAccordion
+                    key={topic.id}
+                    topic={topic}
+                    onDelete={() => handleDeleteTopic(topic.id)}
+                    index={index}
+                  />
+                ))
+              ) : (
+                <div className="no-topics">
+                  No topics have been added to this course yet.
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="course-extra-actions">
+            <p><FontAwesomeIcon icon={faAngleDown} style={{ marginRight: '10px' }} /> For this course :</p>
+            <button 
+              type="button"
+              className="action-button purple-btn"
+              onClick={() => handleAssignmentClick(course?.assignments)}
+            >
+              <FontAwesomeIcon icon={faListCheck} style={{ marginRight: '10px' }} /> See Assignments
+            </button>
+            <button 
+              type="button"
+              className="action-button purple-btn"
+              onClick={() => handleLiveClassesClick(course?.liveClasses)}
+            >
+              <FontAwesomeIcon icon={faVideoCamera} style={{ marginRight: '10px' }} /> View Live Classes
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

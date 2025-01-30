@@ -1,4 +1,5 @@
 /* assignmentDetails.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 /* Global Styles */
 * {
@@ -15,136 +16,285 @@ body {
 
 /* Main Container */
 .assignment-details {
+  padding: 2rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Header Section */
+.assignment-header {
+  margin-bottom: 2rem;
+}
+
+.assignment-title-container {
   display: flex;
-  justify-content: center;
   align-items: center;
-  height: 100vh;
-  padding: 20px;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-.assignment-card {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 800px;
-  padding: 30px;
-  text-align: center;
-}
-
-/* Assignment Title */
 .assignment-title {
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: rgba(68,46,121,255);
+  margin: 0;
+}
+
+.assignment-info-grid {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(68,46,121,0.1);
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #666;
+}
+
+.info-item strong {
   color: #333;
-  margin-bottom: 20px;
+  font-weight: 500;
 }
 
-/* Assignment Info Section */
-.assignment-info {
-  text-align: left;
-  margin-bottom: 30px;
+.info-item svg {
+  color: rgba(68,46,121,255);
+  font-size: 1.2rem;
 }
 
-.assignment-info p {
+/* Action Buttons */
+.assignment-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.action-icon {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: rgba(68,46,121,255);
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.action-icon:hover {
+  transform: scale(1.1);
+  color: rgba(152, 132, 198, 0.871);
+}
+
+.delete-icon:hover {
+  color: #dc3545;
+}
+
+/* Description Section */
+.assignment-description {
+  margin-bottom: 2rem;
+}
+
+.assignment-description h3 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: rgba(68,46,121,255);
+  margin-bottom: 0.8rem;
+}
+
+.assignment-description p {
+  color: #444;
+  line-height: 1.6;
   font-size: 1rem;
-  margin: 8px 0;
+  margin: 0;
+  font-weight: 400;
+  max-width: 800px;
 }
 
-.assignment-info strong {
-  color: #555;
+/* Submission Section */
+.submission-section {
+  margin-top: 2rem;
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-.status {
-  font-weight: bold;
+.submission-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(68,46,121,0.1);
 }
 
-.status.marked {
-  color: #28a745; /* Green */
+.submission-header h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: rgba(68,46,121,255);
+  margin: 0;
 }
 
-.status.unmarked {
-  color: #dc3545; /* Red */
+.submission-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.add-submission {
+  background-color: rgba(68,46,121,255);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.add-submission:hover {
+  background-color: rgba(152, 132, 198, 0.871);
+  transform: translateY(-2px);
 }
 
 /* Form Styles */
-.assignment-form {
+.submission-form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 1rem;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  gap: 0.5rem;
 }
 
-label {
-  font-size: 1rem;
-  margin-bottom: 5px;
+.form-group label {
   color: #555;
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="file"] {
-  padding: 10px;
+.form-group input {
+  padding: 0.8rem;
+  border: 1px solid #e0e0e0;
   border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  width: 100%;
-  max-width: 400px;
-  margin-bottom: 15px;
-  transition: border-color 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="file"]:focus {
-  border-color: #007bff;
+.form-group input:focus {
   outline: none;
+  border-color: rgba(68,46,121,255);
 }
 
-button.submit-button {
-  background-color: #007bff;
+.file-upload .upload-btn {
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px dashed rgba(68,46,121,0.3);
+  border-radius: 5px;
+  background: none;
+  color: rgba(68,46,121,255);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.file-upload .upload-btn:hover {
+  border-color: rgba(68,46,121,255);
+  background-color: rgba(68,46,121,0.05);
+}
+
+.submit-button {
+  background-color: rgba(68,46,121,255);
   color: white;
   border: none;
-  padding: 15px;
+  padding: 1rem;
   border-radius: 5px;
+  font-family: 'Poppins', sans-serif;
   font-size: 1rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 100%;
-  max-width: 400px;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
 }
 
-button.submit-button:hover {
-  background-color: #0056b3;
+.submit-button:hover {
+  background-color: rgba(152, 132, 198, 0.871);
+  transform: translateY(-2px);
 }
 
-/* Responsive Styles */
+/* Responsive Design */
 @media (max-width: 768px) {
-  .assignment-card {
-    padding: 20px;
+  .assignment-title-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
   }
 
   .assignment-title {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
   }
 
-  .assignment-info p {
-    font-size: 0.9rem;
-  }
-
-  .form-group {
+  .assignment-actions {
     width: 100%;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(68,46,121,0.1);
   }
 
-  input[type="text"],
-  input[type="email"],
-  input[type="file"],
-  button.submit-button {
-    max-width: 100%;
+  .assignment-info-grid {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .submission-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .add-submission {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .assignment-details {
+    padding: 1rem;
+  }
+
+  .assignment-title {
+    font-size: 1.5rem;
+  }
+
+  .submission-section {
+    padding: 1rem;
+  }
+
+  .submission-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .form-group input,
+  .file-upload .upload-btn,
+  .submit-button {
+    font-size: 0.9rem;
+    padding: 0.7rem;
   }
 }
