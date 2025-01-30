@@ -62,15 +62,14 @@ const AddEditAssignment = () => {
     <div className="student-area-container">
       <Sidebar />
       <div className="student-display-area">
+        <button onClick={handleBack} className="back-button">
+          <FontAwesomeIcon icon={faArrowLeft} /> Back
+        </button>
         <div className="form-container">
-          <div className="form-header">
-            <button onClick={handleBack} className="back-button">
-              <FontAwesomeIcon icon={faArrowLeft} /> Back
-            </button>
-            <FontAwesomeIcon icon={faGraduationCap} className="header-icon" />
+          <div className="title-section">
             <h2 className="form-title">Add New Assignment</h2>
+            <FontAwesomeIcon icon={faGraduationCap} className="header-icon" />
           </div>
-          
           <div className="form-content">
             <form onSubmit={handleSubmit} className="assignment-form">
               <div className="form-group">

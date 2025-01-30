@@ -67,12 +67,12 @@ const AssignmentDetails = () => {
     <div className="student-area-container">
       <Sidebar />
       <div className="student-display-area">
+        <button onClick={handleBack} className="back-button">
+          <FontAwesomeIcon icon={faArrowLeft} /> Back
+        </button>
         <div className="assignment-details">
           <div className="assignment-header">
             <div className="assignment-title-container">
-              <button onClick={handleBack} className="back-button">
-                <FontAwesomeIcon icon={faArrowLeft} /> Back
-              </button>
               <h1 className="assignment-title">{assignmentData.title}</h1>
             </div>
             
