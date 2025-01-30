@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faEdit, 
@@ -13,7 +13,6 @@ import '../../../../stylesheets/assignmentDetails.css';
 import Sidebar from '../../sidebar';
 
 const AssignmentDetails = () => {
-  const { id } = useParams();
   const location = useLocation();
   const { assignment } = location.state || {};
   const [formData, setFormData] = useState({
@@ -23,7 +22,17 @@ const AssignmentDetails = () => {
     file: null,
   });
 
-  console.log(id);
+  // Mock data for the assignment when not provided through location state
+  const assignmentData = assignment || {
+    title: 'React Basics Quiz',
+    date_of_submission: '2024-03-20',
+    course_title: 'React Development',
+    course_id: 'REACT101',
+    name_of_facilitator: 'John Doe',
+    facilitator_id: 'FAC123',
+    description: 'This quiz will test your understanding of React fundamentals including components, state, props, and hooks. Please read all questions carefully before answering.'
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -36,7 +45,6 @@ const AssignmentDetails = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-    
   };
 
   const handleEdit = () => {
@@ -56,27 +64,27 @@ const AssignmentDetails = () => {
         <div className="assignment-details">
           <div className="assignment-header">
             <div className="assignment-title-container">
-              <h1 className="assignment-title">React Basics Quiz</h1>
+              <h1 className="assignment-title">{assignmentData.title}</h1>
             </div>
             
             <div className="assignment-info-grid">
               <div className="info-item">
                 <FontAwesomeIcon icon={faCalendarAlt} />
-                <span>Date of Submission: <strong>{new Date(assignment.date_of_submission).toLocaleDateString()}</strong></span>
+                <span>Date of Submission: <strong>{new Date(assignmentData.date_of_submission).toLocaleDateString()}</strong></span>
               </div>
               <div className="info-item">
                 <FontAwesomeIcon icon={faBookOpen} />
-                <span>Course: <strong>{assignment.course_title} (ID: {assignment.course_id})</strong></span>
+                <span>Course: <strong>{assignmentData.course_title} (ID: {assignmentData.course_id})</strong></span>
               </div>
               <div className="info-item">
                 <FontAwesomeIcon icon={faUser} />
-                <span>Facilitator: <strong>{assignment.name_of_facilitator} (ID: {assignment.facilitator_id})</strong></span>
+                <span>Facilitator: <strong>{assignmentData.name_of_facilitator} (ID: {assignmentData.facilitator_id})</strong></span>
               </div>
             </div>
 
             <div className="assignment-description">
               <h3>Description :</h3>
-              <p>{assignment.description}</p>
+              <p>{assignmentData.description}</p>
             </div>
           </div>
 
