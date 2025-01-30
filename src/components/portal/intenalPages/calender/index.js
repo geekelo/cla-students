@@ -1,10 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
+import courses from '../../../../data/courseList.json';
 import '../../../../stylesheets/calender.css';
 
-function Calendar({ events }) {
-  const [filteredEvents, setFilteredEvents] = useState(events);
+function Calendar() {
+  const [events, setEvents] = useState([]);
+  const [filteredEvents, setFilteredEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
+
+  const location = useLocation();
+  const { liveClasses } = location.state || [];
+
+  useEffect(() => {
+    if (liveClasses && liveClasses.length > 0) {
+      setEvents(liveClasses);
+      setFilteredEvents(liveClasses);
+    } else {
+      const allLiveEvents = getAllLiveEvents(courses);
+      setEvents(allLiveEvents);
+      setFilteredEvents(allLiveEvents);
+    }
+  }, [liveClasses]);
+
+  function getAllLiveEvents(coursesData) {
+    const categories = Object.keys(coursesData); // Get keys: done, active, pending
+    let liveEvents = [];
+
+    categories.forEach(category => {
+      coursesData[category].forEach(course => {
+        if (course.liveClasses) {
+          liveEvents = liveEvents.concat(course.liveClasses); // Add live classes to the array
+        }
+      });
+    });
+
+    return liveEvents;
+  }
 
   const handleDateFilterChange = (event) => {
     const { value } = event.target;
@@ -29,6 +61,7 @@ function Calendar({ events }) {
     <div className="calendar-container">
       <div className="calendar-header">
         <h1 className="calendar-title">Upcoming Events</h1>
+        <button>Add Live Class</button>
         <input
           type="date"
           className="date-filter"
