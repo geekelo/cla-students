@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import TopicsAccordion from './topicsAccordion';
-import '../../../../../stylesheets/courseDetails.css';
+import '../../../../stylesheets/courseDetails.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faEdit, 
@@ -17,7 +17,7 @@ import {
   faListCheck,
   faVideoCamera
 } from '@fortawesome/free-solid-svg-icons';
-import Sidebar from '../../../sidebar';
+import Sidebar from '../../sidebar';
 
 function CourseDetails() {
   const { id } = useParams();
