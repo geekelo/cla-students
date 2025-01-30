@@ -41,20 +41,30 @@ function CourseDetails() {
   };
 
   const handleLiveClassesClick = (liveClasses) => {
-    navigate(`/portal/events/${course.id}`, { state: { liveClasses: [...liveClasses] } });
+    navigate('/portal/events/', { state: { liveClasses: [...liveClasses] } });
+  }
+
+  const handleAddLiveClassesClick = () => {
+    navigate('/portal/events/new', {
+   state: { 
+      courseId: id,
+      courseName: course.name,
+      course: course
+    } 
+  });
   }
 
   const handleBack = () => {
     navigate('/portal/courses');
   };
-
+  
   // Add topic
   const handleAddTopic = () => {
     navigate('/portal/topic/new', { 
       state: { 
         courseId: id,
         courseName: course.name,
-        course: course  // Pass the entire course object
+        course: course
       } 
     });
   };
@@ -109,7 +119,7 @@ function CourseDetails() {
                 <button
                   type="button"
                   className="add-live-btn"
-                  onClick={() => handleLiveClassesClick(course?.liveClasses)}
+                  onClick={() => handleAddLiveClassesClick(course?.liveClasses)}
                 >
                   <FontAwesomeIcon icon={faVideo} className="icon" />
                   Add Live Class

@@ -12,18 +12,27 @@ function Profile() {
 
       <div className="profile-details">
         <h3 className="profile-name">John Doe</h3>
+        <p className="profile-phone">
+          <span className="profile-label">Studend ID: </span>
+          &nbsp;
+          312ADWETNMTY
+        </p>
         <p className="profile-cohort">
-          <span className="profile-label">Cohort:</span>
+          <span className="profile-label">Cohort: </span>
+          &nbsp;
           Fall 2024
         </p>
         <p className="profile-email">
-          <span className="profile-label">Email:</span>
+          <span className="profile-label">Email: </span>
+          &nbsp;
           john.doe@example.com
         </p>
         <p className="profile-phone">
           <span className="profile-label">Phone: </span>
+          &nbsp;
           +1234567890
         </p>
+       
 
         <div className="profile-actions">
           <a href="/certificate" className="profile-link">

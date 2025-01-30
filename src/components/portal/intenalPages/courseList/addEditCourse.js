@@ -44,7 +44,11 @@ const AddEditCourseForm = () => {
             <h2 className="form-title">Add New Course</h2>
           </div>
           
-          <div className="form-content">
+          <div className="form-content">         
+            <p className="course-details-text">
+              Fill course details :
+            </p>s
+
             <form onSubmit={handleSubmit} className="course-form">
               <div className="form-group">
                 <label htmlFor="courseName" className="form-label">

@@ -79,7 +79,7 @@ function Sidebar() {
         <li>
           <button
             type="button"
-            onClick={() => handleNavigation('calendar')}
+            onClick={() => handleNavigation('events')}
             className={getButtonClass('calendar')}
             aria-label="View Calendar"
           >
