@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faEdit, 
@@ -7,13 +7,15 @@ import {
   faUser, 
   faCalendarAlt,
   faBookOpen,
-  faUpload
+  faUpload,
+  faArrowLeft
 } from '@fortawesome/free-solid-svg-icons';
 import '../../../../stylesheets/assignmentDetails.css';
 import Sidebar from '../../sidebar';
 
 const AssignmentDetails = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { assignment } = location.state || {};
   const [formData, setFormData] = useState({
     name: '',
@@ -57,6 +59,10 @@ const AssignmentDetails = () => {
     }
   };
 
+  const handleBack = () => {
+    navigate('/portal/assignments');
+  };
+
   return (
     <div className="student-area-container">
       <Sidebar />
@@ -64,6 +70,9 @@ const AssignmentDetails = () => {
         <div className="assignment-details">
           <div className="assignment-header">
             <div className="assignment-title-container">
+              <button onClick={handleBack} className="back-button">
+                <FontAwesomeIcon icon={faArrowLeft} /> Back
+              </button>
               <h1 className="assignment-title">{assignmentData.title}</h1>
             </div>
             

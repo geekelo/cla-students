@@ -479,3 +479,24 @@
     padding: 8px 20px;
   }
 }
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: none;
+  border: 1px solid #442e79;
+  border-radius: 6px;
+  color: #442e79;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 1rem;
+}
+
+.back-button:hover {
+  background-color: rgba(68, 46, 121, 0.1);
+  transform: translateX(-2px);
+}
