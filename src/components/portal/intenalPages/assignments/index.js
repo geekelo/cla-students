@@ -1,25 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useParams, useLocation } from 'react-router-dom';
 import AssignmentItem from './assignmentItem';
 import '../../../../stylesheets/assignments.css';
+import courses from '../../../../data/courseList.json';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faCheckCircle, faClipboardCheck } from '@fortawesome/free-solid-svg-icons';
 
 function Assignments() {
   const { id } = useParams();
   const location = useLocation();
-  const { assignments } = location.state || {};
+  const { assignments } = location.state || [];
   const [activeTab, setActiveTab] = useState('all');
+  const [currAssignments, setAssignments] = useState([]);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
 
+  useEffect(() => {
+    if (assignments && assignments.length > 0) {
+      setAssignments(assignments);
+    } else {
+      const allAssignments = getAllAssignments(courses);
+      setAssignments(allAssignments);
+    }
+  }, [assignments]);
+
+  function getAllAssignments(coursesData) {
+    const categories = Object.keys(coursesData);
+    let assignmentsList = [];
+    categories.forEach(category => {
+      coursesData[category].forEach(course => {
+        if (course.assignments) {
+          assignmentsList = assignmentsList.concat(course.assignments);
+        }
+      });
+    });
+
+    return assignmentsList;
+  }
+
   console.log(id);
 
   // Filter assignments for each tab
-  const filteredAssignments = assignments?.filter((assignment) => {
+  const filteredAssignments = currAssignments?.filter((assignment) => {
     if (activeTab === 'pending') return assignment.status === 'pending' && !assignment.locked;
     if (activeTab === 'submitted') return assignment.status === 'submitted' && !assignment.locked;
     if (activeTab === 'marked') return assignment.status === 'marked' || assignment.locked;
