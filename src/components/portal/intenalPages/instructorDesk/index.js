@@ -13,7 +13,6 @@ function InstructorDesk({
     navigate('/portal/course/new', { state: { course: {} } });
   };
 
-
   const onCreateAssignment = () => {
     navigate('/portal/assignment/new', { state: { assignment: {} } });
   }
