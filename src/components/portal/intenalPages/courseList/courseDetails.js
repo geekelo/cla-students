@@ -122,7 +122,7 @@ function CourseDetails() {
                   onClick={() => handleAddLiveClassesClick(course?.liveClasses)}
                 >
                   <FontAwesomeIcon icon={faVideo} className="icon" />
-                  Add Live Class
+                  Schedule Live Class
                 </button>
               </div>
             </div>
