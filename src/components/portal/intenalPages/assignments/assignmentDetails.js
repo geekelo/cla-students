@@ -1,5 +1,16 @@
 import React, { useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faEdit, 
+  faTrash, 
+  faUser, 
+  faCalendarAlt,
+  faBookOpen,
+  faClipboardList,
+  faPlus,
+  faUpload
+} from '@fortawesome/free-solid-svg-icons';
 import '../../../../stylesheets/assignmentDetails.css';
 
 const AssignmentDetails = () => {
@@ -26,24 +37,80 @@ const AssignmentDetails = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-    // Add your submission logic here
+    
+  };
+
+  const handleEdit = () => {
+    console.log('Edit clicked');
+  };
+
+  const handleDelete = () => {
+    if (window.confirm('Are you sure you want to delete this submission?')) {
+      console.log('Delete clicked');
+    }
   };
 
   return (
     <div className="assignment-details">
-      <div className="assignment-card">
-        <h1 className="assignment-title">{assignment.name}</h1>
-        <div className="assignment-info">
-          <p><strong>Status:</strong> <span className={`status ${assignment.status === 'marked' ? 'marked' : 'unmarked'}`}>{assignment.status}</span></p>
-          <p><strong>Description:</strong> {assignment.description}</p>
-          <p><strong>Date of Submission:</strong> {new Date(assignment.date_of_submission).toLocaleDateString()}</p>
-          <p><strong>Course:</strong> {assignment.course_title} (ID: {assignment.course_id})</p>
-          <p><strong>Facilitator:</strong> {assignment.name_of_facilitator} (ID: {assignment.facilitator_id})</p>
+      <div className="assignment-header">
+        <div className="assignment-title-container">
+          <h1 className="assignment-title">{assignment.title}</h1>
+          <div className="assignment-actions">
+            <button 
+              type="button" 
+              className="action-icon" 
+              onClick={handleEdit}
+              title="Edit Submission"
+            >
+              <FontAwesomeIcon icon={faEdit} />
+            </button>
+            <button 
+              type="button" 
+              className="action-icon delete-icon" 
+              onClick={handleDelete}
+              title="Delete Submission"
+            >
+              <FontAwesomeIcon icon={faTrash} />
+            </button>
+          </div>
+        </div>
+        
+        <div className="assignment-info-grid">
+          <div className="info-item">
+            <FontAwesomeIcon icon={faClipboardList} />
+            <span>Status: <strong>{assignment.status}</strong></span>
+          </div>
+          <div className="info-item">
+            <FontAwesomeIcon icon={faCalendarAlt} />
+            <span>Date of Submission: <strong>{new Date(assignment.date_of_submission).toLocaleDateString()}</strong></span>
+          </div>
+          <div className="info-item">
+            <FontAwesomeIcon icon={faBookOpen} />
+            <span>Course: <strong>{assignment.course_title} (ID: {assignment.course_id})</strong></span>
+          </div>
+          <div className="info-item">
+            <FontAwesomeIcon icon={faUser} />
+            <span>Facilitator: <strong>{assignment.name_of_facilitator} (ID: {assignment.facilitator_id})</strong></span>
+          </div>
         </div>
 
-        <form className="assignment-form" onSubmit={handleSubmit}>
+        <div className="assignment-description">
+          <h3>Description :</h3>
+          <p>{assignment.description}</p>
+        </div>
+      </div>
+
+      <div className="submission-section">
+        <div className="submission-header">
+          <h2>Submit Your Work</h2>
+          <button className="add-submission" onClick={() => document.getElementById('file').click()}>
+            <FontAwesomeIcon icon={faPlus} className="icon" /> Add Submission
+          </button>
+        </div>
+
+        <form className="submission-form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name">Full Name</label>
             <input
               type="text"
               id="name"
@@ -67,7 +134,7 @@ const AssignmentDetails = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">Email Address</label>
             <input
               type="email"
               id="email"
@@ -78,8 +145,7 @@ const AssignmentDetails = () => {
             />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="file">Upload PDF</label>
+          <div className="form-group file-upload">
             <input
               type="file"
               id="file"
@@ -87,7 +153,16 @@ const AssignmentDetails = () => {
               accept=".pdf"
               onChange={handleFileChange}
               required
+              style={{ display: 'none' }}
             />
+            <button 
+              type="button" 
+              className="upload-btn"
+              onClick={() => document.getElementById('file').click()}
+            >
+              <FontAwesomeIcon icon={faUpload} className="icon" />
+              {formData.file ? formData.file.name : 'Upload PDF'}
+            </button>
           </div>
 
           <button type="submit" className="submit-button">
