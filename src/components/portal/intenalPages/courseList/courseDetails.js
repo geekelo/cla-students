@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import TopicsAccordion from './topicsAccordion';
+import TopicsAccordion from '../topics/topicsAccordion';
 import '../../../../stylesheets/courseDetails.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faEdit, 
-  faTrash, 
+  faTrash,
   faUser, 
   faIdCard, 
   faCalendarAlt,
@@ -40,11 +40,15 @@ function CourseDetails() {
 
   // Add topic
   const handleAddTopic = () => {
-    const newTopic = prompt('Enter a new topic title:');
-    if (newTopic) {
-      setTopics([...topics, { id: Date.now(), title: newTopic }]);
-    }
+    navigate('/portal/topic/new', { state: { topic: {} } });
   };
+
+  // const handleUpdateTopic = () => {
+  //   const newTopic = prompt('Enter a new topic title:');
+  //   if (newTopic) {
+  //     setTopics([...topics, { id: Date.now(), title: newTopic }]);
+  //   }
+  // };
 
   const handleDeleteTopic = (id) => {
     if (window.confirm('Are you sure you want to delete this topic?')) {

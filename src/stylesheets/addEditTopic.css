@@ -1,0 +1,91 @@
+/* Container Styles */
+.add-topic-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+.add-topic-container h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+/* Form Styles */
+.add-topic-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-topic-form label {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.add-topic-form input,
+.add-topic-form textarea,
+.add-topic-form select {
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  transition: border-color 0.3s;
+}
+
+.add-topic-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.add-topic-form input:focus,
+.add-topic-form textarea:focus,
+.add-topic-form select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+}
+
+/* Button Styles */
+.add-topic-form button {
+  padding: 0.8rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-topic-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .add-topic-container {
+    padding: 1rem;
+  }
+
+  .add-topic-form label {
+    font-size: 0.85rem;
+  }
+
+  .add-topic-form input,
+  .add-topic-form textarea,
+  .add-topic-form select {
+    font-size: 0.9rem;
+  }
+
+  .add-topic-form button {
+    font-size: 0.9rem;
+  }
+}

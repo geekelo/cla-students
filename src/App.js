@@ -9,6 +9,7 @@ import CourseDetails from './components/portal/intenalPages/courseList/courseDet
 import AssignmentDetails from './components/portal/intenalPages/assignments/assignmentDetails';
 import AddEditCourseForm from './components/portal/intenalPages/courseList/addEditCourse';
 import AddEditAssignment from './components/portal/intenalPages/assignments/addEditAssignment';
+import AddEditTopic from './components/portal/intenalPages/topics/addEditTopic';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/portal/assignments/:id" element={<AssignmentDetails />} />
         <Route path="/portal/course/new" element={<AddEditCourseForm />} />
         <Route path="/portal/assignment/new" element={<AddEditAssignment /> } />
+        <Route path="/portal/topic/new" element={<AddEditTopic /> } />
       </Routes>
       <Footer />
     </Router>
