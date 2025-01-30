@@ -1,14 +1,5 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faChartLine,
-  faBook,
-  faClipboardList,
-  faInbox,
-  faVideo,
-  faUser,
-  faLaptop,
-} from '@fortawesome/free-solid-svg-icons';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import '../../stylesheets/studentArea.css';
 import Profile from './intenalPages/profile/index';
 import Courses from './intenalPages/courseList/index';
@@ -17,119 +8,29 @@ import Dashboard from './intenalPages/dashboard/index';
 import Calendar from './intenalPages/calender/index';
 import Submissions from './intenalPages/submissions/index';
 import InstructorDesk from './intenalPages/instructorDesk/index';
+import Sidebar from './sidebar';
 
 function StudentArea() {
-  const [activePage, setActivePage] = useState('dashboard');
-
-  const getButtonClass = (pageName) => `student-nav-link ${activePage === pageName ? 'active' : ''}`;
-
-  const renderContent = () => {
-    switch (activePage) {
-      case 'profile':
-        return <Profile />;
-      case 'courses':
-        return <Courses />;
-      case 'assignments':
-        return <Assignments />;
-      case 'dashboard':
-        return <Dashboard />;
-      case 'submissions':
-        return <Submissions />;
-      case 'calendar':
-        return <Calendar />;
-      case 'instructorDesk':
-        return <InstructorDesk />;
-      default:
-        return (
-          <div className="student-display-area">
-            <h2 className="student-display-title">Welcome to Your Student Area</h2>
-            <p className="student-display-message">Select an option from the menu to get started.</p>
-          </div>
-        );
-    }
-  };
-
   return (
     <div className="student-area-container">
-      {/* Left Side Nav */}
-      <div className="student-side-nav">
-        <ul className="student-nav-list">
-          <li>
-            <button
-              type="button"
-              onClick={() => setActivePage('dashboard')}
-              className={getButtonClass('dashboard')}
-              aria-label="View Dashboard"
-            >
-              <FontAwesomeIcon icon={faChartLine} className="nav-icon" /> Progress Board
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              onClick={() => setActivePage('instructorDesk')}
-              className={getButtonClass('instructorDesk')}
-              aria-label="View My Desk"
-            >
-              <FontAwesomeIcon icon={faLaptop} className="nav-icon" /> My Desk
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              onClick={() => setActivePage('courses')}
-              className={getButtonClass('courses')}
-              aria-label="View Courses"
-            >
-              <FontAwesomeIcon icon={faBook} className="nav-icon" /> Courses
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              onClick={() => setActivePage('assignments')}
-              className={getButtonClass('assignments')}
-              aria-label="View Assignments"
-            >
-              <FontAwesomeIcon icon={faClipboardList} className="nav-icon" /> Assignments
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              onClick={() => setActivePage('submissions')}
-              className={getButtonClass('submissions')}
-              aria-label="View Submissions"
-            >
-              <FontAwesomeIcon icon={faInbox} className="nav-icon" /> Submissions
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              onClick={() => setActivePage('calendar')}
-              className={getButtonClass('calendar')}
-              aria-label="View Calendar"
-            >
-              <FontAwesomeIcon icon={faVideo} className="nav-icon" /> Live Classes
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              onClick={() => setActivePage('profile')}
-              className={getButtonClass('profile')}
-              aria-label="View Profile"
-            >
-              <FontAwesomeIcon icon={faUser} className="nav-icon" /> Profile
-            </button>
-          </li>
-        </ul>
-      </div>
-
-      {/* Right Display Area */}
+      <Sidebar />
       <div className="student-display-area">
-        {renderContent()}
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/assignments" element={<Assignments />} />
+          <Route path="/submissions" element={<Submissions />} />
+          <Route path="/calendar" element={<Calendar />} />
+          <Route path="/instructorDesk" element={<InstructorDesk />} />
+          <Route path="*" element={
+            <div className="student-display-area">
+              <h2 className="student-display-title">Welcome to Your Student Area</h2>
+              <p className="student-display-message">Select an option from the menu to get started.</p>
+            </div>
+          } />
+        </Routes>
       </div>
     </div>
   );
