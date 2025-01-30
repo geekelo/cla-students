@@ -15,7 +15,8 @@ import {
   faPlus,
   faAngleDown,
   faListCheck,
-  faVideoCamera
+  faVideoCamera,
+  faArrowLeft
 } from '@fortawesome/free-solid-svg-icons';
 import Sidebar from '../../sidebar';
 
@@ -53,6 +54,10 @@ function CourseDetails() {
   });
   }
 
+  const handleBack = () => {
+    navigate('/portal/courses');
+  };
+  
   // Add topic
   const handleAddTopic = () => {
     navigate('/portal/topic/new', { 
@@ -90,6 +95,9 @@ function CourseDetails() {
           {/* Header Section */}
           <div className="course-header">
             <div className="course-title-container">
+              <button onClick={handleBack} className="back-button">
+                <FontAwesomeIcon icon={faArrowLeft} /> Back
+              </button>
               <h1 className="course-title">{course.name}</h1>
               <div className="course-actions">
                 <button 

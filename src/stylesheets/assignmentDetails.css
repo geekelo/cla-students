@@ -16,13 +16,15 @@ body {
 
 /* Main Container */
 .assignment-details {
-  padding: 2rem;
+  padding: 1.5rem;
   font-family: 'Poppins', sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Header Section */
 .assignment-header {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .assignment-title-container {
@@ -32,21 +34,41 @@ body {
   margin-bottom: 1.5rem;
 }
 
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: none;
+  border: 1px solid #442e79;
+  border-radius: 6px;
+  color: #442e79;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: rgba(68, 46, 121, 0.1);
+  transform: translateX(-2px);
+}
+
 .assignment-title {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 600;
-  color: rgba(68,46,121,255);
+  color: #442e79;
   margin: 0;
+  flex-grow: 1;
 }
 
 .assignment-info-grid {
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
-  align-items: center;
   margin-bottom: 1.5rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(68,46,121,0.1);
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(68, 46, 121, 0.1);
 }
 
 .info-item {
@@ -54,11 +76,11 @@ body {
   align-items: center;
   gap: 0.5rem;
   color: #666;
+  font-size: 0.95rem;
 }
 
 .info-item strong {
   color: #333;
-  font-weight: 500;
 }
 
 .info-item svg {
@@ -76,8 +98,8 @@ body {
 .action-icon {
   background: none;
   border: none;
-  font-size: 1.5rem;
-  color: rgba(68,46,121,255);
+  font-size: 1.2rem;
+  color: #442e79;
   cursor: pointer;
   padding: 0.5rem;
   transition: all 0.3s ease;
@@ -85,7 +107,6 @@ body {
 
 .action-icon:hover {
   transform: scale(1.1);
-  color: rgba(152, 132, 198, 0.871);
 }
 
 .delete-icon:hover {
@@ -94,32 +115,29 @@ body {
 
 /* Description Section */
 .assignment-description {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .assignment-description h3 {
   font-size: 1.2rem;
   font-weight: 500;
-  color: rgba(68,46,121,255);
+  color: #442e79;
   margin-bottom: 0.8rem;
 }
 
 .assignment-description p {
   color: #444;
   line-height: 1.6;
-  font-size: 1rem;
+  font-size: 0.95rem;
   margin: 0;
-  font-weight: 400;
-  max-width: 800px;
 }
 
 /* Submission Section */
 .submission-section {
-  margin-top: 2rem;
   background: white;
-  border-radius: 15px;
+  border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .submission-header {
@@ -127,21 +145,19 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid rgba(68,46,121,0.1);
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(68, 46, 121, 0.1);
 }
 
 .submission-header h2 {
   font-size: 1.5rem;
-  font-weight: 600;
-  color: rgba(68,46,121,255);
+  color: #442e79;
   margin: 0;
 }
 
 .submission-actions {
   display: flex;
   gap: 1rem;
-  align-items: center;
 }
 
 .add-submission {
@@ -166,9 +182,9 @@ body {
 
 /* Form Styles */
 .submission-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
 }
 
 .form-group {
@@ -177,16 +193,20 @@ body {
   gap: 0.5rem;
 }
 
+.form-group.file-upload,
+.form-group:last-child {
+  grid-column: 1 / -1;
+}
+
 .form-group label {
-  color: #555;
-  font-size: 0.9rem;
   font-weight: 500;
+  color: #442e79;
 }
 
 .form-group input {
-  padding: 0.8rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 5px;
+  padding: 0.7rem 1rem;
+  border: 1px solid rgba(68, 46, 121, 0.2);
+  border-radius: 8px;
   font-family: 'Poppins', sans-serif;
   font-size: 0.9rem;
   transition: all 0.3s ease;
@@ -194,52 +214,58 @@ body {
 
 .form-group input:focus {
   outline: none;
-  border-color: rgba(68,46,121,255);
+  border-color: #442e79;
+  box-shadow: 0 0 0 2px rgba(68, 46, 121, 0.1);
 }
 
 .file-upload .upload-btn {
-  width: 100%;
-  padding: 0.8rem;
-  border: 2px dashed rgba(68,46,121,0.3);
-  border-radius: 5px;
-  background: none;
-  color: rgba(68,46,121,255);
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  width: 100%;
+  padding: 0.8rem;
+  background-color: white;
+  border: 2px dashed rgba(68, 46, 121, 0.3);
+  border-radius: 8px;
+  color: #442e79;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .file-upload .upload-btn:hover {
-  border-color: rgba(68,46,121,255);
-  background-color: rgba(68,46,121,0.05);
+  background-color: rgba(68, 46, 121, 0.05);
+  border-color: #442e79;
 }
 
 .submit-button {
-  background-color: rgba(68,46,121,255);
+  grid-column: 1 / -1;
+  padding: 0.8rem;
+  background-color: #442e79;
   color: white;
   border: none;
-  padding: 1rem;
-  border-radius: 5px;
+  border-radius: 8px;
   font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 1rem;
 }
 
 .submit-button:hover {
-  background-color: rgba(152, 132, 198, 0.871);
-  transform: translateY(-2px);
+  background-color: #33225b;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(68, 46, 121, 0.2);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .assignment-details {
+    padding: 1rem;
+  }
+
   .assignment-title-container {
     flex-direction: column;
     align-items: flex-start;
@@ -250,33 +276,23 @@ body {
     font-size: 1.8rem;
   }
 
-  .assignment-actions {
-    width: 100%;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(68,46,121,0.1);
-  }
-
   .assignment-info-grid {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-
-  .submission-header {
-    flex-direction: column;
     gap: 1rem;
   }
 
-  .add-submission {
-    width: 100%;
-    justify-content: center;
+  .submission-form {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group {
+    grid-column: 1 / -1;
   }
 }
 
 @media (max-width: 480px) {
   .assignment-details {
-    padding: 1rem;
+    padding: 0.8rem;
   }
 
   .assignment-title {
@@ -287,14 +303,18 @@ body {
     padding: 1rem;
   }
 
+  .submission-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
   .submission-header h2 {
     font-size: 1.3rem;
   }
 
-  .form-group input,
-  .file-upload .upload-btn,
-  .submit-button {
-    font-size: 0.9rem;
-    padding: 0.7rem;
+  .submission-actions {
+    width: 100%;
+    justify-content: flex-end;
   }
 }

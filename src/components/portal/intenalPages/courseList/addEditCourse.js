@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faGraduationCap, 
+  faBook, 
   faPlus,
-  faChalkboardUser,
-  faFileLines
+  faArrowLeft
 } from '@fortawesome/free-solid-svg-icons';
 import '../../../../stylesheets/addEditCourse.css';
 import Sidebar from '../../sidebar';
 
 const AddEditCourseForm = () => {
+  const navigate = useNavigate();
   const [courseName, setCourseName] = useState('');
   const [courseDescription, setCourseDescription] = useState('');
 
@@ -22,6 +24,11 @@ const AddEditCourseForm = () => {
     console.log('New Course Added:', newCourse);
     setCourseName('');
     setCourseDescription('');
+    navigate('/portal/courses');
+  };
+
+  const handleBack = () => {
+    navigate('/portal/courses');
   };
 
   return (
@@ -30,19 +37,22 @@ const AddEditCourseForm = () => {
       <div className="student-display-area">
         <div className="form-container">
           <div className="form-header">
+            <button onClick={handleBack} className="back-button">
+              <FontAwesomeIcon icon={faArrowLeft} /> Back
+            </button>
             <FontAwesomeIcon icon={faGraduationCap} className="header-icon" />
             <h2 className="form-title">Add New Course</h2>
           </div>
           
-          <div className="form-content">
+          <div className="form-content">         
             <p className="course-details-text">
               Fill course details :
-            </p>
-            
+            </p>s
+
             <form onSubmit={handleSubmit} className="course-form">
               <div className="form-group">
                 <label htmlFor="courseName" className="form-label">
-                  <FontAwesomeIcon icon={faChalkboardUser} className="input-icon" />
+                  <FontAwesomeIcon icon={faBook} className="input-icon" />
                   Course Name
                 </label>
                 <input
@@ -58,7 +68,7 @@ const AddEditCourseForm = () => {
 
               <div className="form-group">
                 <label htmlFor="courseDescription" className="form-label">
-                  <FontAwesomeIcon icon={faFileLines} className="input-icon" />
+                  <FontAwesomeIcon icon={faBook} className="input-icon" />
                   Course Description
                 </label>
                 <textarea
