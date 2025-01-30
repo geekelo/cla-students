@@ -24,24 +24,36 @@
 }
 
 .form-header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid rgba(68, 46, 121, 0.1);
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
-.header-icon {
-  font-size: 2rem;
-  color: #442e79;
+.title-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .form-title {
-  font-size: 1.8rem;
   color: #442e79;
+  font-size: 1.4rem;
   font-weight: 600;
   margin: 0;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+.header-icon {
+  font-size: 1.4rem;
+  color: #442e79;
+}
+
+.form-subtitle {
+  color: #666;
+  font-size: 1rem;
+  margin-top: 0.5rem;
 }
 
 .form-content {
@@ -49,9 +61,10 @@
 }
 
 .assignment-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
+  background: #fff;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .form-group {
@@ -183,4 +196,27 @@
   .header-icon {
     font-size: 1.5rem;
   }
+}
+
+.global-back-button {
+  position: relative;
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.global-back-button:hover {
+  color: #007bff;
+}
+
+.global-back-button svg {
+  font-size: 1.2rem;
 }

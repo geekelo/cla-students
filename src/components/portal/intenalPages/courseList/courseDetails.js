@@ -91,13 +91,13 @@ function CourseDetails() {
     <div className="student-area-container">
       <Sidebar />
       <div className="student-display-area">
+        <button onClick={handleBack} className="back-button">
+          <FontAwesomeIcon icon={faArrowLeft} /> Back
+        </button>
         <div className="course-details">
           {/* Header Section */}
           <div className="course-header">
             <div className="course-title-container">
-              <button onClick={handleBack} className="back-button">
-                <FontAwesomeIcon icon={faArrowLeft} /> Back
-              </button>
               <h1 className="course-title">{course.name}</h1>
               <div className="course-actions">
                 <button 

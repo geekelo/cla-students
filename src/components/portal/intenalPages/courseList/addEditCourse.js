@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faGraduationCap, 
@@ -12,6 +12,8 @@ import Sidebar from '../../sidebar';
 
 const AddEditCourseForm = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { course } = location.state || {};
   const [courseName, setCourseName] = useState('');
   const [courseDescription, setCourseDescription] = useState('');
 
@@ -35,19 +37,19 @@ const AddEditCourseForm = () => {
     <div className="student-area-container">
       <Sidebar />
       <div className="student-display-area">
-        <div className="form-container">
+        <button onClick={handleBack} className="back-button">
+          <FontAwesomeIcon icon={faArrowLeft} /> Back
+        </button>
+        <div className="course-form">
           <div className="form-header">
-            <button onClick={handleBack} className="back-button">
-              <FontAwesomeIcon icon={faArrowLeft} /> Back
-            </button>
+            <h2>{course ? 'Edit Course' : 'Add New Course'}</h2>
             <FontAwesomeIcon icon={faGraduationCap} className="header-icon" />
-            <h2 className="form-title">Add New Course</h2>
           </div>
           
           <div className="form-content">         
             <p className="course-details-text">
               Fill course details :
-            </p>s
+            </p>
 
             <form onSubmit={handleSubmit} className="course-form">
               <div className="form-group">
