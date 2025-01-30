@@ -1,0 +1,62 @@
+/* Add Course Form Styles */
+.add-course-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.add-course-container h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.add-course-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-course-form label {
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #555;
+}
+
+.add-course-form input,
+.add-course-form textarea,
+.add-course-form select {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  background: #fff;
+}
+
+.add-course-form input:focus,
+.add-course-form textarea:focus,
+.add-course-form select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.add-course-form button {
+  padding: 12px 20px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-course-form button:hover {
+  background-color: #0056b3;
+}

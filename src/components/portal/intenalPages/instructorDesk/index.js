@@ -1,13 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import '../../../../stylesheets/instructorDesk.css';
 
 function InstructorDesk({
   stats,
-  onCreateCourse,
   onCreateAssignment,
   onCreateLiveClass,
 }) {
+  const navigate = useNavigate();
+
+  const onCreateCourse = () => {
+    navigate('/portal/course/new', { state: { course: {} } });
+  };
+
   return (
     <div className="instructor-desk">
       <h1 className="desk-title">My Desk</h1>
@@ -23,6 +29,7 @@ function InstructorDesk({
         </button>
         <button
           type="button"
+          href="/portal/course/new"
           className="action-button"
           onClick={onCreateAssignment}
         >
