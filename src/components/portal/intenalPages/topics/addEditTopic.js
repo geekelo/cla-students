@@ -1,53 +1,113 @@
 import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faGraduationCap, 
+  faLayerGroup,
+  faPlus,
+  faFileLines,
+  faArrowLeft
+} from '@fortawesome/free-solid-svg-icons';
 import '../../../../stylesheets/addEditTopic.css';
+import Sidebar from '../../sidebar';
 
 const AddEditTopic = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { courseId, topic, course } = location.state || {};
+  
   const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    course_id: '',
+    title: topic?.title || '',
+    description: topic?.description || '',
+    courseId: courseId || ''
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Topic Submitted:', formData);
-    // Add form submission logic here
+    console.log('Form submitted:', formData);
+    // After successful submission, navigate back to course details
+    navigate(`/portal/courses/${courseId}`, { state: { course } });
   };
 
-  return (
-    <div className="add-topic-container">
-      <h2>Add Topic</h2>
-      <form className="add-topic-form" onSubmit={handleSubmit}>
-        <label htmlFor="name">Topic Name</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Enter topic name"
-          required
-        />
+  const handleBack = () => {
+    if (courseId) {
+      navigate(`/portal/courses/${courseId}`, { state: { course } });
+    } else {
+      navigate(-1); // Fallback to previous page if no courseId
+    }
+  };
 
-        <label htmlFor="description">Description</label>
-        <textarea
-          id="description"
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          placeholder="Enter topic description"
-          required
-        />
-        <button type="submit">Add Topic</button>
-      </form>
+  if (!courseId || !course) {
+    return <div className="student-area-container">
+      <Sidebar />
+      <div className="student-display-area">
+        <div className="error-message">Course information not found!</div>
+      </div>
+    </div>;
+  }
+
+  return (
+    <div className="student-area-container">
+      <Sidebar />
+      <div className="student-display-area">
+        <div className="form-container">
+          <div className="form-header">
+            <button onClick={handleBack} className="back-button">
+              <FontAwesomeIcon icon={faArrowLeft} /> Back
+            </button>
+            <FontAwesomeIcon icon={faGraduationCap} className="header-icon" />
+            <h2 className="form-title">{topic ? 'Edit Topic' : 'Add New Topic'}</h2>
+          </div>
+          
+          <div className="form-content">
+            <form onSubmit={handleSubmit} className="topic-form">
+              <div className="form-group">
+                <label htmlFor="title" className="form-label">
+                  <FontAwesomeIcon icon={faLayerGroup} className="input-icon" />
+                  Topic Title
+                </label>
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  className="form-input"
+                  value={formData.title}
+                  onChange={handleChange}
+                  placeholder="Enter topic title"
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="description" className="form-label">
+                  <FontAwesomeIcon icon={faFileLines} className="input-icon" />
+                  Topic Description
+                </label>
+                <textarea
+                  id="description"
+                  name="description"
+                  className="form-textarea"
+                  value={formData.description}
+                  onChange={handleChange}
+                  placeholder="Enter topic description"
+                  required
+                  rows="4"
+                />
+              </div>
+
+              <button type="submit" className="form-button">
+                <FontAwesomeIcon icon={faPlus} className="button-icon" />
+                {topic ? 'Update Topic' : 'Add Topic'}
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

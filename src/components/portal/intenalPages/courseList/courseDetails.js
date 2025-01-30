@@ -23,11 +23,16 @@ function CourseDetails() {
   const { id } = useParams();
   const location = useLocation();
   const { course } = location.state || {};
-  const [topics, setTopics] = useState(course.topics || []);
+  const [topics, setTopics] = useState((course?.topics || []));
   const navigate = useNavigate();
 
   if (!course) {
-    return <div>Course not found!</div>;
+    return <div className="student-area-container">
+      <Sidebar />
+      <div className="student-display-area">
+        <div className="error-message">Course not found!</div>
+      </div>
+    </div>;
   }
 
   const handleAssignmentClick = (assignments) => {
@@ -40,20 +45,13 @@ function CourseDetails() {
 
   // Add topic
   const handleAddTopic = () => {
-    navigate('/portal/topic/new', { state: { topic: {} } });
-  };
-
-  // const handleUpdateTopic = () => {
-  //   const newTopic = prompt('Enter a new topic title:');
-  //   if (newTopic) {
-  //     setTopics([...topics, { id: Date.now(), title: newTopic }]);
-  //   }
-  // };
-
-    const newTopic = prompt('Enter a new topic title:');
-    if (newTopic) {
-      setTopics([...topics, { id: Date.now(), title: newTopic }]);
-    }
+    navigate('/portal/topic/new', { 
+      state: { 
+        courseId: id,
+        courseName: course.name,
+        course: course  // Pass the entire course object
+      } 
+    });
   };
 
   const handleDeleteTopic = (id) => {
@@ -72,11 +70,6 @@ function CourseDetails() {
       // Add delete course logic here
       console.log('Delete course clicked');
     }
-  };
-
-  const handleAddLive = () => {
-    // Add live class logic here
-    console.log('Add live class clicked');
   };
 
   return (
@@ -108,9 +101,10 @@ function CourseDetails() {
                 <button
                   type="button"
                   className="add-live-btn"
-                  onClick={handleAddLive}
+                  onClick={() => handleLiveClassesClick(course?.liveClasses)}
                 >
-                  <FontAwesomeIcon icon={faPlus} className="icon" /> Schedule a live class
+                  <FontAwesomeIcon icon={faVideo} className="icon" />
+                  Add Live Class
                 </button>
               </div>
             </div>
