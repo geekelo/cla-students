@@ -12,7 +12,6 @@ import {
   faLayerGroup
 } from '@fortawesome/free-solid-svg-icons';
 import '../../../../stylesheets/addEditAssignment.css';
-import Sidebar from '../../sidebar';
 
 const AddEditAssignment = () => {
   const navigate = useNavigate();
@@ -60,7 +59,6 @@ const AddEditAssignment = () => {
 
   return (
     <div className="student-area-container">
-      <Sidebar />
       <div className="student-display-area">
         <div className="form-container">
           <div className="form-header">

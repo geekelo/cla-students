@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import courses from '../../../../data/courseList.json';
 import '../../../../stylesheets/calender.css';
 
@@ -8,7 +8,7 @@ function Calendar() {
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
-
+  const navigate = useNavigate();
   const location = useLocation();
   const { liveClasses } = location.state || [];
 
@@ -22,6 +22,14 @@ function Calendar() {
       setFilteredEvents(allLiveEvents);
     }
   }, [liveClasses]);
+
+  const handleAddLiveClassesClick = () => {
+    navigate('/portal/event/new', {
+   state: { 
+    courses: courses 
+    } 
+  });
+  }
 
   function getAllLiveEvents(coursesData) {
     const categories = Object.keys(coursesData); // Get keys: done, active, pending
@@ -61,7 +69,7 @@ function Calendar() {
     <div className="calendar-container">
       <div className="calendar-header">
         <h1 className="calendar-title">Upcoming Events</h1>
-        <button>Add Live Class</button>
+        <button  type="button" onClick={handleAddLiveClassesClick}>Schedule Live Class</button>
         <input
           type="date"
           className="date-filter"

@@ -5,7 +5,6 @@ import '../../../../stylesheets/instructorDesk.css';
 
 function InstructorDesk({
   stats,
-  onCreateLiveClass,
 }) {
   const navigate = useNavigate();
 
@@ -15,6 +14,11 @@ function InstructorDesk({
 
   const onCreateAssignment = () => {
     navigate('/portal/assignment/new', { state: { assignment: {} } });
+  }
+  
+  const onCreateLiveClass = () => {
+    navigate('/portal/event/new', { state: { liveClasses: {} } });
+
   }
 
   return (
