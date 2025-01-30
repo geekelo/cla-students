@@ -37,7 +37,7 @@ function CourseDetails() {
   }
 
   const handleAssignmentClick = (assignments) => {
-    navigate(`/portal/assignments/${course.id}`, { state: { assignments } });
+    navigate('/portal/assignments/', { state: { assignments } });
   };
 
   const handleLiveClassesClick = (liveClasses) => {

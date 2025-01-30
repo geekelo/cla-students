@@ -73,7 +73,7 @@ const AssignmentDetails = () => {
         <div className="assignment-details">
           <div className="assignment-header">
             <div className="assignment-title-container">
-              <h1 className="assignment-title">{assignmentData.title}</h1>
+              <h1 className="assignment-title">{assignmentData.name}</h1>
             </div>
             
             <div className="assignment-info-grid">

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 function AssignmentItem({ assignment }) {
   const navigate = useNavigate();
   const handleView = () => {
-    navigate(`/portal/assignment/${assignment.id}`, { state: { assignment } });
+    navigate(`/portal/assignments/${assignment.id}`, { state: { assignment } });
   };
 
   return (
