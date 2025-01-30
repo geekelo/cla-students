@@ -50,6 +50,12 @@ function CourseDetails() {
   //   }
   // };
 
+    const newTopic = prompt('Enter a new topic title:');
+    if (newTopic) {
+      setTopics([...topics, { id: Date.now(), title: newTopic }]);
+    }
+  };
+
   const handleDeleteTopic = (id) => {
     if (window.confirm('Are you sure you want to delete this topic?')) {
       setTopics(topics.filter((topic) => topic.id !== id));
