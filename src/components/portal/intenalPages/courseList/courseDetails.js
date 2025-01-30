@@ -48,7 +48,8 @@ function CourseDetails() {
     navigate('/portal/topic/new', { 
       state: { 
         courseId: id,
-        courseName: course.name 
+        courseName: course.name,
+        course: course  // Pass the entire course object
       } 
     });
   };

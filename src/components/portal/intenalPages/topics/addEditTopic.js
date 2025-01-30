@@ -14,7 +14,7 @@ import Sidebar from '../../sidebar';
 const AddEditTopic = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { courseId, courseName, topic } = location.state || {};
+  const { courseId, topic, course } = location.state || {};
   
   const [formData, setFormData] = useState({
     title: topic?.title || '',
@@ -31,15 +31,24 @@ const AddEditTopic = () => {
     e.preventDefault();
     console.log('Form submitted:', formData);
     // After successful submission, navigate back to course details
-    navigate(`/portal/courses/${courseId}`);
+    navigate(`/portal/courses/${courseId}`, { state: { course } });
   };
 
   const handleBack = () => {
-    navigate(`/portal/courses/${courseId}`);
+    if (courseId) {
+      navigate(`/portal/courses/${courseId}`, { state: { course } });
+    } else {
+      navigate(-1); // Fallback to previous page if no courseId
+    }
   };
 
-  if (!courseId) {
-    return <div>Course information not found!</div>;
+  if (!courseId || !course) {
+    return <div className="student-area-container">
+      <Sidebar />
+      <div className="student-display-area">
+        <div className="error-message">Course information not found!</div>
+      </div>
+    </div>;
   }
 
   return (
@@ -49,18 +58,13 @@ const AddEditTopic = () => {
         <div className="form-container">
           <div className="form-header">
             <button onClick={handleBack} className="back-button">
-              <FontAwesomeIcon icon={faArrowLeft} /> Back to Course
+              <FontAwesomeIcon icon={faArrowLeft} /> Back
             </button>
             <FontAwesomeIcon icon={faGraduationCap} className="header-icon" />
             <h2 className="form-title">{topic ? 'Edit Topic' : 'Add New Topic'}</h2>
           </div>
           
           <div className="form-content">
-            <p className="topic-details-text">
-              <FontAwesomeIcon icon={faLayerGroup} className="details-icon" />
-              Adding topic to course: <strong>{courseName}</strong>
-            </p>
-            
             <form onSubmit={handleSubmit} className="topic-form">
               <div className="form-group">
                 <label htmlFor="title" className="form-label">
