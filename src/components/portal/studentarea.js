@@ -9,6 +9,8 @@ import Submissions from './intenalPages/submissions/index';
 import InstructorDesk from './intenalPages/instructorDesk/index';
 import Sidebar from './sidebar';
 import Calendar from './intenalPages/calender/index';
+import ScheduleLiveClass from './intenalPages/calender/scheduleLiveClass';
+import AddEditAssignment from './intenalPages/assignments/addEditAssignment';
 
 function StudentArea() {
   return (
@@ -24,6 +26,8 @@ function StudentArea() {
           <Route path="/submissions" element={<Submissions />} />
           <Route path="/instructorDesk" element={<InstructorDesk />} />
           <Route path="/events/" element={<Calendar /> } />
+          <Route path="/assignment/new" element={<AddEditAssignment /> } />
+          <Route path="/event/new" element={<ScheduleLiveClass /> } />
           <Route path="*" element={
             <div className="student-display-area">
               <h2 className="student-display-title">Welcome to Your Student Area</h2>

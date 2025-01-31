@@ -37,7 +37,7 @@ function CourseDetails() {
   }
 
   const handleAssignmentClick = (assignments) => {
-    navigate(`/portal/assignments/${course.id}`, { state: { assignments } });
+    navigate('/portal/assignments/', { state: { assignments } });
   };
 
   const handleLiveClassesClick = (liveClasses) => {
@@ -122,7 +122,7 @@ function CourseDetails() {
                   onClick={() => handleAddLiveClassesClick(course?.liveClasses)}
                 >
                   <FontAwesomeIcon icon={faVideo} className="icon" />
-                  Add Live Class
+                  Schedule Live Class
                 </button>
               </div>
             </div>

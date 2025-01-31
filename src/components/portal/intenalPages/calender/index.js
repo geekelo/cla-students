@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faVideo, 
@@ -10,6 +9,7 @@ import {
   faCalendarAlt,
   faClock 
 } from '@fortawesome/free-solid-svg-icons';
+import { useLocation, useNavigate } from 'react-router-dom';
 import courses from '../../../../data/courseList.json';
 import '../../../../stylesheets/calender.css';
 
@@ -17,7 +17,7 @@ function Calendar() {
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
-
+  const navigate = useNavigate();
   const location = useLocation();
   const { liveClasses } = location.state || [];
 
@@ -31,6 +31,14 @@ function Calendar() {
       setFilteredEvents(allLiveEvents);
     }
   }, [liveClasses]);
+
+  const handleAddLiveClassesClick = () => {
+    navigate('/portal/event/new', {
+   state: { 
+    courses: courses 
+    } 
+  });
+  }
 
   function getAllLiveEvents(coursesData) {
     const categories = Object.keys(coursesData);
