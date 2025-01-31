@@ -90,12 +90,20 @@ function Calendar() {
     });
   };
 
+  const handleViewClass = (zoomLink) => {
+    if (zoomLink) {
+      window.open(zoomLink, '_blank');
+    } else {
+      alert('Zoom link not available for this class');
+    }
+  };
+
   return (
     <div className="calendar-container">
       <div className="calendar-header">
         <h1 className="calendar-title">Upcoming Classes</h1>
         <button
-          role="button "
+          role="button"
           onClick={handleAddLiveClassesClick}
         >
           <FontAwesomeIcon icon={faVideo} /> Add Live Class
@@ -132,8 +140,8 @@ function Calendar() {
                 <button 
                   type="button" 
                   className="action-icon" 
-                  onClick={() => console.log('View clicked')}
-                  title="View Class"
+                  onClick={() => handleViewClass(event.zoom_link)}
+                  title="Join Class"
                 >
                   <FontAwesomeIcon icon={faEye} />
                 </button>
