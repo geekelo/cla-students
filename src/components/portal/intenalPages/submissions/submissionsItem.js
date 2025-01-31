@@ -15,43 +15,10 @@ function SubmissionItem({ submission }) {
     setMark('');
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setMark('');
-  };
   return (
-    <li>
-      <button className="submission-item" type="button" tabIndex={0}>
-        <span className="submission-text">
-          <strong>{submission.student_name}</strong>
-          <strong>{submission.student_email}</strong>
-          <strong>{submission.id}</strong>
-          <a href={`/portal/assignments/${submission.assignment_id}`}>Assignment</a>
-        </span>
-        <a>Download</a>
-        <span className="submission-date">{submission.dateSubmitted}</span>
-      
-      
-        {submission.status === 'unmarked' ? (
-        <form onSubmit={handleSubmit}>
-          <label htmlFor={`mark-${submission.id}`}>Mark: </label>
-          <input
-            type="number"
-            id={`mark-${submission.id}`}
-            value={mark}
-            onChange={handleMarkChange}
-            min="0"
-            max="100"
-            required
-          />
-          <button type="submit" onClick={(e) => handleSubmit(e)}>Submit</button>
-        </form>
-      ) : (
-        <span className="submission-mark">Score: {submission.score}%</span>
-        )}
-      </button>
-=======
     <li className="submission-card">
+ 
+
       <div className="submission-details">
         <div className="submission-link">
           <FontAwesomeIcon icon={faLink} className="link-icon" />
@@ -83,10 +50,10 @@ function SubmissionItem({ submission }) {
                   onChange={handleMarkChange}
                   min="0"
                   max="100"
-                  placeholder="Mark"
+                  placeholder="0 %"
                   required
                 />
-                <button type="submit">Submit</button>
+                <button type="submit">Mark</button>
               </form>
             </div>
           ) : (
