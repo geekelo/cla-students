@@ -5,7 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faVideo, 
   faEdit, 
-  faTrash 
+  faTrash,
+  faEye,
+  faCalendarAlt,
+  faClock 
 } from '@fortawesome/free-solid-svg-icons';
 import courses from '../../../../data/courseList.json';
 import '../../../../stylesheets/calender.css';
@@ -39,9 +42,9 @@ function Calendar() {
           // Map the live classes and include course details
           const classesWithCourseInfo = course.liveClasses.map(liveClass => ({
             ...liveClass,
-            courseName: course.name,
-            facilitator: course.facilitator,
-            courseId: course.id
+            courseName: liveClass.name,
+            facilitator: liveClass.name_of_facilitator,
+            courseId: liveClass.course_id
           }));
           liveEvents = liveEvents.concat(classesWithCourseInfo);
         }
@@ -99,15 +102,30 @@ function Calendar() {
           sortedEvents.map((event) => (
             <div key={event.id} className="event-card">
               <div className="event-details">
-                <div className="event-date">
-                  {formatDate(event.date)}
+                <div className="event-datetime">
+                  <div className="event-date">
+                    <FontAwesomeIcon icon={faCalendarAlt} className="datetime-icon" /> 
+                    <span className="datetime-text">{formatDate(event.date)}</span>
+                  </div>
+                  <div className="event-time">
+                    <FontAwesomeIcon icon={faClock} className="datetime-icon" /> 
+                    <span className="datetime-text">{event.time}</span>
+                  </div>
                 </div>
                 <h3 className="event-title">{event.courseName}</h3>
                 <div className="event-course">
-                  Facilitator: {event.facilitator}
+                  Facilitator: {event.facilitator || 'Not Assigned'}
                 </div>
               </div>
               <div className="event-actions">
+                <button 
+                  type="button" 
+                  className="action-icon" 
+                  onClick={() => console.log('View clicked')}
+                  title="View Class"
+                >
+                  <FontAwesomeIcon icon={faEye} />
+                </button>
                 <button 
                   type="button" 
                   className="action-icon" 
