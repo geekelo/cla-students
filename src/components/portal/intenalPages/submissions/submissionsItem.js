@@ -25,7 +25,7 @@ function SubmissionItem({ submission }) {
         <span className="submission-date">{submission.dateSubmitted}</span>
       
       
-        {submission.status === 'unmarked' && (
+        {submission.status === 'unmarked' ? (
         <form onSubmit={handleSubmit}>
           <label htmlFor={`mark-${submission.id}`}>Mark: </label>
           <input
@@ -39,7 +39,9 @@ function SubmissionItem({ submission }) {
           />
           <button type="submit" onClick={(e) => handleSubmit(e)}>Submit</button>
         </form>
-      )}
+      ) : (
+        <span className="submission-mark">Score: {submission.score}%</span>
+        )}
       </button>
     </li>
   );
