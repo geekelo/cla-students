@@ -6,6 +6,7 @@ import Footer from './components/footer';
 import LoginPage from './components/auth/login';
 import StudentArea from './components/portal/studentarea';
 import About from './components/pages/About';
+import Programs from './components/pages/Programs';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/portal/*" element={<StudentArea />} />
         <Route path="/about" element={<About />} />
+        <Route path="/programs" element={<Programs />} />
       </Routes>
       <Footer />
     </Router>
