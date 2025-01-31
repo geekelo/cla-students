@@ -18,8 +18,8 @@ const AssignmentDetails = () => {
   const navigate = useNavigate();
   const { assignment } = location.state || {};
   const [formData, setFormData] = useState({
-    name: '',
-    studentId: '',
+    student_name: '',
+    student_id: '',
     email: '',
     file: null,
   });
@@ -122,36 +122,12 @@ const AssignmentDetails = () => {
 
             <form className="submission-form" onSubmit={handleSubmit}>
               <div className="form-group">
-                <label htmlFor="name">Full Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              <div className="form-group">
                 <label htmlFor="studentId">Student ID</label>
                 <input
                   type="text"
                   id="studentId"
                   name="studentId"
                   value={formData.studentId}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="email">Email Address</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
                   onChange={handleChange}
                   required
                 />
