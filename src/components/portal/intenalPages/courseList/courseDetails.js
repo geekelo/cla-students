@@ -18,7 +18,6 @@ import {
   faVideoCamera,
   faArrowLeft
 } from '@fortawesome/free-solid-svg-icons';
-import Sidebar from '../../sidebar';
 
 function CourseDetails() {
   const { id } = useParams();
@@ -29,7 +28,6 @@ function CourseDetails() {
 
   if (!course) {
     return <div className="student-area-container">
-      <Sidebar />
       <div className="student-display-area">
         <div className="error-message">Course not found!</div>
       </div>
@@ -88,9 +86,8 @@ function CourseDetails() {
   };
 
   return (
-    <div className="student-area-container">
-      <Sidebar />
-      <div className="student-display-area">
+    <div className="course-details-container">
+      <div className="course-details-content">
         <button onClick={handleBack} className="back-button">
           <FontAwesomeIcon icon={faArrowLeft} /> Back
         </button>

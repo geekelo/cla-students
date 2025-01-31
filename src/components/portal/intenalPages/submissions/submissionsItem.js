@@ -17,6 +17,8 @@ function SubmissionItem({ submission }) {
 
   return (
     <li className="submission-card">
+ 
+
       <div className="submission-details">
         <div className="submission-link">
           <FontAwesomeIcon icon={faLink} className="link-icon" />
@@ -48,10 +50,10 @@ function SubmissionItem({ submission }) {
                   onChange={handleMarkChange}
                   min="0"
                   max="100"
-                  placeholder="Mark"
+                  placeholder="0 %"
                   required
                 />
-                <button type="submit">Submit</button>
+                <button type="submit">Mark</button>
               </form>
             </div>
           ) : (

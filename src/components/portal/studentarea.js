@@ -11,6 +11,11 @@ import Sidebar from './sidebar';
 import Calendar from './intenalPages/calender/index';
 import ScheduleLiveClass from './intenalPages/calender/scheduleLiveClass';
 import AddEditAssignment from './intenalPages/assignments/addEditAssignment';
+import CourseDetails from './intenalPages/courseList/courseDetails';
+import AssignmentDetails from './intenalPages/assignments/assignmentDetails';
+import AddEditCourseForm from './intenalPages/courseList/addEditCourse';
+import AddEditTopic from './intenalPages/topics/addEditTopic';
+
 
 function StudentArea() {
   return (
@@ -28,6 +33,10 @@ function StudentArea() {
           <Route path="/events/" element={<Calendar /> } />
           <Route path="/assignment/new" element={<AddEditAssignment /> } />
           <Route path="/event/new" element={<ScheduleLiveClass /> } />
+          <Route path="/courses/:id" element={<CourseDetails />} />
+          <Route path="/assignments/:id" element={<AssignmentDetails />} />
+          <Route path="/course/new" element={<AddEditCourseForm />} />
+          <Route path="/topic/new" element={<AddEditTopic /> } />
           <Route path="*" element={
             <div className="student-display-area">
               <h2 className="student-display-title">Welcome to Your Student Area</h2>
