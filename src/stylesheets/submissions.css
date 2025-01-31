@@ -63,34 +63,106 @@
   font-family: 'Poppins', sans-serif;
 }
 
-.submission-item {
+.submission-card {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  cursor: pointer;
   transition: all 0.3s ease;
+  margin-bottom: 1rem;
   font-family: 'Poppins', sans-serif;
 }
 
-.submission-item:hover {
-  background-color: #f0f0f0;
+.submission-card:hover {
   transform: scale(1.02);
 }
 
-.submission-text {
-  font-size: 1rem;
+.submission-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.submission-link a {
+  color: #442e79;
+  text-decoration: none;
   font-weight: 500;
-  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+}
+
+.submission-link a:hover {
+  text-decoration: underline;
+}
+
+.submission-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.submission-info {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.submission-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.download-link {
+  color: #442e79;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.download-link:hover {
+  text-decoration: underline;
 }
 
 .submission-date {
+  color: #666;
   font-size: 0.9rem;
-  color: gray;
+}
+
+.mark-form {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.mark-form input {
+  width: 70px;
+  padding: 0.3rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
   font-family: 'Poppins', sans-serif;
+}
+
+.mark-form button {
+  padding: 0.3rem 0.8rem;
+  background-color: #442e79;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+}
+
+.mark-form button:hover {
+  background-color: #33225b;
+}
+
+.submission-mark {
+  color: #442e79;
+  font-weight: 500;
 }
 
 /* No Submissions Message */

@@ -12,37 +12,42 @@ function SubmissionItem({ submission }) {
     e.preventDefault();
     setMark('');
   };
+
   return (
-    <li>
-      <button className="submission-item" type="button" tabIndex={0}>
-        <span className="submission-text">
-          <strong>{submission.student_name}</strong>
-          <strong>{submission.student_email}</strong>
-          <strong>{submission.id}</strong>
+    <li className="submission-card">
+      <div className="submission-details">
+        <div className="submission-link">
           <a href={`/portal/assignments/${submission.assignment_id}`}>Assignment</a>
-        </span>
-        <a>Download</a>
+        </div>
+        <div className="submission-name">
+          {submission.student_name}
+        </div>
+        <div className="submission-info">
+          <span className="submission-id">ID: {submission.student_id}</span>
+          <span className="submission-email">{submission.student_email}</span>
+        </div>
+      </div>
+      <div className="submission-actions">
+        <a className="download-link">Download</a>
         <span className="submission-date">{submission.dateSubmitted}</span>
-      
-      
         {submission.status === 'unmarked' ? (
-        <form onSubmit={handleSubmit}>
-          <label htmlFor={`mark-${submission.id}`}>Mark: </label>
-          <input
-            type="number"
-            id={`mark-${submission.id}`}
-            value={mark}
-            onChange={handleMarkChange}
-            min="0"
-            max="100"
-            required
-          />
-          <button type="submit" onClick={(e) => handleSubmit(e)}>Submit</button>
-        </form>
-      ) : (
-        <span className="submission-mark">Score: {submission.score}%</span>
+          <form onSubmit={handleSubmit} className="mark-form">
+            <input
+              type="number"
+              id={`mark-${submission.id}`}
+              value={mark}
+              onChange={handleMarkChange}
+              min="0"
+              max="100"
+              placeholder="Mark"
+              required
+            />
+            <button type="submit">Submit</button>
+          </form>
+        ) : (
+          <span className="submission-mark">Score: {submission.score}%</span>
         )}
-      </button>
+      </div>
     </li>
   );
 }
@@ -50,7 +55,9 @@ function SubmissionItem({ submission }) {
 SubmissionItem.propTypes = {
   submission: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    studentName: PropTypes.string.isRequired,
+    student_name: PropTypes.string.isRequired,
+    student_id: PropTypes.string.isRequired,
+    student_email: PropTypes.string.isRequired,
     dateSubmitted: PropTypes.string.isRequired,
     status: PropTypes.oneOf(['marked', 'unmarked']).isRequired,
   }).isRequired,
