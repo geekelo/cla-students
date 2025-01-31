@@ -94,7 +94,10 @@ function Calendar() {
     <div className="calendar-container">
       <div className="calendar-header">
         <h1 className="calendar-title">Upcoming Classes</h1>
-        <button>
+        <button
+          role="button "
+          onClick={handleAddLiveClassesClick}
+        >
           <FontAwesomeIcon icon={faVideo} /> Add Live Class
         </button>
         <input
