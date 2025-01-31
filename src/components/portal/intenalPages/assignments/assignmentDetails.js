@@ -26,7 +26,7 @@ const AssignmentDetails = () => {
 
   // Mock data for the assignment when not provided through location state
   const assignmentData = assignment || {
-    title: 'React Basics Quiz',
+    name: 'React Basics Quiz',
     date_of_submission: '2024-03-20',
     course_title: 'React Development',
     course_id: 'REACT101',
