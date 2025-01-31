@@ -8,7 +8,6 @@ import {
   faArrowLeft
 } from '@fortawesome/free-solid-svg-icons';
 import '../../../../stylesheets/addEditCourse.css';
-import Sidebar from '../../sidebar';
 
 const AddEditCourseForm = () => {
   const navigate = useNavigate();
@@ -34,9 +33,8 @@ const AddEditCourseForm = () => {
   };
 
   return (
-    <div className="student-area-container">
-      <Sidebar />
-      <div className="student-display-area">
+    <div className="add-edit-course-container">
+      <div className="add-edit-course-content">
         <button onClick={handleBack} className="back-button">
           <FontAwesomeIcon icon={faArrowLeft} /> Back
         </button>

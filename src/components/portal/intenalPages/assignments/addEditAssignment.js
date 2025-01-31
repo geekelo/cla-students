@@ -41,7 +41,6 @@ const AddEditAssignment = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form Submitted:', formData);
-    // After successful submission, navigate back to course details
     if (courseId) {
       navigate(`/portal/courses/${courseId}`);
     } else {
@@ -58,114 +57,102 @@ const AddEditAssignment = () => {
   };
 
   return (
-    <div className="student-area-container">
-      <div className="student-display-area">
-        <button onClick={handleBack} className="back-button">
-          <FontAwesomeIcon icon={faArrowLeft} /> Back
-        </button>
-        <div className="form-container">
-          <div className="title-section">
-            <h2 className="form-title">Add New Assignment</h2>
-            <FontAwesomeIcon icon={faGraduationCap} className="header-icon" />
-          </div>
-          <div className="form-content">
-            <form onSubmit={handleSubmit} className="assignment-form">
-              <div className="form-group">
-                <label htmlFor="name" className="form-label">
-                  <FontAwesomeIcon icon={faClipboardList} className="input-icon" />
-                  Assignment Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  className="form-input"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="Enter assignment name"
-                  required
-                />
-              </div>
+    <div className="student-display-area">
+      <button onClick={handleBack} className="back-button">
+        <FontAwesomeIcon icon={faArrowLeft} /> Back
+      </button>
 
-              <div className="form-group">
-                <label htmlFor="description" className="form-label">
-                  <FontAwesomeIcon icon={faFileLines} className="input-icon" />
-                  Description
-                </label>
-                <textarea
-                  id="description"
-                  name="description"
-                  className="form-textarea"
-                  value={formData.description}
-                  onChange={handleChange}
-                  placeholder="Enter assignment description"
-                  required
-                  rows="4"
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="date_of_submission" className="form-label">
-                  <FontAwesomeIcon icon={faCalendarAlt} className="input-icon" />
-                  Submission Date
-                </label>
-                <input
-                  type="date"
-                  id="date_of_submission"
-                  name="date_of_submission"
-                  className="form-input"
-                  value={formData.date_of_submission}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="course_id" className="form-label">
-                  <FontAwesomeIcon icon={faLayerGroup} className="input-icon" />
-                  Course
-                </label>
-                <select
-                  id="course_id"
-                  name="course_id"
-                  className="form-select"
-                  value={formData.course_id}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="" disabled>Select a course</option>
-                  {courses.map((course) => (
-                    <option key={course.id} value={course.id}>
-                      {course.title}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="name_of_facilitator" className="form-label">
-                  <FontAwesomeIcon icon={faChalkboardTeacher} className="input-icon" />
-                  Facilitator Name
-                </label>
-                <input
-                  type="text"
-                  id="name_of_facilitator"
-                  name="name_of_facilitator"
-                  className="form-input"
-                  value={formData.name_of_facilitator}
-                  onChange={handleChange}
-                  placeholder="Enter facilitator name"
-                  required
-                />
-              </div>
-
-              <button type="submit" className="form-button">
-                <FontAwesomeIcon icon={faPlus} className="button-icon" />
-                Add Assignment
-              </button>
-            </form>
-          </div>
+      <div className="add-assignment-container">
+        <div className="title-section">
+          <h2>Add New Assignment <FontAwesomeIcon icon={faGraduationCap} /></h2>
         </div>
+
+        <p className="form-subtitle">Fill assignment details :</p>
+
+        <form onSubmit={handleSubmit} className="assignment-form">
+          <div className="form-group">
+            <label>
+              <FontAwesomeIcon icon={faClipboardList} className="form-icon" />
+              Assignment Name
+            </label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Enter assignment name"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>
+              <FontAwesomeIcon icon={faFileLines} className="form-icon" />
+              Description
+            </label>
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              placeholder="Enter assignment description"
+              required
+              rows="4"
+            />
+          </div>
+
+          <div className="form-group">
+            <label>
+              <FontAwesomeIcon icon={faCalendarAlt} className="form-icon" />
+              Submission Date
+            </label>
+            <input
+              type="date"
+              name="date_of_submission"
+              value={formData.date_of_submission}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>
+              <FontAwesomeIcon icon={faLayerGroup} className="form-icon" />
+              Course
+            </label>
+            <select
+              name="course_id"
+              value={formData.course_id}
+              onChange={handleChange}
+              required
+            >
+              <option value="" disabled>Select a course</option>
+              {courses.map((course) => (
+                <option key={course.id} value={course.id}>
+                  {course.title}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label>
+              <FontAwesomeIcon icon={faChalkboardTeacher} className="form-icon" />
+              Facilitator Name
+            </label>
+            <input
+              type="text"
+              name="name_of_facilitator"
+              value={formData.name_of_facilitator}
+              onChange={handleChange}
+              placeholder="Enter facilitator name"
+              required
+            />
+          </div>
+
+          <button type="submit" className="submit-button">
+            <FontAwesomeIcon icon={faPlus} /> Add Assignment
+          </button>
+        </form>
       </div>
     </div>
   );

@@ -11,7 +11,6 @@ import {
   faArrowLeft
 } from '@fortawesome/free-solid-svg-icons';
 import '../../../../stylesheets/assignmentDetails.css';
-import Sidebar from '../../sidebar';
 
 const AssignmentDetails = () => {
   const location = useLocation();
@@ -64,9 +63,8 @@ const AssignmentDetails = () => {
   };
 
   return (
-    <div className="student-area-container">
-      <Sidebar />
-      <div className="student-display-area">
+    <div className="assignment-details-container">
+      <div className="assignment-details-content">
         <button onClick={handleBack} className="back-button">
           <FontAwesomeIcon icon={faArrowLeft} /> Back
         </button>
