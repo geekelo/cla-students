@@ -11,9 +11,9 @@ function Header() {
       <nav className="nav">
         <ul className="nav-list">
           <li className="nav-item">
-            <a href="#about" className="nav-link">
+            <Link to="/about" className="nav-link">
               About
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
             <a href="#programs" className="nav-link">
