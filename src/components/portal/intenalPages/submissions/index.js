@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import SubmissionsSection from './submissionsSection';
-import '../../../../stylesheets/submissions.css'; // Include the styles
+import '../../../../stylesheets/submissions.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHourglassHalf, faCheckDouble } from '@fortawesome/free-solid-svg-icons';
+import submissions from '../../../../data/submissions.json';
 
-function Submissions({ submissions }) {
-  const [activeTab, setActiveTab] = useState('unmarked'); // Default tab
+function Submissions() {
+  const [activeTab, setActiveTab] = useState('unmarked');
 
   // Filter submissions for each tab
   const markedSubmissions = submissions?.filter((submission) => submission.status === 'marked');

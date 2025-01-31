@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "student_name": "Jane Doe",
+    "student_id": "S12345",
+    "student_email": "jane.doe@example.com",
+    "download_link": "https://example.com/submissions/jane-doe-assignment1.pdf",
+    "date_submitted": "2025-01-30T10:15:00Z",
+    "assignment_id": 101,
+    "status": "marked",
+    "score": "65"
+  },
+  {
+    "id": 2,
+    "student_name": "John Smith",
+    "student_id": "S12346",
+    "student_email": "john.smith@example.com",
+    "download_link": "https://example.com/submissions/john-smith-assignment1.pdf",
+    "date_submitted": "2025-01-30T12:45:00Z",
+    "assignment_id": 101,
+    "status": "unmarked",
+    "score": null
+  },
+  {
+    "id": 3,
+    "student_name": "Alice Johnson",
+    "student_id": "S12347",
+    "student_email": "alice.johnson@example.com",
+    "download_link": "https://example.com/submissions/alice-johnson-assignment2.pdf",
+    "date_submitted": "2025-01-31T09:30:00Z",
+    "assignment_id": 102,
+    "status": "marked",
+    "score": "25"
+  },
+  {
+    "id": 4,
+    "student_name": "Noke Benson",
+    "student_id": "S12347",
+    "student_email": "alice.johnson@example.com",
+    "download_link": "https://example.com/submissions/alice-johnson-assignment2.pdf",
+    "date_submitted": "2025-01-31T09:30:00Z",
+    "assignment_id": 102,
+    "status": "unmarked",
+    "score": null
+  }
+]
