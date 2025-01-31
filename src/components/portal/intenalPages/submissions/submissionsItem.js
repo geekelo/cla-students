@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLink, faDownload } from '@fortawesome/free-solid-svg-icons';
 
 function SubmissionItem({ submission }) {
   const [mark, setMark] = useState('');
@@ -12,37 +14,51 @@ function SubmissionItem({ submission }) {
     e.preventDefault();
     setMark('');
   };
+
   return (
-    <li>
-      <button className="submission-item" type="button" tabIndex={0}>
-        <span className="submission-text">
-          <strong>{submission.student_name}</strong>
-          <strong>{submission.student_email}</strong>
-          <strong>{submission.id}</strong>
+    <li className="submission-card">
+      <div className="submission-details">
+        <div className="submission-link">
+          <FontAwesomeIcon icon={faLink} className="link-icon" />
           <a href={`/portal/assignments/${submission.assignment_id}`}>Assignment</a>
-        </span>
-        <a>Download</a>
-        <span className="submission-date">{submission.dateSubmitted}</span>
-      
-      
-        {submission.status === 'unmarked' ? (
-        <form onSubmit={handleSubmit}>
-          <label htmlFor={`mark-${submission.id}`}>Mark: </label>
-          <input
-            type="number"
-            id={`mark-${submission.id}`}
-            value={mark}
-            onChange={handleMarkChange}
-            min="0"
-            max="100"
-            required
-          />
-          <button type="submit" onClick={(e) => handleSubmit(e)}>Submit</button>
-        </form>
-      ) : (
-        <span className="submission-mark">Score: {submission.score}%</span>
-        )}
-      </button>
+        </div>
+        <div className="submission-name">
+          {submission.student_name}
+        </div>
+        <div className="submission-info">
+          <div className="submission-id">ID: {submission.student_id}</div>
+          <div className="submission-email">{submission.student_email}</div>
+        </div>
+      </div>
+      <div className="submission-actions">
+        <div className="action-top">
+          <a className="download-link">
+            <FontAwesomeIcon icon={faDownload} className="download-icon" />
+            <span>Download Docs</span>
+          </a>
+        </div>
+        <div className="action-bottom">
+          {submission.status === 'unmarked' ? (
+            <div className="unmarked-section">
+              <form onSubmit={handleSubmit} className="mark-form">
+                <input
+                  type="number"
+                  id={`mark-${submission.id}`}
+                  value={mark}
+                  onChange={handleMarkChange}
+                  min="0"
+                  max="100"
+                  placeholder="Mark"
+                  required
+                />
+                <button type="submit">Submit</button>
+              </form>
+            </div>
+          ) : (
+            <span className="submission-mark">Score: {submission.score}%</span>
+          )}
+        </div>
+      </div>
     </li>
   );
 }
@@ -50,7 +66,9 @@ function SubmissionItem({ submission }) {
 SubmissionItem.propTypes = {
   submission: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    studentName: PropTypes.string.isRequired,
+    student_name: PropTypes.string.isRequired,
+    student_id: PropTypes.string.isRequired,
+    student_email: PropTypes.string.isRequired,
     dateSubmitted: PropTypes.string.isRequired,
     status: PropTypes.oneOf(['marked', 'unmarked']).isRequired,
   }).isRequired,
