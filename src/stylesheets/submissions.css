@@ -70,7 +70,7 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   transition: all 0.3s ease;
   margin-bottom: 1rem;
   font-family: 'Poppins', sans-serif;
@@ -83,7 +83,18 @@
 .submission-details {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
+}
+
+.submission-link {
+  display: flex;
+  align-items: center;
   gap: 0.5rem;
+}
+
+.link-icon {
+  color: #442e79;
+  font-size: 0.9rem;
 }
 
 .submission-link a {
@@ -105,37 +116,64 @@
 
 .submission-info {
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.submission-id, .submission-email {
   font-size: 0.85rem;
   color: #666;
 }
 
 .submission-actions {
   display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.action-top {
+  margin-bottom: 0.5rem;
+}
+
+.action-bottom {
+  display: flex;
   align-items: center;
-  gap: 1.5rem;
 }
 
 .download-link {
   color: #442e79;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 700;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.download-link span {
+  font-size: 0.9rem;
+}
+
+.download-icon {
+  font-size: 1rem;
 }
 
 .download-link:hover {
   text-decoration: underline;
 }
 
-.submission-date {
-  color: #666;
-  font-size: 0.9rem;
+.unmarked-section {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .mark-form {
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  justify-content: center;
 }
 
 .mark-form input {

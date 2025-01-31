@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLink, faDownload } from '@fortawesome/free-solid-svg-icons';
 
 function SubmissionItem({ submission }) {
   const [mark, setMark] = useState('');
@@ -17,36 +19,45 @@ function SubmissionItem({ submission }) {
     <li className="submission-card">
       <div className="submission-details">
         <div className="submission-link">
+          <FontAwesomeIcon icon={faLink} className="link-icon" />
           <a href={`/portal/assignments/${submission.assignment_id}`}>Assignment</a>
         </div>
         <div className="submission-name">
           {submission.student_name}
         </div>
         <div className="submission-info">
-          <span className="submission-id">ID: {submission.student_id}</span>
-          <span className="submission-email">{submission.student_email}</span>
+          <div className="submission-id">ID: {submission.student_id}</div>
+          <div className="submission-email">{submission.student_email}</div>
         </div>
       </div>
       <div className="submission-actions">
-        <a className="download-link">Download</a>
-        <span className="submission-date">{submission.dateSubmitted}</span>
-        {submission.status === 'unmarked' ? (
-          <form onSubmit={handleSubmit} className="mark-form">
-            <input
-              type="number"
-              id={`mark-${submission.id}`}
-              value={mark}
-              onChange={handleMarkChange}
-              min="0"
-              max="100"
-              placeholder="Mark"
-              required
-            />
-            <button type="submit">Submit</button>
-          </form>
-        ) : (
-          <span className="submission-mark">Score: {submission.score}%</span>
-        )}
+        <div className="action-top">
+          <a className="download-link">
+            <FontAwesomeIcon icon={faDownload} className="download-icon" />
+            <span>Download Docs</span>
+          </a>
+        </div>
+        <div className="action-bottom">
+          {submission.status === 'unmarked' ? (
+            <div className="unmarked-section">
+              <form onSubmit={handleSubmit} className="mark-form">
+                <input
+                  type="number"
+                  id={`mark-${submission.id}`}
+                  value={mark}
+                  onChange={handleMarkChange}
+                  min="0"
+                  max="100"
+                  placeholder="Mark"
+                  required
+                />
+                <button type="submit">Submit</button>
+              </form>
+            </div>
+          ) : (
+            <span className="submission-mark">Score: {submission.score}%</span>
+          )}
+        </div>
       </div>
     </li>
   );
