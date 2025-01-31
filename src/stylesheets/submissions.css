@@ -63,34 +63,144 @@
   font-family: 'Poppins', sans-serif;
 }
 
-.submission-item {
+.submission-card {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  cursor: pointer;
+  align-items: flex-start;
   transition: all 0.3s ease;
+  margin-bottom: 1rem;
   font-family: 'Poppins', sans-serif;
 }
 
-.submission-item:hover {
-  background-color: #f0f0f0;
+.submission-card:hover {
   transform: scale(1.02);
 }
 
-.submission-text {
-  font-size: 1rem;
+.submission-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.submission-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.link-icon {
+  color: #442e79;
+  font-size: 0.9rem;
+}
+
+.submission-link a {
+  color: #442e79;
+  text-decoration: none;
   font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.submission-link a:hover {
+  text-decoration: underline;
+}
+
+.submission-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.submission-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.submission-id, .submission-email {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.submission-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.action-top {
+  margin-bottom: 0.5rem;
+}
+
+.action-bottom {
+  display: flex;
+  align-items: center;
+}
+
+.download-link {
+  color: #442e79;
+  text-decoration: none;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.download-link span {
+  font-size: 0.9rem;
+}
+
+.download-icon {
+  font-size: 1rem;
+}
+
+.download-link:hover {
+  text-decoration: underline;
+}
+
+.unmarked-section {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.mark-form {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.mark-form input {
+  width: 70px;
+  padding: 0.3rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
   font-family: 'Poppins', sans-serif;
 }
 
-.submission-date {
-  font-size: 0.9rem;
-  color: gray;
+.mark-form button {
+  padding: 0.3rem 0.8rem;
+  background-color: #442e79;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
   font-family: 'Poppins', sans-serif;
+}
+
+.mark-form button:hover {
+  background-color: #33225b;
+}
+
+.submission-mark {
+  color: #442e79;
+  font-weight: 500;
 }
 
 /* No Submissions Message */
