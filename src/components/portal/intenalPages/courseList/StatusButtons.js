@@ -7,13 +7,6 @@ function StatusButtons({ activeStatus, setActiveStatus }) {
     <div className="course-status-nav">
       <button
         type="button"
-        onClick={() => setActiveStatus('done')}
-        className={`status-btn ${activeStatus === 'done' ? 'active' : ''}`}
-      >
-        <FontAwesomeIcon icon={faCheck} className="me-2" /> Done
-      </button>
-      <button
-        type="button"
         onClick={() => setActiveStatus('active')}
         className={`status-btn ${activeStatus === 'active' ? 'active' : ''}`}
       >
@@ -25,6 +18,13 @@ function StatusButtons({ activeStatus, setActiveStatus }) {
         className={`status-btn ${activeStatus === 'pending' ? 'active' : ''}`}
       >
         <FontAwesomeIcon icon={faClock} className="me-2" /> Pending
+      </button>
+      <button
+        type="button"
+        onClick={() => setActiveStatus('done')}
+        className={`status-btn ${activeStatus === 'done' ? 'active' : ''}`}
+      >
+        <FontAwesomeIcon icon={faCheck} className="me-2" /> Done
       </button>
     </div>
   );

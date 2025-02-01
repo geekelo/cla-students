@@ -34,7 +34,7 @@ body {
 .assignment-title-container {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: space-between;
   margin-bottom: 1.5rem;
 }
 
@@ -64,7 +64,9 @@ body {
   font-weight: 600;
   color: #442e79;
   margin: 0;
-  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .assignment-info-grid {
@@ -103,11 +105,13 @@ body {
 .action-icon {
   background: none;
   border: none;
-  font-size: 1.2rem;
+  font-size: 2rem;
   color: #442e79;
   cursor: pointer;
-  padding: 0.5rem;
+  padding: 0;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
 }
 
 .action-icon:hover {
@@ -146,23 +150,27 @@ body {
 }
 
 .submission-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid rgba(68, 46, 121, 0.1);
 }
 
-.submission-header h2 {
-  font-size: 1.5rem;
+.submission-title-group {
+  display: flex;
+  align-items: center;
+}
+
+.submission-title-group h2 {
+  font-size: 2.5rem;
   color: #442e79;
-  margin: 0;
+  margin-right: 20px;
 }
 
 .submission-actions {
   display: flex;
-  gap: 1rem;
+  align-items: center;
+  flex-direction: row;
+ 
 }
 
 .add-submission {

@@ -97,24 +97,26 @@ const AssignmentDetails = () => {
 
           <div className="submission-section">
             <div className="submission-header">
-              <h2>Submit Your Work</h2>
-              <div className="submission-actions">
-                <button 
-                  type="button" 
-                  className="action-icon" 
-                  onClick={handleEdit}
-                  title="Edit Submission"
-                >
-                  <FontAwesomeIcon icon={faEdit} />
-                </button>
-                <button 
-                  type="button" 
-                  className="action-icon delete-icon" 
-                  onClick={handleDelete}
-                  title="Delete Submission"
-                >
-                  <FontAwesomeIcon icon={faTrash} />
-                </button>
+              <div className="submission-title-group">
+                <h2>Submit Your Work</h2>
+                <div className="submission-actions">
+                  <button 
+                    type="button" 
+                    className="action-icon" 
+                    onClick={handleEdit}
+                    title="Edit Submission"
+                  >
+                    <FontAwesomeIcon icon={faEdit} />
+                  </button>
+                  <button 
+                    type="button" 
+                    className="action-icon delete-icon" 
+                    onClick={handleDelete}
+                    title="Delete Submission"
+                  >
+                    <FontAwesomeIcon icon={faTrash} />
+                  </button>
+                </div>
               </div>
             </div>
 

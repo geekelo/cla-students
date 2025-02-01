@@ -17,43 +17,43 @@ function LoginPage() {
           <h2 className="login-title">Login</h2>
           <form className="login-form">
             <div className="form-group">
-              <label htmlFor="email" className="form-label" aria-label="email">
+              <label htmlFor="email" className="form-label">
                 Email Address
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  className="form-input"
-                  placeholder="you@example.com"
-                  required
-                  aria-label="password"
-                />
               </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                className="form-input"
+                placeholder="you@example.com"
+                required
+                aria-label="email"
+              />
             </div>
 
             <div className="form-group">
               <label htmlFor="password" className="form-label">
                 Password
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  className="form-input"
-                  placeholder="********"
-                  required
-                  aria-label="password"
-                />
               </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                className="form-input"
+                placeholder="********"
+                required
+                aria-label="password"
+              />
             </div>
 
             <div className="form-options">
               <label className="form-remember" htmlFor="checkbox">
-                <span>Remember me</span>
                 <input
                   type="checkbox"
                   className="form-checkbox"
                   id="checkbox"
                 />
+                <span>Remember me</span>
               </label>
 
               <a href="/ggg" className="form-forgot">
@@ -70,7 +70,7 @@ function LoginPage() {
           </form>
 
           <p className="signup-message">
-            Don’t have an account?
+            Don&apos;t have an account?
             {' '}
             <a href="/ggg" className="signup-link">
               Sign Up
