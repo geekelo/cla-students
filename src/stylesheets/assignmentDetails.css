@@ -59,14 +59,44 @@ body {
   transform: translateX(-2px);
 }
 
-.assignment-title {
-  font-size: 2rem;
-  font-weight: 600;
-  color: #442e79;
-  margin: 0;
+.title-with-actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 15px;
+  margin-bottom: 1rem;
+}
+
+.assignment-title {
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: #442e79;
+  margin: 0;
+}
+
+.action-icons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.action-icon {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: #442e79;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  transition: color 0.3s ease;
+}
+
+.action-icon:hover {
+  color: #33225b;
+}
+
+.delete-icon:hover {
+  color: #dc3545;
 }
 
 .assignment-info-grid {
@@ -102,46 +132,6 @@ body {
   align-items: center;
 }
 
-.action-icon {
-  background: none;
-  border: none;
-  font-size: 2rem;
-  color: #442e79;
-  cursor: pointer;
-  padding: 0;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-}
-
-.action-icon:hover {
-  transform: scale(1.1);
-}
-
-.delete-icon:hover {
-  color: #dc3545;
-}
-
-/* Description Section */
-.assignment-description {
-  margin-bottom: 1.5rem;
-}
-
-.assignment-description h3 {
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: #442e79;
-  margin-bottom: 0.8rem;
-}
-
-.assignment-description p {
-  color: #444;
-  line-height: 1.6;
-  font-size: 0.95rem;
-  margin: 0;
-}
-
-/* Submission Section */
 .submission-section {
   background: white;
   border-radius: 12px;
@@ -161,9 +151,10 @@ body {
 }
 
 .submission-title-group h2 {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
+  font-weight: 500;
   color: #442e79;
-  margin-right: 20px;
+  margin: 0;
 }
 
 .submission-actions {
@@ -271,6 +262,14 @@ body {
   background-color: #33225b;
   transform: translateY(-1px);
   box-shadow: 0 4px 6px rgba(68, 46, 121, 0.2);
+}
+
+/* Description Section */
+.assignment-description {
+  color: #666;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
 }
 
 /* Responsive Design */

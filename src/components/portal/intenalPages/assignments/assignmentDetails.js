@@ -70,28 +70,32 @@ const AssignmentDetails = () => {
         </button>
         <div className="assignment-details">
           <div className="assignment-header">
-            <div className="assignment-title-container">
+            <div className="title-with-actions">
               <h1 className="assignment-title">{assignmentData.name}</h1>
-            </div>
-            
-            <div className="assignment-info-grid">
-              <div className="info-item">
-                <FontAwesomeIcon icon={faCalendarAlt} />
-                <span>Date of Submission: <strong>{new Date(assignmentData.date_of_submission).toLocaleDateString()}</strong></span>
-              </div>
-              <div className="info-item">
-                <FontAwesomeIcon icon={faBookOpen} />
-                <span>Course: <strong>{assignmentData.course_title} (ID: {assignmentData.course_id})</strong></span>
-              </div>
-              <div className="info-item">
-                <FontAwesomeIcon icon={faUser} />
-                <span>Facilitator: <strong>{assignmentData.name_of_facilitator} (ID: {assignmentData.facilitator_id})</strong></span>
+              <div className="action-icons">
+                <button className="action-icon" onClick={handleEdit}>
+                  <FontAwesomeIcon icon={faEdit} />
+                </button>
+                <button className="action-icon delete-icon" onClick={handleDelete}>
+                  <FontAwesomeIcon icon={faTrash} />
+                </button>
               </div>
             </div>
+            <p className="assignment-description">{assignmentData.description}</p>
+          </div>
 
-            <div className="assignment-description">
-              <h3>Description :</h3>
-              <p>{assignmentData.description}</p>
+          <div className="assignment-info-grid">
+            <div className="info-item">
+              <FontAwesomeIcon icon={faCalendarAlt} />
+              <span>Date of Submission: <strong>{new Date(assignmentData.date_of_submission).toLocaleDateString()}</strong></span>
+            </div>
+            <div className="info-item">
+              <FontAwesomeIcon icon={faBookOpen} />
+              <span>Course: <strong>{assignmentData.course_title} (ID: {assignmentData.course_id})</strong></span>
+            </div>
+            <div className="info-item">
+              <FontAwesomeIcon icon={faUser} />
+              <span>Facilitator: <strong>{assignmentData.name_of_facilitator} (ID: {assignmentData.facilitator_id})</strong></span>
             </div>
           </div>
 
@@ -99,24 +103,6 @@ const AssignmentDetails = () => {
             <div className="submission-header">
               <div className="submission-title-group">
                 <h2>Submit Your Work</h2>
-                <div className="submission-actions">
-                  <button 
-                    type="button" 
-                    className="action-icon" 
-                    onClick={handleEdit}
-                    title="Edit Submission"
-                  >
-                    <FontAwesomeIcon icon={faEdit} />
-                  </button>
-                  <button 
-                    type="button" 
-                    className="action-icon delete-icon" 
-                    onClick={handleDelete}
-                    title="Delete Submission"
-                  >
-                    <FontAwesomeIcon icon={faTrash} />
-                  </button>
-                </div>
               </div>
             </div>
 
