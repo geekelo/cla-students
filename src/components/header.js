@@ -21,14 +21,14 @@ function Header() {
             </Link>
           </li>
           <li className="nav-item">
-            <a href="#facauties" className="nav-link">
-              Facaulties
-            </a>
+            <Link to="/facaulty" className="nav-link">
+              Facaulty
+            </Link>
           </li>
           <li className="nav-item">
-            <a href="#faqs" className="nav-link">
+            <Link to="/faq" className="nav-link">
               FAQs
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
             <a href="#contact" className="nav-link">

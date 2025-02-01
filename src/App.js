@@ -7,6 +7,9 @@ import LoginPage from './components/auth/login';
 import StudentArea from './components/portal/studentarea';
 import About from './components/pages/About';
 import Programs from './components/pages/Programs';
+import Facaulty from './components/pages/Facaulty';
+import FacaultyDetail from './components/pages/FacaultyDetail';
+import FAQ from './components/pages/FAQ';
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
         <Route path="/portal/*" element={<StudentArea />} />
         <Route path="/about" element={<About />} />
         <Route path="/programs" element={<Programs />} />
+        <Route path="/facaulty" element={<Facaulty />} />
+        <Route path="/facaulty/:id" element={<FacaultyDetail />} />
+        <Route path="/faq" element={<FAQ />} />
       </Routes>
       <Footer />
     </Router>
