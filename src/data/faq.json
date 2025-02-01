@@ -1,0 +1,44 @@
+{
+  "faqs": [
+    {
+      "id": 1,
+      "question": "What is Christian Leadership Academy (CLA)?",
+      "answer": "Christian Leadership Academy is a specialized training institution dedicated to equipping believers with leadership skills grounded in biblical principles. Our programs combine spiritual development with practical leadership training."
+    },
+    {
+      "id": 2,
+      "question": "Are the courses free?",
+      "answer": "Yes! For the first year of our program, all courses will be completely free for all students. This initiative is part of our commitment to making quality Christian leadership education accessible to everyone."
+    },
+    {
+      "id": 3,
+      "question": "How long are the programs?",
+      "answer": "Our programs vary in length depending on the level and type of training. The Believer-Beginners' Class typically runs for 3 months, while the Minister-Service and Leader-Managerial Classes can extend up to 6 months each."
+    },
+    {
+      "id": 4,
+      "question": "Is this an online or physical program?",
+      "answer": "We offer a hybrid learning model that combines online and physical sessions. This flexible approach allows students to access course materials remotely while still benefiting from in-person interactions and practical training sessions."
+    },
+    {
+      "id": 5,
+      "question": "What are the admission requirements?",
+      "answer": "Basic requirements include being a committed Christian, having a recommendation from your local church leader, and completing our application process. Specific programs may have additional requirements based on the level of training."
+    },
+    {
+      "id": 6,
+      "question": "Do I get a certificate after completion?",
+      "answer": "Yes, upon successful completion of your program, you will receive a certificate from Christian Leadership Academy, recognizing your achievement and the specific leadership competencies you've developed."
+    },
+    {
+      "id": 7,
+      "question": "Can I take multiple courses simultaneously?",
+      "answer": "While it's possible, we recommend focusing on one program at a time to get the most out of your learning experience. Each course requires dedication and active participation."
+    },
+    {
+      "id": 8,
+      "question": "What support is available for students?",
+      "answer": "We provide comprehensive support including mentorship, academic guidance, prayer support, and access to our online learning resources. Our faculty and staff are committed to helping you succeed in your leadership journey."
+    }
+  ]
+} 
