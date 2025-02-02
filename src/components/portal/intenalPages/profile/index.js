@@ -13,7 +13,7 @@ function Profile() {
       <div className="profile-details">
         <h3 className="profile-name">John Doe</h3>
         <p className="profile-phone">
-          <span className="profile-label">Studend ID: </span>
+          <span className="profile-label">Student ID: </span>
           &nbsp;
           312ADWETNMTY
         </p>

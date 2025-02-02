@@ -10,6 +10,7 @@ import Programs from './components/pages/Programs';
 import Facaulty from './components/pages/Facaulty';
 import FacaultyDetail from './components/pages/FacaultyDetail';
 import FAQ from './components/pages/FAQ';
+import Contact from './components/pages/Contact';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/facaulty" element={<Facaulty />} />
         <Route path="/facaulty/:id" element={<FacaultyDetail />} />
         <Route path="/faq" element={<FAQ />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
       <Footer />
     </Router>

@@ -27,7 +27,7 @@
 }
 
 .action-button {
-  background-color: rgba(68,46,121,255) ; /* Blue */
+  background-color: rgba(68,46,121,255);
   color: white;
   padding: 10px 20px;
   font-size: 1rem;
@@ -36,11 +36,23 @@
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.button-icon {
+  font-size: 1rem;
+  transition: transform 0.3s ease;
 }
 
 .action-button:hover {
-  background-color: #b8a3e5 ;/* Darker blue */
+  background-color: #b8a3e5;
   transform: scale(1.05);
+}
+
+.action-button:hover .button-icon {
+  transform: rotate(90deg);
 }
 
 .action-button:active {

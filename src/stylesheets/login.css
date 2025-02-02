@@ -95,33 +95,47 @@ a {
 }
 
 .form-label {
-  font-size: 14px;
-  margin-bottom: 5px;
   display: block;
+  font-size: 0.9rem;
+  color: #444;
+  margin-bottom: 8px;
+  font-weight: 500;
 }
 
 .form-input {
   width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 16px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: rgb(69, 46, 121);
+  box-shadow: 0 0 0 2px rgba(69, 46, 121, 0.1);
 }
 
 .form-options {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin: 15px 0 25px;
 }
 
 .form-remember {
   display: flex;
   align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: #666;
 }
 
 .form-checkbox {
-  margin-left: 5px;
+  width: 16px;
+  height: 16px;
+  accent-color: rgb(69, 46, 121);
 }
 
 .form-forgot {
