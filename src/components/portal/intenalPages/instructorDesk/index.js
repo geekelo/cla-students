@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import '../../../../stylesheets/instructorDesk.css';
 
 function InstructorDesk({
@@ -32,6 +34,7 @@ function InstructorDesk({
           className="action-button"
           onClick={onCreateCourse}
         >
+          <FontAwesomeIcon icon={faPlus} className="button-icon" />
           Create Course
         </button>
         <button
@@ -40,6 +43,7 @@ function InstructorDesk({
           className="action-button"
           onClick={onCreateAssignment}
         >
+          <FontAwesomeIcon icon={faPlus} className="button-icon" />
           Create Assignment
         </button>
         <button
@@ -47,7 +51,8 @@ function InstructorDesk({
           className="action-button"
           onClick={onCreateLiveClass}
         >
-          Create Live Class
+          <FontAwesomeIcon icon={faPlus} className="button-icon" />
+          Schedule Live Class
         </button>
       </div>
 

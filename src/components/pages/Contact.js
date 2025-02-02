@@ -37,7 +37,7 @@ function Contact() {
           <div className="contact-left">
             <div className="contact-header">
               <h1 className="contact-title">
-                Looks <span className="highlight">Interesting</span> ? Get in Touch
+                Have any <span className="highlight">Question</span>? Get in Touch
               </h1>
               <p className="contact-subtitle">
                 Our dedicated team is here to assist you and answer any questions you may have.
