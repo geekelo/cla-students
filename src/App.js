@@ -4,6 +4,7 @@ import Header from './components/header';
 import Landing from './components/landing';
 import Footer from './components/footer';
 import LoginPage from './components/auth/login';
+import SignUp from './components/auth/signup';
 import StudentArea from './components/portal/studentarea';
 import About from './components/pages/About';
 import Programs from './components/pages/Programs';
@@ -18,6 +19,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/" element={<Landing />} />
         <Route path="/portal/*" element={<StudentArea />} />
         <Route path="/about" element={<About />} />
