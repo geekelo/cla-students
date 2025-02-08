@@ -1,9 +1,106 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import '../../stylesheets/login.css';
 
+// Create axios instance with default config
+const api = axios.create({
+  baseURL: 'https://cla-portal-api.onrender.com',
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  }
+});
+
 function LoginPage() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    user: {
+      email: '',
+      password: ''
+    }
+  });
+
+  const handleChange = (e) => {
+    setFormData(prev => ({
+      user: {
+        ...prev.user,
+        [e.target.name]: e.target.value
+      }
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const response = await api.post('/api/v1/sign_in', formData);
+      console.log('Login response:', response.data);
+
+      if (response.data.token) {
+        // Save token to sessionStorage
+        sessionStorage.setItem('authToken', response.data.token);
+        
+        // Show success message
+        toast.success('Login successful!', {
+          onClose: () => {
+            // Navigate to portal after toast closes
+            navigate('/portal');
+          }
+        });
+      } else {
+        throw new Error('Authentication failed');
+      }
+    } catch (err) {
+      console.error('Login error:', err);
+      let errorMessage = 'Login failed. Please check your credentials.';
+
+      if (err.response) {
+        if (err.response.data.error) {
+          errorMessage = err.response.data.error;
+        } else if (err.response.data.errors) {
+          errorMessage = Object.entries(err.response.data.errors)
+            .map(([field, messages]) => `${field}: ${messages.join(', ')}`)
+            .join('\n');
+        }
+      } else if (err.request) {
+        errorMessage = 'No response from server. Please check your internet connection.';
+      }
+
+      toast.error(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Show registration success message if redirected from signup
+  React.useEffect(() => {
+    if (location.state?.message) {
+      toast.success(location.state.message);
+      // Clear the message from location state
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state]);
+
   return (
     <div className="login-container">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <div className="login-wrapper">
         {/* Left Column */}
         <div className="login-left">
@@ -15,7 +112,7 @@ function LoginPage() {
         {/* Right Column */}
         <div className="login-right">
           <h2 className="login-title">Login</h2>
-          <form className="login-form">
+          <form className="login-form" onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="email" className="form-label">
                 Email Address
@@ -27,7 +124,9 @@ function LoginPage() {
                 className="form-input"
                 placeholder="you@example.com"
                 required
-                aria-label="email"
+                value={formData.user.email}
+                onChange={handleChange}
+                disabled={loading}
               />
             </div>
 
@@ -42,7 +141,9 @@ function LoginPage() {
                 className="form-input"
                 placeholder="********"
                 required
-                aria-label="password"
+                value={formData.user.password}
+                onChange={handleChange}
+                disabled={loading}
               />
             </div>
 
@@ -56,25 +157,26 @@ function LoginPage() {
                 <span>Remember me</span>
               </label>
 
-              <a href="/ggg" className="form-forgot">
+              <Link to="/forgot-password" className="form-forgot">
                 Forgot Password?
-              </a>
+              </Link>
             </div>
 
             <button
               type="submit"
               className="form-button"
+              disabled={loading}
             >
-              Sign In
+              {loading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
 
           <p className="signup-message">
             Don&apos;t have an account?
             {' '}
-            <a href="/ggg" className="signup-link">
+            <Link to="/signup" className="signup-link">
               Sign Up
-            </a>
+            </Link>
           </p>
         </div>
       </div>
