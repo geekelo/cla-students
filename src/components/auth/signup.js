@@ -1,39 +1,141 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faEnvelope, 
   faUser, 
   faLock,
-  faIdCard
+  faIdCard,
+  faSpinner
 } from '@fortawesome/free-solid-svg-icons';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import '../../stylesheets/signup.css';
 
+// Create axios instance with default config
+const api = axios.create({
+  baseURL: 'https://cla-portal-api.onrender.com',
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  }
+});
+
 function SignUp() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    password_confirmation: '',
-    cla_role_id: '',
-    cla_cohort_id: ''
+    user: {
+      name: '',
+      email: '',
+      password: '',
+      password_confirmation: '',
+      cla_role_id: '',
+      cla_cohort_id: ''
+    }
   });
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const value = e.target.type === 'number' ? 
+      parseInt(e.target.value, 10) || '' : 
+      e.target.value;
+      
+    setFormData(prev => ({
+      user: {
+        ...prev.user,
+        [e.target.name]: value
+      }
+    }));
+    
+    if (error) setError(null);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', { user: formData });
+    setLoading(true);
+    setError(null);
+
+    // Password validation
+    if (formData.user.password !== formData.user.password_confirmation) {
+      setError('Passwords do not match');
+      setLoading(false);
+      toast.error('Passwords do not match');
+      return;
+    }
+
+    try {
+      // Prepare the data according to the API spec
+      const userData = {
+        user: {
+          ...formData.user,
+          cla_role_id: parseInt(formData.user.cla_role_id, 10),
+          cla_cohort_id: formData.user.cla_cohort_id ? parseInt(formData.user.cla_cohort_id, 10) : 0
+        }
+      };
+
+      console.log('Submitting form data:', userData);
+      
+      const response = await api.post('/api/v1/sign_up', userData);
+      console.log('Server response:', response.data);
+
+      if (response.data.message === 'User created successfully') {
+        // Show success toast and navigate
+        toast.success('Account created successfully!', {
+          onClose: () => {
+            navigate('/login', { 
+              state: { 
+                message: 'Registration successful! Please login to continue.' 
+              }
+            });
+          }
+        });
+      } else {
+        throw new Error('Registration failed');
+      }
+    } catch (err) {
+      console.error('Registration error:', err);
+      let errorMessage = 'Something went wrong. Please try again.';
+
+      if (err.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        if (err.response.data.error) {
+          errorMessage = err.response.data.error;
+        } else if (err.response.data.errors) {
+          errorMessage = Object.entries(err.response.data.errors)
+            .map(([field, messages]) => `${field}: ${messages.join(', ')}`)
+            .join('\n');
+        }
+      } else if (err.request) {
+        // The request was made but no response was received
+        errorMessage = 'No response from server. Please check your internet connection.';
+      }
+
+      setError(errorMessage);
+      toast.error(errorMessage);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <>
       <div className="signup-page-background" />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <div className="signup-container">
         <div className="signup-content">
           <div className="signup-left">
@@ -52,6 +154,11 @@ function SignUp() {
 
           <div className="signup-right">
             <div className="signup-form-container">
+              {error && (
+                <div className="error-message">
+                  {error}
+                </div>
+              )}
               <form className="signup-form" onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label htmlFor="name">
@@ -62,10 +169,11 @@ function SignUp() {
                     type="text"
                     id="name"
                     name="name"
-                    value={formData.name}
+                    value={formData.user.name}
                     onChange={handleChange}
                     required
                     placeholder="Enter your full name"
+                    disabled={loading}
                   />
                 </div>
 
@@ -78,10 +186,11 @@ function SignUp() {
                     type="email"
                     id="email"
                     name="email"
-                    value={formData.email}
+                    value={formData.user.email}
                     onChange={handleChange}
                     required
                     placeholder="Enter your email address"
+                    disabled={loading}
                   />
                 </div>
 
@@ -94,10 +203,12 @@ function SignUp() {
                     type="password"
                     id="password"
                     name="password"
-                    value={formData.password}
+                    value={formData.user.password}
                     onChange={handleChange}
                     required
                     placeholder="Create a password"
+                    disabled={loading}
+                    minLength="6"
                   />
                 </div>
 
@@ -110,10 +221,12 @@ function SignUp() {
                     type="password"
                     id="password_confirmation"
                     name="password_confirmation"
-                    value={formData.password_confirmation}
+                    value={formData.user.password_confirmation}
                     onChange={handleChange}
                     required
                     placeholder="Confirm your password"
+                    disabled={loading}
+                    minLength="6"
                   />
                 </div>
 
@@ -127,10 +240,10 @@ function SignUp() {
                       type="number"
                       id="cla_role_id"
                       name="cla_role_id"
-                      value={formData.cla_role_id}
+                      value={formData.user.cla_role_id}
                       onChange={handleChange}
-                      required
                       placeholder="Enter role ID"
+                      disabled={loading}
                     />
                   </div>
 
@@ -143,16 +256,31 @@ function SignUp() {
                       type="number"
                       id="cla_cohort_id"
                       name="cla_cohort_id"
-                      value={formData.cla_cohort_id}
+                      value={formData.user.cla_cohort_id}
                       onChange={handleChange}
                       placeholder="Enter cohort ID"
+                      disabled={loading}
+
                     />
                   </div>
                 </div>
 
-                <button type="submit" className="signup-submit-btn">
-                  <FontAwesomeIcon icon={faUser} className="btn-icon" />
-                  Create Account
+                <button 
+                  type="submit" 
+                  className="signup-submit-btn" 
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <>
+                      <FontAwesomeIcon icon={faSpinner} className="btn-icon fa-spin" />
+                      Creating Account...
+                    </>
+                  ) : (
+                    <>
+                      <FontAwesomeIcon icon={faUser} className="btn-icon" />
+                      Create Account
+                    </>
+                  )}
                 </button>
 
                 <p className="login-message">

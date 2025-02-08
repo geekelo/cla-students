@@ -269,4 +269,84 @@
         font-size: 0.95rem;
         padding: 0 5px;
     }
+}
+
+.error-message {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    border: 1px solid rgba(220, 53, 69, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.form-group input:disabled {
+    background-color: rgba(68, 46, 121, 0.05);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.form-group input:disabled:hover {
+    transform: none;
+    border-color: rgba(68, 46, 121, 0.1);
+}
+
+.signup-submit-btn:disabled {
+    background: linear-gradient(45deg, #8b7aa5, #a596c4);
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.signup-submit-btn:disabled:hover {
+    transform: none;
+    box-shadow: 0 4px 15px rgba(68, 46, 121, 0.2);
+}
+
+.signup-submit-btn:disabled::before {
+    display: none;
+}
+
+.fa-spin {
+    animation: fa-spin 1s infinite linear;
+}
+
+@keyframes fa-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Toast Customization */
+.Toastify__toast {
+    font-family: 'Poppins', sans-serif;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.Toastify__toast--success {
+    background: linear-gradient(45deg, #28a745, #20c997);
+}
+
+.Toastify__toast--error {
+    background: linear-gradient(45deg, #dc3545, #f86b7d);
+}
+
+.Toastify__progress-bar {
+    height: 3px;
+}
+
+.Toastify__toast-body {
+    font-size: 0.95rem;
+    font-weight: 500;
 } 
