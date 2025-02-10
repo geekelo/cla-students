@@ -43,6 +43,17 @@ function SignUp() {
       parseInt(e.target.value, 10) || '' : 
       e.target.value;
       
+    // Store role information when role ID is selected
+    if (e.target.name === 'cla_role_id') {
+      sessionStorage.setItem('userRole', value === 2 ? 'facilitator' : 'student');
+      sessionStorage.setItem('roleId', value);
+    }
+
+    // Store cohort ID when selected
+    if (e.target.name === 'cla_cohort_id') {
+      sessionStorage.setItem('cohortId', value);
+    }
+      
     setFormData(prev => ({
       user: {
         ...prev.user,

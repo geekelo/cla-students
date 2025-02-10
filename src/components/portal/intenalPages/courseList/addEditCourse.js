@@ -78,6 +78,8 @@ const AddEditCourseForm = () => {
   
     if (name === 'cla_cohort_id') {
       finalValue = parseInt(value);
+      // Store cohort ID in session storage when selected
+      sessionStorage.setItem('cohortId', finalValue);
     }
   
     setFormData(prev => ({
