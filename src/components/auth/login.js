@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,7 +15,6 @@ const api = axios.create({
 });
 
 function LoginPage() {
-  const navigate = useNavigate();
   const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -40,26 +39,30 @@ function LoginPage() {
 
     try {
       const response = await api.post('/api/v1/sign_in', formData);
-      console.log('Full Login Response:', {
-        data: response.data,
-        status: response.status,
-        headers: response.headers
-      });
+      console.log('Full Login Response:', response);
       console.log('User Data:', response.data.user);
-      console.log('Token:', response.data.token);
+      console.log('Role ID:', response.data.user.cla_role_id);
+      console.log('Cohort ID:', response.data.user.cla_cohort_id);
 
       if (response.data.token) {
-        // Save token and user ID to sessionStorage
+        // Store authentication token
         sessionStorage.setItem('authToken', response.data.token);
         sessionStorage.setItem('userId', response.data.user.id);
-        
-        // Show success message
-        toast.success('Login successful!', {
-          onClose: () => {
-            // Navigate to portal after toast closes
-            navigate('/portal');
-          }
-        });
+
+        // Store role and cohort information
+        const roleId = response.data.user.cla_role_id;
+        const cohortId = response.data.user.cla_cohort_id;
+        const isStudent = roleId !== 2;
+
+        // Update both localStorage and sessionStorage
+        localStorage.setItem('userRole', isStudent ? 'student' : 'facilitator');
+        localStorage.setItem('roleId', roleId);
+        localStorage.setItem('cohortId', cohortId);
+        sessionStorage.setItem('userRole', isStudent ? 'student' : 'facilitator');
+        sessionStorage.setItem('roleId', roleId);
+        sessionStorage.setItem('cohortId', cohortId);
+
+        toast.success('Login successful!');
       } else {
         throw new Error('Authentication failed');
       }

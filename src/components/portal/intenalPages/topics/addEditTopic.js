@@ -22,9 +22,10 @@ const AddEditTopic = () => {
   const [loading, setLoading] = useState(false);
   
   const [formData, setFormData] = useState({
-    cla_topic: {
-      title: topic?.title || '',
-      description: topic?.description || ''
+    topic: {
+      name: topic?.name || '',
+      description: topic?.description || '',
+      cla_course_id: courseId
     }
   });
 
@@ -32,8 +33,8 @@ const AddEditTopic = () => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      cla_topic: {
-        ...prev.cla_topic,
+      topic: {
+        ...prev.topic,
         [name]: value
       }
     }));
@@ -55,9 +56,6 @@ const AddEditTopic = () => {
       console.log('Course ID:', courseId);
 
       const response = await axios.post(`${BASE_URL}/api/v1/cla_topics`, formData, {
-        params: {
-          cla_course_id: courseId
-        },
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -135,9 +133,9 @@ const AddEditTopic = () => {
               <input
                 type="text"
                 id="title"
-                name="title"
+                name="name"
                 className="form-input"
-                value={formData.cla_topic.title}
+                value={formData.topic.name}
                 onChange={handleChange}
                 placeholder="Enter topic title"
                 required
@@ -154,7 +152,7 @@ const AddEditTopic = () => {
                 id="description"
                 name="description"
                 className="form-textarea"
-                value={formData.cla_topic.description}
+                value={formData.topic.description}
                 onChange={handleChange}
                 placeholder="Enter topic description"
                 required

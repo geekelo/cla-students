@@ -93,6 +93,21 @@ function SignUp() {
       console.log('Server response:', response.data);
 
       if (response.data.message === 'User created successfully') {
+        // Store role and cohort information permanently
+        const roleId = userData.user.cla_role_id;
+        const cohortId = userData.user.cla_cohort_id;
+        const isStudent = roleId !== 2;
+
+        // Store in localStorage for permanent access
+        localStorage.setItem('userRole', isStudent ? 'student' : 'facilitator');
+        localStorage.setItem('roleId', roleId);
+        localStorage.setItem('cohortId', cohortId);
+
+        // Also store in sessionStorage for current session
+        sessionStorage.setItem('userRole', isStudent ? 'student' : 'facilitator');
+        sessionStorage.setItem('roleId', roleId);
+        sessionStorage.setItem('cohortId', cohortId);
+
         // Show success toast and navigate
         toast.success('Account created successfully!', {
           onClose: () => {

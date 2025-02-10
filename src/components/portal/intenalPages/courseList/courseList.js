@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const BASE_URL = 'https://cla-portal-api.onrender.com';
 
@@ -14,36 +16,48 @@ function CourseList() {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const userRole = sessionStorage.getItem('userRole');
-        const cla_user_id = sessionStorage.getItem('userId');
-        const cohort_id = sessionStorage.getItem('cohortId');
-        
+        const userId = sessionStorage.getItem('userId');
+        const token = sessionStorage.getItem('authToken');
+        const userRole = localStorage.getItem('userRole');
+        const cohortId = localStorage.getItem('cohortId');
+
+        if (!userId || !token) {
+          toast.error('Session expired. Please login again.');
+          navigate('/login');
+          return;
+        }
+
+        if (!userRole) {
+          toast.error('User role not found. Please login again.');
+          navigate('/login');
+          return;
+        }
+
         let params = {};
         if (userRole === 'student') {
-          params = { cohort_id };
+          params = { cohort_id: cohortId };
         } else if (userRole === 'facilitator') {
-          params = { cla_user_id };
+          params = { cla_user_id: userId };
         }
 
         console.log('Fetching courses with params:', params);
         console.log('User Role:', userRole);
-        console.log('User Id:', cla_user_id);
-        console.log('Auth Token:', sessionStorage.getItem('authToken'));
+        console.log('User Id:', userId);
 
-        const response = await axios.get(`${BASE_URL}/api/v1/cla_courses/`, {
+        const coursesResponse = await axios.get(`${BASE_URL}/api/v1/cla_courses/`, {
           params,
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem('authToken')}`
+            Authorization: `Bearer ${token}`
           }
         });
 
-        console.log('API Response:', response);
-        console.log('Courses data:', response.data);
+        console.log('Courses API Response:', coursesResponse);
+        console.log('Courses data:', coursesResponse.data);
 
-        setCourses(response.data);
+        setCourses(coursesResponse.data);
         setLoading(false);
       } catch (err) {
-        console.error('Error fetching courses:', err);
+        console.error('Error fetching data:', err);
         console.error('Error details:', err.response?.data);
         setError('Failed to fetch courses. Please try again later.');
         setLoading(false);
@@ -51,7 +65,7 @@ function CourseList() {
     };
 
     fetchCourses();
-  }, []);
+  }, [navigate]);
 
   const handleCourseClick = (course) => {
     if (course.locked) {
@@ -71,6 +85,18 @@ function CourseList() {
 
   return (
     <div className="course-list">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       {courses.map((course) => (
         <button
           key={course.id}
