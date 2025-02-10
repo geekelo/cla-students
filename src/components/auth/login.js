@@ -40,11 +40,18 @@ function LoginPage() {
 
     try {
       const response = await api.post('/api/v1/sign_in', formData);
-      console.log('Login response:', response.data);
+      console.log('Full Login Response:', {
+        data: response.data,
+        status: response.status,
+        headers: response.headers
+      });
+      console.log('User Data:', response.data.user);
+      console.log('Token:', response.data.token);
 
       if (response.data.token) {
-        // Save token to sessionStorage
+        // Save token and user ID to sessionStorage
         sessionStorage.setItem('authToken', response.data.token);
+        sessionStorage.setItem('userId', response.data.user.id);
         
         // Show success message
         toast.success('Login successful!', {
@@ -57,7 +64,11 @@ function LoginPage() {
         throw new Error('Authentication failed');
       }
     } catch (err) {
-      console.error('Login error:', err);
+      console.error('Login error details:', {
+        message: err.message,
+        response: err.response?.data,
+        status: err.response?.status
+      });
       let errorMessage = 'Login failed. Please check your credentials.';
 
       if (err.response) {
