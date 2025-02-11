@@ -2,110 +2,131 @@
 
 /* Calendar container styles */
 .calendar-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
   background-color: #ede7f4;
-  padding: 40px;
   font-family: 'Poppins', sans-serif;
 }
 
 /* Header Styles */
 .calendar-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 40px;
-}
-
-.calendar-header .date-filter {
-  margin-left: auto;
+  margin-bottom: 20px;
 }
 
 .calendar-title {
-  font-size: 36px;
-  font-weight: 600;
-  color: #333;
-  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  margin: 0;
 }
 
-.date-filter {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  outline: none;
-  font-family: 'Poppins', sans-serif;
+.add-class-btn {
+  background-color: #442e79;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
 }
 
-.date-filter:focus {
-  border-color: #5a67d8;
+.add-class-btn:hover {
+  background-color: #5a3e99;
+}
+
+.calendar-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.tab-button.active {
+  color: white;
+  font-weight: 500;
+  background-color: #442e79;
+  border-radius: 5px 5px 0 0;
+}
+
+.tab-button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -11px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #442e79;
 }
 
 /* Events List */
 .events-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  font-family: 'Poppins', sans-serif;
+  gap: 15px;
 }
 
 .event-card {
-  background-color: #ffffff;
-  padding: 20px;
+  background: white;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.event-card:hover {
-  transform: scale(1.05);
+.event-details {
+  flex-grow: 1;
 }
 
 .event-datetime {
   display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 0.5rem;
+  gap: 20px;
+  margin-bottom: 10px;
+  color: #666;
+  font-size: 14px;
 }
 
 .event-date, .event-time {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
+  gap: 5px;
 }
 
 .datetime-icon {
-  color: #666;
-  font-size: 0.9rem;
-}
-
-.datetime-text {
   color: #442e79;
-  font-weight: 500;
-}
-
-.event-day {
-  font-size: 20px;
-  color: #3b8b3a;
-}
-
-.event-details {
-  flex-grow: 1;
-  font-family: 'Poppins', sans-serif;
 }
 
 .event-title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #444;
-  margin-bottom: 0.5rem;
+  margin: 0 0 5px 0;
+  font-size: 16px;
+  color: #333;
 }
 
 .event-course {
-  font-size: 0.9rem;
   color: #666;
+  font-size: 14px;
 }
 
 .event-description {
@@ -121,26 +142,42 @@
 
 .event-actions {
   display: flex;
-  gap: 1rem;
-  align-items: center;
+  gap: 10px;
 }
 
 .action-icon {
   background: none;
   border: none;
-  font-size: 1.2rem;
-  color: #442e79;
+  padding: 8px;
   cursor: pointer;
-  padding: 0.5rem;
-  transition: all 0.3s ease;
+  color: #666;
+  border-radius: 4px;
+  transition: all 0.2s;
 }
 
 .action-icon:hover {
-  transform: scale(1.1);
+  background-color: #f0f0f0;
+  color: #442e79;
 }
 
 .delete-icon:hover {
   color: #dc3545;
+}
+
+.no-events {
+  text-align: center;
+  color: #666;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-size: 14px;
 }
 
 @media (max-width: 768px) {

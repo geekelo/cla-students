@@ -39,14 +39,15 @@ function SignUp() {
   const [error, setError] = useState(null);
 
   const handleChange = (e) => {
-    const value = e.target.type === 'number' ? 
-      parseInt(e.target.value, 10) || '' : 
-      e.target.value;
+    const { name, value } = e.target;
+    const parsedValue = e.target.type === 'number' ? 
+      parseInt(value, 10) || '' : 
+      value;
       
     setFormData(prev => ({
       user: {
         ...prev.user,
-        [e.target.name]: value
+        [name]: parsedValue
       }
     }));
     
@@ -72,7 +73,7 @@ function SignUp() {
         user: {
           ...formData.user,
           cla_role_id: parseInt(formData.user.cla_role_id, 10),
-          cla_cohort_id: formData.user.cla_cohort_id ? parseInt(formData.user.cla_cohort_id, 10) : 0
+          cla_cohort_id: parseInt(formData.user.cla_cohort_id, 10) || null
         }
       };
 
@@ -260,7 +261,6 @@ function SignUp() {
                       onChange={handleChange}
                       placeholder="Enter cohort ID"
                       disabled={loading}
-
                     />
                   </div>
                 </div>

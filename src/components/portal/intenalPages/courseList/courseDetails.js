@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import TopicsAccordion from '../topics/topicsAccordion';
 import '../../../../stylesheets/courseDetails.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 import { 
   faEdit, 
   faTrash,
@@ -19,12 +21,44 @@ import {
   faArrowLeft
 } from '@fortawesome/free-solid-svg-icons';
 
+const BASE_URL = 'https://cla-portal-api.onrender.com';
+
 function CourseDetails() {
   const { id } = useParams();
   const location = useLocation();
   const { course } = location.state || {};
   const [topics, setTopics] = useState((course?.topics || []));
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchCourseDetails = async () => {
+      try {
+        const token = sessionStorage.getItem('authToken');
+        if (!token) {
+          toast.error('Session expired. Please login again.');
+          navigate('/login');
+          return;
+        }
+
+        const response = await axios.get(`${BASE_URL}/api/v1/cla_courses/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        console.log('Course Details Response:', response.data);
+      } catch (error) {
+        console.error('Error fetching course details:', error);
+        if (error.response) {
+          console.log('Error response:', error.response.data);
+        }
+      }
+    };
+
+    if (id) {
+      fetchCourseDetails();
+    }
+  }, [id, navigate]);
 
   if (!course) {
     return <div className="student-area-container">
@@ -34,8 +68,31 @@ function CourseDetails() {
     </div>;
   }
 
-  const handleAssignmentClick = (assignments) => {
-    navigate('/portal/assignments/', { state: { assignments } });
+  const handleAssignmentClick = async () => {
+    try {
+      const token = sessionStorage.getItem('authToken');
+      if (!token) {
+        toast.error('Session expired. Please login again.');
+        navigate('/login');
+        return;
+      }
+
+      const response = await axios.get(`${BASE_URL}/api/v1/cla_assignments`, {
+        params: { cla_course_id: id },
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      console.log('Assignments Response:', response.data);
+      navigate('/portal/assignments/', { state: { assignments: response.data } });
+    } catch (error) {
+      console.error('Error fetching assignments:', error);
+      if (error.response) {
+        console.log('Error response:', error.response.data);
+      }
+      toast.error('Failed to fetch assignments. Please try again.');
+    }
   };
 
   const handleLiveClassesClick = (liveClasses) => {
@@ -83,6 +140,15 @@ function CourseDetails() {
       // Add delete course logic here
       console.log('Delete course clicked');
     }
+  };
+
+  const handleAddAssignment = () => {
+    navigate('/portal/assignment/new', { 
+      state: { 
+        courseId: id,
+        course: course
+      } 
+    });
   };
 
   return (
@@ -193,9 +259,16 @@ function CourseDetails() {
             <button 
               type="button"
               className="action-button purple-btn"
-              onClick={() => handleAssignmentClick(course?.assignments)}
+              onClick={handleAssignmentClick}
             >
               <FontAwesomeIcon icon={faListCheck} style={{ marginRight: '10px' }} /> See Assignments
+            </button>
+            <button 
+              type="button"
+              className="action-button purple-btn"
+              onClick={() => handleAddAssignment()}
+            >
+              <FontAwesomeIcon icon={faPlus} style={{ marginRight: '10px' }} /> Add Assignment
             </button>
             <button 
               type="button"

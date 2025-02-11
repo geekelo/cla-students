@@ -111,3 +111,15 @@
   background-color: rgba(68, 46, 121, 0.1);
   transform: translateX(-2px);
 }
+
+
+.form-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0;
+  margin-left: 2rem;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}

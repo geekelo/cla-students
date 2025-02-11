@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,8 +15,8 @@ const api = axios.create({
 });
 
 function LoginPage() {
-  const navigate = useNavigate();
   const location = useLocation();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     user: {
@@ -40,24 +40,49 @@ function LoginPage() {
 
     try {
       const response = await api.post('/api/v1/sign_in', formData);
-      console.log('Login response:', response.data);
+      console.log('Full Login Response:', response);
+      console.log('User Data:', response.data.user);
+      console.log('Role ID:', response.data.user.cla_role_id);
+      console.log('Cohort ID:', response.data.user.cla_cohort_id);
 
       if (response.data.token) {
-        // Save token to sessionStorage
+        // Store authentication token and user ID
         sessionStorage.setItem('authToken', response.data.token);
-        
-        // Show success message
-        toast.success('Login successful!', {
-          onClose: () => {
-            // Navigate to portal after toast closes
-            navigate('/portal');
-          }
-        });
+        sessionStorage.setItem('userId', response.data.user.id);
+
+        // Store role and cohort information with 7-day expiry
+        const roleId = response.data.user.cla_role_id;
+        const cohortId = response.data.user.cla_cohort_id;
+        const isStudent = roleId !== 2;
+        const expiryTime = new Date().getTime() + (7 * 24 * 60 * 60 * 1000); // 7 days
+
+        // Store in localStorage with expiry
+        const storageData = {
+          roleId: roleId.toString(),
+          userRole: isStudent ? 'student' : 'facilitator',
+          cohortId: cohortId ? cohortId.toString() : '',
+          expiry: expiryTime
+        };
+        localStorage.setItem('userData', JSON.stringify(storageData));
+
+        // Store in sessionStorage for current session
+        sessionStorage.setItem('roleId', roleId.toString());
+        sessionStorage.setItem('userRole', isStudent ? 'student' : 'facilitator');
+        if (cohortId) {
+          sessionStorage.setItem('cohortId', cohortId.toString());
+        }
+
+        toast.success('Login successful!');
+        navigate('/portal/courses');
       } else {
         throw new Error('Authentication failed');
       }
     } catch (err) {
-      console.error('Login error:', err);
+      console.error('Login error details:', {
+        message: err.message,
+        response: err.response?.data,
+        status: err.response?.status
+      });
       let errorMessage = 'Login failed. Please check your credentials.';
 
       if (err.response) {
