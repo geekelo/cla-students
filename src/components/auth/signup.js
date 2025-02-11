@@ -39,25 +39,15 @@ function SignUp() {
   const [error, setError] = useState(null);
 
   const handleChange = (e) => {
-    const value = e.target.type === 'number' ? 
-      parseInt(e.target.value, 10) || '' : 
-      e.target.value;
-      
-    // Store role information when role ID is selected
-    if (e.target.name === 'cla_role_id') {
-      sessionStorage.setItem('userRole', value === 2 ? 'facilitator' : 'student');
-      sessionStorage.setItem('roleId', value);
-    }
-
-    // Store cohort ID when selected
-    if (e.target.name === 'cla_cohort_id') {
-      sessionStorage.setItem('cohortId', value);
-    }
+    const { name, value } = e.target;
+    const parsedValue = e.target.type === 'number' ? 
+      parseInt(value, 10) || '' : 
+      value;
       
     setFormData(prev => ({
       user: {
         ...prev.user,
-        [e.target.name]: value
+        [name]: parsedValue
       }
     }));
     
@@ -83,7 +73,7 @@ function SignUp() {
         user: {
           ...formData.user,
           cla_role_id: parseInt(formData.user.cla_role_id, 10),
-          cla_cohort_id: formData.user.cla_cohort_id ? parseInt(formData.user.cla_cohort_id, 10) : 0
+          cla_cohort_id: parseInt(formData.user.cla_cohort_id, 10) || null
         }
       };
 
@@ -93,21 +83,6 @@ function SignUp() {
       console.log('Server response:', response.data);
 
       if (response.data.message === 'User created successfully') {
-        // Store role and cohort information permanently
-        const roleId = userData.user.cla_role_id;
-        const cohortId = userData.user.cla_cohort_id;
-        const isStudent = roleId !== 2;
-
-        // Store in localStorage for permanent access
-        localStorage.setItem('userRole', isStudent ? 'student' : 'facilitator');
-        localStorage.setItem('roleId', roleId);
-        localStorage.setItem('cohortId', cohortId);
-
-        // Also store in sessionStorage for current session
-        sessionStorage.setItem('userRole', isStudent ? 'student' : 'facilitator');
-        sessionStorage.setItem('roleId', roleId);
-        sessionStorage.setItem('cohortId', cohortId);
-
         // Show success toast and navigate
         toast.success('Account created successfully!', {
           onClose: () => {
@@ -286,7 +261,6 @@ function SignUp() {
                       onChange={handleChange}
                       placeholder="Enter cohort ID"
                       disabled={loading}
-
                     />
                   </div>
                 </div>

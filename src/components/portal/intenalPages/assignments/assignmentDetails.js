@@ -1,51 +1,85 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 import { 
   faEdit, 
   faTrash, 
-  faUser, 
   faCalendarAlt,
   faBookOpen,
-  faUpload,
+  faQuestionCircle,
   faArrowLeft
 } from '@fortawesome/free-solid-svg-icons';
 import '../../../../stylesheets/assignmentDetails.css';
 
+const BASE_URL = 'https://cla-portal-api.onrender.com';
+
 const AssignmentDetails = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { assignment } = location.state || {};
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    student_name: '',
-    student_id: '',
-    email: '',
-    file: null,
+    download_link: '',
   });
-
-  // Mock data for the assignment when not provided through location state
-  const assignmentData = assignment || {
-    name: 'React Basics Quiz',
-    date_of_submission: '2024-03-20',
-    course_title: 'React Development',
-    course_id: 'REACT101',
-    name_of_facilitator: 'John Doe',
-    facilitator_id: 'FAC123',
-    description: 'This quiz will test your understanding of React fundamentals including components, state, props, and hooks. Please read all questions carefully before answering.'
-  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleFileChange = (e) => {
-    setFormData({ ...formData, file: e.target.files[0] });
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    setLoading(true);
+
+    try {
+      const token = sessionStorage.getItem('authToken');
+      const userId = sessionStorage.getItem('userId');
+
+      if (!token || !userId) {
+        toast.error('Session expired. Please login again.');
+        navigate('/login');
+        return;
+      }
+
+      const submissionData = {
+        cla_submission: {
+          download_link: formData.download_link,
+          cla_assignment_id: location.state?.assignment?.id,
+          cla_facilitator_id: location.state?.assignment?.cla_user_id,
+          cla_student_id: userId
+        }
+      };
+
+      const response = await axios.post(`${BASE_URL}/api/v1/cla_submissions`, submissionData, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      console.log('Submission response:', response.data);
+      toast.success('Assignment submitted successfully!');
+      navigate('/portal/assignments');
+    } catch (error) {
+      console.error('Error submitting assignment:', error);
+      let errorMessage = 'Failed to submit assignment. Please try again.';
+
+      if (error.response) {
+        console.log('Error response:', error.response.data);
+        if (typeof error.response.data.error === 'string') {
+          errorMessage = error.response.data.error;
+        } else if (error.response.data.errors) {
+          errorMessage = Object.entries(error.response.data.errors)
+            .map(([field, messages]) => `${field}: ${messages.join(', ')}`)
+            .join('\n');
+        }
+      }
+
+      toast.error(errorMessage);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleEdit = () => {
@@ -62,16 +96,22 @@ const AssignmentDetails = () => {
     navigate('/portal/assignments');
   };
 
+  const openGuidelinesVideo = () => {
+    // Replace this URL with your actual guidelines video URL
+    window.open('https://your-guidelines-video-url.com', '_blank');
+  };
+
   return (
     <div className="assignment-details-container">
       <div className="assignment-details-content">
         <button onClick={handleBack} className="back-button">
           <FontAwesomeIcon icon={faArrowLeft} /> Back
         </button>
+        
         <div className="assignment-details">
           <div className="assignment-header">
             <div className="title-with-actions">
-              <h1 className="assignment-title">{assignmentData.name}</h1>
+              <h1 className="assignment-title">{location.state?.assignment?.name || 'Assignment Details'}</h1>
               <div className="action-icons">
                 <button className="action-icon" onClick={handleEdit}>
                   <FontAwesomeIcon icon={faEdit} />
@@ -81,21 +121,17 @@ const AssignmentDetails = () => {
                 </button>
               </div>
             </div>
-            <p className="assignment-description">{assignmentData.description}</p>
+            <p className="assignment-description">{location.state?.assignment?.description || 'No description available.'}</p>
           </div>
 
           <div className="assignment-info-grid">
             <div className="info-item">
               <FontAwesomeIcon icon={faCalendarAlt} />
-              <span>Date of Submission: <strong>{new Date(assignmentData.date_of_submission).toLocaleDateString()}</strong></span>
+              <span>Due Date: <strong>{location.state?.assignment?.due_date ? new Date(location.state.assignment.due_date).toLocaleDateString() : 'Not set'}</strong></span>
             </div>
             <div className="info-item">
               <FontAwesomeIcon icon={faBookOpen} />
-              <span>Course: <strong>{assignmentData.course_title} (ID: {assignmentData.course_id})</strong></span>
-            </div>
-            <div className="info-item">
-              <FontAwesomeIcon icon={faUser} />
-              <span>Facilitator: <strong>{assignmentData.name_of_facilitator} (ID: {assignmentData.facilitator_id})</strong></span>
+              <span>Course: <strong>{location.state?.assignment?.course_name || 'Not specified'}</strong></span>
             </div>
           </div>
 
@@ -108,39 +144,30 @@ const AssignmentDetails = () => {
 
             <form className="submission-form" onSubmit={handleSubmit}>
               <div className="form-group">
-                <label htmlFor="studentId">Student ID</label>
-                <input
-                  type="text"
-                  id="studentId"
-                  name="studentId"
-                  value={formData.studentId}
-                  onChange={handleChange}
-                  required
-                />
+                <div className="input-with-icon">
+                  <input
+                    type="url"
+                    id="download_link"
+                    name="download_link"
+                    value={formData.download_link}
+                    onChange={handleChange}
+                    placeholder="Paste your Google Docs link here"
+                    required
+                    className="google-docs-input"
+                  />
+                  <button 
+                    type="button" 
+                    className="help-icon"
+                    onClick={openGuidelinesVideo}
+                    title="View submission guidelines"
+                  >
+                    Help <FontAwesomeIcon icon={faQuestionCircle} />
+                  </button>
+                </div>
               </div>
 
-              <div className="form-group file-upload">
-                <input
-                  type="file"
-                  id="file"
-                  name="file"
-                  accept=".pdf"
-                  onChange={handleFileChange}
-                  required
-                  style={{ display: 'none' }}
-                />
-                <button 
-                  type="button" 
-                  className="upload-btn"
-                  onClick={() => document.getElementById('file').click()}
-                >
-                  <FontAwesomeIcon icon={faUpload} className="icon" />
-                  {formData.file ? formData.file.name : 'Upload PDF'}
-                </button>
-              </div>
-
-              <button type="submit" className="submit-button">
-                Submit Assignment
+              <button type="submit" className="submit-button" disabled={loading}>
+                {loading ? 'Submitting...' : 'Submit Assignment'}
               </button>
             </form>
           </div>

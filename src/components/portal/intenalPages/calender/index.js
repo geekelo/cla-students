@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faVideo, 
@@ -7,16 +6,17 @@ import {
   faTrash,
   faEye,
   faCalendarAlt,
-  faClock 
+  faClock,
+  faHistory,
+  faCalendarDay
 } from '@fortawesome/free-solid-svg-icons';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import courses from '../../../../data/courseList.json';
 import '../../../../stylesheets/calender.css';
 
 function Calendar() {
   const [events, setEvents] = useState([]);
-  const [filteredEvents, setFilteredEvents] = useState([]);
-  const [selectedDate, setSelectedDate] = useState('');
+  const [activeTab, setActiveTab] = useState('new');
   const navigate = useNavigate();
   const location = useLocation();
   const { liveClasses } = location.state || [];
@@ -24,21 +24,11 @@ function Calendar() {
   useEffect(() => {
     if (liveClasses && liveClasses.length > 0) {
       setEvents(liveClasses);
-      setFilteredEvents(liveClasses);
     } else {
       const allLiveEvents = getAllLiveEvents(courses);
       setEvents(allLiveEvents);
-      setFilteredEvents(allLiveEvents);
     }
   }, [liveClasses]);
-
-  const handleAddLiveClassesClick = () => {
-    navigate('/portal/event/new', {
-   state: { 
-    courses: courses 
-    } 
-  });
-  }
 
   function getAllLiveEvents(coursesData) {
     const categories = Object.keys(coursesData);
@@ -47,7 +37,6 @@ function Calendar() {
     categories.forEach(category => {
       coursesData[category].forEach(course => {
         if (course.liveClasses) {
-          // Map the live classes and include course details
           const classesWithCourseInfo = course.liveClasses.map(liveClass => ({
             ...liveClass,
             courseName: liveClass.name,
@@ -62,24 +51,27 @@ function Calendar() {
     return liveEvents;
   }
 
-  const handleDateFilterChange = (event) => {
-    const { value } = event.target;
-    setSelectedDate(value);
+  const getFilteredEvents = () => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-    if (value) {
-      const filtered = events.filter((event) => {
-        const eventDate = new Date(event.date);
-        const selected = new Date(value);
-        return eventDate.toDateString() === selected.toDateString();
-      });
-      setFilteredEvents(filtered);
-    } else {
-      setFilteredEvents(events);
-    }
+    return events.filter(event => {
+      const eventDate = new Date(event.date);
+      if (activeTab === 'new') {
+        return eventDate >= today;
+      } else {
+        return eventDate < today;
+      }
+    }).sort((a, b) => new Date(a.date) - new Date(b.date));
   };
 
-  // Sort events by date (closest to farthest)
-  const sortedEvents = filteredEvents?.sort((a, b) => new Date(a.date) - new Date(b.date));
+  const handleAddLiveClassesClick = () => {
+    navigate('/portal/event/new', {
+      state: { 
+        courses: courses 
+      } 
+    });
+  };
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -101,24 +93,33 @@ function Calendar() {
   return (
     <div className="calendar-container">
       <div className="calendar-header">
-        <h1 className="calendar-title">Upcoming Classes</h1>
+        <h1 className="calendar-title">Live Classes</h1>
         <button
-          role="button"
+          className="add-class-btn"
           onClick={handleAddLiveClassesClick}
         >
           <FontAwesomeIcon icon={faVideo} /> Add Live Class
         </button>
-        <input
-          type="date"
-          className="date-filter"
-          value={selectedDate}
-          onChange={handleDateFilterChange}
-        />
+      </div>
+
+      <div className="calendar-tabs">
+        <button
+          className={`tab-button ${activeTab === 'new' ? 'active' : ''}`}
+          onClick={() => setActiveTab('new')}
+        >
+          <FontAwesomeIcon icon={faCalendarDay} /> Upcoming Classes
+        </button>
+        <button
+          className={`tab-button ${activeTab === 'old' ? 'active' : ''}`}
+          onClick={() => setActiveTab('old')}
+        >
+          <FontAwesomeIcon icon={faHistory} /> Past Classes
+        </button>
       </div>
 
       <div className="events-list">
-        {sortedEvents?.length > 0 ? (
-          sortedEvents.map((event) => (
+        {getFilteredEvents().length > 0 ? (
+          getFilteredEvents().map((event) => (
             <div key={event.id} className="event-card">
               <div className="event-details">
                 <div className="event-datetime">
@@ -165,22 +166,11 @@ function Calendar() {
             </div>
           ))
         ) : (
-          <p>No classes found for the selected date.</p>
+          <p className="no-events">No {activeTab === 'new' ? 'upcoming' : 'past'} classes found.</p>
         )}
       </div>
     </div>
   );
 }
-
-Calendar.propTypes = {
-  events: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      date: PropTypes.string.isRequired, // ISO string or date string
-    }),
-  ).isRequired,
-};
 
 export default Calendar;

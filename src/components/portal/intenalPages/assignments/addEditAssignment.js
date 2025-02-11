@@ -20,7 +20,7 @@ const BASE_URL = 'https://cla-portal-api.onrender.com';
 const AddEditAssignment = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { courseId, assignment } = location.state || {};
+  const { courseId, assignment, course } = location.state || {};
   const [loading, setLoading] = useState(false);
   const [courses, setCourses] = useState([]);
 
@@ -48,21 +48,24 @@ const AddEditAssignment = () => {
           return;
         }
 
-        let params = {};
-        if (userRole === 'student') {
-          params = { cohort_id: cohortId };
-        } else if (userRole === 'facilitator') {
-          params = { cla_user_id: userId };
-        }
-
-        const response = await axios.get(`${BASE_URL}/api/v1/cla_courses`, {
-          params,
-          headers: {
-            Authorization: `Bearer ${token}`
+        // Only fetch courses if we don't have a courseId
+        if (!courseId) {
+          let params = {};
+          if (userRole === 'student') {
+            params = { cohort_id: cohortId };
+          } else if (userRole === 'facilitator') {
+            params = { cla_user_id: userId };
           }
-        });
 
-        setCourses(response.data);
+          const response = await axios.get(`${BASE_URL}/api/v1/cla_courses`, {
+            params,
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+
+          setCourses(response.data);
+        }
       } catch (error) {
         console.error('Error fetching courses:', error);
         toast.error('Failed to fetch courses. Please try again.');
@@ -70,7 +73,7 @@ const AddEditAssignment = () => {
     };
 
     fetchCourses();
-  }, [navigate]);
+  }, [navigate, courseId]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -219,20 +222,30 @@ const AddEditAssignment = () => {
               <FontAwesomeIcon icon={faLayerGroup} className="form-icon" />
               Course
             </label>
-            <select
-              name="cla_course_id"
-              value={formData.cla_assignment.cla_course_id}
-              onChange={handleChange}
-              required
-              disabled={loading}
-            >
-              <option value="">Select a course</option>
-              {courses.map((course) => (
-                <option key={course.id} value={course.id}>
-                  {course.name}
-                </option>
-              ))}
-            </select>
+            {courseId ? (
+              <input
+                type="text"
+                value={course?.name || 'Selected Course'}
+                
+                className="form-input"
+              />
+            ) : (
+              <select
+                name="cla_course_id"
+                value={formData.cla_assignment.cla_course_id}
+                onChange={handleChange}
+                required
+                disabled={loading}
+                className="form-input"
+              >
+                <option value="">Select a course</option>
+                {courses.map((course) => (
+                  <option key={course.id} value={course.id}>
+                    {course.name}
+                  </option>
+                ))}
+              </select>
+            )}
           </div>
 
           <button type="submit" className="submit-button" disabled={loading}>

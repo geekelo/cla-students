@@ -186,15 +186,14 @@ body {
 
 /* Form Styles */
 .submission-form {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 1.2rem;
+  width: 100%;
 }
 
 .form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  width: 100%;
 }
 
 .form-group.file-upload,
@@ -244,8 +243,54 @@ body {
   border-color: #442e79;
 }
 
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.google-docs-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+  padding-right: 80px; /* Make space for the help button */
+}
+
+.google-docs-input:focus {
+  border-color: #442e79;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(68, 46, 121, 0.1);
+}
+
+.help-icon {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: #442e79;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 14px;
+  transition: transform 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.help-icon svg {
+  font-size: 16px;
+}
+
+.help-icon:hover {
+  transform: scale(1.05);
+}
+
 .submit-button {
-  grid-column: 1 / -1;
+  width: 100%;
   padding: 0.8rem;
   background-color: #442e79;
   color: white;

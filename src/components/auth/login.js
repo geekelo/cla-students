@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,6 +16,7 @@ const api = axios.create({
 
 function LoginPage() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     user: {
@@ -45,24 +46,34 @@ function LoginPage() {
       console.log('Cohort ID:', response.data.user.cla_cohort_id);
 
       if (response.data.token) {
-        // Store authentication token
+        // Store authentication token and user ID
         sessionStorage.setItem('authToken', response.data.token);
         sessionStorage.setItem('userId', response.data.user.id);
 
-        // Store role and cohort information
+        // Store role and cohort information with 7-day expiry
         const roleId = response.data.user.cla_role_id;
         const cohortId = response.data.user.cla_cohort_id;
         const isStudent = roleId !== 2;
+        const expiryTime = new Date().getTime() + (7 * 24 * 60 * 60 * 1000); // 7 days
 
-        // Update both localStorage and sessionStorage
-        localStorage.setItem('userRole', isStudent ? 'student' : 'facilitator');
-        localStorage.setItem('roleId', roleId);
-        localStorage.setItem('cohortId', cohortId);
+        // Store in localStorage with expiry
+        const storageData = {
+          roleId: roleId.toString(),
+          userRole: isStudent ? 'student' : 'facilitator',
+          cohortId: cohortId ? cohortId.toString() : '',
+          expiry: expiryTime
+        };
+        localStorage.setItem('userData', JSON.stringify(storageData));
+
+        // Store in sessionStorage for current session
+        sessionStorage.setItem('roleId', roleId.toString());
         sessionStorage.setItem('userRole', isStudent ? 'student' : 'facilitator');
-        sessionStorage.setItem('roleId', roleId);
-        sessionStorage.setItem('cohortId', cohortId);
+        if (cohortId) {
+          sessionStorage.setItem('cohortId', cohortId.toString());
+        }
 
         toast.success('Login successful!');
+        navigate('/portal/courses');
       } else {
         throw new Error('Authentication failed');
       }
