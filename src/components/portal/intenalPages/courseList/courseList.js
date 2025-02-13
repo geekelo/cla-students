@@ -4,7 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faEye,
 
+} from '@fortawesome/free-solid-svg-icons';
 const BASE_URL = 'https://cla-portal-api.onrender.com';
 
 function CourseList() {
@@ -18,8 +22,8 @@ function CourseList() {
       try {
         const userId = sessionStorage.getItem('userId');
         const token = sessionStorage.getItem('authToken');
-        const userRole = localStorage.getItem('userRole');
-        const cohortId = localStorage.getItem('cohortId');
+        const userRole = sessionStorage.getItem('userRole');
+        const cohortId = sessionStorage.getItem('cohortId');
 
         if (!userId || !token) {
           toast.error('Session expired. Please login again.');
@@ -113,7 +117,13 @@ function CourseList() {
             <span className="lock-icon" aria-label="locked course">
               🔒
             </span>
+            
           )}
+          <div className="event-actions">
+                          <button type="button" className="action-icon"  title="Join Class">
+                            <FontAwesomeIcon icon={faEye} />
+                          </button>
+                      </div>
         </button>
       ))}
     </div>

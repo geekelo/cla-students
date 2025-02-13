@@ -5,6 +5,7 @@ import {
   faCalendarAlt,
   faClock,
   faVideo,
+  faUsers,
   faBook
 } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
@@ -18,6 +19,7 @@ const ScheduleLiveClass = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [courses, setCourses] = useState([]);
+  const [cohorts, setCohorts] = useState([]);
 
   const [formData, setFormData] = useState({
     cla_live_class: {
@@ -27,7 +29,15 @@ const ScheduleLiveClass = () => {
       duration: '',
       zoom_link: '',
       cla_course_id: '',
-      cohort_id: localStorage.getItem('cohortId') || ''
+      cohort_id: sessionStorage.getItem('cohortId') || ''
+    }
+  });
+
+  const api = axios.create({
+    baseURL: 'https://cla-portal-api.onrender.com',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
     }
   });
 
@@ -36,8 +46,8 @@ const ScheduleLiveClass = () => {
       try {
         const token = sessionStorage.getItem('authToken');
         const userId = sessionStorage.getItem('userId');
-        const userRole = localStorage.getItem('userRole');
-        const cohortId = localStorage.getItem('cohortId');
+        const userRole = sessionStorage.getItem('userRole');
+        const cohortId = sessionStorage.getItem('cohortId');
 
         if (!token || !userId) {
           toast.error('Session expired. Please login again.');
@@ -51,6 +61,12 @@ const ScheduleLiveClass = () => {
         } else if (userRole === 'facilitator') {
           params = { cla_user_id: userId };
         }
+        api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        
+        // Fetch cohorts
+        const cohortsResponse = await api.get('/api/v1/cla_cohorts');
+        setCohorts(cohortsResponse.data.cohorts || []);
+       
 
         const response = await axios.get(`${BASE_URL}/api/v1/cla_courses`, {
           params,
@@ -71,11 +87,18 @@ const ScheduleLiveClass = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    let finalValue = value;
+  
+    if (name === 'cla_cohort_id') {
+      finalValue = parseInt(value);
+      // Store cohort ID in session storage when selected
+      sessionStorage.setItem('cohortId', finalValue);
+    }
     setFormData(prev => ({
       ...prev,
       cla_live_class: {
         ...prev.cla_live_class,
-        [name]: value
+        [name]: finalValue
       }
     }));
   };
@@ -251,6 +274,29 @@ const ScheduleLiveClass = () => {
             disabled={loading}
           />
         </div>
+
+        <div className="form-group">
+                        <label htmlFor="cla_cohort_id" className="form-label">
+                          <FontAwesomeIcon icon={faUsers} className="input-icon" />
+                          Select Cohort
+                        </label>
+                        <select
+                          id="cla_cohort_id"
+                          name="cla_cohort_id"
+                          className="form-input"
+                          value={formData.cla_cohort_id}
+                          onChange={handleChange}
+                          required
+                          disabled={loading}
+                        >
+                          <option value="">Select a cohort</option>
+                          {Array.isArray(cohorts) && cohorts.map((cohort) => (
+                            <option key={cohort.id} value={cohort.id}>
+                              {cohort.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
 
         <button type="submit" className="submit-button" disabled={loading}>
           {loading ? 'Scheduling...' : 'Schedule Class'}

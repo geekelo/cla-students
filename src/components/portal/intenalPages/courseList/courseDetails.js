@@ -95,9 +95,11 @@ function CourseDetails() {
     }
   };
 
-  const handleLiveClassesClick = (liveClasses) => {
-    navigate('/portal/events/', { state: { liveClasses: [...liveClasses] } });
-  }
+  const handleLiveClassesClick = () => {
+    const classes = Array.isArray(course?.liveClasses) ? course.liveClasses : [];
+    navigate('/portal/events/', { state: { liveClasses: classes } });
+  };
+  
 
   const handleAddLiveClassesClick = () => {
     navigate('/portal/events/new', {
@@ -161,7 +163,7 @@ function CourseDetails() {
           {/* Header Section */}
           <div className="course-header">
             <div className="course-title-container">
-              <h1 className="course-title">{course.name}</h1>
+              <h1 className="course-title">{course?.name}</h1>
               <div className="course-actions">
                 <button 
                   type="button" 
@@ -193,7 +195,7 @@ function CourseDetails() {
             <div className="course-info-grid">
               <div className="info-item">
                 <FontAwesomeIcon icon={faUser} />
-                <span>Facilitator: <strong>{course.facilitator}</strong></span>
+                <span>Facilitator: <strong>{course?.facilitator}</strong></span>
               </div>
               <div className="info-item">
                 <FontAwesomeIcon icon={faIdCard} />
@@ -201,19 +203,19 @@ function CourseDetails() {
               </div>
               <div className="info-item">
                 <FontAwesomeIcon icon={faCalendarAlt} />
-                <span>Created on: <strong>{course.dateCreated}</strong></span>
+                <span>Created on: <strong>{course?.dateCreated}</strong></span>
               </div>
               <div className="info-item">
                 <FontAwesomeIcon icon={faBookOpen} />
-                <span>Number of Topics: <strong>{topics.length}</strong></span>
+                <span>Number of Topics: <strong>{topics?.length}</strong></span>
               </div>
               <div className="info-item">
                 <FontAwesomeIcon icon={faClipboardList} />
-                <span>Number of Assignments: <strong>{course?.assignments.length}</strong></span>
+                <span>Number of Assignments: <strong>{course?.assignments?.length}</strong></span>
               </div>
               <div className="info-item">
                 <FontAwesomeIcon icon={faVideo} />
-                <span>Pending Live Classes: <strong>{course.pendingLiveClasses}</strong></span>
+                <span>Pending Live Classes: <strong>{course?.pendingLiveClasses}</strong></span>
               </div>
             </div>
 

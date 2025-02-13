@@ -53,12 +53,14 @@ function LoginPage() {
         // Store role and cohort information with 7-day expiry
         const roleId = response.data.user.cla_role_id;
         const cohortId = response.data.user.cla_cohort_id;
+        const email = response.data.user.email;
         const isStudent = roleId !== 2;
         const expiryTime = new Date().getTime() + (7 * 24 * 60 * 60 * 1000); // 7 days
 
         // Store in localStorage with expiry
         const storageData = {
           roleId: roleId.toString(),
+          email: email,
           userRole: isStudent ? 'student' : 'facilitator',
           cohortId: cohortId ? cohortId.toString() : '',
           expiry: expiryTime
@@ -67,13 +69,14 @@ function LoginPage() {
 
         // Store in sessionStorage for current session
         sessionStorage.setItem('roleId', roleId.toString());
+        sessionStorage.setItem('email', email.toString());
         sessionStorage.setItem('userRole', isStudent ? 'student' : 'facilitator');
         if (cohortId) {
           sessionStorage.setItem('cohortId', cohortId.toString());
         }
 
         toast.success('Login successful!');
-        navigate('/portal/courses');
+        navigate('/portal');
       } else {
         throw new Error('Authentication failed');
       }
