@@ -28,7 +28,7 @@ function SubmissionItem({ submission }) {
           {submission.student_name}
         </div>
         <div className="submission-info">
-          <div className="submission-id">ID: {submission.student_id}</div>
+          <div className="submission-id">ID: {submission.id}</div>
           <div className="submission-email">{submission.student_email}</div>
         </div>
       </div>
