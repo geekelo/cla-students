@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { 
   faEdit, 
   faTrash, 
@@ -93,8 +94,60 @@ const AssignmentDetails = () => {
   };
 
   const handleDelete = () => {
-    if (window.confirm('Are you sure you want to delete this submission?')) {
-      console.log('Delete clicked');
+    toast.info(
+      <div>
+        <p>Are you sure you want to delete this assignment?</p>
+        <p>This action cannot be undone.</p>
+        <button 
+          onClick={confirmDelete} 
+          style={{
+            background: '#6b4ca6',
+            color: 'white',
+            padding: '5px 10px',
+            border: 'none',
+            borderRadius: '4px',
+            marginRight: '10px',
+            cursor: 'pointer'
+          }}
+        >
+          Yes, Delete Assignment
+        </button>
+      </div>,
+      {
+        autoClose: false,
+        closeOnClick: false,
+        closeButton: true
+      }
+    );
+  };
+
+  const confirmDelete = async () => {
+    try {
+      const token = sessionStorage.getItem('authToken');
+      if (!token) {
+        toast.error('Session expired. Please login again.');
+        navigate('/login');
+        return;
+      }
+
+      toast.info('Deleting assignment...', {
+        autoClose: false,
+        toastId: 'deletingAssignment'
+      });
+
+      await axios.delete(`${BASE_URL}/api/v1/cla_assignments/${location.state?.assignment?.id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      toast.dismiss('deletingAssignment');
+      toast.success('Assignment deleted successfully!');
+      navigate('/portal/assignments');
+    } catch (error) {
+      toast.dismiss('deletingAssignment');
+      console.error('Error deleting assignment:', error);
+      toast.error('Failed to delete assignment. Please try again.');
     }
   };
 
@@ -109,6 +162,18 @@ const AssignmentDetails = () => {
 
   return (
     <div className="assignment-details-container">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <div className="assignment-details-content">
         <button onClick={handleBack} className="back-button">
           <FontAwesomeIcon icon={faArrowLeft} /> Back

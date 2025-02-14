@@ -11,8 +11,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import '../../../../stylesheets/calender.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 const BASE_URL = 'https://cla-portal-api.onrender.com';
 
@@ -90,8 +91,79 @@ function Calendar() {
     });
   };
 
+  const handleDelete = async (event) => {
+    // Show confirmation toast
+    toast.info(
+      <div>
+        <p>Are you sure you want to delete this live class?</p>
+        <button 
+          onClick={() => confirmDelete(event)} 
+          style={{
+            background: '#6b4ca6',
+            color: 'white',
+            padding: '5px 10px',
+            border: 'none',
+            borderRadius: '4px',
+            marginRight: '10px',
+            cursor: 'pointer'
+          }}
+        >
+          Yes, Delete
+        </button>
+      </div>,
+      {
+        autoClose: false,
+        closeOnClick: false,
+        closeButton: true
+      }
+    );
+  };
+
+  const confirmDelete = async (event) => {
+    try {
+      const token = sessionStorage.getItem('authToken');
+      if (!token) {
+        toast.error('Session expired. Please login again.');
+        navigate('/login');
+        return;
+      }
+
+      toast.info('Deleting live class...', {
+        autoClose: false,
+        toastId: 'deletingLiveClass'
+      });
+
+      await axios.delete(`${BASE_URL}/api/v1/cla_live_classes/${event.id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      // Update the events list after successful deletion
+      setEvents(events.filter(e => e.id !== event.id));
+      toast.dismiss('deletingLiveClass');
+      toast.success('Live class deleted successfully!');
+    } catch (error) {
+      toast.dismiss('deletingLiveClass');
+      console.error('Error deleting live class:', error);
+      toast.error('Failed to delete live class. Please try again.');
+    }
+  };
+
   return (
     <div className="calendar-container">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <div className="calendar-header">
         <h1 className="calendar-title">Live Classes</h1>
       </div>
@@ -130,7 +202,7 @@ function Calendar() {
                 <button type="button" className="action-icon" onClick={() => handleEdit(event)} title="Edit Class">
                   <FontAwesomeIcon icon={faEdit} />
                 </button>
-                <button type="button" className="action-icon delete-icon" title="Delete Class">
+                <button type="button" className="action-icon delete-icon" onClick={() => handleDelete(event)} title="Delete Class">
                   <FontAwesomeIcon icon={faTrash} />
                 </button>
               </div>

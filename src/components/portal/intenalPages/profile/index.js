@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 function Profile() {
   const navigate = useNavigate();
@@ -55,6 +57,53 @@ function Profile() {
     });
   };
 
+  const handleLogout = () => {
+    toast.info(
+      <div>
+        <p>Are you sure you want to logout?</p>
+        <button 
+          onClick={confirmLogout} 
+          style={{
+            background: '#6b4ca6',
+            color: 'white',
+            padding: '5px 10px',
+            border: 'none',
+            borderRadius: '4px',
+            marginRight: '10px',
+            cursor: 'pointer'
+          }}
+        >
+          Yes, Logout
+        </button>
+      </div>,
+      {
+        autoClose: false,
+        closeOnClick: false,
+        closeButton: true
+      }
+    );
+  };
+
+  const confirmLogout = () => {
+    toast.info('Logging out...', {
+      autoClose: false,
+      toastId: 'loggingOut'
+    });
+
+    // Clear all storage
+    localStorage.clear();
+    sessionStorage.clear();
+    
+    // Dismiss the logging out toast and show success message
+    toast.dismiss('loggingOut');
+    toast.success('Logged out successfully!', {
+      onClose: () => {
+        // Redirect to login page after the success toast is closed
+        navigate('/login');
+      }
+    });
+  };
+
   const formatDate = (dateString) => {
     if (!dateString) return 'Not set';
     return new Date(dateString).toLocaleDateString();
@@ -62,6 +111,18 @@ function Profile() {
 
   return (
     <div className="profile-container">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <div className="profile-image">
         <img src="/avatar.jpg" alt="Student" className="profile-pic" />
       </div>
@@ -98,7 +159,7 @@ function Profile() {
             <button type="button" className="profile-btn" onClick={handleEdit}>
               Edit Profile
             </button>
-            <button type="button" className="profile-btn">
+            <button type="button" className="profile-btn" onClick={handleLogout}>
               Logout
             </button>
           </div>
