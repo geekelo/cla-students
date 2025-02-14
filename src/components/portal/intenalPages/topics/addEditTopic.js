@@ -1,109 +1,138 @@
-import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-  faGraduationCap, 
+'use client'
+
+import { useState, useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faGraduationCap,
   faLayerGroup,
   faPlus,
   faFileLines,
-  faArrowLeft
-} from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import '../../../../stylesheets/addEditTopic.css';
+  faArrowLeft,
+  faSave,
+} from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import '../../../../stylesheets/addEditTopic.css'
 
-const BASE_URL = 'https://cla-portal-api.onrender.com';
+const BASE_URL = 'https://cla-portal-api.onrender.com'
 
 const AddEditTopic = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const { courseId, topic, course } = location.state || {};
-  const [loading, setLoading] = useState(false);
-  
+  const location = useLocation()
+  const navigate = useNavigate()
+  const { courseId, topic, course, isEditMode } = location.state || {}
+  const [loading, setLoading] = useState(false)
+
   const [formData, setFormData] = useState({
     topic: {
       name: topic?.name || '',
       description: topic?.description || '',
-      cla_course_id: courseId
+      cla_course_id: courseId,
+    },
+  })
+
+  useEffect(() => {
+    if (isEditMode && topic) {
+      setFormData({
+        topic: {
+          name: topic.name,
+          description: topic.description,
+          cla_course_id: courseId,
+        },
+      })
     }
-  });
+  }, [isEditMode, topic, courseId])
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
+    const { name, value } = e.target
+    setFormData((prev) => ({
       ...prev,
       topic: {
         ...prev.topic,
-        [name]: value
-      }
-    }));
-  };
+        [name]: value,
+      },
+    }))
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+    e.preventDefault()
+    setLoading(true)
 
     try {
-      const token = sessionStorage.getItem('authToken');
+      const token = sessionStorage.getItem('authToken')
       if (!token) {
-        toast.error('Session expired. Please login again.');
-        navigate('/login');
-        return;
+        toast.error('Session expired. Please login again.')
+        navigate('/login')
+        return
       }
 
-      console.log('Sending topic data:', formData);
-      console.log('Course ID:', courseId);
+      console.log('Sending topic data:', formData)
+      console.log('Course ID:', courseId)
 
-      const response = await axios.post(`${BASE_URL}/api/v1/cla_topics`, formData, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      });
+      let response
+      if (isEditMode) {
+        response = await axios.put(`${BASE_URL}/api/v1/cla_topics/${topic.id}`, formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        })
+      } else {
+        response = await axios.post(`${BASE_URL}/api/v1/cla_topics`, formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        })
+      }
 
-      console.log('Topic creation response:', response.data);
-      toast.success('Topic created successfully!');
-      navigate(`/portal/courses/${courseId}`, { state: { course } });
+      console.log('Topic response:', response.data)
+      toast.success(isEditMode ? 'Topic updated successfully!' : 'Topic created successfully!')
+      navigate(`/portal/courses/${courseId}`, { state: { course } })
     } catch (error) {
-      console.error('Error creating topic:', error);
-      let errorMessage = 'Failed to create topic. Please try again.';
+      console.error('Error with topic:', error)
+      let errorMessage = isEditMode
+        ? 'Failed to update topic. Please try again.'
+        : 'Failed to create topic. Please try again.'
 
       if (error.response) {
-        console.log('Error response:', error.response.data);
+        console.log('Error response:', error.response.data)
         if (typeof error.response.data.error === 'string') {
-          errorMessage = error.response.data.error;
+          errorMessage = error.response.data.error
         } else if (error.response.data.errors) {
           errorMessage = Object.entries(error.response.data.errors)
             .map(([field, messages]) => `${field}: ${messages.join(', ')}`)
-            .join('\n');
+            .join('\n')
         }
       }
 
-      toast.error(errorMessage);
+      toast.error(errorMessage)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   const handleBack = () => {
     if (courseId) {
-      navigate(`/portal/courses/${courseId}`, { state: { course } });
+      navigate(`/portal/courses/${courseId}`, { state: { course } })
     } else {
-      navigate(-1);
+      navigate(-1)
     }
-  };
+  }
 
   if (!courseId || !course) {
-    return <div className="student-display-area">
-      <div className="error-message">Course information not found!</div>
-    </div>;
+    return (
+      <div className='student-display-area'>
+        <div className='error-message'>Course information not found!</div>
+      </div>
+    )
   }
 
   return (
-    <div className="student-display-area">
+    <div className='student-display-area'>
       <ToastContainer
-        position="top-right"
+        position='top-right'
         autoClose={3000}
         hideProgressBar={false}
         newestOnTop
@@ -112,64 +141,71 @@ const AddEditTopic = () => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="colored"
+        theme='colored'
       />
-      <div className="form-container">
-        <div className="form-header">
-          <button onClick={handleBack} className="back-button">
+      <div className='form-container'>
+        <div className='form-header'>
+          <button onClick={handleBack} className='back-button'>
             <FontAwesomeIcon icon={faArrowLeft} /> Back
           </button>
-          <FontAwesomeIcon icon={faGraduationCap} className="header-icon" />
-          <h2 className="form-title">{topic ? 'Edit Topic' : 'Add New Topic'}</h2>
+          <FontAwesomeIcon icon={faGraduationCap} className='header-icon' />
+          <h2 className='form-title'>{isEditMode ? 'Edit Topic' : 'Add New Topic'}</h2>
         </div>
-        
-        <div className="form-content">
-          <form onSubmit={handleSubmit} className="topic-form">
-            <div className="form-group">
-              <label htmlFor="title" className="form-label">
-                <FontAwesomeIcon icon={faLayerGroup} className="input-icon" />
+
+        <div className='form-content'>
+          <form onSubmit={handleSubmit} className='topic-form'>
+            <div className='form-group'>
+              <label htmlFor='title' className='form-label'>
+                <FontAwesomeIcon icon={faLayerGroup} className='input-icon' />
                 Topic Title
               </label>
               <input
-                type="text"
-                id="title"
-                name="name"
-                className="form-input"
+                type='text'
+                id='title'
+                name='name'
+                className='form-input'
                 value={formData.topic.name}
                 onChange={handleChange}
-                placeholder="Enter topic title"
+                placeholder='Enter topic title'
                 required
                 disabled={loading}
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="description" className="form-label">
-                <FontAwesomeIcon icon={faFileLines} className="input-icon" />
+            <div className='form-group'>
+              <label htmlFor='description' className='form-label'>
+                <FontAwesomeIcon icon={faFileLines} className='input-icon' />
                 Topic Description
               </label>
               <textarea
-                id="description"
-                name="description"
-                className="form-textarea"
+                id='description'
+                name='description'
+                className='form-textarea'
                 value={formData.topic.description}
                 onChange={handleChange}
-                placeholder="Enter topic description"
+                placeholder='Enter topic description'
                 required
-                rows="4"
+                rows='4'
                 disabled={loading}
               />
             </div>
 
-            <button type="submit" className="form-button" disabled={loading}>
-              <FontAwesomeIcon icon={faPlus} className="button-icon" />
-              {loading ? 'Creating Topic...' : (topic ? 'Update Topic' : 'Add Topic')}
+            <button type='submit' className='form-button' disabled={loading}>
+              <FontAwesomeIcon icon={isEditMode ? faSave : faPlus} className='button-icon' />
+              {loading
+                ? isEditMode
+                  ? 'Updating Topic...'
+                  : 'Creating Topic...'
+                : isEditMode
+                  ? 'Save Changes'
+                  : 'Add Topic'}
             </button>
           </form>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AddEditTopic;
+export default AddEditTopic
+

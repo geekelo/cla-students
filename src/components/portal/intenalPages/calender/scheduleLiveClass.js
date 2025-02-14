@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faCalendarAlt,
@@ -17,19 +17,21 @@ const BASE_URL = 'https://cla-portal-api.onrender.com';
 
 const ScheduleLiveClass = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { liveClass, courseId, isEditMode } = location.state || {};
   const [loading, setLoading] = useState(false);
   const [courses, setCourses] = useState([]);
   const [cohorts, setCohorts] = useState([]);
 
   const [formData, setFormData] = useState({
     cla_live_class: {
-      name: '',
-      date: '',
-      time: '',
-      duration: '',
-      zoom_link: '',
-      cla_course_id: '',
-      cohort_id: sessionStorage.getItem('cohortId') || ''
+      name: liveClass?.name || '',
+      date: liveClass?.date || '',
+      time: liveClass?.time || '',
+      duration: liveClass?.duration || '',
+      zoom_link: liveClass?.zoom_link || '',
+      cla_course_id: courseId || liveClass?.cla_course_id || '',
+      cohort_id: sessionStorage.getItem('cohortId') || liveClass?.cohort_id || ''
     }
   });
 
@@ -85,6 +87,22 @@ const ScheduleLiveClass = () => {
     fetchCourses();
   }, [navigate]);
 
+  useEffect(() => {
+    if (isEditMode && liveClass) {
+      setFormData({
+        cla_live_class: {
+          name: liveClass.name,
+          date: liveClass.date,
+          time: liveClass.time,
+          duration: liveClass.duration,
+          zoom_link: liveClass.zoom_link,
+          cla_course_id: liveClass.cla_course_id,
+          cohort_id: liveClass.cohort_id
+        }
+      });
+    }
+  }, [isEditMode, liveClass]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     let finalValue = value;
@@ -117,19 +135,29 @@ const ScheduleLiveClass = () => {
 
       console.log('Sending live class data:', formData);
 
-      const response = await axios.post(`${BASE_URL}/api/v1/cla_live_classes`, formData, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      });
+      let response;
+      if (isEditMode) {
+        response = await axios.put(`${BASE_URL}/api/v1/cla_live_classes/${liveClass.id}`, formData, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+      } else {
+        response = await axios.post(`${BASE_URL}/api/v1/cla_live_classes`, formData, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+      }
 
-      console.log('Live class creation response:', response.data);
-      toast.success('Live class scheduled successfully!');
+      console.log('Live class response:', response.data);
+      toast.success(isEditMode ? 'Live class updated successfully!' : 'Live class scheduled successfully!');
       navigate('/portal/calendar');
     } catch (error) {
-      console.error('Error scheduling live class:', error);
-      let errorMessage = 'Failed to schedule live class. Please try again.';
+      console.error('Error with live class:', error);
+      let errorMessage = isEditMode ? 'Failed to update live class. Please try again.' : 'Failed to schedule live class. Please try again.';
 
       if (error.response) {
         console.log('Error response:', error.response.data);
@@ -162,7 +190,7 @@ const ScheduleLiveClass = () => {
         pauseOnHover
         theme="colored"
       />
-      <h2 className="schedule-title">Schedule a Live Class</h2>
+      <h2 className="schedule-title">{isEditMode ? 'Edit Live Class' : 'Schedule a Live Class'}</h2>
       <form className="schedule-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="cla_course_id">
@@ -299,7 +327,8 @@ const ScheduleLiveClass = () => {
                       </div>
 
         <button type="submit" className="submit-button" disabled={loading}>
-          {loading ? 'Scheduling...' : 'Schedule Class'}
+          {loading ? (isEditMode ? 'Updating...' : 'Scheduling...') 
+            : (isEditMode ? 'Save Changes' : 'Schedule Class')}
         </button>
       </form>
     </div>

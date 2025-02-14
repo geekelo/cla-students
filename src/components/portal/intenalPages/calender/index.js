@@ -80,6 +80,16 @@ function Calendar() {
     }
   };
 
+  const handleEdit = (event) => {
+    navigate('/portal/event/new', {
+      state: {
+        liveClass: event,
+        courseId: event.cla_course_id,
+        isEditMode: true
+      }
+    });
+  };
+
   return (
     <div className="calendar-container">
       <div className="calendar-header">
@@ -117,7 +127,7 @@ function Calendar() {
                 <button type="button" className="action-icon" onClick={() => handleViewClass(event.zoom_link)} title="Join Class">
                   <FontAwesomeIcon icon={faEye} />
                 </button>
-                <button type="button" className="action-icon" title="Edit Class">
+                <button type="button" className="action-icon" onClick={() => handleEdit(event)} title="Edit Class">
                   <FontAwesomeIcon icon={faEdit} />
                 </button>
                 <button type="button" className="action-icon delete-icon" title="Delete Class">

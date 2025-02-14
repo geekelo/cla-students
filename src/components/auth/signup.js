@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
@@ -7,7 +7,9 @@ import {
   faUser, 
   faLock,
   faIdCard,
-  faSpinner
+  faSpinner,
+  faPhone,
+  faCalendarAlt
 } from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -24,6 +26,11 @@ const api = axios.create({
 
 function SignUp() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { isEditMode, userData } = location.state || {};
+  const [cohorts, setCohorts] = useState([]);
+  const [roles, setRoles] = useState([]);
+
   const [formData, setFormData] = useState({
     user: {
       name: '',
@@ -31,9 +38,47 @@ function SignUp() {
       password: '',
       password_confirmation: '',
       cla_role_id: '',
-      cla_cohort_id: ''
+      cla_cohort_id: '',
+      birthday: '',
+      phone_number: ''
     }
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch cohorts
+        const cohortsResponse = await api.get('/api/v1/cla_cohorts');
+        setCohorts(cohortsResponse.data.cohorts || []);
+
+        // Fetch roles
+        const rolesResponse = await api.get('/api/v1/cla_roles');
+        setRoles(rolesResponse.data.roles || []);
+        
+        console.log('Cohorts:', cohortsResponse.data.cohorts);
+        console.log('Roles:', rolesResponse.data.roles);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        if (error.response) {
+          toast.error('Failed to load data. Please try again.');
+        }
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (isEditMode && userData) {
+      setFormData({
+        user: {
+          ...userData.user,
+          birthday: userData.user.birthday || '',
+          phone_number: userData.user.phone_number || ''
+        }
+      });
+    }
+  }, [isEditMode, userData]);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -59,8 +104,8 @@ function SignUp() {
     setLoading(true);
     setError(null);
 
-    // Password validation
-    if (formData.user.password !== formData.user.password_confirmation) {
+    // Password validation only for non-edit mode
+    if (!isEditMode && formData.user.password !== formData.user.password_confirmation) {
       setError('Passwords do not match');
       setLoading(false);
       toast.error('Passwords do not match');
@@ -77,32 +122,41 @@ function SignUp() {
         }
       };
 
+      // Remove password fields and id for edit mode
+      if (isEditMode) {
+        delete userData.user.password;
+        delete userData.user.password_confirmation;
+        delete userData.user.id; // Remove the id from payload
+      }
+
       console.log('Submitting form data:', userData);
       
-      const response = await api.post('/api/v1/sign_up', userData);
-      console.log('Server response:', response.data);
-
-      if (response.data.message === 'User created successfully') {
-        // Show success toast and navigate
-        toast.success('Account created successfully!', {
-          onClose: () => {
-            navigate('/login', { 
-              state: { 
-                message: 'Registration successful! Please login to continue.' 
-              }
-            });
-          }
-        });
+      let response;
+      if (isEditMode) {
+        response = await api.put(`/api/v1/edit_profile?id=${formData.user.id}`, userData);
+        toast.success('Profile updated successfully!');
+        navigate('/portal/profile');
       } else {
-        throw new Error('Registration failed');
+        response = await api.post('/api/v1/sign_up', userData);
+        if (response.data.message === 'User created successfully') {
+          toast.success('Account created successfully!', {
+            onClose: () => {
+              navigate('/login', { 
+                state: { 
+                  message: 'Registration successful! Please login to continue.' 
+                }
+              });
+            }
+          });
+        }
       }
+
+      console.log('Server response:', response.data);
     } catch (err) {
-      console.error('Registration error:', err);
+      console.error('Registration/Update error:', err);
       let errorMessage = 'Something went wrong. Please try again.';
 
       if (err.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
         if (err.response.data.error) {
           errorMessage = err.response.data.error;
         } else if (err.response.data.errors) {
@@ -111,7 +165,6 @@ function SignUp() {
             .join('\n');
         }
       } else if (err.request) {
-        // The request was made but no response was received
         errorMessage = 'No response from server. Please check your internet connection.';
       }
 
@@ -145,10 +198,10 @@ function SignUp() {
             </div>
             <div className="signup-header">
               <h1 className="signup-title">
-                Welcome
+                {isEditMode ? 'Edit Profile' : 'Welcome'}
               </h1>
               <p className="signup-subtitle">
-                Join our community of believers and start your journey of spiritual growth.
+                {isEditMode ? 'Update your profile information' : 'Join our community of believers and start your journey of spiritual growth.'}
               </p>
             </div>
           </div>
@@ -196,40 +249,77 @@ function SignUp() {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="password">
-                    <FontAwesomeIcon icon={faLock} />
-                    Password
+                  <label htmlFor="phone_number">
+                    <FontAwesomeIcon icon={faPhone} />
+                    Phone Number
                   </label>
                   <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={formData.user.password}
+                    type="tel"
+                    id="phone_number"
+                    name="phone_number"
+                    value={formData.user.phone_number}
                     onChange={handleChange}
                     required
-                    placeholder="Create a password"
+                    placeholder="Enter your phone number"
                     disabled={loading}
-                    minLength="6"
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="password_confirmation">
-                    <FontAwesomeIcon icon={faLock} />
-                    Confirm Password
+                  <label htmlFor="birthday">
+                    <FontAwesomeIcon icon={faCalendarAlt} />
+                    Birthday
                   </label>
                   <input
-                    type="password"
-                    id="password_confirmation"
-                    name="password_confirmation"
-                    value={formData.user.password_confirmation}
+                    type="date"
+                    id="birthday"
+                    name="birthday"
+                    value={formData.user.birthday}
                     onChange={handleChange}
                     required
-                    placeholder="Confirm your password"
                     disabled={loading}
-                    minLength="6"
                   />
                 </div>
+
+                {!isEditMode && (
+                  <>
+                    <div className="form-group">
+                      <label htmlFor="password">
+                        <FontAwesomeIcon icon={faLock} />
+                        Password
+                      </label>
+                      <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        value={formData.user.password}
+                        onChange={handleChange}
+                        required
+                        placeholder="Create a password"
+                        disabled={loading}
+                        minLength="6"
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="password_confirmation">
+                        <FontAwesomeIcon icon={faLock} />
+                        Confirm Password
+                      </label>
+                      <input
+                        type="password"
+                        id="password_confirmation"
+                        name="password_confirmation"
+                        value={formData.user.password_confirmation}
+                        onChange={handleChange}
+                        required
+                        placeholder="Confirm your password"
+                        disabled={loading}
+                        minLength="6"
+                      />
+                    </div>
+                  </>
+                )}
 
                 <div className="form-row">
                   <div className="form-group">
@@ -237,15 +327,22 @@ function SignUp() {
                       <FontAwesomeIcon icon={faIdCard} />
                       Role ID
                     </label>
-                    <input
-                      type="number"
+                    <select
                       id="cla_role_id"
                       name="cla_role_id"
                       value={formData.user.cla_role_id}
                       onChange={handleChange}
-                      placeholder="Enter role ID"
+                      required
                       disabled={loading}
-                    />
+                      className="form-select"
+                    >
+                      <option value="">Select Role ID</option>
+                      {roles.map((role) => (
+                        <option key={role.id} value={role.id}>
+                          ID: {role.id} - {role.name}
+                        </option>
+                      ))}
+                    </select>
                   </div>
 
                   <div className="form-group">
@@ -253,15 +350,22 @@ function SignUp() {
                       <FontAwesomeIcon icon={faIdCard} />
                       Cohort ID
                     </label>
-                    <input
-                      type="number"
+                    <select
                       id="cla_cohort_id"
                       name="cla_cohort_id"
                       value={formData.user.cla_cohort_id}
                       onChange={handleChange}
-                      placeholder="Enter cohort ID"
+                      required
                       disabled={loading}
-                    />
+                      className="form-select"
+                    >
+                      <option value="">Select Cohort ID</option>
+                      {cohorts.map((cohort) => (
+                        <option key={cohort.id} value={cohort.id}>
+                          ID: {cohort.id} - {cohort.name}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
 
@@ -273,23 +377,25 @@ function SignUp() {
                   {loading ? (
                     <>
                       <FontAwesomeIcon icon={faSpinner} className="btn-icon fa-spin" />
-                      Creating Account...
+                      {isEditMode ? 'Updating Profile...' : 'Creating Account...'}
                     </>
                   ) : (
                     <>
                       <FontAwesomeIcon icon={faUser} className="btn-icon" />
-                      Create Account
+                      {isEditMode ? 'Save Changes' : 'Create Account'}
                     </>
                   )}
                 </button>
 
-                <p className="login-message">
-                  Already have an account?
-                  {' '}
-                  <Link to="/login" className="login-link">
-                    Sign In
-                  </Link>
-                </p>
+                {!isEditMode && (
+                  <p className="login-message">
+                    Already have an account?
+                    {' '}
+                    <Link to="/login" className="login-link">
+                      Sign In
+                    </Link>
+                  </p>
+                )}
               </form>
             </div>
           </div>
