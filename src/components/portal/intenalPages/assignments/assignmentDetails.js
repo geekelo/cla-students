@@ -83,7 +83,13 @@ const AssignmentDetails = () => {
   };
 
   const handleEdit = () => {
-    console.log('Edit clicked');
+    navigate('/portal/assignment/new', {
+      state: {
+        assignment: location.state?.assignment,
+        courseId: location.state?.assignment?.cla_course_id,
+        isEditMode: true
+      }
+    });
   };
 
   const handleDelete = () => {

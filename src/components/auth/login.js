@@ -54,6 +54,9 @@ function LoginPage() {
         const roleId = response.data.user.cla_role_id;
         const cohortId = response.data.user.cla_cohort_id;
         const email = response.data.user.email;
+        const name = response.data.user.name;
+        const birthday = response.data.user.birthday || '';
+        const phoneNumber = response.data.user.phone_number || '';
         const isStudent = roleId !== 2;
         const expiryTime = new Date().getTime() + (7 * 24 * 60 * 60 * 1000); // 7 days
 
@@ -63,17 +66,34 @@ function LoginPage() {
           email: email,
           userRole: isStudent ? 'student' : 'facilitator',
           cohortId: cohortId ? cohortId.toString() : '',
-          expiry: expiryTime
+          expiry: expiryTime,
+          userName: name,
+          birthday: birthday,
+          phoneNumber: phoneNumber
         };
         localStorage.setItem('userData', JSON.stringify(storageData));
 
         // Store in sessionStorage for current session
         sessionStorage.setItem('roleId', roleId.toString());
-        sessionStorage.setItem('email', email.toString());
+        sessionStorage.setItem('email', email);
         sessionStorage.setItem('userRole', isStudent ? 'student' : 'facilitator');
+        sessionStorage.setItem('userName', name);
+        sessionStorage.setItem('birthday', birthday);
+        sessionStorage.setItem('phoneNumber', phoneNumber);
         if (cohortId) {
           sessionStorage.setItem('cohortId', cohortId.toString());
         }
+
+        console.log('Stored user data:', {
+          sessionStorage: {
+            userId: sessionStorage.getItem('userId'),
+            email: sessionStorage.getItem('email'),
+            userName: sessionStorage.getItem('userName'),
+            birthday: sessionStorage.getItem('birthday'),
+            phoneNumber: sessionStorage.getItem('phoneNumber')
+          },
+          localStorage: JSON.parse(localStorage.getItem('userData'))
+        });
 
         toast.success('Login successful!');
         navigate('/portal');

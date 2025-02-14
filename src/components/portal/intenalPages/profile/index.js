@@ -3,22 +3,63 @@ import '../../../../stylesheets/profile.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 
 function Profile() {
-  const [studentId, setStudentId] = useState(null);
-  const [cohort, setCohort] = useState(null);
-  const [email, setEmail] = useState(null);
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState({
+    studentId: '',
+    cohort: '',
+    email: '',
+    name: '',
+    roleId: '',
+    cohortId: '',
+    birthday: '',
+    phoneNumber: ''
+  });
 
   useEffect(() => {
-    const storedStudentId = sessionStorage.getItem('userId');
-    const storedCohort = sessionStorage.getItem('cohortId');
-    const storedEmail = sessionStorage.getItem('email');
-
-    setStudentId(storedStudentId);
-    setCohort(storedCohort);
-    setEmail(storedEmail);
+    // Get data from localStorage
+    const storedData = JSON.parse(localStorage.getItem('userData'));
+    
+    if (storedData) {
+      setUserData({
+        studentId: sessionStorage.getItem('userId'),
+        cohort: storedData.cohortId,
+        email: storedData.email,
+        name: storedData.userName,
+        roleId: storedData.roleId,
+        cohortId: storedData.cohortId,
+        birthday: storedData.birthday,
+        phoneNumber: storedData.phoneNumber
+      });
+    }
   }, []);
+
+  const handleEdit = () => {
+    navigate('/signup', {
+      state: {
+        isEditMode: true,
+        userData: {
+          user: {
+            name: userData.name,
+            email: userData.email,
+            cla_role_id: userData.roleId,
+            cla_cohort_id: userData.cohortId,
+            id: userData.studentId,
+            birthday: userData.birthday,
+            phone_number: userData.phoneNumber
+          }
+        }
+      }
+    });
+  };
+
+  const formatDate = (dateString) => {
+    if (!dateString) return 'Not set';
+    return new Date(dateString).toLocaleDateString();
+  };
+
   return (
     <div className="profile-container">
       <div className="profile-image">
@@ -26,28 +67,27 @@ function Profile() {
       </div>
 
       <div className="profile-details">
-        <h3 className="profile-name">John Doe</h3>
-        <p className="profile-phone">
+        <h3 className="profile-name">{userData.name || 'User Name'}</h3>
+        <p className="profile-info">
           <span className="profile-label">Student ID: </span>
-          &nbsp;
-          {studentId}
+          {userData.studentId}
         </p>
-        <p className="profile-cohort">
+        <p className="profile-info">
+          <span className="profile-label">Email: </span>
+          {userData.email}
+        </p>
+        <p className="profile-info">
+          <span className="profile-label">Phone Number: </span>
+          {userData.phoneNumber || 'Not set'}
+        </p>
+        <p className="profile-info">
+          <span className="profile-label">Birthday: </span>
+          {formatDate(userData.birthday)}
+        </p>
+        <p className="profile-info">
           <span className="profile-label">Cohort: </span>
-          &nbsp;
-          {cohort}
+          {userData.cohort || 'Not assigned'}
         </p>
-        <p className="profile-email">
-          <span className="profile-label">{email}</span>
-          &nbsp;
-          john.doe@example.com
-        </p>
-        <p className="profile-phone">
-          <span className="profile-label">Phone: </span>
-          &nbsp;
-          +1234567890
-        </p>
-       
 
         <div className="profile-actions">
           <a href="/certificate" className="profile-link">
@@ -55,7 +95,7 @@ function Profile() {
             Download Certificate
           </a>
           <div>
-            <button type="button" className="profile-btn">
+            <button type="button" className="profile-btn" onClick={handleEdit}>
               Edit Profile
             </button>
             <button type="button" className="profile-btn">
