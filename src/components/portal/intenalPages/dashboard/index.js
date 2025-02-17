@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import '../../../../stylesheets/dashboard.css';
+import { createAxiosInstance } from '../../../../config';
 
-const BASE_URL = 'https://cla-portal-api.onrender.com';
+const api = createAxiosInstance();
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -38,41 +38,30 @@ function Dashboard() {
           return;
         }
 
-        const courseResponse = await axios.get(`${BASE_URL}/api/v1/cla_dashboards/course_stats`, {
+        api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+        const courseResponse = await api.get('/api/v1/cla_dashboards/course_stats', {
           params: { 
             cla_cohort_id: cohortId,
             cla_user_id: userId,
-          },
-          headers: {
-            Authorization: `Bearer ${token}`
           }
         });
-        const scoreResponse = await axios.get(`${BASE_URL}/api/v1/cla_dashboards/score_stats`, {
+        const scoreResponse = await api.get('/api/v1/cla_dashboards/score_stats', {
           params: { 
             cla_user_id: userId,
-          },
-          headers: {
-            Authorization: `Bearer ${token}`
           }
         });
-        const assignmentResponse = await axios.get(`${BASE_URL}/api/v1/cla_dashboards/assignment_stats`, {
+        const assignmentResponse = await api.get('/api/v1/cla_dashboards/assignment_stats', {
           params: { 
             cla_user_id: userId,
-          },
-          headers: {
-            Authorization: `Bearer ${token}`
           }
         });
 
-        const attendanceResponse = await axios.get(`${BASE_URL}/api/v1/cla_dashboards/attendance_stats`, {
+        const attendanceResponse = await api.get('/api/v1/cla_dashboards/attendance_stats', {
           params: { 
             cla_user_id: userId,
-          },
-          headers: {
-            Authorization: `Bearer ${token}`
           }
         });
-
 
         console.log('course Response:', courseResponse.data,  
           'score response:', scoreResponse.data, 'attendance stats:', attendanceResponse.data);

@@ -10,18 +10,12 @@ import {
   faCalendarAlt,
   faSave,
 } from '@fortawesome/free-solid-svg-icons'
-import axios from 'axios'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import '../../../../stylesheets/addEditCourse.css'
+import { createAxiosInstance } from '../../../../config'
 
-const api = axios.create({
-  baseURL: 'https://cla-portal-api.onrender.com',
-  headers: {
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-  },
-})
+const api = createAxiosInstance()
 
 const AddEditCourseForm = () => {
   const navigate = useNavigate()

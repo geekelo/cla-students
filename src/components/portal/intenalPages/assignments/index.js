@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import AssignmentItem from './assignmentItem';
 import '../../../../stylesheets/assignments.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faCheckCircle, faClipboardCheck } from '@fortawesome/free-solid-svg-icons';
+import { createAxiosInstance } from '../../../../config';
 
-const BASE_URL = 'https://cla-portal-api.onrender.com';
+const api = createAxiosInstance();
 
 function Assignments() {
   const location = useLocation();
@@ -54,7 +54,7 @@ function Assignments() {
         }
 
         // Fetch course IDs first
-        const courseIdsResponse = await axios.get(`${BASE_URL}/api/v1/cla_courses/get_course_ids`, {
+        const courseIdsResponse = await api.get('/api/v1/cla_courses/get_course_ids', {
           params: { cla_cohort_id: cla_cohort_id },
           headers: { Authorization: `Bearer ${token}` }
         });
@@ -72,7 +72,7 @@ function Assignments() {
         // Fetch assignments for each course
         const allAssignments = [];
         for (const courseId of courseIds) {
-          const assignmentsResponse = await axios.get(`${BASE_URL}/api/v1/cla_assignments`, {
+          const assignmentsResponse = await api.get('/api/v1/cla_assignments', {
             params: { cla_course_id: courseId },
             headers: { Authorization: `Bearer ${token}` }
           });

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faEnvelope, 
@@ -14,15 +13,9 @@ import {
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../../stylesheets/signup.css';
+import { createAxiosInstance } from '../../config';
 
-// Create axios instance with default config
-const api = axios.create({
-  baseURL: 'https://cla-portal-api.onrender.com',
-  headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json'
-  }
-});
+const api = createAxiosInstance();
 
 function SignUp() {
   const navigate = useNavigate();
