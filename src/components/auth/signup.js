@@ -339,7 +339,7 @@ function SignUp() {
                       <option value="">Select Role ID</option>
                       {roles.map((role) => (
                         <option key={role.id} value={role.id}>
-                          ID: {role.id} - {role.name}
+                           {role.id} - {role.name}
                         </option>
                       ))}
                     </select>
@@ -362,7 +362,7 @@ function SignUp() {
                       <option value="">Select Cohort ID</option>
                       {cohorts.map((cohort) => (
                         <option key={cohort.id} value={cohort.id}>
-                          ID: {cohort.id} - {cohort.name}
+                          {cohort.id} - {cohort.name}
                         </option>
                       ))}
                     </select>

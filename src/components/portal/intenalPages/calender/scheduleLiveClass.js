@@ -31,7 +31,8 @@ const ScheduleLiveClass = () => {
       duration: liveClass?.duration || '',
       zoom_link: liveClass?.zoom_link || '',
       cla_course_id: courseId || liveClass?.cla_course_id || '',
-      cohort_id: sessionStorage.getItem('cohortId') || liveClass?.cohort_id || ''
+      cohort_id: sessionStorage.getItem('cohortId') || liveClass?.cohort_id || '',
+      cla_user_id: sessionStorage.getItem('userId') || liveClass?.cla_user_id || ''
     }
   });
 
@@ -97,7 +98,8 @@ const ScheduleLiveClass = () => {
           duration: liveClass.duration,
           zoom_link: liveClass.zoom_link,
           cla_course_id: liveClass.cla_course_id,
-          cohort_id: liveClass.cohort_id
+          cohort_id: liveClass.cohort_id,
+          cla_user_id: liveClass.cla_user_id
         }
       });
     }

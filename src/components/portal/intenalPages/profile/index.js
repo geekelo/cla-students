@@ -27,19 +27,19 @@ function Profile() {
     if (storedData) {
       setUserData({
         studentId: sessionStorage.getItem('userId'),
-        cohort: storedData.cohortId,
-        email: storedData.email,
-        name: storedData.userName,
-        roleId: storedData.roleId,
-        cohortId: storedData.cohortId,
-        birthday: storedData.birthday,
-        phoneNumber: storedData.phoneNumber
+        cohort: sessionStorage.getItem('cohortId'),
+        email: sessionStorage.getItem('email'),
+        name: sessionStorage.getItem('userName'),
+        roleId: sessionStorage.getItem('roleId'),
+        cohortName: sessionStorage.getItem('cohortName'),
+        birthday: sessionStorage.getItem('birthday'),
+        phoneNumber: sessionStorage.getItem('phoneNumber')
       });
     }
   }, []);
 
   const handleEdit = () => {
-    navigate('/signup', {
+    navigate('/JJRSFCLA', {
       state: {
         isEditMode: true,
         userData: {
@@ -147,7 +147,7 @@ function Profile() {
         </p>
         <p className="profile-info">
           <span className="profile-label">Cohort: </span>
-          {userData.cohort || 'Not assigned'}
+          {userData.cohortName || 'Not assigned'}
         </p>
 
         <div className="profile-actions">

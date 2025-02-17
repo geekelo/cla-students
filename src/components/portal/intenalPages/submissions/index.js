@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 const BASE_URL = 'https://cla-portal-api.onrender.com';
 
 function Submissions() {
-  const [activeTab, setActiveTab] = useState('unmarked');
+  const userRole = sessionStorage.getItem('userRole');
   const [submissions, setSubmissions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -36,7 +36,7 @@ function Submissions() {
           }
         });
 
-        console.log('Fetched Submissions:', response.data); // ✅ Debugging Log
+        console.log('Fetched Submissions:', response.data);
         setSubmissions(response.data);
       } catch (error) {
         console.error('Error fetching submissions:', error);
@@ -55,38 +55,37 @@ function Submissions() {
 
   return (
     <div className="submissions-section-wrapper">
-      {/* Section Background */}
       <div className="submissions-section">
-        {/* Tabs */}
+        {/* Show only the relevant tab based on user role */}
         <div className="submissions-tabs">
-          <button
-            type="button"
-            className={`tab-button ${activeTab === 'unmarked' ? 'active' : ''}`}
-            onClick={() => setActiveTab('unmarked')}
-          >
-            <FontAwesomeIcon icon={faHourglassHalf} className="me-2" /> Unmarked
-          </button>
-          <button
-            type="button"
-            className={`tab-button ${activeTab === 'marked' ? 'active' : ''}`}
-            onClick={() => setActiveTab('marked')}
-          >
-            <FontAwesomeIcon icon={faCheckDouble} className="me-2" /> Marked
-          </button>
+          {userRole === 'facilitator' && (
+            <button
+              type="button"
+              className="tab-button active"
+            >
+              <FontAwesomeIcon icon={faHourglassHalf} className="me-2" /> Unmarked
+            </button>
+          )}
+          {userRole === 'student' && (
+            <button
+              type="button"
+              className="tab-button active"
+            >
+              <FontAwesomeIcon icon={faCheckDouble} className="me-2" /> Marked
+            </button>
+          )}
         </div>
 
-        {/* Loading & Error Handling */}
         {loading ? (
           <p className="loading-text">Loading submissions...</p>
         ) : error ? (
           <p className="error-text">{error}</p>
         ) : (
           <>
-            {/* Tab Content */}
-            {activeTab === 'unmarked' && (
+            {userRole === 'facilitator' && (
               <SubmissionsSection submissions={unmarkedSubmissions} title="Unmarked Submissions" />
             )}
-            {activeTab === 'marked' && (
+            {userRole === 'student' && (
               <SubmissionsSection submissions={markedSubmissions} title="Marked Submissions" />
             )}
           </>
