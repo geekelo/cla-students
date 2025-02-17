@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-  faEye,
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { createAxiosInstance } from '../../../../config';
 
-} from '@fortawesome/free-solid-svg-icons';
-const BASE_URL = 'https://cla-portal-api.onrender.com';
+const api = createAxiosInstance();
 
 function CourseList() {
   const navigate = useNavigate();
@@ -48,7 +46,7 @@ function CourseList() {
         console.log('User Role:', userRole);
         console.log('User Id:', userId);
 
-        const coursesResponse = await axios.get(`${BASE_URL}/api/v1/cla_courses/`, {
+        const coursesResponse = await api.get('/api/v1/cla_courses/', {
           params,
           headers: {
             Authorization: `Bearer ${token}`

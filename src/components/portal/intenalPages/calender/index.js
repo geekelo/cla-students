@@ -10,12 +10,12 @@ import {
   faCalendarDay
 } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate, useLocation } from 'react-router-dom';
-import axios from 'axios';
+import { createAxiosInstance } from '../../../../config';
 import { toast, ToastContainer } from 'react-toastify';
 import '../../../../stylesheets/calender.css';
 import 'react-toastify/dist/ReactToastify.css';
 
-const BASE_URL = 'https://cla-portal-api.onrender.com';
+const api = createAxiosInstance();
 
 function Calendar() {
   const [events, setEvents] = useState([]);
@@ -48,7 +48,7 @@ function Calendar() {
           params = { filter_id: cohortId }; // If student
         }
 
-        const response = await axios.get(`${BASE_URL}/api/v1/cla_live_classes`, {
+        const response = await api.get('/api/v1/cla_live_classes', {
           params,
           headers: { Authorization: `Bearer ${token}` }
         });
@@ -155,7 +155,7 @@ function Calendar() {
         toastId: 'deletingLiveClass'
       });
 
-      await axios.delete(`${BASE_URL}/api/v1/cla_live_classes/${event.id}`, {
+      await api.delete(`/api/v1/cla_live_classes/${event.id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

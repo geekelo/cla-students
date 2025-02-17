@@ -11,12 +11,12 @@ import {
   faArrowLeft,
   faSave,
 } from '@fortawesome/free-solid-svg-icons'
-import axios from 'axios'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import '../../../../stylesheets/addEditTopic.css'
+import { createAxiosInstance } from '../../../../config'
 
-const BASE_URL = 'https://cla-portal-api.onrender.com'
+const api = createAxiosInstance()
 
 const AddEditTopic = () => {
   const location = useLocation()
@@ -72,14 +72,14 @@ const AddEditTopic = () => {
 
       let response
       if (isEditMode) {
-        response = await axios.put(`${BASE_URL}/api/v1/cla_topics/${topic.id}`, formData, {
+        response = await api.put(`/api/v1/cla_topics/${topic.id}`, formData, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
         })
       } else {
-        response = await axios.post(`${BASE_URL}/api/v1/cla_topics`, formData, {
+        response = await api.post('/api/v1/cla_topics', formData, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
