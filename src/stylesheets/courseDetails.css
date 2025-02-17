@@ -54,72 +54,80 @@
 /* Action Buttons */
 .course-actions {
   display: flex;
-  gap: 1rem;
-  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin: 20px 0;
 }
 
-.action-icon {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: rgba(68,46,121,255);
-  cursor: pointer;
-  padding: 0.5rem;
-  transition: all 0.3s ease;
-}
-
-.action-icon:hover {
-  transform: scale(1.1);
-  color: rgba(152, 132, 198, 0.871);
-}
-
-.delete-icon:hover {
-  color: #dc3545;
-}
-
-.add-live-btn {
-  padding: 0.5rem 1.2rem;
-  border: 2px solid rgba(68,46,121,255);
-  border-radius: 5px;
-  background: none;
-  color: rgba(68,46,121,255);
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.course-action-btn {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-}
-
-.add-live-btn:hover {
-  background-color: rgba(68,46,121,0.1);
-  transform: translateY(-2px);
-}
-
-.add-live-btn .icon {
-  font-size: 1rem;
-}
-
-.action-button.purple-btn {
-  background-color: #5D3891;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background-color: #442e79;
   color: white;
   border: none;
   border-radius: 25px;
-  padding: 10px 25px;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  margin: 0 10px;
-  transition: background-color 0.3s ease;
-  gap: 10px;
+  transition: all 0.3s ease;
+  flex: 1;
+  min-width: 200px;
+  max-width: 300px;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.action-button.purple-btn:hover {
-  background-color: #4c2d77;
+.course-action-btn:hover {
+  background-color: #6b4ca6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.course-action-btn .btn-icon {
+  font-size: 1.1rem;
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .course-actions {
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .course-action-btn {
+    min-width: 180px;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .course-actions {
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-start;
+  }
+
+  .course-action-btn {
+    min-width: calc(50% - 10px);
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .course-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .course-action-btn {
+    width: 100%;
+    margin: 5px 0;
+  }
 }
 
 .course-extra-actions {

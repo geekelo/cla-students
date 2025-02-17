@@ -69,8 +69,30 @@ function Calendar() {
     today.setHours(0, 0, 0, 0);
 
     return events
-      .filter(event => (activeTab === 'new' ? new Date(event.date) >= today : new Date(event.date) < today))
-      .sort((a, b) => new Date(a.date) - new Date(b.date));
+      .filter(event => {
+        const eventDate = new Date(event.date);
+        
+        if (activeTab === 'new') {
+          // For upcoming events, just check if the date is in the future
+          return eventDate >= today;
+        } else {
+          // For past events, check both the date and cohort_end_date
+          const cohortEndDate = event.cla_cohort_end_date ? new Date(event.cla_cohort_end_date) : null;
+          
+          // Only show past events where:
+          // 1. The event date is in the past
+          // 2. Either there's no cohort end date, or the cohort end date hasn't passed yet
+          return eventDate < today && (!cohortEndDate || cohortEndDate >= today);
+        }
+      })
+      .sort((a, b) => {
+        // Sort in different directions based on the tab
+        if (activeTab === 'new') {
+          return new Date(a.date) - new Date(b.date); // Ascending for upcoming
+        } else {
+          return new Date(b.date) - new Date(a.date); // Descending for past
+        }
+      });
   };
 
   const handleViewClass = (zoomLink) => {
@@ -199,12 +221,16 @@ function Calendar() {
                 <button type="button" className="action-icon" onClick={() => handleViewClass(event.zoom_link)} title="Join Class">
                   <FontAwesomeIcon icon={faEye} />
                 </button>
-                <button type="button" className="action-icon" onClick={() => handleEdit(event)} title="Edit Class">
-                  <FontAwesomeIcon icon={faEdit} />
-                </button>
-                <button type="button" className="action-icon delete-icon" onClick={() => handleDelete(event)} title="Delete Class">
-                  <FontAwesomeIcon icon={faTrash} />
-                </button>
+                {sessionStorage.getItem('userRole') === 'facilitator' && (
+                  <>
+                    <button type="button" className="action-icon" onClick={() => handleEdit(event)} title="Edit Class">
+                      <FontAwesomeIcon icon={faEdit} />
+                    </button>
+                    <button type="button" className="action-icon delete-icon" onClick={() => handleDelete(event)} title="Delete Class">
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           ))

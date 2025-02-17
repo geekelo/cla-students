@@ -183,14 +183,16 @@ const AssignmentDetails = () => {
           <div className="assignment-header">
             <div className="title-with-actions">
               <h1 className="assignment-title">{location.state?.assignment?.name || 'Assignment Details'}</h1>
-              <div className="action-icons">
-                <button className="action-icon" onClick={handleEdit}>
-                  <FontAwesomeIcon icon={faEdit} />
-                </button>
-                <button className="action-icon delete-icon" onClick={handleDelete}>
-                  <FontAwesomeIcon icon={faTrash} />
-                </button>
-              </div>
+              {sessionStorage.getItem('userRole') === 'facilitator' && (
+                <div className="action-icons">
+                  <button className="action-icon" onClick={handleEdit}>
+                    <FontAwesomeIcon icon={faEdit} />
+                  </button>
+                  <button className="action-icon delete-icon" onClick={handleDelete}>
+                    <FontAwesomeIcon icon={faTrash} />
+                  </button>
+                </div>
+              )}
             </div>
             <p className="assignment-description">{location.state?.assignment?.description || 'No description available.'}</p>
           </div>

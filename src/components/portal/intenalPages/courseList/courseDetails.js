@@ -11,16 +11,12 @@ import {
   faEdit,
   faTrash,
   faUser,
-  faIdCard,
-  faCalendarAlt,
   faBookOpen,
   faClipboardList,
   faVideo,
   faPlus,
-  faAngleDown,
-  faListCheck,
-  faVideoCamera,
   faArrowLeft,
+  faCopy
 } from '@fortawesome/free-solid-svg-icons'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -284,6 +280,18 @@ function CourseDetails() {
     })
   }
 
+  const handleDuplicateCourse = () => {
+    navigate('/portal/course/new', {
+      state: {
+        course: {
+          ...course,
+          name: `Copy of ${course.name}`,
+        },
+        isDuplicateMode: true,
+      },
+    });
+  };
+
   return (
     <div className='course-details-container'>
       <ToastContainer
@@ -307,27 +315,24 @@ function CourseDetails() {
           <div className='course-header'>
             <div className='course-title-container'>
               <h1 className='course-title'>{course?.name}</h1>
-              <div className='course-actions'>
-                <button type='button' className='action-icon' onClick={handleEditCourse} title='Edit Course'>
-                  <FontAwesomeIcon icon={faEdit} />
-                </button>
-                <button
-                  type='button'
-                  className='action-icon delete-icon'
-                  onClick={handleDeleteCourse}
-                  title='Delete Course'
-                >
-                  <FontAwesomeIcon icon={faTrash} />
-                </button>
-                <button
-                  type='button'
-                  className='add-live-btn'
-                  onClick={() => handleAddLiveClassesClick(course?.liveClasses)}
-                >
-                  <FontAwesomeIcon icon={faVideo} className='icon' />
-                  Schedule Live Class
-                </button>
-              </div>
+              {sessionStorage.getItem('userRole') === 'facilitator' && (
+                <div className='course-actions'>
+                  <button type='button' className='action-icon' onClick={handleEditCourse} title='Edit Course'>
+                    <FontAwesomeIcon icon={faEdit} />
+                  </button>
+                  <button type='button' className='action-icon' onClick={handleDuplicateCourse} title='Duplicate Course'>
+                    <FontAwesomeIcon icon={faCopy} />
+                  </button>
+                  <button
+                    type='button'
+                    className='action-icon delete-icon'
+                    onClick={handleDeleteCourse}
+                    title='Delete Course'
+                  >
+                    <FontAwesomeIcon icon={faTrash} />
+                  </button>
+                </div>
+              )}
             </div>
 
             <div className='course-info-grid'>
@@ -335,18 +340,6 @@ function CourseDetails() {
                 <FontAwesomeIcon icon={faUser} />
                 <span>
                   Facilitator: <strong>{course?.facilitator}</strong>
-                </span>
-              </div>
-              <div className='info-item'>
-                <FontAwesomeIcon icon={faIdCard} />
-                <span>
-                  Course ID: <strong>{id}</strong>
-                </span>
-              </div>
-              <div className='info-item'>
-                <FontAwesomeIcon icon={faCalendarAlt} />
-                <span>
-                  Created on: <strong>{course?.dateCreated}</strong>
                 </span>
               </div>
               <div className='info-item'>
@@ -401,22 +394,34 @@ function CourseDetails() {
             </div>
           </div>
 
-          <div className='course-extra-actions'>
-            <p>
-              <FontAwesomeIcon icon={faAngleDown} style={{ marginRight: '10px' }} /> For this course :
-            </p>
-            <button type='button' className='action-button purple-btn' onClick={handleAssignmentClick}>
-              <FontAwesomeIcon icon={faListCheck} style={{ marginRight: '10px' }} /> See Assignments
-            </button>
-            <button type='button' className='action-button purple-btn' onClick={() => handleAddAssignment()}>
-              <FontAwesomeIcon icon={faPlus} style={{ marginRight: '10px' }} /> Add Assignment
+          <div className="course-actions">
+            <button
+              type="button"
+              className="course-action-btn"
+              onClick={handleAssignmentClick}
+            >
+              <FontAwesomeIcon icon={faClipboardList} className="btn-icon" /> See Assignments
             </button>
             <button
-              type='button'
-              className='action-button purple-btn'
-              onClick={() => handleLiveClassesClick(course?.liveClasses)}
+              type="button"
+              className="course-action-btn"
+              onClick={handleLiveClassesClick}
             >
-              <FontAwesomeIcon icon={faVideoCamera} style={{ marginRight: '10px' }} /> View Live Classes
+              <FontAwesomeIcon icon={faVideo} className="btn-icon" /> View Live Classes
+            </button>
+            <button
+              type="button"
+              className="course-action-btn"
+              onClick={handleAddLiveClassesClick}
+            >
+              <FontAwesomeIcon icon={faPlus} className="btn-icon" /> Schedule Live Class
+            </button>
+            <button
+              type="button"
+              className="course-action-btn"
+              onClick={handleAddAssignment}
+            >
+              <FontAwesomeIcon icon={faPlus} className="btn-icon" /> Add Assignment
             </button>
           </div>
         </div>

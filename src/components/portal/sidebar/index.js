@@ -26,26 +26,30 @@ function Sidebar() {
   return (
     <div className="student-side-nav">
       <ul className="student-nav-list">
-        <li>
-          <button
-            type="button"
-            onClick={() => handleNavigation('dashboard')}
-            className={getButtonClass('dashboard')}
-            aria-label="View Dashboard"
-          >
-            <FontAwesomeIcon icon={faChartLine} className="nav-icon" /> Progress Board
-          </button>
-        </li>
-        <li>
-          <button
-            type="button"
-            onClick={() => handleNavigation('instructorDesk')}
-            className={getButtonClass('instructorDesk')}
-            aria-label="View My Desk"
-          >
-            <FontAwesomeIcon icon={faLaptop} className="nav-icon" /> My Desk
-          </button>
-        </li>
+        {sessionStorage.getItem('userRole') === 'student' && (
+          <li>
+            <button
+              type="button"
+              onClick={() => handleNavigation('dashboard')}
+              className={getButtonClass('dashboard')}
+              aria-label="View Dashboard"
+            >
+              <FontAwesomeIcon icon={faChartLine} className="nav-icon" /> Progress Board
+            </button>
+          </li>
+        )}
+        {sessionStorage.getItem('userRole') === 'facilitator' && (
+          <li>
+            <button
+              type="button"
+              onClick={() => handleNavigation('instructorDesk')}
+              className={getButtonClass('instructorDesk')}
+              aria-label="View My Desk"
+            >
+              <FontAwesomeIcon icon={faLaptop} className="nav-icon" /> My Desk
+            </button>
+          </li>
+        )}
         <li>
           <button
             type="button"

@@ -12,6 +12,8 @@ import Facaulty from './components/pages/Facaulty';
 import FacaultyDetail from './components/pages/FacaultyDetail';
 import FAQ from './components/pages/FAQ';
 import Contact from './components/pages/Contact';
+import ForgotPassword from './components/auth/forgotPassword';
+import ResetPassword from './components/auth/resetPassword';
 
 function App() {
   return (
@@ -19,7 +21,9 @@ function App() {
       <Header />
       <Routes>
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/JJRSFCLA" element={<SignUp />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/" element={<Landing />} />
         <Route path="/portal/*" element={<StudentArea />} />
         <Route path="/about" element={<About />} />

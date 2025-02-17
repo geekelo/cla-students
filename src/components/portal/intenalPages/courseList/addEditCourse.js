@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -27,12 +26,12 @@ const api = axios.create({
 const AddEditCourseForm = () => {
   const navigate = useNavigate()
   const location = useLocation()
-  const { course, isEditMode } = location.state || {}
+  const { course, isEditMode, isDuplicateMode } = location.state || {}
   const [loading, setLoading] = useState(false)
   const [cohorts, setCohorts] = useState([])
   const [formData, setFormData] = useState({
     cla_course: {
-      name: course?.name ||'',
+      name: course?.name || '',
       description: course?.description || '',
       cla_cohort_id: course?.cla_cohort_id || '',
       start_date: course?.start_date || '',
@@ -187,7 +186,7 @@ const AddEditCourseForm = () => {
         </button>
         <div className='course-form'>
           <div className='form-header'>
-            <h2>{isEditMode ? 'Edit Course' : 'Add New Course'}</h2>
+            <h2>{isDuplicateMode ? 'Duplicate Course' : isEditMode ? 'Edit Course' : 'Add New Course'}</h2>
             <FontAwesomeIcon icon={faGraduationCap} className='header-icon' />
           </div>
 
@@ -292,12 +291,16 @@ const AddEditCourseForm = () => {
               <button type='submit' className='form-button' disabled={loading}>
                 <FontAwesomeIcon icon={isEditMode ? faSave : faPlus} className='button-icon' />
                 {loading
-                  ? isEditMode
-                    ? 'Updating Course...'
-                    : 'Creating Course...'
-                  : isEditMode
-                    ? 'Save Changes'
-                    : 'Add Course'}
+                  ? isDuplicateMode
+                    ? 'Duplicating Course...'
+                    : isEditMode
+                      ? 'Updating Course...'
+                      : 'Creating Course...'
+                  : isDuplicateMode
+                    ? 'Save Duplicate'
+                    : isEditMode
+                      ? 'Save Changes'
+                      : 'Add Course'}
               </button>
             </form>
           </div>

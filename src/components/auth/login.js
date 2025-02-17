@@ -50,53 +50,53 @@ function LoginPage() {
         sessionStorage.setItem('authToken', response.data.token);
         sessionStorage.setItem('userId', response.data.user.id);
 
-        // Store role and cohort information with 7-day expiry
-        const roleId = response.data.user.cla_role_id;
-        const cohortId = response.data.user.cla_cohort_id;
-        const email = response.data.user.email;
-        const name = response.data.user.name;
-        const birthday = response.data.user.birthday || '';
-        const phoneNumber = response.data.user.phone_number || '';
-        const isStudent = roleId !== 2;
-        const expiryTime = new Date().getTime() + (7 * 24 * 60 * 60 * 1000); // 7 days
-
-        // Store in localStorage with expiry
-        const storageData = {
-          roleId: roleId.toString(),
-          email: email,
-          userRole: isStudent ? 'student' : 'facilitator',
-          cohortId: cohortId ? cohortId.toString() : '',
-          expiry: expiryTime,
-          userName: name,
-          birthday: birthday,
-          phoneNumber: phoneNumber
+        // Store user information
+        const userData = {
+          roleId: response.data.user.cla_role_id,
+          roleName: response.data.user.cla_role_name,
+          email: response.data.user.email,
+          userRole: response.data.user.cla_role_name,
+          cohortId: response.data.user.cla_cohort_id,
+          cohortName: response.data.user.cla_cohort_name,
+          userName: response.data.user.name,
+          birthday: response.data.user.birthday || '',
+          phoneNumber: response.data.user.phone_number || '',
+          expiry: new Date().getTime() + (7 * 24 * 60 * 60 * 1000) // 7 days
         };
-        localStorage.setItem('userData', JSON.stringify(storageData));
 
-        // Store in sessionStorage for current session
-        sessionStorage.setItem('roleId', roleId.toString());
-        sessionStorage.setItem('email', email);
-        sessionStorage.setItem('userRole', isStudent ? 'student' : 'facilitator');
-        sessionStorage.setItem('userName', name);
-        sessionStorage.setItem('birthday', birthday);
-        sessionStorage.setItem('phoneNumber', phoneNumber);
-        if (cohortId) {
-          sessionStorage.setItem('cohortId', cohortId.toString());
-        }
+        // Store in localStorage
+        localStorage.setItem('userData', JSON.stringify(userData));
+
+        // Store in sessionStorage
+        Object.entries(userData).forEach(([key, value]) => {
+          if (value !== undefined && value !== null) {
+            sessionStorage.setItem(key, value.toString());
+          }
+        });
 
         console.log('Stored user data:', {
           sessionStorage: {
             userId: sessionStorage.getItem('userId'),
             email: sessionStorage.getItem('email'),
             userName: sessionStorage.getItem('userName'),
+            userRole: sessionStorage.getItem('userRole'),
+            cohortId: sessionStorage.getItem('cohortId'),
+            cohortName: sessionStorage.getItem('cohortName'),
             birthday: sessionStorage.getItem('birthday'),
-            phoneNumber: sessionStorage.getItem('phoneNumber')
+            phoneNumber: sessionStorage.getItem('phoneNumber'),
+            roleName: sessionStorage.getItem('roleName')
           },
           localStorage: JSON.parse(localStorage.getItem('userData'))
         });
 
         toast.success('Login successful!');
-        navigate('/portal');
+        
+        // Redirect based on user role
+        if (response.data.user.cla_role_name === 'facilitator') {
+          navigate('/portal/instructorDesk');
+        } else {
+          navigate('/portal');
+        }
       } else {
         throw new Error('Authentication failed');
       }
@@ -219,13 +219,8 @@ function LoginPage() {
             </button>
           </form>
 
-          <p className="signup-message">
-            Don&apos;t have an account?
-            {' '}
-            <Link to="/signup" className="signup-link">
-              Sign Up
-            </Link>
-          </p>
+      
+      
         </div>
       </div>
     </div>
