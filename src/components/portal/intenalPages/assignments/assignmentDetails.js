@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { 
@@ -13,8 +12,9 @@ import {
   faArrowLeft
 } from '@fortawesome/free-solid-svg-icons';
 import '../../../../stylesheets/assignmentDetails.css';
+import { createAxiosInstance } from '../../../../config';
 
-const BASE_URL = 'https://cla-portal-api.onrender.com';
+const api = createAxiosInstance();
 
 const AssignmentDetails = () => {
   const location = useLocation();
@@ -43,6 +43,8 @@ const AssignmentDetails = () => {
         return;
       }
 
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
       const submissionData = {
         cla_submission: {
           download_link: formData.download_link,
@@ -52,12 +54,7 @@ const AssignmentDetails = () => {
         }
       };
 
-      const response = await axios.post(`${BASE_URL}/api/v1/cla_submissions`, submissionData, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      });
+      const response = await api.post('/api/v1/cla_submissions', submissionData);
 
       console.log('Submission response:', response.data);
       toast.success('Assignment submitted successfully!');
@@ -135,11 +132,7 @@ const AssignmentDetails = () => {
         toastId: 'deletingAssignment'
       });
 
-      await axios.delete(`${BASE_URL}/api/v1/cla_assignments/${location.state?.assignment?.id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      await api.delete(`/api/v1/cla_assignments/${location.state?.assignment?.id}`);
 
       toast.dismiss('deletingAssignment');
       toast.success('Assignment deleted successfully!');

@@ -1,18 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../../stylesheets/login.css';
+import { createAxiosInstance } from '../../config';
 
 // Create axios instance with default config
-const api = axios.create({
-  baseURL: 'https://cla-portal-api.onrender.com',
-  headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json'
-  }
-});
+const api = createAxiosInstance();
 
 function LoginPage() {
   const location = useLocation();

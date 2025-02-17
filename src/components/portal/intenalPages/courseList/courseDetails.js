@@ -5,7 +5,6 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom'
 import TopicsAccordion from '../topics/topicsAccordion'
 import '../../../../stylesheets/courseDetails.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import axios from 'axios'
 import { toast } from 'react-toastify'
 import {
   faEdit,
@@ -20,8 +19,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { createAxiosInstance } from '../../../../config'
 
-const BASE_URL = 'https://cla-portal-api.onrender.com'
+const api = createAxiosInstance()
 
 function CourseDetails() {
   const { id } = useParams()
@@ -40,7 +40,7 @@ function CourseDetails() {
           return
         }
 
-        const response = await axios.get(`${BASE_URL}/api/v1/cla_courses/${id}`, {
+        const response = await api.get(`/api/v1/cla_courses/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -49,7 +49,7 @@ function CourseDetails() {
         console.log('Course Details Response:', response.data)
 
         // Fetch topics for the course
-        const topicsResponse = await axios.get(`${BASE_URL}/api/v1/cla_topics`, {
+        const topicsResponse = await api.get('/api/v1/cla_topics', {
           params: { cla_course_id: id },
           headers: {
             Authorization: `Bearer ${token}`,
@@ -89,7 +89,7 @@ function CourseDetails() {
         return
       }
 
-      const response = await axios.get(`${BASE_URL}/api/v1/cla_assignments`, {
+      const response = await api.get('/api/v1/cla_assignments', {
         params: { cla_course_id: id },
         headers: {
           Authorization: `Bearer ${token}`,
@@ -178,7 +178,7 @@ function CourseDetails() {
         toastId: 'deletingTopic'
       });
 
-      await axios.delete(`${BASE_URL}/api/v1/cla_topics/${topicId}`, {
+      await api.delete(`/api/v1/cla_topics/${topicId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -245,7 +245,7 @@ function CourseDetails() {
         toastId: 'deletingCourse'
       });
 
-      await axios.delete(`${BASE_URL}/api/v1/cla_courses/${id}`, {
+      await api.delete(`/api/v1/cla_courses/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

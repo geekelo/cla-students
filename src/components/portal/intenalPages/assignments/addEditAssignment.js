@@ -10,12 +10,12 @@ import {
   faArrowLeft,
   faLayerGroup
 } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
+import { createAxiosInstance } from '../../../../config';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../../../../stylesheets/addEditAssignment.css';
 
-const BASE_URL = 'https://cla-portal-api.onrender.com';
+const api = createAxiosInstance();
 
 const AddEditAssignment = () => {
   const navigate = useNavigate();
@@ -69,7 +69,7 @@ const AddEditAssignment = () => {
           params = { cla_user_id: userId };
         }
 
-        const response = await axios.get(`${BASE_URL}/api/v1/cla_courses`, {
+        const response = await api.get('/api/v1/cla_courses', {
           params,
           headers: {
             Authorization: `Bearer ${token}`
@@ -113,14 +113,14 @@ const AddEditAssignment = () => {
 
       let response;
       if (isEditMode) {
-        response = await axios.put(`${BASE_URL}/api/v1/cla_assignments/${assignment.id}`, formData, {
+        response = await api.put(`/api/v1/cla_assignments/${assignment.id}`, formData, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
           }
         });
       } else {
-        response = await axios.post(`${BASE_URL}/api/v1/cla_assignments`, formData, {
+        response = await api.post('/api/v1/cla_assignments', formData, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'

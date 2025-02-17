@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import SubmissionsSection from './submissionsSection';
-import '../../../../stylesheets/submissions.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHourglassHalf, faCheckDouble } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
+import { createAxiosInstance } from '../../../../config';
+import '../../../../stylesheets/submissions.css';
+import SubmissionsSection from './submissionsSection';
 
-const BASE_URL = 'https://cla-portal-api.onrender.com';
+const api = createAxiosInstance();
 
 function Submissions() {
   const userRole = sessionStorage.getItem('userRole');
@@ -29,7 +29,7 @@ function Submissions() {
           return;
         }
 
-        const response = await axios.get(`${BASE_URL}/api/v1/cla_submissions`, {
+        const response = await api.get('/api/v1/cla_submissions', {
           params: { cla_user_id: userId },
           headers: {
             Authorization: `Bearer ${token}`
