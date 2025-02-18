@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-.facaulty-page-background {
+.faculty-page-background {
     background-image: url('../../public/css-pattern.png');
     background-repeat: repeat;
     background-size: 400px;
@@ -14,7 +14,7 @@
     z-index: -1;
 }
 
-.facaulty-container {
+.faculty-container {
     max-width: 1600px;
     margin: 40px auto;
     padding: 30px;
@@ -24,26 +24,26 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.facaulty-header {
+.faculty-header {
     text-align: center;
     margin-bottom: 40px;
 }
 
-.facaulty-title {
+.faculty-title {
     color: rgba(68,46,121,255);
     font-size: 2.5rem;
     margin-bottom: 10px;
     font-weight: 600;
 }
 
-.facaulty-grid {
+.faculty-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
     padding: 20px 0;
 }
 
-.facaulty-card {
+.faculty-card {
     background: white;
     border-radius: 12px;
     overflow: hidden;
@@ -53,35 +53,35 @@
     text-decoration: none;
 }
 
-.facaulty-card:hover {
+.faculty-card:hover {
     transform: translateY(-5px);
 }
 
-.facaulty-image {
+.faculty-image {
     width: 100%;
     aspect-ratio: 1;
     object-fit: contain;
 }
 
-.facaulty-info {
+.faculty-info {
     padding: 15px;
     text-align: center;
 }
 
-.facaulty-name {
+.faculty-name {
     color: rgba(68,46,121,255);
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 5px;
 }
 
-.facaulty-role {
+.faculty-role {
     color: #666;
     font-size: 0.9rem;
 }
 
 /* Detail Page Styles */
-.facaulty-detail-container {
+.faculty-detail-container {
     max-width: 1200px;
     margin: 40px auto;
     padding: 30px;
@@ -91,54 +91,54 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.facaulty-detail-header {
+.faculty-detail-header {
     display: flex;
     gap: 40px;
     margin-bottom: 40px;
 }
 
-.facaulty-detail-image {
+.faculty-detail-image {
     flex: 0 0 400px;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.facaulty-detail-image img {
+.faculty-detail-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.facaulty-detail-info {
+.faculty-detail-info {
     flex: 1;
 }
 
-.facaulty-detail-name {
+.faculty-detail-name {
     color: rgba(68,46,121,255);
     font-size: 2.5rem;
     margin-bottom: 10px;
     font-weight: 600;
 }
 
-.facaulty-detail-role {
+.faculty-detail-role {
     color: #666;
     font-size: 1.2rem;
     margin-bottom: 20px;
 }
 
-.facaulty-detail-bio {
+.faculty-detail-bio {
     color: #444;
     line-height: 1.8;
     font-size: 1rem;
     margin-bottom: 20px;
 }
 
-.facaulty-detail-additional {
+.faculty-detail-additional {
     margin-top: 30px;
 }
 
-.facaulty-detail-additional p {
+.faculty-detail-additional p {
     color: #444;
     line-height: 1.8;
     margin-bottom: 15px;
@@ -159,21 +159,21 @@
 }
 
 @media (max-width: 1200px) {
-    .facaulty-grid {
+    .faculty-grid {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
 @media (max-width: 992px) {
-    .facaulty-grid {
+    .faculty-grid {
         grid-template-columns: repeat(2, 1fr);
     }
     
-    .facaulty-detail-header {
+    .faculty-detail-header {
         flex-direction: column;
     }
     
-    .facaulty-detail-image {
+    .faculty-detail-image {
         flex: 0 0 auto;
         max-width: 100%;
         aspect-ratio: 16/9;
@@ -181,21 +181,21 @@
 }
 
 @media (max-width: 768px) {
-    .facaulty-grid {
+    .faculty-grid {
         grid-template-columns: 1fr;
     }
     
-    .facaulty-container,
-    .facaulty-detail-container {
+    .faculty-container,
+    .faculty-detail-container {
         padding: 20px;
         margin: 15px;
     }
     
-    .facaulty-title {
+    .faculty-title {
         font-size: 2rem;
     }
     
-    .facaulty-detail-name {
+    .faculty-detail-name {
         font-size: 2rem;
     }
 } 

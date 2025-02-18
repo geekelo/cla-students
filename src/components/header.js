@@ -21,8 +21,8 @@ function Header() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/facaulty" className="nav-link">
-              Facaulty
+            <Link to="/faculty" className="nav-link">
+              Faculty
             </Link>
           </li>
           <li className="nav-item">
