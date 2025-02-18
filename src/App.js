@@ -8,8 +8,8 @@ import SignUp from './components/auth/signup';
 import StudentArea from './components/portal/studentarea';
 import About from './components/pages/About';
 import Programs from './components/pages/Programs';
-import Facaulty from './components/pages/Facaulty';
-import FacaultyDetail from './components/pages/FacaultyDetail';
+import Faculty from './components/pages/Faculty';
+import FacultyDetail from './components/pages/FacultyDetail';
 import FAQ from './components/pages/FAQ';
 import Contact from './components/pages/Contact';
 import ForgotPassword from './components/auth/forgotPassword';
@@ -28,8 +28,8 @@ function App() {
         <Route path="/portal/*" element={<StudentArea />} />
         <Route path="/about" element={<About />} />
         <Route path="/programs" element={<Programs />} />
-        <Route path="/facaulty" element={<Facaulty />} />
-        <Route path="/facaulty/:id" element={<FacaultyDetail />} />
+        <Route path="/faculty" element={<Faculty />} />
+        <Route path="/faculty/:id" element={<FacultyDetail />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
