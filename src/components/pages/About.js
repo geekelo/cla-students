@@ -1,18 +1,18 @@
-import React from "react";
-import "../../stylesheets/about.css";
+import React from 'react';
+import '../../stylesheets/about.css';
 
 function About() {
   return (
     <>
-      <div className="about-page-background" />
-      <div className="about-container">
-        <div className="about-content">
-          <div className="about-image">
-            <img src="/bible-study.jpg" alt="Person praying with Bible" />
+      <div className='about-page-background' />
+      <div className='about-container'>
+        <div className='about-content'>
+          <div className='about-image'>
+            <img src='/bible-study.jpg' alt='Person praying with Bible' />
           </div>
-          <div className="about-text">
-            <h1 className="about-title">About Our Program</h1>
-            <p className="about-description">
+          <div className='about-text'>
+            <h1 className='about-title'>About Our Program</h1>
+            <p className='about-description'>
               Christian Leadership Academy (CLA) is an academy committed to
               providing high-quality, faith-based training to students
               worldwide. The academy&apos;s mission is to equip believers with
@@ -22,7 +22,7 @@ function About() {
               empowering students to navigate the challenges of the modern world
               while maintaining a strong foundation in their Christian faith.
             </p>
-            <div className="highlight-text">
+            <div className='highlight-text'>
               <p>
                 In the first year of running this program, all our courses will
                 be free for all students. This initiative is driven by a desire
@@ -33,7 +33,7 @@ function About() {
                 learn, and grow in their spiritual journey.
               </p>
             </div>
-            <p className="about-description">
+            <p className='about-description'>
               We aim to foster a supportive environment where believers can grow
               spiritually. Through interactive lectures, small group
               discussions, and mentorship opportunities. CLA provides a
