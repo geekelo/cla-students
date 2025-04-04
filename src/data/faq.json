@@ -3,7 +3,7 @@
     {
       "id": 1,
       "question": "What is Christian Leadership Academy (CLA)?",
-      "answer": "Christian Leadership Academy is a specialized training institution dedicated to equipping believers with leadership skills grounded in biblical principles. Our programs combine spiritual development with practical leadership training."
+      "answer": "The Christian Leadership Academy (CLA) is a specialized training institution dedicated to equipping believers with leadership skills rooted in biblical principles. By combining spiritual development with practical leadership training, our programs empower individuals to effectively serve and lead in their communities."
     },
     {
       "id": 2,
@@ -13,22 +13,22 @@
     {
       "id": 3,
       "question": "How long are the programs?",
-      "answer": "Our programs vary in length depending on the level and type of training. The Believer-Beginners' Class typically runs for 3 months, while the Minister-Service and Leader-Managerial Classes can extend up to 6 months each."
+      "answer": "Each level of the CLA classes takes place within a month, culminating in team presentations from the various groups assigned to participants."
     },
     {
       "id": 4,
       "question": "Is this an online or physical program?",
-      "answer": "We offer a hybrid learning model that combines online and physical sessions. This flexible approach allows students to access course materials remotely while still benefiting from in-person interactions and practical training sessions."
+      "answer": "Our CLA program is offered entirely online. \n Experience the flexibility and convenience of our virtual learning platform, where you can access course materials, engage with instructors, and connect with fellow participants from anywhere in the world."
     },
     {
       "id": 5,
       "question": "What are the admission requirements?",
-      "answer": "Basic requirements include being a committed Christian, having a recommendation from your local church leader, and completing our application process. Specific programs may have additional requirements based on the level of training."
+      "answer": "To be eligible for our program, you must:\n\n- Be a committed Christian\n- Be willing to dedicate yourself to the coursework and requirements\n- Complete our application process\n\nPlease note that additional requirements may apply. We'll be happy to guide you through the process."
     },
     {
       "id": 6,
       "question": "Do I get a certificate after completion?",
-      "answer": "Yes, upon successful completion of your program, you will receive a certificate from Christian Leadership Academy, recognizing your achievement and the specific leadership competencies you've developed."
+      "answer": "Yes, upon successful completion of our program, you'll be awarded a certificate from Christian Leadership Academy, after passing all course assessments and meeting the necessary requirements."
     },
     {
       "id": 7,
@@ -41,4 +41,4 @@
       "answer": "We provide comprehensive support including mentorship, academic guidance, prayer support, and access to our online learning resources. Our faculty and staff are committed to helping you succeed in your leadership journey."
     }
   ]
-} 
+}

@@ -11,6 +11,12 @@ function FAQ() {
     setExpandedId(expandedId === id ? null : id);
   };
 
+  const renderAnswer = (answer) => {
+    return answer.split('\n').map((line, index) => {
+      return <p key={index}>{line}</p>;
+    });
+  };
+
   return (
     <>
       <div className="faq-page-background" />
@@ -34,9 +40,11 @@ function FAQ() {
                   className="faq-arrow"
                 />
               </div>
-              <div className="faq-answer">
-                <p>{faq.answer}</p>
-              </div>
+              {expandedId === faq.id && (
+                <div className="faq-answer">
+                  {renderAnswer(faq.answer)}
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -45,4 +53,4 @@ function FAQ() {
   );
 }
 
-export default FAQ; 
+export default FAQ;
