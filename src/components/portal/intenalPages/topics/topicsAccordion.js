@@ -137,7 +137,7 @@ function TopicsAccordion({ topic, onDelete, index, courseId, course }) {
               </div>
               <div className='resource-item'>
                 <FontAwesomeIcon icon={faVideo} />
-                <span>Video Tutorial</span>
+                <span>Video Lesson</span>
               </div>
               <div className='resource-item'>
                 <FontAwesomeIcon icon={faLink} />
