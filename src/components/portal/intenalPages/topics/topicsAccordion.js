@@ -41,6 +41,14 @@ function TopicsAccordion({ topic, onDelete, index, courseId, course }) {
           src = `https://www.youtube.com/embed/${videoId}`;
           title = 'YouTube video';
           height = '315px';
+        } else if (part.endsWith('.pdf')) {
+          src = part;
+          title = 'PDF Preview';
+          height = '500px';
+        } else if (part.includes('docs.google.com/presentation')) {
+          src = part.replace('/edit', '/embed');
+          title = 'Slides Preview';
+          height = '480px';
         }
   
         if (src) {
@@ -84,49 +92,6 @@ function TopicsAccordion({ topic, onDelete, index, courseId, course }) {
     );
   };
 
-  // Function to get PDF or Google Slides embed
-  const getPdfEmbed = (text) => {
-    const parts = text.split(/\s+/);
-  
-    const embeds = [];
-  
-    parts.forEach((part, index) => {
-      if (/^https?:\/\//.test(part)) {
-        let src = '';
-        let title = '';
-        let height = '';
-  
-        if (part.endsWith('.pdf')) {
-          src = part;
-          title = 'PDF Preview';
-          height = '500px';
-        } else if (part.includes('docs.google.com/presentation')) {
-          src = part.replace('/edit', '/embed');
-          title = 'Slides Preview';
-          height = '480px';
-        }
-  
-        if (src) {
-          embeds.push(
-            <iframe
-              key={`embed-${index}`}
-              src={src}
-              title={title}
-              width="100%"
-              height={height}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              style={{ marginTop: '10px', marginBottom: '10px', border: 'none' }}
-            />
-          );
-        }
-      }
-    });
-  
-    return <>{embeds}</>;
-  };  
-  
   return (
     <div className='topic-item'>
       <div className='topic-header' onClick={toggleAccordion}>
@@ -169,7 +134,6 @@ function TopicsAccordion({ topic, onDelete, index, courseId, course }) {
               <div className='resource-item'>
                 <FontAwesomeIcon icon={faFileAlt} />
                 <span>Lecture Notes</span>
-                {getPdfEmbed(topic.description)}
               </div>
               <div className='resource-item'>
                 <FontAwesomeIcon icon={faVideo} />
