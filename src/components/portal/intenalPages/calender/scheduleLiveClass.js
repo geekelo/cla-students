@@ -144,8 +144,10 @@ const ScheduleLiveClass = () => {
         });
       }
 
-      toast.success(isEditMode ? 'Live class updated successfully!' : 'Live class scheduled successfully!');
-      navigate('/portal/calendar');
+      if (response) {
+        toast.success(isEditMode ? 'Live class updated successfully!' : 'Live class scheduled successfully!');
+        navigate('/portal/calendar');
+      }
     } catch (error) {
       console.error('Error with live class:', error);
       let errorMessage = isEditMode ? 'Failed to update live class. Please try again.' : 'Failed to schedule live class. Please try again.';

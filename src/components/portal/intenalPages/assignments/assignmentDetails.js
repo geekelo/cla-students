@@ -56,8 +56,10 @@ const AssignmentDetails = () => {
 
       const response = await api.post('/api/v1/cla_submissions', submissionData);
 
-      toast.success('Assignment submitted successfully!');
-      navigate('/portal/assignments');
+      if (response) {
+        toast.success('Assignment submitted successfully!');
+        navigate('/portal/assignments');
+      }
     } catch (error) {
       console.error('Error submitting assignment:', error);
       let errorMessage = 'Failed to submit assignment. Please try again.';

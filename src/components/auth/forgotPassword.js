@@ -22,12 +22,15 @@ function ForgotPassword() {
       const response = await api.post('/api/v1/forgot_password', {
         email: email
       });
-      toast.success('Reset link has been sent to your email!');
-      
-      // Wait for the success message to be shown before redirecting
-      setTimeout(() => {
-        navigate('/login');
-      }, 3000);
+
+      if (response) {
+        toast.success('Reset link has been sent to your email!');
+        
+        // Wait for the success message to be shown before redirecting
+        setTimeout(() => {
+          navigate('/login');
+        }, 3000);
+      }
     } catch (error) {
       console.error('Forgot password error:', error);
       let errorMessage = 'Failed to send reset link. Please try again.';

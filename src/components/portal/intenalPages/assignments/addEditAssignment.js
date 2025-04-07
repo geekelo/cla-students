@@ -126,9 +126,11 @@ const AddEditAssignment = () => {
         });
       }
 
-      toast.success(isEditMode ? 'Assignment updated successfully!' : 'Assignment created successfully!');
-      
-      navigate('/portal/assignments');
+      if (response) {
+        toast.success(isEditMode ? 'Assignment updated successfully!' : 'Assignment created successfully!');
+        
+        navigate('/portal/assignments');
+      }
     } catch (error) {
       console.error('Error with assignment:', error);
       let errorMessage = isEditMode ? 'Failed to update assignment. Please try again.' : 'Failed to create assignment. Please try again.';
