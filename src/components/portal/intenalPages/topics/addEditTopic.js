@@ -67,9 +67,6 @@ const AddEditTopic = () => {
         return
       }
 
-      console.log('Sending topic data:', formData)
-      console.log('Course ID:', courseId)
-
       let response
       if (isEditMode) {
         response = await api.put(`/api/v1/cla_topics/${topic.id}`, formData, {
@@ -87,7 +84,6 @@ const AddEditTopic = () => {
         })
       }
 
-      console.log('Topic response:', response.data)
       toast.success(isEditMode ? 'Topic updated successfully!' : 'Topic created successfully!')
       navigate(`/portal/courses/${courseId}`, { state: { course } })
     } catch (error) {
@@ -97,7 +93,7 @@ const AddEditTopic = () => {
         : 'Failed to create topic. Please try again.'
 
       if (error.response) {
-        console.log('Error response:', error.response.data)
+        console.error('Error response:', error.response.data)
         if (typeof error.response.data.error === 'string') {
           errorMessage = error.response.data.error
         } else if (error.response.data.errors) {

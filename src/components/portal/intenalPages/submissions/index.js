@@ -36,7 +36,6 @@ function Submissions() {
           }
         });
 
-        console.log('Fetched Submissions:', response.data);
         setSubmissions(response.data);
       } catch (error) {
         console.error('Error fetching submissions:', error);

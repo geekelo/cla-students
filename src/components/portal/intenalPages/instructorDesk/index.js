@@ -89,7 +89,6 @@ function InstructorDesk() {
       });
 
       setDeskStats(statsResponse.data);
-      console.log('Desk Stats Response:', statsResponse.data);
 
       // Fetch student list
       const studentsResponse = await api.get('/api/v1/cla_dashboards/student_list', {
@@ -99,7 +98,6 @@ function InstructorDesk() {
       });
 
       setStudents(studentsResponse.data || []);
-      console.log('Students Response:', studentsResponse.data);
     } catch (error) {
       console.error('Error fetching data:', error);
       toast.error('Failed to fetch data');

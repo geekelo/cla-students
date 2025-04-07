@@ -55,7 +55,6 @@ function ResetPassword() {
         password: formData.password
       });
 
-      console.log('Reset password response:', response.data);
       toast.success('Password has been reset successfully!');
       
       // Wait for the success message to be shown before redirecting

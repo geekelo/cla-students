@@ -62,9 +62,6 @@ function Dashboard() {
             cla_user_id: userId,
           }
         });
-
-        console.log('course Response:', courseResponse.data,  
-          'score response:', scoreResponse.data, 'attendance stats:', attendanceResponse.data);
         
         // Update stats with the combined response data
         setStats({
@@ -93,7 +90,7 @@ function Dashboard() {
   }, [navigate]);
 
   const notices = [
-    { id: 1, title: 'Important Announcement', content: 'Your final exam is scheduled for next week. Make sure to review all the materials.' },
+    { id: 1, title: 'Important Announcement', content: 'Classes starts by 8AM WAT. Your attendance is very important' },
     { id: 2, title: 'Assignment Deadline', content: 'The deadline for Assignment 6 is this Friday. Don\'t forget to submit it!' },
   ];
 

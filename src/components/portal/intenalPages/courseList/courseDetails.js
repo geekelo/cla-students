@@ -46,9 +46,6 @@ function CourseDetails() {
             Authorization: `Bearer ${token}`,
           },
         })
-
-        console.log('Course Details Response:', response.data)
-
         // Fetch topics for the course
         const topicsResponse = await api.get('/api/v1/cla_topics', {
           params: { cla_course_id: id },
@@ -56,12 +53,11 @@ function CourseDetails() {
             Authorization: `Bearer ${token}`,
           },
         })
-        console.log('Course Topics Response:', topicsResponse.data)
         setTopics(topicsResponse.data || [])
       } catch (error) {
         console.error('Error fetching course details:', error)
         if (error.response) {
-          console.log('Error response:', error.response.data)
+          console.error('Error response:', error.response.data)
         }
       }
     }
@@ -98,12 +94,11 @@ function CourseDetails() {
         },
       })
 
-      console.log('Assignments Response:', response.data)
       navigate('/portal/assignments/', { state: { assignments: response.data } })
     } catch (error) {
       console.error('Error fetching assignments:', error)
       if (error.response) {
-        console.log('Error response:', error.response.data)
+        console.error('Error response:', error.response.data)
       }
       toast.error('Failed to fetch assignments. Please try again.')
     }

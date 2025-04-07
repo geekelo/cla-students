@@ -54,7 +54,6 @@ function Calendar() {
           headers: { Authorization: `Bearer ${token}` }
         });
 
-        console.log('Live Classes API Response:', response.data);
         setEvents(response.data);
       } catch (error) {
         console.error('Error fetching live classes:', error);

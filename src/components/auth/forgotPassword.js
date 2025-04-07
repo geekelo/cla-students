@@ -22,8 +22,6 @@ function ForgotPassword() {
       const response = await api.post('/api/v1/forgot_password', {
         email: email
       });
-
-      console.log('Forgot password response:', response.data);
       toast.success('Reset link has been sent to your email!');
       
       // Wait for the success message to be shown before redirecting
