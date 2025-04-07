@@ -114,15 +114,17 @@ const AddEditCourseForm = () => {
         },
       }
 
-      let response
+      let response;
       if (isEditMode) {
         response = await api.put(`/api/v1/cla_courses/${course.id}`, courseData)
       } else {
         response = await api.post('/api/v1/cla_courses', courseData)
       }
 
+      if (response) {
       toast.success(isEditMode ? 'Course updated successfully!' : 'Course created successfully!')
       navigate('/portal/instructorDesk')
+      }
     } catch (error) {
       let errorMessage = isEditMode
         ? 'Failed to update course. Please try again.'

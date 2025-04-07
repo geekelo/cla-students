@@ -82,6 +82,8 @@ const AddEditTopic = () => {
             'Content-Type': 'application/json',
           },
         })
+
+        console.log('Submitted:', response.status)
       }
 
       toast.success(isEditMode ? 'Topic updated successfully!' : 'Topic created successfully!')

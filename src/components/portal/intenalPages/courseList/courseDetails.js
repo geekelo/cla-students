@@ -46,6 +46,9 @@ function CourseDetails() {
             Authorization: `Bearer ${token}`,
           },
         })
+
+        console.log('Course Details Loaded:', response.status)
+
         // Fetch topics for the course
         const topicsResponse = await api.get('/api/v1/cla_topics', {
           params: { cla_course_id: id },
