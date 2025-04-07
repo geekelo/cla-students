@@ -11,6 +11,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { createAxiosInstance } from '../../../../config';
+import { formatDateWithOrdinal } from '../../../helpers/dateFormatter';
 import { toast, ToastContainer } from 'react-toastify';
 import '../../../../stylesheets/calender.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -207,11 +208,15 @@ function Calendar() {
                 <div className="event-datetime">
                   <div className="event-date">
                     <FontAwesomeIcon icon={faCalendarAlt} className="datetime-icon" /> 
-                    <span className="datetime-text">{new Date(event.date).toLocaleDateString()}</span>
+                    <span className="datetime-text">{formatDateWithOrdinal(event.date)}</span>
                   </div>
                   <div className="event-time">
                     <FontAwesomeIcon icon={faClock} className="datetime-icon" /> 
-                    <span className="datetime-text">{event.time}</span>
+                    <span className="datetime-text">
+                      {new Date(event.time).toLocaleString(undefined, {
+                        timeStyle: 'short',
+                      })}
+                    </span>
                   </div>
                 </div>
                 <h3 className="event-title">{event.courseName}</h3>
