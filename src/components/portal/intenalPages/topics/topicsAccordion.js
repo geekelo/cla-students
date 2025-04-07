@@ -26,9 +26,7 @@ function TopicsAccordion({ topic, onDelete, index, courseId, course }) {
 
   const processDescription = (text) => {
     const parts = text.split(/\s+/);
-  
-    const textParts = [];
-    const embeds = [];
+    const elements = [];
   
     parts.forEach((part, index) => {
       if (/^https?:\/\//.test(part)) {
@@ -52,7 +50,7 @@ function TopicsAccordion({ topic, onDelete, index, courseId, course }) {
         }
   
         if (src) {
-          embeds.push(
+          elements.push(
             <iframe
               key={`embed-${index}`}
               src={src}
@@ -67,7 +65,7 @@ function TopicsAccordion({ topic, onDelete, index, courseId, course }) {
           );
         } else {
           // fallback for unknown links
-          embeds.push(
+          elements.push(
             <a
               key={`link-${index}`}
               href={part}
@@ -80,18 +78,14 @@ function TopicsAccordion({ topic, onDelete, index, courseId, course }) {
           );
         }
       } else {
-        textParts.push(part);
+        // Normal text
+        elements.push(<span key={`text-${index}`}>{part + ' '}</span>);
       }
     });
   
-    return (
-      <>
-        <p>{textParts.join(' ')}</p>
-        {embeds}
-      </>
-    );
+    return <>{elements}</>;
   };
-
+  
   return (
     <div className='topic-item'>
       <div className='topic-header' onClick={toggleAccordion}>
@@ -137,7 +131,7 @@ function TopicsAccordion({ topic, onDelete, index, courseId, course }) {
               </div>
               <div className='resource-item'>
                 <FontAwesomeIcon icon={faVideo} />
-                <span>Video Lesson</span>
+                <span>Lecture Video</span>
               </div>
               <div className='resource-item'>
                 <FontAwesomeIcon icon={faLink} />
