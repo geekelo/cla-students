@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCheck, faArrowRight, faSave, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../../../../stylesheets/addAttendance.css';
+import { createAxiosInstance } from '../../../../config';
 
-const BASE_URL = 'https://cla-portal-api.onrender.com';
+const api = createAxiosInstance();
 
 function AddAttendance() {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ function AddAttendance() {
           return;
         }
 
-        const response = await axios.get(`${BASE_URL}/api/v1/cla_live_classes/today_classes`, {
+        const response = await api.get('/api/v1/cla_live_classes/today_classes', {
           headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -75,7 +75,7 @@ function AddAttendance() {
       }
 
       // Fetch missing attendance students
-      const response = await axios.get(`${BASE_URL}/api/v1/cla_attendances/missing_attendance`, {
+      const response = await api.get('/api/v1/cla_attendances/missing_attendance', {
         params: {
           cla_live_class_id: selectedClass,
           cla_cohort_id: selectedCohortId
@@ -123,7 +123,7 @@ function AddAttendance() {
         }
       };
 
-      await axios.post(`${BASE_URL}/api/v1/cla_attendances`, attendanceData, {
+      await api.post('/api/v1/cla_attendances', attendanceData, {
         headers: { 
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -136,7 +136,7 @@ function AddAttendance() {
       setPresent('present');
       
       // Refresh the students list to remove the marked student
-      const updatedResponse = await axios.get(`${BASE_URL}/api/v1/cla_attendances/missing_attendance`, {
+      const updatedResponse = await api.get('/api/v1/cla_attendances/missing_attendance', {
         params: {
           cla_live_class_id: selectedClass,
           cla_cohort_id: selectedCohortId

@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faSpinner } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../../stylesheets/forgotPassword.css';
+import { createAxiosInstance } from '../../config';
 
-const BASE_URL = 'https://cla-portal-api.onrender.com';
+const api = createAxiosInstance();
 
 function ForgotPassword() {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ function ForgotPassword() {
     setLoading(true);
 
     try {
-      const response = await axios.post(`${BASE_URL}/api/v1/forgot_password`, {
+      const response = await api.post('/api/v1/forgot_password', {
         email: email
       });
 

@@ -9,11 +9,11 @@ import {
   faEnvelope,
   faGraduationCap 
 } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import '../../../../stylesheets/instructorDesk.css';
+import { createAxiosInstance } from '../../../../config';
 
-const BASE_URL = 'https://cla-portal-api.onrender.com';
+const api = createAxiosInstance();
 
 function InstructorDesk() {
   const navigate = useNavigate();
@@ -33,9 +33,9 @@ function InstructorDesk() {
           return;
         }
 
-        const response = await axios.get(`${BASE_URL}/api/v1/cla_cohorts`, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+        const response = await api.get('/api/v1/cla_cohorts');
 
         if (response.data && response.data.cohorts) {
           setCohorts(response.data.cohorts);
@@ -79,23 +79,23 @@ function InstructorDesk() {
         return;
       }
 
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
       // Fetch desk stats
-      const statsResponse = await axios.get(`${BASE_URL}/api/v1/cla_dashboards/desk_stats`, {
+      const statsResponse = await api.get('/api/v1/cla_dashboards/desk_stats', {
         params: { 
           cla_cohort_id: selectedCohort
-        },
-        headers: { Authorization: `Bearer ${token}` }
+        }
       });
 
       setDeskStats(statsResponse.data);
       console.log('Desk Stats Response:', statsResponse.data);
 
       // Fetch student list
-      const studentsResponse = await axios.get(`${BASE_URL}/api/v1/cla_dashboards/student_list`, {
+      const studentsResponse = await api.get('/api/v1/cla_dashboards/student_list', {
         params: { 
           cla_cohort_id: selectedCohort
-        },
-        headers: { Authorization: `Bearer ${token}` }
+        }
       });
 
       setStudents(studentsResponse.data || []);

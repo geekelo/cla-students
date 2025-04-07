@@ -1,9 +1,8 @@
 import React from 'react';
-// import { p } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faLinkedin,
-  faTwitter,
   faYoutube,
 } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope, faGlobe } from '@fortawesome/free-solid-svg-icons';
@@ -53,34 +52,24 @@ function FooterSection() {
             <h6 className="footer-headers">Quick Links</h6>
             <ul className="footer-links">
               <li>
-                <p to="/about" className="links">
+                <Link to="/about" className="links">
                   About
-                </p>
+                </Link>
               </li>
               <li>
-                <p to="/courses" className="links">
-                  Courses
-                </p>
-              </li>
-              <li>
-                <p to="/facaulties" className="links">
+                <Link to="/facaulty" className="links">
                   Faculties
-                </p>
+                </Link>
               </li>
               <li>
-                <p to="/faqs" className="links">
+                <Link to="/faq" className="links">
                   Help | FAQs
-                </p>
+                </Link>
               </li>
               <li>
-                <p to="/contact" className="links">
+                <Link to="/contact" className="links">
                   Contact
-                </p>
-              </li>
-              <li>
-                <p to="/privacy-policy" className="links">
-                  Privacy Policy
-                </p>
+                </Link>
               </li>
             </ul>
           </div>
@@ -110,7 +99,7 @@ function FooterSection() {
                 <li>
                   <a
                     className="linkedin"
-                    href="https://linkedin.com/in/eloghene-otiede"
+                    href="https://www.linkedin.com/showcase/jjrsf-cla/?viewAsMember=true"
                     aria-label="LinkedIn"
                   >
                     <FontAwesomeIcon icon={faLinkedin} />
@@ -119,7 +108,7 @@ function FooterSection() {
                 <li>
                   <a
                     className="email"
-                    href="https://youtube.com/@geekelo"
+                    href="https://www.youtube.com/@jesusjirehrapha4725"
                     aria-label="YouTube"
                   >
                     <FontAwesomeIcon icon={faYoutube} />
@@ -127,17 +116,8 @@ function FooterSection() {
                 </li>
                 <li>
                   <a
-                    className="twitter"
-                    href="https://x.com/geekelo_xyz"
-                    aria-label="Twitter"
-                  >
-                    <FontAwesomeIcon icon={faTwitter} />
-                  </a>
-                </li>
-                <li>
-                  <a
                     className="globe"
-                    href="https://geekelo.com.ng"
+                    href="cla.jjrsf.org"
                     aria-label="Website"
                   >
                     <FontAwesomeIcon icon={faGlobe} />
@@ -146,7 +126,7 @@ function FooterSection() {
                 <li>
                   <a
                     className="facebook"
-                    href="mailto:efuelight12@gmail.com"
+                    href="jjrsfoundation@gmail.com"
                     aria-label="Email"
                   >
                     <FontAwesomeIcon icon={faEnvelope} />

@@ -8,12 +8,12 @@ import {
   faUsers,
   faBook
 } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../../../../stylesheets/scheduleLiveClass.css';
+import { createAxiosInstance } from '../../../../config';
 
-const BASE_URL = 'https://cla-portal-api.onrender.com';
+const api = createAxiosInstance();
 
 const ScheduleLiveClass = () => {
   const navigate = useNavigate();
@@ -33,14 +33,6 @@ const ScheduleLiveClass = () => {
       cla_course_id: courseId || liveClass?.cla_course_id || '',
       cohort_id: sessionStorage.getItem('cohortId') || liveClass?.cohort_id || '',
       cla_user_id: sessionStorage.getItem('userId') || liveClass?.cla_user_id || ''
-    }
-  });
-
-  const api = axios.create({
-    baseURL: 'https://cla-portal-api.onrender.com',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
     }
   });
 
@@ -71,7 +63,7 @@ const ScheduleLiveClass = () => {
         setCohorts(cohortsResponse.data.cohorts || []);
        
 
-        const response = await axios.get(`${BASE_URL}/api/v1/cla_courses`, {
+        const response = await api.get('/api/v1/cla_courses', {
           params,
           headers: {
             Authorization: `Bearer ${token}`
@@ -139,14 +131,14 @@ const ScheduleLiveClass = () => {
 
       let response;
       if (isEditMode) {
-        response = await axios.put(`${BASE_URL}/api/v1/cla_live_classes/${liveClass.id}`, formData, {
+        response = await api.put(`/api/v1/cla_live_classes/${liveClass.id}`, formData, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
           }
         });
       } else {
-        response = await axios.post(`${BASE_URL}/api/v1/cla_live_classes`, formData, {
+        response = await api.post('/api/v1/cla_live_classes', formData, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'

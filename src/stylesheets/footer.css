@@ -81,7 +81,7 @@
 .footer-links a:active,
 .footer-links a:focus,
 .footer-links a:hover {
-  color: rgb(197, 168, 1);
+  color: #695e89;
   text-decoration: none;
 }
 
@@ -94,7 +94,7 @@
 }
 
 .site-footer a:hover {
-  color: rgb(197, 168, 1);
+  color: #695e89;
   text-decoration: none;
 }
 
