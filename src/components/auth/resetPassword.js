@@ -55,13 +55,14 @@ function ResetPassword() {
         password: formData.password
       });
 
-      console.log('Reset password response:', response.data);
-      toast.success('Password has been reset successfully!');
-      
-      // Wait for the success message to be shown before redirecting
-      setTimeout(() => {
-        navigate('/login');
-      }, 3000);
+      if (response) {
+        toast.success('Password has been reset successfully!');
+        
+        // Wait for the success message to be shown before redirecting
+        setTimeout(() => {
+          navigate('/login');
+        }, 3000);
+      }
     } catch (error) {
       console.error('Reset password error:', error);
       let errorMessage = 'Failed to reset password. Please try again.';

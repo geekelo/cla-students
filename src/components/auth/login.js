@@ -34,11 +34,6 @@ function LoginPage() {
 
     try {
       const response = await api.post('/api/v1/sign_in', formData);
-      console.log('Full Login Response:', response);
-      console.log('User Data:', response.data.user);
-      console.log('Role ID:', response.data.user.cla_role_id);
-      console.log('Cohort ID:', response.data.user.cla_cohort_id);
-
       if (response.data.token) {
         // Store authentication token and user ID
         sessionStorage.setItem('authToken', response.data.token);
@@ -66,21 +61,6 @@ function LoginPage() {
           if (value !== undefined && value !== null) {
             sessionStorage.setItem(key, value.toString());
           }
-        });
-
-        console.log('Stored user data:', {
-          sessionStorage: {
-            userId: sessionStorage.getItem('userId'),
-            email: sessionStorage.getItem('email'),
-            userName: sessionStorage.getItem('userName'),
-            userRole: sessionStorage.getItem('userRole'),
-            cohortId: sessionStorage.getItem('cohortId'),
-            cohortName: sessionStorage.getItem('cohortName'),
-            birthday: sessionStorage.getItem('birthday'),
-            phoneNumber: sessionStorage.getItem('phoneNumber'),
-            roleName: sessionStorage.getItem('roleName')
-          },
-          localStorage: JSON.parse(localStorage.getItem('userData'))
         });
 
         toast.success('Login successful!');

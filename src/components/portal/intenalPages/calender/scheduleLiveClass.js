@@ -127,8 +127,6 @@ const ScheduleLiveClass = () => {
         return;
       }
 
-      console.log('Sending live class data:', formData);
-
       let response;
       if (isEditMode) {
         response = await api.put(`/api/v1/cla_live_classes/${liveClass.id}`, formData, {
@@ -146,15 +144,16 @@ const ScheduleLiveClass = () => {
         });
       }
 
-      console.log('Live class response:', response.data);
-      toast.success(isEditMode ? 'Live class updated successfully!' : 'Live class scheduled successfully!');
-      navigate('/portal/calendar');
+      if (response) {
+        toast.success(isEditMode ? 'Live class updated successfully!' : 'Live class scheduled successfully!');
+        navigate('/portal/calendar');
+      }
     } catch (error) {
       console.error('Error with live class:', error);
       let errorMessage = isEditMode ? 'Failed to update live class. Please try again.' : 'Failed to schedule live class. Please try again.';
 
       if (error.response) {
-        console.log('Error response:', error.response.data);
+        console.error('Error response:', error.response.data);
         if (typeof error.response.data.error === 'string') {
           errorMessage = error.response.data.error;
         } else if (error.response.data.errors) {
