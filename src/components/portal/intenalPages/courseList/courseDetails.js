@@ -28,6 +28,7 @@ function CourseDetails() {
   const location = useLocation()
   const { course } = location.state || {}
   const [topics, setTopics] = useState([])
+  const [userRoleId, setUserRoleId] = useState(null);
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -66,7 +67,8 @@ function CourseDetails() {
     }
 
     if (id) {
-      fetchCourseDetails()
+      fetchCourseDetails();
+      setUserRoleId(sessionStorage.getItem('userRoleId'))
     }
   }, [id, navigate])
 
@@ -371,9 +373,10 @@ function CourseDetails() {
           <div className='topics-section'>
             <div className='topics-header'>
               <h2>Topics</h2>
+              {userRoleId === '1' && (
               <button className='add-topic' onClick={handleAddTopic}>
                 <FontAwesomeIcon icon={faPlus} className='icon' /> Add Topic
-              </button>
+              </button>)}
             </div>
             <div className='topics-list'>
               {topics.length > 0 ? (
