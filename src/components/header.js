@@ -12,13 +12,13 @@ function Header() {
 
   const handleLogout = () => {
     // Clear login data (you can adjust this based on your auth logic)
-    localStorage.removeItem('authToken'); 
+    sessionStorage.removeItem('authToken'); 
     setIsLoggedIn(false); 
   };
 
   useEffect(() => {
     // Check if the user is logged in by checking if a token exists in localStorage
-    const token = localStorage.getItem('authToken');
+    const token = sessionStorage.getItem('authToken');
     setIsLoggedIn(!!token); 
   }, []);
 
