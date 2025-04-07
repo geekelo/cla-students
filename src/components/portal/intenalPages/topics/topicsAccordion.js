@@ -24,6 +24,74 @@ function TopicsAccordion({ topic, onDelete, index, courseId, course }) {
     })
   }
 
+  const processDescription = (text) => {
+    const parts = text.split(/\s+/);
+  
+    const textParts = [];
+    const embeds = [];
+  
+    parts.forEach((part, index) => {
+      if (/^https?:\/\//.test(part)) {
+        let src = '';
+        let title = '';
+        let height = '';
+  
+        if (part.includes('youtube.com') || part.includes('youtu.be')) {
+          const videoId = part.split('v=')[1]?.split('&')[0] || part.split('/').pop();
+          src = `https://www.youtube.com/embed/${videoId}`;
+          title = 'YouTube video';
+          height = '315px';
+        } else if (part.endsWith('.pdf')) {
+          src = part;
+          title = 'PDF Preview';
+          height = '500px';
+        } else if (part.includes('docs.google.com/presentation')) {
+          src = part.replace('/edit', '/embed');
+          title = 'Slides Preview';
+          height = '480px';
+        }
+  
+        if (src) {
+          embeds.push(
+            <iframe
+              key={`embed-${index}`}
+              src={src}
+              title={title}
+              width="100%"
+              height={height}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{ marginTop: '10px', marginBottom: '10px', border: 'none' }}
+            />
+          );
+        } else {
+          // fallback for unknown links
+          embeds.push(
+            <a
+              key={`link-${index}`}
+              href={part}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: 'block', marginTop: '10px' }}
+            >
+              {part}
+            </a>
+          );
+        }
+      } else {
+        textParts.push(part);
+      }
+    });
+  
+    return (
+      <>
+        <p>{textParts.join(' ')}</p>
+        {embeds}
+      </>
+    );
+  };  
+
   return (
     <div className='topic-item'>
       <div className='topic-header' onClick={toggleAccordion}>
@@ -58,7 +126,7 @@ function TopicsAccordion({ topic, onDelete, index, courseId, course }) {
 
       {isOpen && (
         <div className='topic-content'>
-          <div className='topic-description'>{topic.description}</div>
+          <div className='topic-description'>{processDescription(topic.description)}</div>
 
           <div className='topic-resources'>
             <h4>Resources</h4>
