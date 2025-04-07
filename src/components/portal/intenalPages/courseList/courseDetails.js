@@ -412,6 +412,8 @@ function CourseDetails() {
             >
               <FontAwesomeIcon icon={faVideo} className="btn-icon" /> View Live Classes
             </button>
+            {userRoleId === '1' && (
+            <>
             <button
               type="button"
               className="course-action-btn"
@@ -426,6 +428,8 @@ function CourseDetails() {
             >
               <FontAwesomeIcon icon={faPlus} className="btn-icon" /> Add Assignment
             </button>
+          </>
+          )}
           </div>
         </div>
       </div>
