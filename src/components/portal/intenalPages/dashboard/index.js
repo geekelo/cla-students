@@ -90,8 +90,10 @@ function Dashboard() {
   }, [navigate]);
 
   const notices = [
-    { id: 1, title: 'Important Announcement', content: 'Classes starts by 8AM WAT. Your attendance is very important' },
-    { id: 2, title: 'Assignment Deadline', content: 'The deadline for Assignment 6 is this Friday. Don\'t forget to submit it!' },
+    { id: 1, title: 'Important Reminders for Our Classes:', content: 'The meeting room opens at 7:30 AM for all students. Get settled and ready to go!\nClasses commence at 8:00 AM sharp!'},
+    { id: 2, title: 'Important Reminders on Attendance', content: 'Your attendance is crucial, as it accounts for the highest percentage of your cumulative scores. Be there and be on time!\n'},
+    { id: 3, title: 'Important Reminders on Assignments', content: 'Always submit your assignments before the deadline to stay ahead!\n'},
+    { id: 3, title: 'Let\'s make this semester a success!', content: ''},
   ];
 
   return (
