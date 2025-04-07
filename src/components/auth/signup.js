@@ -48,8 +48,6 @@ function SignUp() {
         const rolesResponse = await api.get('/api/v1/cla_roles');
         setRoles(rolesResponse.data.roles || []);
         
-        console.log('Cohorts:', cohortsResponse.data.cohorts);
-        console.log('Roles:', rolesResponse.data.roles);
       } catch (error) {
         console.error('Error fetching data:', error);
         if (error.response) {
@@ -121,8 +119,6 @@ function SignUp() {
         delete userData.user.password_confirmation;
         delete userData.user.id; // Remove the id from payload
       }
-
-      console.log('Submitting form data:', userData);
       
       let response;
       if (isEditMode) {
@@ -144,7 +140,6 @@ function SignUp() {
         }
       }
 
-      console.log('Server response:', response.data);
     } catch (err) {
       console.error('Registration/Update error:', err);
       let errorMessage = 'Something went wrong. Please try again.';

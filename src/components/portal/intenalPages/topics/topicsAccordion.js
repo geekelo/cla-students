@@ -24,6 +24,75 @@ function TopicsAccordion({ topic, onDelete, index, courseId, course }) {
     })
   }
 
+  const processDescription = (text) => {
+    const lines = text.split('\n'); // split by newlines
+    const elements = [];
+  
+    lines.forEach((line, lineIndex) => {
+      const parts = line.trim().split(/\s+/);
+  
+      parts.forEach((part, index) => {
+        if (/^https?:\/\//.test(part)) {
+          let src = '';
+          let title = '';
+          let height = '';
+  
+          if (part.includes('youtube.com') || part.includes('youtu.be')) {
+            const videoId = part.split('v=')[1]?.split('&')[0] || part.split('/').pop();
+            src = `https://www.youtube.com/embed/${videoId}`;
+            title = 'YouTube video';
+            height = '315px';
+          } else if (part.endsWith('.pdf')) {
+            src = part;
+            title = 'PDF Preview';
+            height = '500px';
+          } else if (part.includes('docs.google.com/presentation')) {
+            src = part.replace('/edit', '/embed');
+            title = 'Slides Preview';
+            height = '480px';
+          }
+  
+          if (src) {
+            elements.push(
+              <iframe
+                key={`embed-${lineIndex}-${index}`}
+                src={src}
+                title={title}
+                width="100%"
+                height={height}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{ marginTop: '10px', marginBottom: '10px', border: 'none' }}
+              />
+            );
+          } else {
+            elements.push(
+              <a
+                key={`link-${lineIndex}-${index}`}
+                href={part}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ display: 'block', marginTop: '10px' }}
+              >
+                {part}
+              </a>
+            );
+          }
+        } else {
+          elements.push(
+            <span key={`text-${lineIndex}-${index}`}>{part + ' '}</span>
+          );
+        }
+      });
+  
+      // Add a line break between lines
+      elements.push(<br key={`br-${lineIndex}`} />);
+    });
+  
+    return <>{elements}</>;
+  };  
+  
   return (
     <div className='topic-item'>
       <div className='topic-header' onClick={toggleAccordion}>
@@ -32,9 +101,12 @@ function TopicsAccordion({ topic, onDelete, index, courseId, course }) {
           <h3 className='topic-title'>{topic.name}</h3>
         </div>
         <div className='topic-actions'>
+        {sessionStorage.getItem('userRole') === 'facilitator' && (
           <button type='button' className='edit-topic' onClick={handleEdit} title='Edit Topic'>
             <FontAwesomeIcon icon={faPencilAlt} />
           </button>
+        )}
+        {sessionStorage.getItem('userRole') === 'facilitator' && (
           <button
             type='button'
             className='delete-topic'
@@ -46,6 +118,7 @@ function TopicsAccordion({ topic, onDelete, index, courseId, course }) {
           >
             <FontAwesomeIcon icon={faTrash} />
           </button>
+        )}
           <button type='button' className={`topic-toggle-btn ${isOpen ? 'open' : ''}`} onClick={toggleAccordion}>
             <FontAwesomeIcon icon={faChevronDown} />
           </button>
@@ -54,7 +127,7 @@ function TopicsAccordion({ topic, onDelete, index, courseId, course }) {
 
       {isOpen && (
         <div className='topic-content'>
-          <div className='topic-description'>{topic.description}</div>
+          <div className='topic-description'>{processDescription(topic.description)}</div>
 
           <div className='topic-resources'>
             <h4>Resources</h4>
@@ -65,7 +138,7 @@ function TopicsAccordion({ topic, onDelete, index, courseId, course }) {
               </div>
               <div className='resource-item'>
                 <FontAwesomeIcon icon={faVideo} />
-                <span>Video Tutorial</span>
+                <span>Lecture Video</span>
               </div>
               <div className='resource-item'>
                 <FontAwesomeIcon icon={faLink} />
