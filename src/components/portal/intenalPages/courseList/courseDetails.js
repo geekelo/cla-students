@@ -28,7 +28,7 @@ function CourseDetails() {
   const location = useLocation()
   const { course } = location.state || {}
   const [topics, setTopics] = useState([])
-  const [userRoleId, setUserRoleId] = useState(null);
+  const [userRole, setUserRole] = useState(null);
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -68,7 +68,7 @@ function CourseDetails() {
 
     if (id) {
       fetchCourseDetails();
-      setUserRoleId(sessionStorage.getItem('userRoleId'))
+      setUserRole(sessionStorage.getItem('userRole'))
     }
   }, [id, navigate])
 
@@ -317,7 +317,7 @@ function CourseDetails() {
           <div className='course-header'>
             <div className='course-title-container'>
               <h1 className='course-title'>{course?.name}</h1>
-              {sessionStorage.getItem('userRole') === 'facilitator' && (
+              {userRole === 'facilitator' && (
                 <div className='course-actions'>
                   <button type='button' className='action-icon' onClick={handleEditCourse} title='Edit Course'>
                     <FontAwesomeIcon icon={faEdit} />
@@ -373,7 +373,7 @@ function CourseDetails() {
           <div className='topics-section'>
             <div className='topics-header'>
               <h2>Topics</h2>
-              {userRoleId === '1' && (
+              {userRole === 'facilitator' && (
               <button className='add-topic' onClick={handleAddTopic}>
                 <FontAwesomeIcon icon={faPlus} className='icon' /> Add Topic
               </button>)}
@@ -412,8 +412,7 @@ function CourseDetails() {
             >
               <FontAwesomeIcon icon={faVideo} className="btn-icon" /> View Live Classes
             </button>
-            {userRoleId === '1' && (
-            <>
+            {userRole === 'facilitator' && (
             <button
               type="button"
               className="course-action-btn"
@@ -421,6 +420,8 @@ function CourseDetails() {
             >
               <FontAwesomeIcon icon={faPlus} className="btn-icon" /> Schedule Live Class
             </button>
+            )}
+            {userRole === 'facilitator' && (
             <button
               type="button"
               className="course-action-btn"
@@ -428,7 +429,6 @@ function CourseDetails() {
             >
               <FontAwesomeIcon icon={faPlus} className="btn-icon" /> Add Assignment
             </button>
-          </>
           )}
           </div>
         </div>

@@ -32,9 +32,12 @@ function TopicsAccordion({ topic, onDelete, index, courseId, course }) {
           <h3 className='topic-title'>{topic.name}</h3>
         </div>
         <div className='topic-actions'>
+        {sessionStorage.getItem('userRole') === 'facilitator' && (
           <button type='button' className='edit-topic' onClick={handleEdit} title='Edit Topic'>
             <FontAwesomeIcon icon={faPencilAlt} />
           </button>
+        )}
+        {sessionStorage.getItem('userRole') === 'facilitator' && (
           <button
             type='button'
             className='delete-topic'
@@ -46,6 +49,7 @@ function TopicsAccordion({ topic, onDelete, index, courseId, course }) {
           >
             <FontAwesomeIcon icon={faTrash} />
           </button>
+        )}
           <button type='button' className={`topic-toggle-btn ${isOpen ? 'open' : ''}`} onClick={toggleAccordion}>
             <FontAwesomeIcon icon={faChevronDown} />
           </button>
