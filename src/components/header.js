@@ -1,13 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../stylesheets/header.css';
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const handleLogout = () => {
+    // Clear login data (you can adjust this based on your auth logic)
+    localStorage.clear();
+    sessionStorage.clear();
+  };
+
+  useEffect(() => {
+    // Check if the user is logged in by checking if a token exists in localStorage
+    const token = sessionStorage.getItem('authToken');
+    setIsLoggedIn(!!token); 
+  }, []);
 
   return (
     <header className="header">
@@ -50,9 +63,15 @@ function Header() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/login" className="nav-link login">
-              Login
-            </Link>
+            {isLoggedIn ? (
+              <button onClick={handleLogout} className="nav-link logout">
+                Logout
+              </button>
+            ) : (
+              <Link to="/login" className="nav-link login">
+                Login
+              </Link>
+            )}
           </li>
         </ul>
       </nav>
