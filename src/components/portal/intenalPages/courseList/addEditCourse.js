@@ -55,10 +55,10 @@ const AddEditCourseForm = () => {
 
         // Fetch roles
         const rolesResponse = await api.get('/api/v1/cla_roles')
-        console.log('Roles Response:', rolesResponse.data)
+        console.error('Roles Response:', rolesResponse.data)
       } catch (error) {
         if (error.response) {
-          console.log('Error fetching data:', error.response.data)
+          console.error('Error fetching data:', error.response.data)
           toast.error('Failed to load data')
         }
       }
@@ -114,25 +114,23 @@ const AddEditCourseForm = () => {
         },
       }
 
-      console.log('Sending course data:', JSON.stringify(courseData, null, 2))
-
-      let response
+      let response;
       if (isEditMode) {
         response = await api.put(`/api/v1/cla_courses/${course.id}`, courseData)
       } else {
         response = await api.post('/api/v1/cla_courses', courseData)
       }
 
-      console.log('Course response:', response.data)
+      if (response) {
       toast.success(isEditMode ? 'Course updated successfully!' : 'Course created successfully!')
       navigate('/portal/instructorDesk')
+      }
     } catch (error) {
       let errorMessage = isEditMode
         ? 'Failed to update course. Please try again.'
         : 'Failed to create course. Please try again.'
 
       if (error.response) {
-        console.log('Error response:', error.response.data)
         if (typeof error.response.data.error === 'string') {
           errorMessage = error.response.data.error
         } else if (error.response.data.errors) {

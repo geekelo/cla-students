@@ -109,8 +109,6 @@ const AddEditAssignment = () => {
         return;
       }
 
-      console.log('Sending assignment data:', formData);
-
       let response;
       if (isEditMode) {
         response = await api.put(`/api/v1/cla_assignments/${assignment.id}`, formData, {
@@ -128,16 +126,17 @@ const AddEditAssignment = () => {
         });
       }
 
-      console.log('Assignment response:', response.data);
-      toast.success(isEditMode ? 'Assignment updated successfully!' : 'Assignment created successfully!');
-      
-      navigate('/portal/assignments');
+      if (response) {
+        toast.success(isEditMode ? 'Assignment updated successfully!' : 'Assignment created successfully!');
+        
+        navigate('/portal/assignments');
+      }
     } catch (error) {
       console.error('Error with assignment:', error);
       let errorMessage = isEditMode ? 'Failed to update assignment. Please try again.' : 'Failed to create assignment. Please try again.';
 
       if (error.response) {
-        console.log('Error response:', error.response.data);
+        console.error('Error response:', error.response.data);
         if (typeof error.response.data.error === 'string') {
           errorMessage = error.response.data.error;
         } else if (error.response.data.errors) {

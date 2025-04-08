@@ -42,19 +42,12 @@ function CourseList() {
           params = { cla_user_id: userId };
         }
 
-        console.log('Fetching courses with params:', params);
-        console.log('User Role:', userRole);
-        console.log('User Id:', userId);
-
         const coursesResponse = await api.get('/api/v1/cla_courses/', {
           params,
           headers: {
             Authorization: `Bearer ${token}`
           }
         });
-
-        console.log('Courses API Response:', coursesResponse);
-        console.log('Courses data:', coursesResponse.data);
 
         setCourses(coursesResponse.data);
         setLoading(false);

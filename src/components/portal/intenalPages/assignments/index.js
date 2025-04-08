@@ -31,9 +31,6 @@ function Assignments() {
         const token = sessionStorage.getItem('authToken');
         const cla_cohort_id = sessionStorage.getItem('cohortId');
 
-        console.log('Token:', token);
-        console.log('Cohort ID:', cla_cohort_id);
-
         if (!token) {
           toast.error('Session expired. Please login again.');
           navigate('/login');
@@ -78,7 +75,6 @@ function Assignments() {
           });
           allAssignments.push(...assignmentsResponse.data);
         }
-        console.log('all assignment', allAssignments);
         setAssignments(allAssignments);
         setLoading(false);
       } catch (error) {

@@ -28,6 +28,7 @@ function CourseDetails() {
   const location = useLocation()
   const { course } = location.state || {}
   const [topics, setTopics] = useState([])
+  const [userRole, setUserRole] = useState(null);
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -46,7 +47,7 @@ function CourseDetails() {
           },
         })
 
-        console.log('Course Details Response:', response.data)
+        console.log('Course Details Loaded:', response.status)
 
         // Fetch topics for the course
         const topicsResponse = await api.get('/api/v1/cla_topics', {
@@ -55,18 +56,18 @@ function CourseDetails() {
             Authorization: `Bearer ${token}`,
           },
         })
-        console.log('Course Topics Response:', topicsResponse.data)
         setTopics(topicsResponse.data || [])
       } catch (error) {
         console.error('Error fetching course details:', error)
         if (error.response) {
-          console.log('Error response:', error.response.data)
+          console.error('Error response:', error.response.data)
         }
       }
     }
 
     if (id) {
-      fetchCourseDetails()
+      fetchCourseDetails();
+      setUserRole(sessionStorage.getItem('userRole'))
     }
   }, [id, navigate])
 
@@ -96,12 +97,11 @@ function CourseDetails() {
         },
       })
 
-      console.log('Assignments Response:', response.data)
       navigate('/portal/assignments/', { state: { assignments: response.data } })
     } catch (error) {
       console.error('Error fetching assignments:', error)
       if (error.response) {
-        console.log('Error response:', error.response.data)
+        console.error('Error response:', error.response.data)
       }
       toast.error('Failed to fetch assignments. Please try again.')
     }
@@ -315,7 +315,7 @@ function CourseDetails() {
           <div className='course-header'>
             <div className='course-title-container'>
               <h1 className='course-title'>{course?.name}</h1>
-              {sessionStorage.getItem('userRole') === 'facilitator' && (
+              {userRole === 'facilitator' && (
                 <div className='course-actions'>
                   <button type='button' className='action-icon' onClick={handleEditCourse} title='Edit Course'>
                     <FontAwesomeIcon icon={faEdit} />
@@ -371,9 +371,10 @@ function CourseDetails() {
           <div className='topics-section'>
             <div className='topics-header'>
               <h2>Topics</h2>
+              {userRole === 'facilitator' && (
               <button className='add-topic' onClick={handleAddTopic}>
                 <FontAwesomeIcon icon={faPlus} className='icon' /> Add Topic
-              </button>
+              </button>)}
             </div>
             <div className='topics-list'>
               {topics.length > 0 ? (
@@ -409,6 +410,7 @@ function CourseDetails() {
             >
               <FontAwesomeIcon icon={faVideo} className="btn-icon" /> View Live Classes
             </button>
+            {userRole === 'facilitator' && (
             <button
               type="button"
               className="course-action-btn"
@@ -416,6 +418,8 @@ function CourseDetails() {
             >
               <FontAwesomeIcon icon={faPlus} className="btn-icon" /> Schedule Live Class
             </button>
+            )}
+            {userRole === 'facilitator' && (
             <button
               type="button"
               className="course-action-btn"
@@ -423,6 +427,7 @@ function CourseDetails() {
             >
               <FontAwesomeIcon icon={faPlus} className="btn-icon" /> Add Assignment
             </button>
+          )}
           </div>
         </div>
       </div>
