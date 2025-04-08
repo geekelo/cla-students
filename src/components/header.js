@@ -19,7 +19,7 @@ function Header() {
   useEffect(() => {
     // Check if the user is logged in by checking if a token exists in localStorage
     const token = sessionStorage.getItem('authToken');
-    setIsLoggedIn(!!token); 
+    setIsLoggedIn(!!token);
   }, []);
 
   return (
