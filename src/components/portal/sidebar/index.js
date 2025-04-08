@@ -34,7 +34,7 @@ function Sidebar() {
               className={getButtonClass('dashboard')}
               aria-label="View Dashboard"
             >
-              <FontAwesomeIcon icon={faChartLine} className="nav-icon" /> Progress Board
+              <FontAwesomeIcon icon={faChartLine} className="nav-icon" /> Dashboard
             </button>
           </li>
         )}
