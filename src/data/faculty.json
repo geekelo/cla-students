@@ -13,51 +13,48 @@
       ]
     },
     {
-      "id": 6,
+      "id": 2,
       "name": "Nguavese Jennifer Tokula",
       "role": "Program Coordinator ",
       "image": "https://jjrsf.org/cla/wp-content/uploads/2025/01/Avase.jpg",
       "bio": "Specializes in Christian counseling and pastoral care."
     },
     {
-      "id": 5,
+      "id": 3,
       "name": "Nnenna Mosugu",
       "role": "Program Administrator",
       "image": "https://jjrsf.org/cla/wp-content/uploads/2025/01/Nnenna.jpg",
       "bio": "Skilled administrator with focus on student support and program management."
     },
-   
+
     {
-      "id": 3,
+      "id": 4,
       "name": "Dr Paulette Jordan",
       "role": "Senior Faculty Member",
       "image": "https://jjrsf.org/cla/wp-content/uploads/2025/01/Paulette.jpg",
       "bio": "Specializes in biblical studies and Christian education with extensive teaching experience."
     },
     {
-      "id": 7,
+      "id": 5,
       "name": "Rev. Mosi Mosugu",
       "role": "Senior Faculty Member",
       "image": "https://jjrsf.org/cla/wp-content/uploads/2025/01/Mosi-scaled.jpg",
       "bio": "Experienced minister and educator in biblical studies."
     },
     {
-      "id": 4,
+      "id": 6,
       "name": "DR. KOFI OSEI-KUSI",
       "role": "Faculty Member",
       "image": "https://jjrsf.org/cla/wp-content/uploads/2025/01/Kofi.jpg",
       "bio": "Expert in Christian leadership and organizational management."
     },
     {
-      "id": 2,
+      "id": 7,
       "name": "Modupe Mosugu",
       "role": "Faculty Member",
       "image": "https://jjrsf.org/cla/wp-content/uploads/2025/01/Modupe-scaled.jpg",
       "bio": "An experienced educator and program coordinator with expertise in Christian leadership development."
     },
-   
-    
-   
     {
       "id": 8,
       "name": "Rev. Ubandoma Seibol Solomon",
@@ -65,16 +62,16 @@
       "image": "https://jjrsf.org/cla/wp-content/uploads/2024/01/Solo.jpg",
       "bio": "Expert in pastoral ministry and leadership development."
     },
-   
+
     {
-      "id": 11,
+      "id": 9,
       "name": "Rev Joshua Tende",
       "role": "Faculty Member",
       "image": "https://jjrsf.org/cla/wp-content/uploads/2024/01/rev-pic-4.jpg",
       "bio": "Experienced minister and educator in Christian leadership."
     },
     {
-      "id": 12,
+      "id": 10,
       "name": "Pastor Arome Tokula",
       "role": "Faculty Member",
       "image": "https://jjrsf.org/cla/wp-content/uploads/2025/01/Arome.jpg",
@@ -82,21 +79,21 @@
     },
 
     {
-      "id": 13,
+      "id": 11,
       "name": "Pharm. Oseka Molade",
       "role": "Facilitator",
       "image": "https://jjrsf.org/cla/wp-content/uploads/2025/04/Pharm-Oseka-Molade.jpg",
       "bio": "Pharmacist Oseka Molade is a Training Consultant dedicated to improving lives, systems and institutions through service, training and mentorship. She has facilitated over 53 physical and virtual trainings for workers and leaders of Corporate, Non-Governmental and Faith Based Organizations. She oversees a mentorship platform for nurturing and empowering youth on relevant soft skills with a focus on sharpening individualistic strengths to boost organizational performance.Oseka is a Common Wealth 100 Open-Source Leader with a Bachelor of Pharmacy degree, a Master's in Public Health, a Postgraduate Diploma in Education, and is a Fellow of the West African Postgraduate College of Pharmacists."
     },
     {
-      "id": 9,
+      "id": 12,
       "name": "Maj Gen Chukwuemeka Chamberlain Okonkwo",
       "role": "Guest Lecturer",
       "image": "https://jjrsf.org/cla/wp-content/uploads/2025/01/CC.jpg",
       "bio": "Military leader bringing unique perspectives on leadership and discipline."
     },
     {
-      "id": 10,
+      "id": 13,
       "name": "Engr GENERAL DELE AROGUNDADE",
       "role": "Guest Lecturer",
       "image": "https://jjrsf.org/cla/wp-content/uploads/2025/01/IMG-20250116-WA0052.jpg",

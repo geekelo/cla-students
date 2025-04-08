@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import "../stylesheets/header.css";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import '../stylesheets/header.css';
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,7 +18,7 @@ function Header() {
 
   useEffect(() => {
     // Check if the user is logged in by checking if a token exists in localStorage
-    const token = sessionStorage.getItem("authToken");
+    const token = sessionStorage.getItem('authToken');
     setIsLoggedIn(!!token);
   }, []);
 
@@ -28,9 +28,9 @@ function Header() {
         <img src="/JJRSF purple.png" alt="Logo" className="logo" />
       </div>
       <button className="mobile-menu-btn" onClick={toggleMenu}>
-        <span className={`menu-icon ${isMenuOpen ? "open" : ""}`}></span>
+        <span className={`menu-icon ${isMenuOpen ? 'open' : ''}`}></span>
       </button>
-      <nav className={`nav ${isMenuOpen ? "nav-open" : ""}`}>
+      <nav className={`nav ${isMenuOpen ? 'nav-open' : ''}`}>
         <ul className="nav-list">
           <li className="nav-item">
             <Link to="/" className="nav-link">
