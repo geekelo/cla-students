@@ -64,9 +64,9 @@ function Header() {
           </li>
           <li className="nav-item">
             {isLoggedIn ? (
-              <button onClick={handleLogout} className="nav-link logout">
+              <Link to="/" onClick={handleLogout} className="nav-link login">
                 Logout
-              </button>
+              </Link>
             ) : (
               <Link to="/login" className="nav-link login">
                 Login
