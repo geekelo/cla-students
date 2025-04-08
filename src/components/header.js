@@ -12,8 +12,8 @@ function Header() {
 
   const handleLogout = () => {
     // Clear login data (you can adjust this based on your auth logic)
-    sessionStorage.removeItem('authToken'); 
-    setIsLoggedIn(false); 
+    localStorage.clear();
+    sessionStorage.clear();
   };
 
   useEffect(() => {
