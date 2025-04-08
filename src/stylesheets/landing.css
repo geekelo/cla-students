@@ -73,3 +73,14 @@
   background-color: #442e79;
   color: #fff;
 }
+
+@media screen and (max-width: 920px) {
+  .title {
+    font-size: 1.6rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+  }
+}
+
