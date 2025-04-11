@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import 'react-toastify/dist/ReactToastify.css';
 import '../../stylesheets/login.css';
 import { createAxiosInstance } from '../../config';
@@ -18,6 +20,7 @@ function LoginPage() {
       password: ''
     }
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setFormData(prev => ({
@@ -109,6 +112,10 @@ function LoginPage() {
     }
   }, [location.state]);
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className="login-container">
       <ToastContainer
@@ -156,17 +163,28 @@ function LoginPage() {
               <label htmlFor="password" className="form-label">
                 Password
               </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                className="form-input"
-                placeholder="********"
-                required
-                value={formData.user.password}
-                onChange={handleChange}
-                disabled={loading}
-              />
+              <div className="password-input-container">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  id="password"
+                  name="password"
+                  className="form-input"
+                  placeholder="********"
+                  required
+                  value={formData.user.password}
+                  onChange={handleChange}
+                  disabled={loading}
+                />
+                <button 
+                  type="button" 
+                  className="password-toggle-btn" 
+                  onClick={togglePasswordVisibility}
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  tabIndex="0"
+                >
+                  <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                </button>
+              </div>
             </div>
 
             <div className="form-options">
@@ -192,9 +210,6 @@ function LoginPage() {
               {loading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
-
-      
-      
         </div>
       </div>
     </div>

@@ -171,6 +171,44 @@ a {
   text-decoration: underline;
 }
 
+/* Add or update these styles in your login.css file */
+
+.password-input-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-input-container input {
+  width: 100%;
+  padding-right: 40px; /* Make room for the eye icon */
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #442e79; /* Light purple color */
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.password-toggle-btn:hover {
+  color: #442e79; /* Slightly darker purple on hover */
+}
+
+.password-toggle-btn:focus {
+  outline: none;
+  color: #442e79; /* Even darker purple on focus */
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   .login-wrapper {
