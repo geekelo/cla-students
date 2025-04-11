@@ -8,7 +8,9 @@ import {
   faIdCard,
   faSpinner,
   faPhone,
-  faCalendarAlt
+  faCalendarAlt,
+  faEye,
+  faEyeSlash
 } from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -37,17 +39,22 @@ function SignUp() {
     }
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch cohorts
-        const cohortsResponse = await api.get('/api/v1/cla_cohorts');
-        setCohorts(cohortsResponse.data.cohorts || []);
+        // Only fetch cohorts and roles if not in edit mode
+        if (!isEditMode) {
+          // Fetch cohorts
+          const cohortsResponse = await api.get('/api/v1/cla_cohorts');
+          setCohorts(cohortsResponse.data.cohorts || []);
 
-        // Fetch roles
-        const rolesResponse = await api.get('/api/v1/cla_roles');
-        setRoles(rolesResponse.data.roles || []);
-        
+          // Fetch roles
+          const rolesResponse = await api.get('/api/v1/cla_roles');
+          setRoles(rolesResponse.data.roles || []);
+        }
       } catch (error) {
         console.error('Error fetching data:', error);
         if (error.response) {
@@ -57,7 +64,7 @@ function SignUp() {
     };
 
     fetchData();
-  }, []);
+  }, [isEditMode]);
 
   useEffect(() => {
     if (isEditMode && userData) {
@@ -88,6 +95,14 @@ function SignUp() {
     }));
     
     if (error) setError(null);
+  };
+
+  const togglePasswordVisibility = (field) => {
+    if (field === 'password') {
+      setShowPassword(!showPassword);
+    } else if (field === 'confirmation') {
+      setShowConfirmPassword(!showConfirmPassword);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -123,6 +138,24 @@ function SignUp() {
       let response;
       if (isEditMode) {
         response = await api.put(`/api/v1/edit_profile?id=${formData.user.id}`, userData);
+        
+        // Update session storage with the new user data
+        sessionStorage.setItem('userName', formData.user.name);
+        sessionStorage.setItem('email', formData.user.email);
+        sessionStorage.setItem('birthday', formData.user.birthday || '');
+        sessionStorage.setItem('phoneNumber', formData.user.phone_number || '');
+        
+        // Also update localStorage userData object
+        const storedData = JSON.parse(localStorage.getItem('userData')) || {};
+        const updatedData = {
+          ...storedData,
+          userName: formData.user.name,
+          email: formData.user.email,
+          birthday: formData.user.birthday || '',
+          phoneNumber: formData.user.phone_number || ''
+        };
+        localStorage.setItem('userData', JSON.stringify(updatedData));
+        
         toast.success('Profile updated successfully!');
         navigate('/portal/profile');
       } else {
@@ -276,17 +309,28 @@ function SignUp() {
                         <FontAwesomeIcon icon={faLock} />
                         Password
                       </label>
-                      <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={formData.user.password}
-                        onChange={handleChange}
-                        required
-                        placeholder="Create a password"
-                        disabled={loading}
-                        minLength="6"
-                      />
+                      <div className="password-input-container">
+                        <input
+                          type={showPassword ? 'text' : 'password'}
+                          id="password"
+                          name="password"
+                          value={formData.user.password}
+                          onChange={handleChange}
+                          required
+                          placeholder="Create a password"
+                          disabled={loading}
+                          minLength="6"
+                        />
+                        <button 
+                          type="button" 
+                          className="password-toggle-btn" 
+                          onClick={() => togglePasswordVisibility('password')}
+                          aria-label={showPassword ? 'Hide password' : 'Show password'}
+                          tabIndex="0"
+                        >
+                          <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                        </button>
+                      </div>
                     </div>
 
                     <div className="form-group">
@@ -294,68 +338,80 @@ function SignUp() {
                         <FontAwesomeIcon icon={faLock} />
                         Confirm Password
                       </label>
-                      <input
-                        type="password"
-                        id="password_confirmation"
-                        name="password_confirmation"
-                        value={formData.user.password_confirmation}
-                        onChange={handleChange}
-                        required
-                        placeholder="Confirm your password"
-                        disabled={loading}
-                        minLength="6"
-                      />
+                      <div className="password-input-container">
+                        <input
+                          type={showConfirmPassword ? 'text' : 'password'}
+                          id="password_confirmation"
+                          name="password_confirmation"
+                          value={formData.user.password_confirmation}
+                          onChange={handleChange}
+                          required
+                          placeholder="Confirm your password"
+                          disabled={loading}
+                          minLength="6"
+                        />
+                        <button 
+                          type="button" 
+                          className="password-toggle-btn" 
+                          onClick={() => togglePasswordVisibility('confirmation')}
+                          aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+                          tabIndex="0"
+                        >
+                          <FontAwesomeIcon icon={showConfirmPassword ? faEyeSlash : faEye} />
+                        </button>
+                      </div>
+                    </div>
+                    
+                    {/* Role ID and Cohort ID fields - Only shown in signup mode */}
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label htmlFor="cla_role_id">
+                          <FontAwesomeIcon icon={faIdCard} />
+                          Role ID
+                        </label>
+                        <select
+                          id="cla_role_id"
+                          name="cla_role_id"
+                          value={formData.user.cla_role_id}
+                          onChange={handleChange}
+                          required
+                          disabled={loading}
+                          className="form-select"
+                        >
+                          <option value="">Select Role ID</option>
+                          {roles.map((role) => (
+                            <option key={role.id} value={role.id}>
+                               {role.id} - {role.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div className="form-group">
+                        <label htmlFor="cla_cohort_id">
+                          <FontAwesomeIcon icon={faIdCard} />
+                          Cohort ID
+                        </label>
+                        <select
+                          id="cla_cohort_id"
+                          name="cla_cohort_id"
+                          value={formData.user.cla_cohort_id}
+                          onChange={handleChange}
+                          required
+                          disabled={loading}
+                          className="form-select"
+                        >
+                          <option value="">Select Cohort ID</option>
+                          {cohorts.map((cohort) => (
+                            <option key={cohort.id} value={cohort.id}>
+                              {cohort.id} - {cohort.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
                     </div>
                   </>
                 )}
-
-                <div className="form-row">
-                  <div className="form-group">
-                    <label htmlFor="cla_role_id">
-                      <FontAwesomeIcon icon={faIdCard} />
-                      Role ID
-                    </label>
-                    <select
-                      id="cla_role_id"
-                      name="cla_role_id"
-                      value={formData.user.cla_role_id}
-                      onChange={handleChange}
-                      required
-                      disabled={loading}
-                      className="form-select"
-                    >
-                      <option value="">Select Role ID</option>
-                      {roles.map((role) => (
-                        <option key={role.id} value={role.id}>
-                           {role.id} - {role.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="cla_cohort_id">
-                      <FontAwesomeIcon icon={faIdCard} />
-                      Cohort ID
-                    </label>
-                    <select
-                      id="cla_cohort_id"
-                      name="cla_cohort_id"
-                      value={formData.user.cla_cohort_id}
-                      onChange={handleChange}
-                      required
-                      disabled={loading}
-                      className="form-select"
-                    >
-                      <option value="">Select Cohort ID</option>
-                      {cohorts.map((cohort) => (
-                        <option key={cohort.id} value={cohort.id}>
-                          {cohort.id} - {cohort.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
 
                 <button 
                   type="submit" 
@@ -393,4 +449,4 @@ function SignUp() {
   );
 }
 
-export default SignUp; 
+export default SignUp;
