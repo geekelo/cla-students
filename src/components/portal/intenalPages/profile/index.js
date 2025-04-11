@@ -106,7 +106,33 @@ function Profile() {
 
   const formatDate = (dateString) => {
     if (!dateString) return 'Not set';
-    return new Date(dateString).toLocaleDateString();
+    
+    const date = new Date(dateString);
+    
+    // Check if date is valid
+    if (isNaN(date)) return 'Invalid date';
+    
+    // Array of month names
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    
+    // Get day, month, and year
+    const day = date.getDate();
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+    
+    // Function to add ordinal suffix to day (1st, 2nd, 3rd, 4th, etc.)
+    const getOrdinalSuffix = (day) => {
+      if (day > 3 && day < 21) return 'th'; // 4th through 20th
+      switch (day % 10) {
+        case 1: return 'st';
+        case 2: return 'nd';
+        case 3: return 'rd';
+        default: return 'th';
+      }
+    };
+    
+    // Format date as "4th Mar 2025"
+    return `${day}${getOrdinalSuffix(day)} ${month} ${year}`;
   };
 
   return (
