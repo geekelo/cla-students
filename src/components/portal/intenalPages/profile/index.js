@@ -139,7 +139,7 @@ function Profile() {
         </p>
         <p className="profile-info">
           <span className="profile-label">Birthday: </span>
-          {userData.birthday ? formatDateWithOrdinal(userData.birthday) : 'Not set'}
+          {userData.birthday ? formatDateWithOrdinal(userData?.birthday) : 'Not set'}
         </p>
         <p className="profile-info">
           <span className="profile-label">Cohort: </span>
