@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
+import { formatDateWithOrdinal } from '../../../helpers/dateFormatter'; 
 
 function Profile() {
   const navigate = useNavigate();
@@ -104,11 +105,6 @@ function Profile() {
     });
   };
 
-  const formatDate = (dateString) => {
-    if (!dateString) return 'Not set';
-    return new Date(dateString).toLocaleDateString();
-  };
-
   return (
     <div className="profile-container">
       <ToastContainer
@@ -143,7 +139,7 @@ function Profile() {
         </p>
         <p className="profile-info">
           <span className="profile-label">Birthday: </span>
-          {formatDate(userData.birthday)}
+          {userData.birthday ? formatDateWithOrdinal(userData?.birthday) : 'Not set'}
         </p>
         <p className="profile-info">
           <span className="profile-label">Cohort: </span>
