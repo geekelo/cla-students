@@ -37,11 +37,11 @@ function Assignments() {
           return;
         }
 
-        if (!cla_cohort_id) {
-          toast.error('Cohort information not found. Please login again.');
-          navigate('/login');
-          return;
-        }
+        // if (!cla_cohort_id) {
+        //   toast.error('Cohort information not found. Please login again.');
+        //   navigate('/login');
+        //   return;
+        // }
 
         // If assignments are passed through location state, use those
         if (location.state?.assignments && location.state.assignments.length > 0) {
