@@ -1,25 +1,49 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../stylesheets/header.css';
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   const handleLogout = () => {
-    // Clear login data (you can adjust this based on your auth logic)
+    // Clear login data
     localStorage.clear();
     sessionStorage.clear();
+    setIsLoggedIn(false);
+    navigate('/');
+  };
+
+  // Create a function to check login status
+  const checkLoginStatus = () => {
+    const token = sessionStorage.getItem('authToken');
+    setIsLoggedIn(!!token);
   };
 
   useEffect(() => {
-    // Check if the user is logged in by checking if a token exists in localStorage
-    const token = sessionStorage.getItem('authToken');
-    setIsLoggedIn(!!token);
+    // Check login status when component mounts
+    checkLoginStatus();
+    
+    // Set up event listener for logout events
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'authToken' || event.key === null) {
+        checkLoginStatus();
+      }
+    });
+    
+    // Listen for custom logout event
+    window.addEventListener('user-logout', checkLoginStatus);
+    
+    // Cleanup event listeners
+    return () => {
+      window.removeEventListener('storage', checkLoginStatus);
+      window.removeEventListener('user-logout', checkLoginStatus);
+    };
   }, []);
 
   return (
