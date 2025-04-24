@@ -38,9 +38,14 @@ function Assignments() {
         }
 
         if (!cla_cohort_id) {
-          toast.error('Cohort information not found. Please login again.');
-          navigate('/login');
-          return;
+          const userRole = sessionStorage.getItem('userRole');
+          if (userRole === 'student') {
+            toast.error('Cohort information not found. Please login again.');
+            navigate('/login');
+            return;
+          } else {
+            toast.warning('Cohort information not found. Some features may be limited.');
+          }
         }
 
         // If assignments are passed through location state, use those

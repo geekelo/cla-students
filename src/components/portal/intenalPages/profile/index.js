@@ -95,6 +95,9 @@ function Profile() {
     localStorage.clear();
     sessionStorage.clear();
     
+    // Dispatch a custom event to notify header of logout
+    window.dispatchEvent(new Event('user-logout'));
+    
     // Dismiss the logging out toast and show success message
     toast.dismiss('loggingOut');
     toast.success('Logged out successfully!', {
