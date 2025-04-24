@@ -37,11 +37,16 @@ function Assignments() {
           return;
         }
 
-        // if (!cla_cohort_id) {
-        //   toast.error('Cohort information not found. Please login again.');
-        //   navigate('/login');
-        //   return;
-        // }
+        if (!cla_cohort_id) {
+          const userRole = sessionStorage.getItem('userRole');
+          if (userRole === 'student') {
+            toast.error('Cohort information not found. Please login again.');
+            navigate('/login');
+            return;
+          } else {
+            toast.warning('Cohort information not found. Some features may be limited.');
+          }
+        }
 
         // If assignments are passed through location state, use those
         if (location.state?.assignments && location.state.assignments.length > 0) {
