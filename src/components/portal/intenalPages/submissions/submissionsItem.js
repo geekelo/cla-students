@@ -15,10 +15,14 @@ function SubmissionItem({ submission }) {
     setMark('');
   };
 
+  const handleDownload = () => {
+    if (submission.download_link) {
+      window.open(submission.download_link, '_blank');
+    }
+  };
+
   return (
     <li className="submission-card">
- 
-
       <div className="submission-details">
         <div className="submission-link">
           <FontAwesomeIcon icon={faLink} className="link-icon" />
@@ -34,7 +38,13 @@ function SubmissionItem({ submission }) {
       </div>
       <div className="submission-actions">
         <div className="action-top">
-          <a className="download-link">
+          <a 
+            className="download-link" 
+            onClick={handleDownload} 
+            href="#"
+            role="button"
+            style={{ cursor: 'pointer' }}
+          >
             <FontAwesomeIcon icon={faDownload} className="download-icon" />
             <span>Download Docs</span>
           </a>
@@ -71,8 +81,13 @@ SubmissionItem.propTypes = {
     student_name: PropTypes.string.isRequired,
     student_id: PropTypes.string.isRequired,
     student_email: PropTypes.string.isRequired,
-    dateSubmitted: PropTypes.string.isRequired,
     status: PropTypes.oneOf(['marked', 'unmarked']).isRequired,
+    download_link: PropTypes.string,
+    assignment_id: PropTypes.string,
+    score: PropTypes.number,
+    // dateSubmitted was in your original PropTypes but isn't in the API response
+    // you may want to format created_at from the API to use as dateSubmitted
+    dateSubmitted: PropTypes.string.isRequired,
   }).isRequired,
 };
 
