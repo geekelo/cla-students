@@ -214,16 +214,44 @@
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .submissions-section-wrapper {
+    margin: 10px;
     padding: 15px;
   }
 
   .tab-button {
     font-size: 0.9rem;
     padding: 8px 15px;
+    min-width: 100px;
   }
 
-  .submission-item {
-    padding: 10px;
+  .submission-card {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .submission-details {
+    width: 100%;
+  }
+
+  .submission-actions {
+    width: 100%;
+    align-items: flex-start;
+    margin-top: 10px;
+  }
+
+  .action-top, .action-bottom {
+    width: 100%;
+  }
+
+  .unmarked-section {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .mark-form {
+    width: 100%;
+    justify-content: flex-start;
   }
 }
 
@@ -239,15 +267,37 @@
     min-width: 80px;
   }
 
-  .submission-item {
+  .submissions-section-content {
     padding: 10px;
   }
 
-  .submission-text {
-    font-size: 0.9rem;
+  .submission-card {
+    padding: 12px;
   }
 
-  .submission-date {
+  .submission-name {
+    font-size: 1rem;
+  }
+
+  .submission-id, .submission-email {
     font-size: 0.8rem;
+  }
+
+  .download-link span {
+    font-size: 0.8rem;
+  }
+
+  .mark-form {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .mark-form input {
+    width: 100%;
+  }
+
+  .mark-form button {
+    width: 100%;
   }
 }
