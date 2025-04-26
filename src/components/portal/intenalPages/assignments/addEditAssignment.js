@@ -157,7 +157,7 @@ const AddEditAssignment = () => {
   };
 
   return (
-    <div className="student-display-area">
+    <div className="student-display-area assignment-fix">
       <ToastContainer
         position="top-right"
         autoClose={3000}
