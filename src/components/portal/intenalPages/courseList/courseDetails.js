@@ -316,18 +316,31 @@ function CourseDetails() {
             <div className='course-title-container'>
               <h1 className='course-title'>{course?.name}</h1>
               {userRole === 'facilitator' && (
-                <div className='course-actions'>
-                  <button type='button' className='action-icon' onClick={handleEditCourse} title='Edit Course'>
+                <div className='course-header-actions'>
+                  <button 
+                    type='button' 
+                    className='header-action-icon' 
+                    onClick={handleEditCourse} 
+                    title='Edit Course'
+                    aria-label="Edit course"
+                  >
                     <FontAwesomeIcon icon={faEdit} />
                   </button>
-                  <button type='button' className='action-icon' onClick={handleDuplicateCourse} title='Duplicate Course'>
+                  <button 
+                    type='button' 
+                    className='header-action-icon' 
+                    onClick={handleDuplicateCourse} 
+                    title='Duplicate Course'
+                    aria-label="Duplicate course"
+                  >
                     <FontAwesomeIcon icon={faCopy} />
                   </button>
                   <button
                     type='button'
-                    className='action-icon delete-icon'
+                    className='header-action-icon delete-icon'
                     onClick={handleDeleteCourse}
                     title='Delete Course'
+                    aria-label="Delete course"
                   >
                     <FontAwesomeIcon icon={faTrash} />
                   </button>

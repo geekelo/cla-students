@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,6 +7,7 @@ import { faChevronDown, faTrash, faFileAlt, faVideo, faLink, faPencilAlt } from 
 function TopicsAccordion({ topic, onDelete, index, courseId, course }) {
   const [isOpen, setIsOpen] = useState(false)
   const navigate = useNavigate()
+  const contentRef = useRef(null)
 
   const toggleAccordion = () => {
     setIsOpen(!isOpen)
@@ -24,8 +25,15 @@ function TopicsAccordion({ topic, onDelete, index, courseId, course }) {
     })
   }
 
+  const handleDelete = (e) => {
+    e.stopPropagation()
+    onDelete(topic.id)
+  }
+
   const processDescription = (text) => {
-    const lines = text.split('\n'); // split by newlines
+    if (!text) return <p>No description available</p>;
+    
+    const lines = text.split('\n');
     const elements = [];
   
     lines.forEach((line, lineIndex) => {
@@ -73,7 +81,7 @@ function TopicsAccordion({ topic, onDelete, index, courseId, course }) {
                 href={part}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ display: 'block', marginTop: '10px' }}
+                style={{ display: 'block', marginTop: '10px', wordBreak: 'break-all' }}
               >
                 {part}
               </a>
@@ -101,32 +109,42 @@ function TopicsAccordion({ topic, onDelete, index, courseId, course }) {
           <h3 className='topic-title'>{topic.name}</h3>
         </div>
         <div className='topic-actions'>
-        {sessionStorage.getItem('userRole') === 'facilitator' && (
-          <button type='button' className='edit-topic' onClick={handleEdit} title='Edit Topic'>
-            <FontAwesomeIcon icon={faPencilAlt} />
-          </button>
-        )}
-        {sessionStorage.getItem('userRole') === 'facilitator' && (
-          <button
-            type='button'
-            className='delete-topic'
-            onClick={(e) => {
-              e.stopPropagation()
-              onDelete(topic.id)
-            }}
-            title='Delete Topic'
+          {sessionStorage.getItem('userRole') === 'facilitator' && (
+            <button 
+              type='button' 
+              className='edit-topic' 
+              onClick={handleEdit} 
+              title='Edit Topic'
+              aria-label="Edit topic"
+            >
+              <FontAwesomeIcon icon={faPencilAlt} />
+            </button>
+          )}
+          {sessionStorage.getItem('userRole') === 'facilitator' && (
+            <button
+              type='button'
+              className='delete-topic'
+              onClick={handleDelete}
+              title='Delete Topic'
+              aria-label="Delete topic"
+            >
+              <FontAwesomeIcon icon={faTrash} />
+            </button>
+          )}
+          <button 
+            type='button' 
+            className={`topic-toggle-btn ${isOpen ? 'open' : ''}`} 
+            onClick={toggleAccordion}
+            aria-expanded={isOpen}
+            aria-label={isOpen ? 'Collapse topic' : 'Expand topic'}
           >
-            <FontAwesomeIcon icon={faTrash} />
-          </button>
-        )}
-          <button type='button' className={`topic-toggle-btn ${isOpen ? 'open' : ''}`} onClick={toggleAccordion}>
             <FontAwesomeIcon icon={faChevronDown} />
           </button>
         </div>
       </div>
 
       {isOpen && (
-        <div className='topic-content'>
+        <div className='topic-content' ref={contentRef}>
           <div className='topic-description'>{processDescription(topic.description)}</div>
 
           <div className='topic-resources'>
@@ -159,7 +177,7 @@ TopicsAccordion.propTypes = {
     description: PropTypes.string,
   }).isRequired,
   onDelete: PropTypes.func.isRequired,
-  onEdit: PropTypes.func.isRequired,
+  onEdit: PropTypes.func,
   index: PropTypes.number.isRequired,
   courseId: PropTypes.string.isRequired,
   course: PropTypes.object.isRequired,
