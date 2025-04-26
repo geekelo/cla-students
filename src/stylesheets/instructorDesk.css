@@ -233,3 +233,246 @@
     font-size: 0.9rem;
   }
 }
+
+/* Students List Section Styles */
+.students-section {
+  margin-top: 30px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  color: rgba(68, 46, 121, 1);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.students-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.student-card {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.student-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.student-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(68, 46, 121, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(68, 46, 121, 1);
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.student-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.student-name {
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.student-details {
+  margin-bottom: 15px;
+  background-color: rgba(68, 46, 121, 0.05);
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.student-email, .student-id {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.student-email:last-child, .student-id:last-child {
+  margin-bottom: 0;
+}
+
+.student-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 10px;
+  border-radius: 6px;
+  border-left: 3px solid rgba(68, 46, 121, 0.8);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.stat-percentage {
+  display: inline-block;
+  margin-left: 5px;
+  color: #777;
+}
+
+.loading-spinner {
+  text-align: center;
+  padding: 30px;
+  color: #666;
+  font-style: italic;
+}
+
+.no-students, .no-cohort-selected {
+  text-align: center;
+  padding: 30px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  color: #666;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .students-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .student-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .student-card {
+    padding: 15px;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .student-avatar {
+    margin-bottom: 10px;
+  }
+  
+  .student-name {
+    text-align: center;
+  }
+  
+  .student-details {
+    padding: 8px;
+  }
+  
+  .section-title {
+    font-size: 1.3rem;
+  }
+  
+  .stat-item {
+    padding: 8px;
+  }
+}
+
+/* Custom styling for 100% attendance marker */
+.stat-percentage:has(100%) {
+  color: green;
+  font-weight: 500;
+}
+
+/* Custom styling for 0% markers */
+.stat-percentage:has(0%) {
+  color: #999;
+}
+
+/* Make student cards look like the design in the image */
+@media (min-width: 768px) {
+  .students-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .student-card {
+    flex: 0 0 calc(33.33% - 20px);
+    max-width: calc(33.33% - 20px);
+  }
+  
+  .cohort-filter {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+  
+  .filter-label {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+  }
+  
+  .cohort-select {
+    width: 100%;
+    max-width: none;
+  }
+  
+  .filter-button {
+    width: 100%;
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cohort-filter {
+    margin: 1.5rem 0;
+    padding: 0.75rem;
+  }
+  
+  .filter-label {
+    font-size: 0.9rem;
+  }
+  
+  .cohort-select {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+  
+  .filter-button {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+}
