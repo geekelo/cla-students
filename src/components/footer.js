@@ -71,6 +71,11 @@ function FooterSection() {
                   Contact
                 </Link>
               </li>
+            <li>
+<a href="https://wa.me/+2347070392387" target="_blank" rel="noopener noreferrer">
+  Contact Developer
+</a>
+            </li>
             </ul>
           </div>
         </div>
