@@ -72,9 +72,10 @@ function FooterSection() {
                 </Link>
               </li>
             <li>
-<a href="https://wa.me/+2347070392387" target="_blank" rel="noopener noreferrer">
-  Contact Developer
-</a>
+     💡<a href="https://wa.me/+2347070392387" target="_blank" rel="noopener noreferrer" style={{ color: 'black', textDecoration: 'none' }}
+>
+      Contact Developer
+       </a>
             </li>
             </ul>
           </div>
