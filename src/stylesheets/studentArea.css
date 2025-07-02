@@ -3,7 +3,7 @@
 /* Main Student Area */
 .student-area-container {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 /* Left Side Nav */
