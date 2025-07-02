@@ -3,6 +3,10 @@
 .course-details {
   padding: 2rem;
   font-family: 'Poppins', sans-serif;
+  min-width: 100vh;
+   overflow-y: auto;
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
 }
 
 /* Header Section */
