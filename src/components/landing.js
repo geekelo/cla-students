@@ -12,7 +12,7 @@ function Landing() {
             Our academy is committed to providing high-quality, faith-based training&nbsp;
             to students worldwide.
           </p>
-          <a href="https://forms.gle/QiQfJ1evkN5u2Wue6" className="cta-button">
+          <a href="https://forms.gle/LPTgtCnJDonnXkgh6" className="cta-button">
             APPLY HERE
           </a>
         </div>
