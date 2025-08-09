@@ -15,6 +15,7 @@ function AddAttendance() {
   const [liveClasses, setLiveClasses] = useState([]);
   const [selectedClass, setSelectedClass] = useState('');
   const [selectedCohortId, setSelectedCohortId] = useState('');
+  const [selectedCourseId, setSelectedCourseId] = useState('');
   const [students, setStudents] = useState([]);
   const [selectedStudent, setSelectedStudent] = useState('');
   const [present, setPresent] = useState('present');
@@ -55,6 +56,7 @@ function AddAttendance() {
     const selectedLiveClass = liveClasses.find(lc => lc.id === classId);
     if (selectedLiveClass) {
       setSelectedCohortId(selectedLiveClass.cla_cohort_id);
+      setSelectedCourseId(selectedLiveClass.cla_course_id);
     }
   };
 
@@ -119,6 +121,7 @@ function AddAttendance() {
           cla_live_class_id: selectedClass,
           cla_user_id: selectedStudent,
           cla_cohort_id: selectedCohortId.toString(),
+          cla_course_id: selectedCourseId.toString(),
           present: present === 'present'
         }
       };

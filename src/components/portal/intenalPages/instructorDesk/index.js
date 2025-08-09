@@ -105,6 +105,12 @@ function InstructorDesk() {
       setLoading(false);
     }
   };
+  const getTotalPoints = (course) => {
+    return course.course_stats.user_submission_percentage.submission_points +
+           course.course_stats.user_attendance_percentage.attendance_points +
+           course.course_stats.user_contribution_stats.contributions_points +
+           course.course_stats.user_cbt_stats.cbt_points;
+  }
 
   return (
     <div className="instructor-desk">
@@ -212,61 +218,52 @@ function InstructorDesk() {
                 key={student.student.user_id} 
                 className="student-card"
               >
-                <div className="student-avatar">
-                  <FontAwesomeIcon icon={faUser} />
+                <div className="student-header">
+                  <div className="student-avatar">
+                    <FontAwesomeIcon icon={faUser} />
+                  </div>
+                  <div className="student-basic-info">
+                    <h3 className="student-name">{student.student.name}</h3>
+                    <div className="student-contact">
+                      <p className="student-email">
+                        <FontAwesomeIcon icon={faEnvelope} /> {student.student.email}
+                      </p>
+                      <p className="student-id">
+                        <FontAwesomeIcon icon={faUser} /> ID: {student.student.user_id}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div className="student-info">
-                  <h3 className="student-name">{student.student.name}</h3>
-                  <div className="student-details">
-                    <p className="student-email">
-                      <FontAwesomeIcon icon={faEnvelope} /> {student.student.email}
-                    </p>
-                    <p className="student-id">
-                      <FontAwesomeIcon icon={faUser} /> ID: {student.student.user_id}
-                    </p>
-                  </div>
-                  
-                  <div className="student-stats">
-                    <div className="stat-item">
-                      <span className="stat-label">Courses:</span>
-                      <span className="stat-value">
-                        {student.course_completion_rate.completed_courses}/{student.course_completion_rate.total_courses}
-                        <span className="stat-percentage">
-                          ({student.course_completion_rate.completion_percentage}%)
-                        </span>
-                      </span>
+                
+                <div className="student-courses">
+                  <h4 className="courses-title">Enrolled Courses</h4>
+                  {student.courses.map((course) => (
+                    <div key={course.course_id} className="course-card">
+                      <h5 className="course-name">{course.course_name}</h5>
+                      <div className="stat-box assignment">
+                      <span className="stat-label">Total</span>
+                        <span className="stat-value">{getTotalPoints(course)}%</span>
+                      </div>
+                      <div className="course-stats-grid">
+                        <div className="stat-box assignment">
+                          <span className="stat-label">Assignment</span>
+                          <span className="stat-value">{course.course_stats.user_submission_percentage.submission_points}%</span>
+                        </div>
+                        <div className="stat-box attendance">
+                          <span className="stat-label">Attendance</span>
+                          <span className="stat-value">{course.course_stats.user_attendance_percentage.attendance_points}%</span>
+                        </div>
+                        <div className="stat-box contributions">
+                          <span className="stat-label">Contributions</span>
+                          <span className="stat-value">{course.course_stats.user_contribution_stats.contributions_points}%</span>
+                        </div>
+                        <div className="stat-box cbt">
+                          <span className="stat-label">CBT</span>
+                          <span className="stat-value">{course.course_stats.user_cbt_stats.cbt_points}%</span>
+                        </div>
+                      </div>
                     </div>
-                    
-                    <div className="stat-item">
-                      <span className="stat-label">Assignments:</span>
-                      <span className="stat-value">
-                        {student.user_submission_percentage.total_submissions}/{student.user_submission_percentage.total_assignments}
-                        <span className="stat-percentage">
-                          ({student.user_submission_percentage.submission_percentage}%)
-                        </span>
-                      </span>
-                    </div>
-                    
-                    <div className="stat-item">
-                      <span className="stat-label">Score:</span>
-                      <span className="stat-value">
-                        {student.user_score_percentage.total_user_score}/{student.user_score_percentage.total_possible_score}
-                        <span className="stat-percentage">
-                          ({student.user_score_percentage.score_percentage}%)
-                        </span>
-                      </span>
-                    </div>
-                    
-                    <div className="stat-item">
-                      <span className="stat-label">Attendance:</span>
-                      <span className="stat-value">
-                        {student.user_attendance_percentage.total_present}/{student.user_attendance_percentage.total_classes}
-                        <span className="stat-percentage">
-                          ({student.user_attendance_percentage.attendance_percentage}%)
-                        </span>
-                      </span>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             ))}
