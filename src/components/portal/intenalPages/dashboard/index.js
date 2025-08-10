@@ -23,13 +23,14 @@ function Dashboard() {
     totalPossibleScore: 0,
     totalUserScore: 0,
     attendancePercentage: 0,
+    studentDashboardStats: {},
   });
 
   useEffect(() => {
     const fetchDashboardStats = async () => {
       try {
         const token = sessionStorage.getItem('authToken');
-        const cohortId = sessionStorage.getItem('cohortId');
+        // const cohortId = sessionStorage.getItem('cohortId');
         const userId = sessionStorage.getItem('userId');
 
         if (!token) {
@@ -40,24 +41,7 @@ function Dashboard() {
 
         api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-        const courseResponse = await api.get('/api/v1/cla_dashboards/course_stats', {
-          params: { 
-            cla_cohort_id: cohortId,
-            cla_user_id: userId,
-          }
-        });
-        const scoreResponse = await api.get('/api/v1/cla_dashboards/score_stats', {
-          params: { 
-            cla_user_id: userId,
-          }
-        });
-        const assignmentResponse = await api.get('/api/v1/cla_dashboards/assignment_stats', {
-          params: { 
-            cla_user_id: userId,
-          }
-        });
-
-        const attendanceResponse = await api.get('/api/v1/cla_dashboards/attendance_stats', {
+        const studentDashboardData = await api.get('/api/v1/cla_dashboards/student_dashboard_stats', {
           params: { 
             cla_user_id: userId,
           }
@@ -65,29 +49,37 @@ function Dashboard() {
         
         // Update stats with the combined response data
         setStats({
-          totalCourses: courseResponse.data.total_courses || 0,
-          totalCoursesTaken: courseResponse.data.completed_courses || 0,
-          completionPercentage: courseResponse.data.completion_percentage || 0,
-          totalScore: scoreResponse.data.score_percentage || 0,
-          totalPossibleScore: scoreResponse.data.total_possible_score || 0,
-          totalUserScore: scoreResponse.data.total_user_score || 0,
-          // Update with assignment response data
-          totalAssignmentsGiven: assignmentResponse.data.total_assignments || 0,
-          totalAssignmentsDone: assignmentResponse.data.total_submissions || 0,
-          submissionPercentage: assignmentResponse.data.submission_percentage || 0,
-          totalClasses: attendanceResponse.data.total_classes || 0,
-          totalPresent: attendanceResponse.data.total_present || 0,
-          attendancePercentage: attendanceResponse.data.attendance_percentage || 0,
+          studentDashboardStats: studentDashboardData.data || {},
         });
 
       } catch (error) {
-        console.error('Error fetching dashboard stats:', error);
+        console.error('❌ Error fetching dashboard stats:', error);
+        console.error('🔍 Error details:', {
+          message: error.message,
+          response: error.response?.data,
+          status: error.response?.status
+        });
         toast.error('Failed to fetch dashboard statistics');
       }
     };
 
     fetchDashboardStats();
   }, [navigate]);
+
+  const getTotalPoints = (stat) => {
+    
+    // Check if we have nested course_stats
+    const statsData = stat.course_stats || stat;
+    
+    const assignment = Number(statsData?.user_submission_percentage?.submission_points) || 0;
+    const attendance = Number(statsData?.user_attendance_percentage?.attendance_points) || 0;
+    const contributions = Number(statsData?.user_contribution_stats?.contributions_points) || 0;
+    const cbt = Number(statsData?.user_cbt_stats?.cbt_points) || 0;
+        
+    const total = assignment + attendance + contributions + cbt;
+    
+    return total;
+  }
 
   const notices = [
     { id: 1, title: 'Important Reminders for Our Classes:', content: 'The meeting room opens at 7:30 AM for all students!\nClasses commence at 8:00 AM sharp!'},
@@ -101,45 +93,85 @@ function Dashboard() {
       <div className="dashboard-header">
         <h1 className="dashboard-title">Dashboard</h1>
         <p className="dashboard-subtitle">Quick overview of your performance</p>
+        <div>
+          <h2 className="stat-title">CLA Level</h2>
+          <p className="stat-value">
+            {stats.studentDashboardStats?.course_stats?.length || 0} / 3
+          </p>
+        </div>
       </div>
-
+  
       <div className="dashboard-stats">
-        <div className="dashboard-stat">
-          <h2 className="stat-title">Courses</h2>
-          <p className="stat-value">
-            {stats.totalCoursesTaken} / {stats.totalCourses}
-          </p>
-          <p className="stat-percentage">
-            {stats.completionPercentage}% Completed
-          </p>
-        </div>
-        <div className="dashboard-stat">
-          <h2 className="stat-title">Scores</h2>
-          <p className="stat-value">
-            {stats.totalUserScore} / {stats.totalPossibleScore}
-          </p>
-          <p className="stat-percentage">
-            {stats.totalScore}% Overall
-          </p>
-        </div>
-        <div className="dashboard-stat">
-          <h2 className="stat-title">Assignments</h2>
-          <p className="stat-value">
-            {stats.totalAssignmentsDone} / {stats.totalAssignmentsGiven}
-          </p>
-          <p className="stat-percentage">
-           {stats.submissionPercentage}% Submissions
-          </p>
-        </div>
-        <div className="dashboard-stat">
-          <h2 className="stat-title">Attendance</h2>
-          <p className="stat-value">
-            {stats.totalPresent} / {stats.totalClasses}
-          </p>
-          <p className="stat-percentage">
-            {stats.attendancePercentage} % Attendance
-          </p>
-        </div>
+        {stats.studentDashboardStats.course_stats && stats.studentDashboardStats.course_stats.length > 0 ? (
+          // If course_stats array exists, map over it
+          stats.studentDashboardStats.course_stats.map((stat, index) => (
+            <div key={stat.course_id || index} className="dashboard-stat">
+              <h2 className="stat-title">{stat.course_name}</h2>
+              <div className="stat-details">
+                <p className="stat-percentage">
+                  Assignment: {stat.course_stats?.user_submission_percentage?.submission_points || 0}%
+                </p>
+                <p className="stat-percentage">
+                  Attendance: {stat.course_stats?.user_attendance_percentage?.attendance_points || 0}%
+                </p>
+                <p className="stat-percentage">
+                  Contributions: {stat.course_stats?.user_contribution_stats?.contributions_points || 0}%
+                </p>
+                <p className="stat-percentage">
+                  CBT: {stat.course_stats?.user_cbt_stats?.cbt_points || 0}%
+                </p>
+              </div>
+              <div className="stat-details">
+                <p className="stat-value">
+                  Total: {getTotalPoints(stat)}%
+                </p>
+              </div>
+            </div>
+          ))
+        ) : (
+          // Fallback to single stats display
+          <>
+            <div className="dashboard-stat">
+              <h2 className="stat-title">Courses</h2>
+              <p className="stat-value">
+                {stats.studentDashboardStats.courses_completed || 0} / 3
+              </p>
+              <p className="stat-percentage">
+                {stats.completionPercentage || 0}% Completed
+              </p>
+            </div>
+            <div className="dashboard-stat">
+              <h2 className="stat-title">Assignments</h2>
+              <p className="stat-value">
+                {stats.studentDashboardStats.user_submission_percentage?.submission_points || 0}%
+              </p>
+            </div>
+            <div className="dashboard-stat">
+              <h2 className="stat-title">Attendance</h2>
+              <p className="stat-value">
+                {stats.studentDashboardStats.user_attendance_percentage?.attendance_points || 0}%
+              </p>
+            </div>
+            <div className="dashboard-stat">
+              <h2 className="stat-title">Contributions</h2>
+              <p className="stat-value">
+                {stats.studentDashboardStats.user_contribution_stats?.contributions_points || 0}%
+              </p>
+            </div>
+            <div className="dashboard-stat">
+              <h2 className="stat-title">CBT</h2>
+              <p className="stat-value">
+                {stats.studentDashboardStats.user_cbt_stats?.cbt_points || 0}%
+              </p>
+            </div>
+            <div className="dashboard-stat">
+              <h2 className="stat-title">Total</h2>
+              <p className="stat-value">
+                {getTotalPoints(stats.studentDashboardStats)}%
+              </p>
+            </div>
+          </>
+        )}
       </div>
 
       <div className="dashboard-notices">
