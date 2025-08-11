@@ -16,6 +16,8 @@ import AssignmentDetails from './intenalPages/assignments/assignmentDetails';
 import AddEditCourseForm from './intenalPages/courseList/addEditCourse';
 import AddEditTopic from './intenalPages/topics/addEditTopic';
 import AddAttendance from './intenalPages/attendance/addAttendance';
+import Contributions from './intenalPages/contributions';
+import AddEditContribution from './intenalPages/contributions/addEditContribution';
 
 function StudentArea() {
   return (
@@ -38,6 +40,8 @@ function StudentArea() {
           <Route path="/course/new" element={<AddEditCourseForm />} />
           <Route path="/topic/new" element={<AddEditTopic /> } />
           <Route path="/attendance/new" element={<AddAttendance />} />
+          <Route path="/contributions" element={<Contributions />} />
+          <Route path="/contribution/new" element={<AddEditContribution />} />
           <Route path="*" element={
             <div className="student-display-area">
               <h2 className="student-display-title">Welcome to Your Student Area</h2>

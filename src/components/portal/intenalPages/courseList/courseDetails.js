@@ -270,6 +270,16 @@ function CourseDetails() {
     })
   }
 
+  const handleAddContribution = () => {
+    navigate('/portal/contribution/new', {
+      state: {
+        courseId: id,
+        course: course,
+        cohortId: course.cla_cohort_id,
+      },
+    })
+  }
+
   const handleEditTopic = (topic) => {
     navigate('/portal/topic/new', {
       state: {
@@ -423,6 +433,9 @@ function CourseDetails() {
             >
               <FontAwesomeIcon icon={faVideo} className="btn-icon" /> View Live Classes
             </button>
+          </div>
+
+          <div className="course-actions">
             {userRole === 'facilitator' && (
             <button
               type="button"
@@ -439,6 +452,15 @@ function CourseDetails() {
               onClick={handleAddAssignment}
             >
               <FontAwesomeIcon icon={faPlus} className="btn-icon" /> Add Assignment
+            </button>
+          )}
+          {userRole === 'facilitator' && (
+            <button
+              type="button"
+              className="course-action-btn"
+              onClick={handleAddContribution}
+            >
+              <FontAwesomeIcon icon={faPlus} className="btn-icon" /> Create Contribution
             </button>
           )}
           </div>
