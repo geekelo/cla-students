@@ -29,34 +29,27 @@ const ContributionDetails = () => {
     score: '',
   });
 
-  useEffect(() => {
-    setUserRole(sessionStorage.getItem('userRole'));
-    setUserId(sessionStorage.getItem('userId'));
-  }, []);
-  
-  useEffect(() => {
-    fetchStudents();
-  }, [userRole === 'facilitator']);
-
   const fetchStudents = async () => {
     try {
-    const response = await api.get('/api/v1/cla_contributions_scores/students_without_scores', {
-      params: {
-        cla_contribution_id: location.state?.contribution?.id,
-      },
-    });
-    if (response.data) {
-      setStudents(response.data);
-    } else {
-      toast.info('No students found without scores.');
+      setIsLoading(true);
+      const response = await api.get('/api/v1/cla_contributions_scores/students_without_scores', {
+        params: {
+          cla_contribution_id: location.state?.contribution?.id,
+        },
+      });
+      if (response.data) {
+        setStudents(response.data);
+      } else {
+        toast.info('No students found without scores.');
+      }
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error fetching students:', error);
+      toast.error('Failed to fetch students. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
-  } catch (error) {
-    console.error('Error fetching students:', error);
-    toast.error('Failed to fetch students. Please try again.');
-  } finally {
-    setIsLoading(false);
-  }
-
+  
   };
 
   const handleSubmit = async (e) => {
@@ -142,6 +135,12 @@ const ContributionDetails = () => {
       }
     });
   };
+  
+  useEffect(() => {
+    setUserRole(sessionStorage.getItem('userRole'));
+    setUserId(sessionStorage.getItem('userId'));
+    fetchStudents();
+  }, [userRole === 'facilitator']);
 
   const handleDelete = () => {
     toast.info(
@@ -263,9 +262,30 @@ const ContributionDetails = () => {
           {/* Step 2: Score Contribution */}
           {userRole === 'facilitator' && (
           <div className="form-part active">
+            {/* Student Statistics */}
+            {students && (
+              <div className="student-stats-section">
+                <h3>Student Statistics</h3>
+                <div className="stats-grid">
+                  <div className="stat-card">
+                    <span className="stat-label">Total Students in Cohort</span>
+                    <span className="stat-value">{students.total_students_in_cohort || 0}</span>
+                  </div>
+                  <div className="stat-card">
+                    <span className="stat-label">Students with Scores</span>
+                    <span className="stat-value">{students.students_with_scores || 0}</span>
+                  </div>
+                  <div className="stat-card">
+                    <span className="stat-label">Students without Scores</span>
+                    <span className="stat-value">{students.students_without_scores || 0}</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <form onSubmit={handleSubmit}>
               <div className="form-group">
-                <label htmlFor="student">Select Student</label>
+                <label htmlFor="student">Select Student:</label>
                 <select
                   id="student"
                   className="form-input"
@@ -277,16 +297,17 @@ const ContributionDetails = () => {
                   required
                 >
                   <option value="">Select a student</option>
-                  {students.map((student) => (
+                  {students?.students_without_scores_list?.map((student) => (
                     <option key={student.id} value={student.id}>
                       {student.name}
                     </option>
                   ))}
                 </select>
+                <p>{isLoading ? 'Loading Students...' : ''}</p>
               </div>
       
               <div className="form-group">
-                <label>Score</label>
+                <label>Assign Score:</label>
                 <div className="attendance-status-radio">
                   <div className="radio-option">
                     <input
