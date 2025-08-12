@@ -17,7 +17,10 @@ function ContributionItem({ contribution }) {
       onKeyDown={(e) => (e.key === 'Enter' ?  handleView(contribution) : null)}
     >
       <span className="assignment-name">{contribution.name}</span>
-      {contribution.locked && <span className="lock-icon">🔒 Locked</span>}
+      {contribution.due_date < new Date().toISOString() ? 
+        <span className="lock-icon">🔒 Past Due</span> : 
+        <span className="lock-icon">⭐ New</span>
+      }
     </div>
   );
 }
