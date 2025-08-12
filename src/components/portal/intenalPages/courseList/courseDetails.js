@@ -279,6 +279,16 @@ function CourseDetails() {
       },
     })
   }
+  
+  const handleAddCbt = () => {
+    navigate('/portal/cbt/new', {
+      state: {
+        courseId: id,
+        course: course,
+        cohortId: course.cla_cohort_id,
+      },
+    })
+  }
 
   const handleEditTopic = (topic) => {
     navigate('/portal/topic/new', {
@@ -461,6 +471,15 @@ function CourseDetails() {
               onClick={handleAddContribution}
             >
               <FontAwesomeIcon icon={faPlus} className="btn-icon" /> Create Contribution
+            </button>
+          )}
+                    {userRole === 'facilitator' && (
+            <button
+              type="button"
+              className="course-action-btn"
+              onClick={handleAddCbt}
+            >
+              <FontAwesomeIcon icon={faPlus} className="btn-icon" /> Create Test
             </button>
           )}
           </div>

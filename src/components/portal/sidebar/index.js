@@ -83,6 +83,16 @@ function Sidebar() {
         <li>
           <button
             type="button"
+            onClick={() => handleNavigation('cbts')}
+            className={getButtonClass('cbts')}
+            aria-label="View Cbts"
+          >
+            <FontAwesomeIcon icon={faClipboardList} className="nav-icon" /> Tests
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
             onClick={() => handleNavigation('submissions')}
             className={getButtonClass('submissions')}
             aria-label="View Submissions"
