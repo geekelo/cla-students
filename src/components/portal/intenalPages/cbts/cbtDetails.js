@@ -8,26 +8,49 @@ import {
   faTrash, 
   faCalendarAlt,
   faBookOpen,
-  faSave,
-  faArrowLeft
+  faArrowLeft,
+  faSave
 } from '@fortawesome/free-solid-svg-icons';
 import '../../../../stylesheets/assignmentDetails.css';
 import { createAxiosInstance } from '../../../../config';
 
 const api = createAxiosInstance();
 
-const AssignmentDetails = () => {
+const CbtDetails = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [students, setStudents] = useState([]);
+  const [selectedStudent, setSelectedStudent] = useState('');
   const [userRole, setUserRole] = useState('');
   const [userId, setUserId] = useState('');
-  const [students, setStudents] = useState(null);
-  const [selectedStudent, setSelectedStudent] = useState('');
   const [formData, setFormData] = useState({
+    cla_user_id: '',
     score: '',
   });
 
+  const fetchStudents = async () => {
+    try {
+      setIsLoading(true);
+      const response = await api.get('/api/v1/cla_cbts_scores/students_without_scores', {
+        params: {
+          cla_cbt_id: location.state?.cbt?.id,
+        },
+      });
+      if (response.data) {
+        setStudents(response.data);
+      } else {
+        toast.info('No students found without scores.');
+      }
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error fetching students:', error);
+      toast.error('Failed to fetch students. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,41 +67,56 @@ const AssignmentDetails = () => {
 
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-      const submissionData = {
-        cla_submission: {
-          cla_assignment_id: location.state?.assignment?.id,
-          cla_facilitator_id: userId,
+      const cbtScoreData = {
+        cla_cbts_score: {
           score: formData.score,
-          cla_student_id: selectedStudent,
-          cla_cohort_id: location.state?.assignment?.cla_cohort_id,
-          cla_course_id: location.state?.assignment?.cla_course_id,
-          download_link: 'https://www.google.com',
+          cla_cbt_id: location.state?.cbt?.id,
+          cla_user_id: formData.cla_user_id,
+          cla_cohort_id: location.state?.cbt?.cla_cohort_id,
+          cla_course_id: location.state?.cbt?.cla_course_id,
         },
-        cla_assignment_id: location.state?.assignment?.id,
+        cla_cbt_id: location.state?.cbt?.id,
       };
 
-      const response = await api.post('/api/v1/cla_submissions', submissionData);
+      const response = await api.post('/api/v1/cla_cbts_scores', cbtScoreData);
 
       if (response) {
-        toast.success('Assignment Scored successfully!');
-        fetchStudents();
+        toast.success('Cbt scored successfully!');
         setFormData({
+          cla_user_id: '',
           score: '',
-        });
+        })
         setSelectedStudent('');
+        fetchStudents();
       }
     } catch (error) {
-      console.error('Error submitting assignment:', error);
-      let errorMessage = 'Failed to submit assignment. Please try again.';
+      console.error('Error scoring cbt:', error);
+      let errorMessage = 'Failed to score cbt. Please try again.';
 
       if (error.response) {
         console.error('Error response:', error.response.data);
         if (typeof error.response.data.error === 'string') {
           errorMessage = error.response.data.error;
         } else if (error.response.data.errors) {
-          errorMessage = Object.entries(error.response.data.errors)
-            .map(([field, messages]) => `${field}: ${messages.join(', ')}`)
-            .join('\n');
+          // Handle both array and object error formats
+          const errors = error.response.data.errors;
+          // if errors is an array
+          if (Array.isArray(errors)) {
+            errorMessage = errors.join(', ');
+          } else {
+            errorMessage = Object.entries(errors)
+              .map(([field, messages]) => {
+                let messageText = '';
+                if (Array.isArray(messages)) {
+                  messageText = messages.join(', ');
+                } else if (typeof messages === 'string') {
+                  messageText = messages;
+                } else {
+                  messageText = String(messages);
+                }
+                return `${field}: ${messageText}`;
+              }).join('\n');
+          }
         }
       }
 
@@ -88,50 +126,26 @@ const AssignmentDetails = () => {
     }
   };
 
-  const fetchStudents = async () => {
-    const token = sessionStorage.getItem('authToken');
-    if (!token) {
-      toast.error('Session expired. Please login again.');
-      navigate('/login');
-      return;
-    }
-    try {
-      setIsLoading(true);
-      const response = await api.get('/api/v1/cla_submissions/students_without_scores', {
-        params: {
-          cla_assignment_id: location.state?.assignment?.id,
-        },
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      if (response.data) {
-        setStudents(response.data);
-      } else {
-        toast.info('No students found without scores.');
-      }
-      setIsLoading(false);
-    } catch (error) {
-      console.error('Error fetching students:', error);
-      toast.error('Failed to fetch students. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const handleEdit = () => {
-    navigate('/portal/assignment/new', {
+    navigate('/portal/cbt/new', {
       state: {
-        assignment: location.state?.assignment,
-        courseId: location.state?.assignment?.cla_course_id,
-        cohortId: location.state?.assignment?.cla_cohort_id,
+        cbt: location.state?.cbt,
+        courseId: location.state?.cbt?.cla_course_id,
         isEditMode: true
       }
     });
   };
+  
+  useEffect(() => {
+    setUserRole(sessionStorage.getItem('userRole'));
+    setUserId(sessionStorage.getItem('userId'));
+    fetchStudents();
+  }, [userRole === 'facilitator']);
 
   const handleDelete = () => {
     toast.info(
       <div>
-        <p>Are you sure you want to delete this assignment?</p>
+        <p>Are you sure you want to delete this cbt?</p>
         <p>This action cannot be undone.</p>
         <button 
           onClick={confirmDelete} 
@@ -145,7 +159,7 @@ const AssignmentDetails = () => {
             cursor: 'pointer'
           }}
         >
-          Yes, Delete Assignment
+          Yes, Delete cbt
         </button>
       </div>,
       {
@@ -165,33 +179,26 @@ const AssignmentDetails = () => {
         return;
       }
 
-      toast.info('Deleting assignment...', {
+      toast.info('Deleting cbt...', {
         autoClose: false,
-        toastId: 'deletingAssignment'
+        toastId: 'Deleting Cbt'
       });
 
-      await api.delete(`/api/v1/cla_assignments/${location.state?.assignment?.id}`);
+      await api.delete(`/api/v1/cla_cbts/${location.state?.cbt?.id}`);
 
-      toast.dismiss('deletingAssignment');
-      toast.success('Assignment deleted successfully!');
-      navigate('/portal/assignments');
+      toast.dismiss('Deleting Cbt');
+      toast.success('Cbt deleted successfully!');
+      navigate('/portal/cbts');
     } catch (error) {
-      toast.dismiss('deletingAssignment');
-      console.error('Error deleting assignment:', error);
-      toast.error('Failed to delete assignment. Please try again.');
+      toast.dismiss('Deleting Cbt');
+      console.error('Error deleting cbt:', error);
+      toast.error('Failed to delete cbt. Please try again.');
     }
   };
 
   const handleBack = () => {
-    navigate('/portal/assignments');
+    navigate('/portal/cbts');
   };
-
-  useEffect(() => {
-    setUserRole(sessionStorage.getItem('userRole'));
-    setUserId(sessionStorage.getItem('userId'));
-    fetchStudents();
-  }, []);
-
 
   return (
     <div className="assignment-details-container">
@@ -215,7 +222,7 @@ const AssignmentDetails = () => {
         <div className="assignment-details">
           <div className="assignment-header">
             <div className="title-with-actions">
-              <h1 className="assignment-title">{location.state?.assignment?.name || 'Assignment Details'}</h1>
+              <h1 className="assignment-title">{location.state?.cbt?.name || 'Cbt Details'}</h1>
               {sessionStorage.getItem('userRole') === 'facilitator' && (
                 <div className="action-icons">
                   <button className="action-icon" onClick={handleEdit}>
@@ -227,17 +234,17 @@ const AssignmentDetails = () => {
                 </div>
               )}
             </div>
-            <p className="assignment-description">{location.state?.assignment?.description || 'No description available.'}</p>
+            <p className="assignment-description">{location.state?.cbt?.description || 'No description available.'}</p>
           </div>
 
           <div className="assignment-info-grid">
             <div className="info-item">
               <FontAwesomeIcon icon={faCalendarAlt} />
-              <span>Due Date: <strong>{location.state?.assignment?.due_date ? new Date(location.state.assignment.due_date).toLocaleDateString() : 'Not set'}</strong></span>
+              <span>Due Date: <strong>{location.state?.cbt?.due_date ? new Date(location.state.cbt.due_date).toLocaleDateString() : 'Not set'}</strong></span>
             </div>
             <div className="info-item">
               <FontAwesomeIcon icon={faBookOpen} />
-              <span>Course: <strong>{location.state?.assignment?.course_name || 'Not specified'}</strong></span>
+              <span>Course: <strong>{location.state?.cbt?.course_name || 'Not specified'}</strong></span>
             </div>
           </div>
 
@@ -245,13 +252,13 @@ const AssignmentDetails = () => {
           <div className="submission-section">
             <div className="submission-header">
               <div className="submission-title-group">
-                <h2>Your Score: {location.state?.assignment?.student_score ? `${location.state?.assignment?.student_score}%` : 'Not scored'}</h2>
+                <h2>Your Score: {location.state?.cbt?.student_score ? `${location.state?.cbt?.student_score}%` : 'Not scored'}</h2>
               </div>
             </div>
           </div>
           )}
 
-          {/* Step 2: Score Contribution */}
+          {/* Step 2: Score Cbt */}
           {userRole === 'facilitator' && (
           <div className="form-part active">
             {/* Student Statistics */}
@@ -329,10 +336,11 @@ const AssignmentDetails = () => {
             </form>
           </div>
         )}
+
         </div>
       </div>
     </div>
   );
 };
 
-export default AssignmentDetails;
+export default CbtDetails;

@@ -266,6 +266,27 @@ function CourseDetails() {
       state: {
         courseId: id,
         course: course,
+        cohortId: course.cla_cohort_id,
+      },
+    })
+  }
+
+  const handleAddContribution = () => {
+    navigate('/portal/contribution/new', {
+      state: {
+        courseId: id,
+        course: course,
+        cohortId: course.cla_cohort_id,
+      },
+    })
+  }
+
+  const handleAddCbt = () => {
+    navigate('/portal/cbt/new', {
+      state: {
+        courseId: id,
+        course: course,
+        cohortId: course.cla_cohort_id,
       },
     })
   }
@@ -423,6 +444,9 @@ function CourseDetails() {
             >
               <FontAwesomeIcon icon={faVideo} className="btn-icon" /> View Live Classes
             </button>
+          </div>
+
+          <div className="course-actions">
             {userRole === 'facilitator' && (
             <button
               type="button"
@@ -439,6 +463,24 @@ function CourseDetails() {
               onClick={handleAddAssignment}
             >
               <FontAwesomeIcon icon={faPlus} className="btn-icon" /> Add Assignment
+            </button>
+          )}
+          {userRole === 'facilitator' && (
+            <button
+              type="button"
+              className="course-action-btn"
+              onClick={handleAddContribution}
+            >
+              <FontAwesomeIcon icon={faPlus} className="btn-icon" /> Create Contribution
+            </button>
+          )}
+                    {userRole === 'facilitator' && (
+            <button
+              type="button"
+              className="course-action-btn"
+              onClick={handleAddCbt}
+            >
+              <FontAwesomeIcon icon={faPlus} className="btn-icon" /> Create Test
             </button>
           )}
           </div>

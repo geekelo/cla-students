@@ -10,6 +10,7 @@ const api = createAxiosInstance();
 
 function Dashboard() {
   const navigate = useNavigate();
+  const [announcements, setAnnouncements] = useState([]);
   const [stats, setStats] = useState({
     totalCourses: 0,
     totalCoursesTaken: 0,
@@ -52,6 +53,20 @@ function Dashboard() {
           studentDashboardStats: studentDashboardData.data || {},
         });
 
+        const announcements = await api.get('/api/v1/cla_announcements', {
+
+          params: { 
+            cla_cohort_id: cohortId,
+          }
+        });
+
+        if (announcements.data) {
+          setAnnouncements(announcements.data);
+        } else {
+          toast.error('Failed to fetch announcements');
+        }
+
+
       } catch (error) {
         console.error('❌ Error fetching dashboard stats:', error);
         console.error('🔍 Error details:', {
@@ -80,13 +95,6 @@ function Dashboard() {
     
     return total;
   }
-
-  const notices = [
-    { id: 1, title: 'Important Reminders for Our Classes:', content: 'The meeting room opens at 7:30 AM for all students!\nClasses commence at 8:00 AM sharp!'},
-    { id: 2, title: 'Important Reminders on Attendance', content: 'Your attendance is crucial, as it accounts for the highest percentage of your cumulative scores. Be there and be on time!\n'},
-    { id: 3, title: 'Important Reminders on Assignments', content: 'Always submit your assignments before the deadline to stay ahead!\n'},
-    { id: 3, title: 'Let\'s make this semester a success!', content: ''},
-  ];
 
   return (
     <div className="dashboard-container">
@@ -179,12 +187,18 @@ function Dashboard() {
           <FontAwesomeIcon icon={faBell} className="notice-icon" /> Announcements
         </h2>
         <ul className="notices-list">
-          {notices.map((notice) => (
-            <li key={notice.id} className="notice-item">
-              <h3 className="notice-title">{notice.title}</h3>
-              <p className="notice-content">{notice.content}</p>
+          {announcements?.length > 0 ? (
+            announcements.map((announcement) => (
+            <li key={announcement.id} className="notice-item">
+              <h3 className="notice-title">{announcement.title}</h3>
+              <p className="notice-content">{announcement.content}</p>
             </li>
-          ))}
+          ))
+          ) : (
+            <li className="notice-item">
+              <p className="notice-content">No announcements found</p>
+            </li>
+          )}
         </ul>
       </div>
     </div>

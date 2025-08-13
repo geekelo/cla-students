@@ -160,6 +160,58 @@
   font-size: 1.1rem;
 }
 
+/* Announcement Type Radio Options */
+.announcement-type-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #f8f9fa;
+}
+
+.radio-option:hover {
+  border-color: rgba(68, 46, 121, 0.3);
+  background-color: rgba(68, 46, 121, 0.05);
+}
+
+.radio-option input[type="radio"] {
+  margin: 0;
+  width: 18px;
+  height: 18px;
+  accent-color: rgba(68, 46, 121, 1);
+}
+
+.radio-option input[type="radio"]:checked + svg {
+  color: rgba(68, 46, 121, 1);
+}
+
+.radio-option:has(input[type="radio"]:checked) {
+  border-color: rgba(68, 46, 121, 0.8);
+  background-color: rgba(68, 46, 121, 0.1);
+  box-shadow: 0 2px 4px rgba(68, 46, 121, 0.1);
+}
+
+.radio-option svg {
+  color: #6c757d;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.radio-option:has(input[type="radio"]:checked) svg {
+  color: rgba(68, 46, 121, 1);
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .task-editor-main {
@@ -189,6 +241,22 @@
   .task-editor-input-group select,
   .task-editor-input-group textarea {
     padding: 0.6rem;
+  }
+}
+
+/* Mobile responsive for radio options */
+@media (max-width: 768px) {
+  .announcement-type-options {
+    gap: 8px;
+  }
+  
+  .radio-option {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+  
+  .radio-option svg {
+    font-size: 0.9rem;
   }
 }
 

@@ -5,7 +5,8 @@ import Profile from './intenalPages/profile/index';
 import Courses from './intenalPages/courseList/index';
 import Assignments from './intenalPages/assignments/index';
 import Dashboard from './intenalPages/dashboard/index';
-import Submissions from './intenalPages/submissions/index';
+import Announcements from './intenalPages/announcements/index';
+import AddEditAnnouncement from './intenalPages/announcements/addEditAnnouncement';
 import InstructorDesk from './intenalPages/instructorDesk/index';
 import Sidebar from './sidebar';
 import Calendar from './intenalPages/calender/index';
@@ -16,6 +17,12 @@ import AssignmentDetails from './intenalPages/assignments/assignmentDetails';
 import AddEditCourseForm from './intenalPages/courseList/addEditCourse';
 import AddEditTopic from './intenalPages/topics/addEditTopic';
 import AddAttendance from './intenalPages/attendance/addAttendance';
+import Contributions from './intenalPages/contributions';
+import AddEditContribution from './intenalPages/contributions/addEditContribution';
+import ContributionDetails from './intenalPages/contributions/contributionDetails';
+import AddEditCbt from './intenalPages/cbts/addEditCbt';
+import CbtDetails from './intenalPages/cbts/cbtDetails';
+import Cbts from './intenalPages/cbts';
 
 function StudentArea() {
   return (
@@ -28,7 +35,8 @@ function StudentArea() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/assignments" element={<Assignments />} />
-          <Route path="/submissions" element={<Submissions />} />
+          <Route path="/announcements" element={<Announcements />} />
+          <Route path="/announcement/new" element={<AddEditAnnouncement />} />
           <Route path="/instructorDesk" element={<InstructorDesk />} />
           <Route path="/events/" element={<Calendar /> } />
           <Route path="/assignment/new" element={<AddEditAssignment /> } />
@@ -38,6 +46,12 @@ function StudentArea() {
           <Route path="/course/new" element={<AddEditCourseForm />} />
           <Route path="/topic/new" element={<AddEditTopic /> } />
           <Route path="/attendance/new" element={<AddAttendance />} />
+          <Route path="/contributions" element={<Contributions />} />
+          <Route path="/contribution/new" element={<AddEditContribution />} />
+          <Route path="/contributions/:id" element={<ContributionDetails />} />
+          <Route path="/cbts" element={<Cbts />} />
+          <Route path="/cbt/new" element={<AddEditCbt />} />
+          <Route path="/cbts/:id" element={<CbtDetails />} />
           <Route path="*" element={
             <div className="student-display-area">
               <h2 className="student-display-title">Welcome to Your Student Area</h2>

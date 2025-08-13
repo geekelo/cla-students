@@ -73,13 +73,35 @@ function Sidebar() {
         <li>
           <button
             type="button"
-            onClick={() => handleNavigation('submissions')}
-            className={getButtonClass('submissions')}
-            aria-label="View Submissions"
+            onClick={() => handleNavigation('contributions')}
+            className={getButtonClass('contributions')}
+            aria-label="View Contributions"
           >
-            <FontAwesomeIcon icon={faInbox} className="nav-icon" /> Submissions
+            <FontAwesomeIcon icon={faClipboardList} className="nav-icon" /> Contributions
           </button>
         </li>
+        <li>
+          <button
+            type="button"
+            onClick={() => handleNavigation('cbts')}
+            className={getButtonClass('cbts')}
+            aria-label="View Cbts"
+          >
+            <FontAwesomeIcon icon={faClipboardList} className="nav-icon" /> Tests
+          </button>
+        </li>
+        {sessionStorage.getItem('userRole') === 'facilitator' && (
+        <li>
+          <button
+            type="button"
+            onClick={() => handleNavigation('announcements')}
+            className={getButtonClass('announcements')}
+            aria-label="View Announcements"
+          >
+            <FontAwesomeIcon icon={faInbox} className="nav-icon" /> Announcements
+          </button>
+        </li>
+        )}
         <li>
           <button
             type="button"

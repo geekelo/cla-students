@@ -19,19 +19,18 @@ import '../../../../stylesheets/addEditAssignment.css'
 
 const api = createAxiosInstance()
 
-const AddEditAssignment = () => {
+const AddEditCbt = () => {
   const navigate = useNavigate()
   const location = useLocation()
-  const assignment = location.state?.assignment || {}
-  const { courseId, contribution, isEditMode, cohortId } = location.state || {}
+  const { courseId, cbt, isEditMode, cohortId } = location.state || {}
   const [loading, setLoading] = useState(false)
   const [courses, setCourses] = useState([])
 
   const [formData, setFormData] = useState({
-    cla_assignment: {
-      name: contribution?.name || '',
-      description: contribution?.description || '',
-      due_date: contribution?.due_date || '',
+    cla_cbt: {
+      name: cbt?.name || '',
+      description: cbt?.description || '',
+      due_date: cbt?.due_date || '',
       cla_course_id: courseId || '',
       cla_user_id: sessionStorage.getItem('userId') || '',
       cla_cohort_id: cohortId || '',
@@ -39,18 +38,19 @@ const AddEditAssignment = () => {
   })
 
   useEffect(() => {
-    if (isEditMode && assignment) {
+    if (isEditMode && cbt) {
       setFormData({
-        cla_assignment: {
-          name: assignment.name,
-          description: assignment.description,
-          due_date: assignment.due_date,
-          cla_course_id: assignment.cla_course_id,
+        cla_cbt: {
+          name: cbt.name,
+          description: cbt.description,
+          due_date: cbt.due_date,
+          cla_course_id: cbt.cla_course_id,
           cla_user_id: sessionStorage.getItem('userId'),
+          cla_cohort_id: cohortId,
         },
       })
     }
-  }, [isEditMode, contribution])
+  }, [isEditMode, cbt])
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -94,8 +94,8 @@ const AddEditAssignment = () => {
     const { name, value } = e.target
     setFormData((prev) => ({
       ...prev,
-      cla_assignment: {
-        ...prev.cla_assignment,
+      cla_cbt: {
+        ...prev.cla_cbt,
         [name]: value,
       },
     }))
@@ -115,14 +115,14 @@ const AddEditAssignment = () => {
 
       let response
       if (isEditMode) {
-        response = await api.put(`/api/v1/cla_assignments/${assignment.id}`, formData, {
+        response = await api.put(`/api/v1/cla_cbts/${cbt.id}`, formData, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
         })
       } else {
-        response = await api.post('/api/v1/cla_assignments', formData, {
+        response = await api.post('/api/v1/cla_cbts', formData, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
@@ -131,25 +131,43 @@ const AddEditAssignment = () => {
       }
 
       if (response) {
-        toast.success(isEditMode ? 'Assignment updated successfully!' : 'Assignment created successfully!')
-        setTimeout(() => {
-          navigate('/portal/assignments')
-        }, 3000)
+        toast.success(isEditMode ? 'Cbt updated successfully!' : 'Cbt created successfully!')
+
+        navigate('/portal/cbts')
       }
     } catch (error) {
-      console.error('Error with assignment:', error)
+      console.error('Error with cbt:', error)
       let errorMessage = isEditMode
-        ? 'Failed to update assignment. Please try again.'
-        : 'Failed to create assignment. Please try again.'
+        ? 'Failed to update cbt. Please try again.'
+        : 'Failed to create cbt. Please try again.'
 
       if (error.response) {
         console.error('Error response:', error.response.data)
         if (typeof error.response.data.error === 'string') {
           errorMessage = error.response.data.error
         } else if (error.response.data.errors) {
-          errorMessage = Object.entries(error.response.data.errors)
-            .map(([field, messages]) => `${field}: ${messages.join(',')}`)
-            .join('\n')
+          // Handle both array and object error formats
+          const errors = error.response.data.errors;
+          if (Array.isArray(errors)) {
+            // If errors is an array, join them directly
+            errorMessage = errors.join(', ');
+          } else {
+            // If errors is an object, format with field names
+            errorMessage = Object.entries(errors)
+              .map(([field, messages]) => {
+                // Handle different types of messages (string, array, or other)
+                let messageText = '';
+                if (Array.isArray(messages)) {
+                  messageText = messages.join(', ');
+                } else if (typeof messages === 'string') {
+                  messageText = messages;
+                } else {
+                  messageText = String(messages);
+                }
+                return `${field}: ${messageText}`;
+              })
+              .join('\n')
+          }
         }
       }
 
@@ -160,7 +178,7 @@ const AddEditAssignment = () => {
   }
 
   const handleBack = () => {
-    navigate('/portal/assignments')
+    navigate('/portal/cbts')
   }
 
   return (
@@ -186,24 +204,24 @@ const AddEditAssignment = () => {
         <div className="task-editor-panel">
           <div className="task-editor-title">
             <h2>
-              {isEditMode ? 'Edit Assignment' : 'Add New Assignment'} <FontAwesomeIcon icon={faGraduationCap} />
+              {isEditMode ? 'Edit Cbt' : 'Add New Cbt'} <FontAwesomeIcon icon={faGraduationCap} />
             </h2>
           </div>
 
-          <p className="task-editor-subtitle">Fill assignment details:</p>
+          <p className="task-editor-subtitle">Fill cbt details:</p>
 
           <form onSubmit={handleSubmit} className="task-editor-form">
             <div className="task-editor-input-group">
               <label>
                 <FontAwesomeIcon icon={faClipboardList} className="task-editor-icon" />
-                Assignment Name
+                Cbt Name
               </label>
               <input
                 type="text"
                 name="name"
-                value={formData.cla_assignment.name}
+                value={formData.cla_cbt.name}
                 onChange={handleChange}
-                placeholder="Enter assignment name"
+                placeholder="Enter cbt name"
                 required
                 disabled={loading}
               />
@@ -216,9 +234,9 @@ const AddEditAssignment = () => {
               </label>
               <textarea
                 name="description"
-                value={formData.cla_assignment.description}
+                value={formData.cla_cbt.description}
                 onChange={handleChange}
-                placeholder="Enter assignment description"
+                placeholder="Enter cbt description"
                 required
                 rows="4"
                 disabled={loading}
@@ -233,7 +251,7 @@ const AddEditAssignment = () => {
               <input
                 type="date"
                 name="due_date"
-                value={formData.cla_assignment.due_date}
+                value={formData.cla_cbt.due_date}
                 onChange={handleChange}
                 required
                 disabled={loading}
@@ -247,7 +265,7 @@ const AddEditAssignment = () => {
               </label>
               <select
                 name="cla_course_id"
-                value={formData.cla_assignment.cla_course_id}
+                value={formData.cla_cbt.cla_course_id}
                 onChange={handleChange}
                 required
                 disabled={loading}
@@ -266,11 +284,11 @@ const AddEditAssignment = () => {
               <FontAwesomeIcon icon={faPlus} />
               {loading
                 ? isEditMode
-                  ? 'Updating Assignment...'
-                  : 'Creating Assignment...'
+                  ? 'Updating Cbt...'
+                  : 'Creating Cbt...'
                 : isEditMode
                   ? 'Save Changes'
-                  : 'Add Assignment'}
+                  : 'Add Cbt'}
             </button>
           </form>
         </div>
@@ -279,5 +297,5 @@ const AddEditAssignment = () => {
   )
 }
 
-export default AddEditAssignment
+export default AddEditCbt
 
