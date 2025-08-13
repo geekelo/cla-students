@@ -52,9 +52,7 @@ const AddEditAnnouncement = () => {
 
   useEffect(() => {
     const fetchStudents = async () => {
-      console.log('fetchStudents called with cohortId:', cohortId)
       if (!cohortId) {
-        console.log('No cohortId provided, skipping fetch')
         return
       }
       
@@ -66,15 +64,12 @@ const AddEditAnnouncement = () => {
           return
         }
 
-        console.log('Fetching students for cohort:', cohortId)
         const response = await api.get('/api/v1/cla_cohorts/students_of_cohort', {
           params: { cla_cohort_id: cohortId },
           headers: {
             Authorization: `Bearer ${token}`,
           },
         })
-
-        console.log('Students API response:', response.data)
         
         // Handle different possible response structures
         let studentsData = []
@@ -88,13 +83,9 @@ const AddEditAnnouncement = () => {
           }
         }
         
-        console.log('Processed students data:', studentsData)
-        
         if (studentsData && studentsData.length > 0) {
-          console.log('Setting students:', studentsData)
           setStudents(studentsData)
         } else {
-          console.log('No students found in response')
           setStudents([])
         }
       } catch (error) {
@@ -338,7 +329,6 @@ const AddEditAnnouncement = () => {
                   className="task-editor-dropdown"
                 >
                   <option value="">Select a student</option>
-                  {console.log('Rendering students dropdown with:', students)}
                   {students && students.length > 0 ? (
                     students.map((student) => {
                       // Handle different possible student object structures

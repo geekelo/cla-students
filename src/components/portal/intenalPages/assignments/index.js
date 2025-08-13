@@ -42,9 +42,6 @@ function Assignments() {
 
   const applyCohortFilter = async (cohortId = selectedCohort) => {
     try {
-      console.log('🔍 applyCohortFilter called with cohortId:', cohortId);
-      console.log('🔍 selectedCohort state:', selectedCohort);
-      
       const token = sessionStorage.getItem('authToken');
       if (!token) {
         toast.error('Session expired. Please login again.');
@@ -72,14 +69,12 @@ function Assignments() {
       setLoading(true);
 
       const params = targetCohortId ? { cla_cohort_id: targetCohortId } : {};
-      console.log('🔍 API params:', params);
 
       const assignmentsResponse = await api.get('/api/v1/cla_assignments', {
         params,
         headers: { Authorization: `Bearer ${token}` }
       });
 
-      console.log('📋 Assignments response:', assignmentsResponse.data);
       setAssignments(assignmentsResponse.data);
       
     } catch (error) {
@@ -120,19 +115,13 @@ function Assignments() {
   }, []);
 
   // Handle data loading based on user role and location state
-  useEffect(() => {
-    console.log('📊 Data loading useEffect');
-    console.log('📊 UserRole:', userRole);
-    console.log('📊 Location state:', location.state);
-    
+  useEffect(() => {    
     if (!userRole) {
-      console.log('📊 No user role yet, waiting...');
       return; // Wait for user role to be set
     }
 
     // Check if assignments are passed through location state first
     if (location.state?.assignments && location.state.assignments.length > 0) {
-      console.log('📊 Using assignments from location state');
       setAssignments(location.state.assignments);
       setLoading(false);
       return;
@@ -140,12 +129,10 @@ function Assignments() {
 
     // Handle based on user role
     if (userRole === 'facilitator') {
-      console.log('👨‍🏫 Facilitator - fetching cohorts');
       fetchCohorts();
       // Don't load assignments yet - wait for cohort selection
       setLoading(false);
     } else if (userRole === 'student') {
-      console.log('👨‍🎓 Student - loading assignments');
       const cohortId = sessionStorage.getItem('cohortId');
       if (cohortId) {
         // Apply filter with the cohort ID directly
@@ -159,12 +146,7 @@ function Assignments() {
   }, [userRole, location.state]);
 
   // Handle cohort filter for facilitators when selectedCohort changes
-  useEffect(() => {
-    console.log('🔄 Cohort filter useEffect');
-    console.log('🔄 UserRole:', userRole);
-    console.log('🔄 SelectedCohort:', selectedCohort);
-    console.log('🔄 IsFacilitator:', isFacilitator);
-    
+  useEffect(() => {    
     // Only auto-apply filter for facilitators when they select a cohort
     if (userRole === 'facilitator' && selectedCohort && cohorts.length > 0) {
       console.log('👨‍🏫 Facilitator cohort selected, applying filter');

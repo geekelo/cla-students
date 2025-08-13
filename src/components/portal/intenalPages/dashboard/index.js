@@ -31,7 +31,7 @@ function Dashboard() {
     const fetchDashboardStats = async () => {
       try {
         const token = sessionStorage.getItem('authToken');
-        // const cohortId = sessionStorage.getItem('cohortId');
+        const cohortId = sessionStorage.getItem('cohortId');
         const userId = sessionStorage.getItem('userId');
 
         if (!token) {
