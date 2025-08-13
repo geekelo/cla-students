@@ -252,8 +252,7 @@ const CbtDetails = () => {
           <div className="submission-section">
             <div className="submission-header">
               <div className="submission-title-group">
-                <h2>Score Your Cbt</h2>
-                <p>{location.state?.cbt?.student_score || 'Not scored'}</p>
+                <h2>Your Score: {location.state?.cbt?.student_score ? `${location.state?.cbt?.student_score}%` : 'Not scored'}</h2>
               </div>
             </div>
           </div>

@@ -252,8 +252,7 @@ const ContributionDetails = () => {
           <div className="submission-section">
             <div className="submission-header">
               <div className="submission-title-group">
-                <h2>Score Your Contribution</h2>
-                <p>{location.state?.contribution?.student_score || 'Not scored'}</p>
+                <h2>Your Score: {location.state?.contribution?.student_score ? `${location.state?.contribution?.student_score}%` : 'Not scored'}</h2>
               </div>
             </div>
           </div>
