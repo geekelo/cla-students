@@ -31,7 +31,7 @@ function Dashboard() {
     const fetchDashboardStats = async () => {
       try {
         const token = sessionStorage.getItem('authToken');
-        const cohortId = sessionStorage.getItem('cohortId');
+        // const cohortId = sessionStorage.getItem('cohortId');
         const userId = sessionStorage.getItem('userId');
 
         if (!token) {
@@ -54,6 +54,7 @@ function Dashboard() {
         });
 
         const announcements = await api.get('/api/v1/cla_announcements', {
+
           params: { 
             cla_cohort_id: cohortId,
           }
@@ -64,6 +65,7 @@ function Dashboard() {
         } else {
           toast.error('Failed to fetch announcements');
         }
+
 
       } catch (error) {
         console.error('❌ Error fetching dashboard stats:', error);
