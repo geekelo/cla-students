@@ -103,7 +103,13 @@ function Cbts() {
 
   return (
     <section className="assignments-section">
-      <div className="assignments-tabs">
+      {/* Title Section */}
+      <div className="assignments-title-container">
+        <h2 className="assignments-title">CBTs</h2>
+      </div>
+
+      {/* Filter Section - Only for facilitators */}
+      <div className="cohort-filter-section">
         {isFacilitator && (
           <div className="cohort-filter">
             <div className="filter-label">

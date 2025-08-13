@@ -150,7 +150,13 @@ function Announcements() {
 
   return (
     <div className="assignments-section">
-      <div className="assignments-tabs">
+      {/* Title Section */}
+      <div className="assignments-title-container">
+        <h2 className="assignments-title">Announcements</h2>
+      </div>
+
+      {/* Filter Section - Only for facilitators */}
+      <div className="cohort-filter-section">
         <div className="cohort-filter">
           <div className="filter-label">
             <FontAwesomeIcon icon={faFilter} className="filter-icon" />

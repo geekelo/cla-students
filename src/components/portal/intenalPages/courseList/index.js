@@ -100,6 +100,11 @@ function Courses() {
 
   return (
     <div className="assignments-section">
+      {/* Title Section */}
+      <div className="assignments-title-container">
+        <h2 className="assignments-title">Courses</h2>
+      </div>
+
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -112,8 +117,10 @@ function Courses() {
         pauseOnHover
         theme="colored"
       />
-       <div className="assignments-tabs">
-        {isFacilitator && (
+
+      {/* Filter Section - Only for facilitators */}
+      {isFacilitator && (
+        <div className="cohort-filter-section">
           <div className="cohort-filter">
             <div className="filter-label">
               <FontAwesomeIcon icon={faFilter} className="filter-icon" />
@@ -132,9 +139,10 @@ function Courses() {
               ))}
             </select>
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
+      {/* Courses List */}
       {loading ? (<div className="loading">Loading courses...</div>)  : (
         courses.map((course) => (
           <CourseList key={course.id} course={course} />
