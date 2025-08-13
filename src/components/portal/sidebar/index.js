@@ -9,6 +9,8 @@ import {
   faVideo,
   faUser,
   faLaptop,
+  faComments,
+  faGraduationCap,
 } from '@fortawesome/free-solid-svg-icons';
 import '../../../stylesheets/studentArea.css';
 
@@ -77,7 +79,7 @@ function Sidebar() {
             className={getButtonClass('contributions')}
             aria-label="View Contributions"
           >
-            <FontAwesomeIcon icon={faClipboardList} className="nav-icon" /> Contributions
+            <FontAwesomeIcon icon={faComments} className="nav-icon" /> Contributions
           </button>
         </li>
         <li>
@@ -87,7 +89,7 @@ function Sidebar() {
             className={getButtonClass('cbts')}
             aria-label="View Cbts"
           >
-            <FontAwesomeIcon icon={faClipboardList} className="nav-icon" /> Tests
+            <FontAwesomeIcon icon={faGraduationCap} className="nav-icon" /> Tests
           </button>
         </li>
         {sessionStorage.getItem('userRole') === 'facilitator' && (
