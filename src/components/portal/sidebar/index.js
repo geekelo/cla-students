@@ -90,16 +90,18 @@ function Sidebar() {
             <FontAwesomeIcon icon={faClipboardList} className="nav-icon" /> Tests
           </button>
         </li>
+        {sessionStorage.getItem('userRole') === 'facilitator' && (
         <li>
           <button
             type="button"
-            onClick={() => handleNavigation('submissions')}
-            className={getButtonClass('submissions')}
-            aria-label="View Submissions"
+            onClick={() => handleNavigation('announcements')}
+            className={getButtonClass('announcements')}
+            aria-label="View Announcements"
           >
-            <FontAwesomeIcon icon={faInbox} className="nav-icon" /> Submissions
+            <FontAwesomeIcon icon={faInbox} className="nav-icon" /> Announcements
           </button>
         </li>
+        )}
         <li>
           <button
             type="button"

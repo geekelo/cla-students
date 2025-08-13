@@ -5,7 +5,8 @@ import Profile from './intenalPages/profile/index';
 import Courses from './intenalPages/courseList/index';
 import Assignments from './intenalPages/assignments/index';
 import Dashboard from './intenalPages/dashboard/index';
-import Submissions from './intenalPages/submissions/index';
+import Announcements from './intenalPages/announcements/index';
+import AddEditAnnouncement from './intenalPages/announcements/addEditAnnouncement';
 import InstructorDesk from './intenalPages/instructorDesk/index';
 import Sidebar from './sidebar';
 import Calendar from './intenalPages/calender/index';
@@ -34,7 +35,8 @@ function StudentArea() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/assignments" element={<Assignments />} />
-          <Route path="/submissions" element={<Submissions />} />
+          <Route path="/announcements" element={<Announcements />} />
+          <Route path="/announcement/new" element={<AddEditAnnouncement />} />
           <Route path="/instructorDesk" element={<InstructorDesk />} />
           <Route path="/events/" element={<Calendar /> } />
           <Route path="/assignment/new" element={<AddEditAssignment /> } />
