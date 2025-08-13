@@ -18,8 +18,8 @@ function ContributionItem({ contribution }) {
     >
       <span className="assignment-name">{contribution.name}</span>
       {contribution.due_date < new Date().toISOString() ? 
-        <span className="lock-icon">🔒 Past Due</span> : 
-        <span className="lock-icon">⭐ New</span>
+        <span className="lock-icon">🌑 Past Due</span> : 
+        <span className="lock-icon">🌕 New</span>
       }
     </div>
   );

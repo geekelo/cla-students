@@ -23,7 +23,7 @@ const AddEditAssignment = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const assignment = location.state?.assignment || {}
-  const { courseId, contribution, isEditMode } = location.state || {}
+  const { courseId, contribution, isEditMode, cohortId } = location.state || {}
   const [loading, setLoading] = useState(false)
   const [courses, setCourses] = useState([])
 
@@ -34,6 +34,7 @@ const AddEditAssignment = () => {
       due_date: contribution?.due_date || '',
       cla_course_id: courseId || '',
       cla_user_id: sessionStorage.getItem('userId') || '',
+      cla_cohort_id: cohortId || '',
     },
   })
 
@@ -131,8 +132,9 @@ const AddEditAssignment = () => {
 
       if (response) {
         toast.success(isEditMode ? 'Assignment updated successfully!' : 'Assignment created successfully!')
-
-        navigate('/portal/assignments')
+        setTimeout(() => {
+          navigate('/portal/assignments')
+        }, 3000)
       }
     } catch (error) {
       console.error('Error with assignment:', error)

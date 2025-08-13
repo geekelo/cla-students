@@ -17,7 +17,7 @@ function AssignmentItem({ assignment }) {
       onKeyDown={(e) => (e.key === 'Enter' ?  handleView(assignment) : null)}
     >
       <span className="assignment-name">{assignment.name}</span>
-      {assignment.locked && <span className="lock-icon">🔒 Locked</span>}
+      {assignment.due_date < new Date().toISOString() ? (<span className="lock-icon"> 🌑 Past Due</span>) : (<span className="lock-icon"> 🌕 New</span>)}
     </div>
   );
 }

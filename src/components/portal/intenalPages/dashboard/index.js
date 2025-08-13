@@ -85,7 +85,7 @@ function Dashboard() {
     { id: 1, title: 'Important Reminders for Our Classes:', content: 'The meeting room opens at 7:30 AM for all students!\nClasses commence at 8:00 AM sharp!'},
     { id: 2, title: 'Important Reminders on Attendance', content: 'Your attendance is crucial, as it accounts for the highest percentage of your cumulative scores. Be there and be on time!\n'},
     { id: 3, title: 'Important Reminders on Assignments', content: 'Always submit your assignments before the deadline to stay ahead!\n'},
-    { id: 3, title: 'Let\'s make this semester a success!', content: ''},
+    { id: 4, title: 'Let\'s make this semester a success!', content: ''},
   ];
 
   return (

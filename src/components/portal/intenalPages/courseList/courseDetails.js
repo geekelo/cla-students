@@ -266,6 +266,7 @@ function CourseDetails() {
       state: {
         courseId: id,
         course: course,
+        cohortId: course.cla_cohort_id,
       },
     })
   }
@@ -279,7 +280,7 @@ function CourseDetails() {
       },
     })
   }
-  
+
   const handleAddCbt = () => {
     navigate('/portal/cbt/new', {
       state: {

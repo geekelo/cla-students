@@ -18,8 +18,8 @@ function CbtItem({ cbt }) {
     >
       <span className="assignment-name">{cbt.name}</span>
       {cbt.due_date < new Date().toISOString() ? 
-        <span className="lock-icon">🔒 Past Due</span> : 
-        <span className="lock-icon">⭐ New</span>
+        <span className="lock-icon">🌑 Past Due</span> : 
+        <span className="lock-icon">🌕 New</span>
       }
     </div>
   );

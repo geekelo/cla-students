@@ -60,10 +60,16 @@ function Contributions() {
   };
 
   const handleCohortChange = (e) => {
-    setSelectedCohort(e.target.value);
+    const newCohortId = e.target.value;
+    setSelectedCohort(newCohortId);
+    
+    // Use the new cohort ID directly instead of relying on state
+    if (newCohortId) {
+      applyCohortFilter(newCohortId);
+    }
   };
 
-  const applyCohortFilter = async () => {
+  const applyCohortFilter = async (cohortId = selectedCohort) => {
     if (!selectedCohort) {
       toast.warning('Please select a cohort first.');
       return;
@@ -81,7 +87,7 @@ function Contributions() {
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       
       const contributionsResponse = await api.get('/api/v1/cla_contributions', {
-        params: { cla_cohort_id: selectedCohort },
+        params: { cla_cohort_id: cohortId },
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -94,10 +100,6 @@ function Contributions() {
       setLoading(false);
     }
   };
-
-  if (loading) {
-    return <div className="loading">Loading Contributions...</div>;
-  }
 
   return (
     <section className="assignments-section">
@@ -120,17 +122,10 @@ function Contributions() {
                 </option>
               ))}
             </select>
-            <button
-              type="button"
-              className="filter-button"
-              onClick={applyCohortFilter}
-              disabled={!selectedCohort}
-            >
-              Apply Filter
-            </button>
           </div>
         )}
       </div>
+      {loading ? (<div className="loading">Loading contributions...</div>)  : (
       <div className="assignments-list">
         {currContributions?.length > 0 ? (
           currContributions.map((contribution) => (
@@ -141,7 +136,7 @@ function Contributions() {
             No contributions available.
           </p>
         )}
-      </div>
+      </div>)}
     </section>
   );
 }
