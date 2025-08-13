@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import AssignmentItem from './assignmentItem';
 import '../../../../stylesheets/assignments.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClock, faCheckCircle, faClipboardCheck } from '@fortawesome/free-solid-svg-icons';
+import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import { createAxiosInstance } from '../../../../config';
 
 const api = createAxiosInstance();
@@ -13,23 +13,21 @@ const api = createAxiosInstance();
 function Assignments() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('all');
   const [currAssignments, setAssignments] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [isFacilitator, setIsFacilitator] = useState(false);
+  const [selectedCohort, setSelectedCohort] = useState('');
+  const [cohorts, setCohorts] = useState([]);
 
-  useEffect(() => {
-    const userRole = sessionStorage.getItem('userRole');
-    setIsFacilitator(userRole === 'facilitator');
-    // Set default active tab based on role
-    setActiveTab(userRole === 'facilitator' ? 'all' : 'pending');
-  }, []);
 
-  useEffect(() => {
-    const fetchAssignments = async () => {
+  const fetchCohorts = async () => {
+    const response = await api.get('/api/v1/cla_cohorts');
+    setCohorts(response.data.cohorts);
+  };
+
+    const applyCohortFilter = async () => {
       try {
         const token = sessionStorage.getItem('authToken');
-        const cla_cohort_id = sessionStorage.getItem('cohortId');
 
         if (!token) {
           toast.error('Session expired. Please login again.');
@@ -37,7 +35,7 @@ function Assignments() {
           return;
         }
 
-        if (!cla_cohort_id) {
+        if (!selectedCohort) {
           const userRole = sessionStorage.getItem('userRole');
           if (userRole === 'student') {
             toast.error('Cohort information not found. Please login again.');
@@ -54,33 +52,11 @@ function Assignments() {
           setLoading(false);
           return;
         }
-
-        // Fetch course IDs first
-        const courseIdsResponse = await api.get('/api/v1/cla_courses/get_course_ids', {
-          params: { cla_cohort_id: cla_cohort_id },
+        const assignmentsResponse = await api.get('/api/v1/cla_assignments', {
+          params: { cla_cohort_id: selectedCohort },
           headers: { Authorization: `Bearer ${token}` }
         });
-
-        // Access the course_ids array from the response
-        const courseIds = courseIdsResponse.data.course_ids;
-        
-        if (!courseIds || !Array.isArray(courseIds)) {
-          console.error('Invalid course IDs response:', courseIdsResponse.data);
-          toast.error('Failed to fetch course IDs. Please try again.');
-          setLoading(false);
-          return;
-        }
-
-        // Fetch assignments for each course
-        const allAssignments = [];
-        for (const courseId of courseIds) {
-          const assignmentsResponse = await api.get('/api/v1/cla_assignments', {
-            params: { cla_course_id: courseId },
-            headers: { Authorization: `Bearer ${token}` }
-          });
-          allAssignments.push(...assignmentsResponse.data);
-        }
-        setAssignments(allAssignments);
+        setAssignments(assignmentsResponse.data);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching assignments:', error);
@@ -89,67 +65,73 @@ function Assignments() {
       }
     };
 
-    fetchAssignments();
-  }, [location.state, navigate]);
-
-  const handleTabClick = (tab) => {
-    setActiveTab(tab);
+  const handleCohortChange = (e) => {
+    setSelectedCohort(e.target.value);
   };
-
-  // Filter assignments for each tab
-  const filteredAssignments = currAssignments?.filter((assignment) => {
-    if (activeTab === 'pending') return assignment.submitted === false;
-    if (activeTab === 'submitted') return assignment.submitted === true;
-    if (activeTab === 'all') return true; // Show all assignments for facilitator
-    return false;
-  });
 
   if (loading) {
     return <div className="loading">Loading assignments...</div>;
   }
 
+  useEffect(() => {
+    const userRole = sessionStorage.getItem('userRole');
+    setIsFacilitator(userRole === 'facilitator');
+    // Fetch cohorts if facilitator and set cohort if student
+    if (userRole === 'facilitator') {
+      fetchCohorts();
+    } else {
+      setSelectedCohort(sessionStorage.getItem('cohortId'));
+      applyCohortFilter();
+    }
+
+    // If Contributions are passed through location state, use those
+    if (location.state?.assignments && location.state.assignments.length > 0) {
+      setAssignments(location.state.assignments);
+      setLoading(false);
+      return;
+    }
+  }, [location.state, navigate]);
+
   return (
     <section className="assignments-section">
       <div className="assignments-tabs">
-        {isFacilitator ? (
-          <button
-            type="button"
-            className={`tab-button ${activeTab === 'all' ? 'active' : ''}`}
-            onClick={() => handleTabClick('all')}
-          >
-            <FontAwesomeIcon icon={faCheckCircle} className="me-2" /> ALL
-          </button>
-        ) : (
-          <>
+        {isFacilitator && (
+          <div className="cohort-filter">
+            <div className="filter-label">
+              <FontAwesomeIcon icon={faFilter} className="filter-icon" />
+              Filter by Cohort:
+            </div>
+            <select
+              className="cohort-select"
+              value={selectedCohort}
+              onChange={handleCohortChange}
+            >
+              <option value="">Select a cohort</option>
+              {cohorts?.length > 0 && cohorts.map((cohort) => (
+                <option key={cohort.id} value={cohort.id}>
+                  {cohort.name}
+                </option>
+              ))}
+            </select>
             <button
               type="button"
-              className={`tab-button ${activeTab === 'pending' ? 'active' : ''}`}
-              onClick={() => handleTabClick('pending')}
+              className="filter-button"
+              onClick={applyCohortFilter}
+              disabled={!selectedCohort}
             >
-              <FontAwesomeIcon icon={faClock} className="me-2" /> Pending
+              Apply Filter
             </button>
-            <button
-              type="button"
-              className={`tab-button ${activeTab === 'submitted' ? 'active' : ''}`}
-              onClick={() => handleTabClick('submitted')}
-            >
-              <FontAwesomeIcon icon={faClipboardCheck} className="me-2" /> Submitted
-            </button>
-          </>
+          </div>
         )}
       </div>
       <div className="assignments-list">
-        {filteredAssignments?.length > 0 ? (
-          filteredAssignments.map((assignment) => (
+        {currAssignments?.length > 0 ? (
+          currAssignments.map((assignment) => (
             <AssignmentItem key={assignment.id} assignment={assignment} />
           ))
         ) : (
           <p className="no-assignments">
-            No
-            {' '}
-            {activeTab}
-            {' '}
-            assignments available.
+            No assignments available.
           </p>
         )}
       </div>

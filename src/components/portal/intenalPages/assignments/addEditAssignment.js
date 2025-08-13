@@ -22,15 +22,16 @@ const api = createAxiosInstance()
 const AddEditAssignment = () => {
   const navigate = useNavigate()
   const location = useLocation()
-  const { courseId, assignment, isEditMode } = location.state || {}
+  const assignment = location.state?.assignment || {}
+  const { courseId, contribution, isEditMode } = location.state || {}
   const [loading, setLoading] = useState(false)
   const [courses, setCourses] = useState([])
 
   const [formData, setFormData] = useState({
     cla_assignment: {
-      name: assignment?.name || '',
-      description: assignment?.description || '',
-      due_date: assignment?.due_date || '',
+      name: contribution?.name || '',
+      description: contribution?.description || '',
+      due_date: contribution?.due_date || '',
       cla_course_id: courseId || '',
       cla_user_id: sessionStorage.getItem('userId') || '',
     },
@@ -48,7 +49,7 @@ const AddEditAssignment = () => {
         },
       })
     }
-  }, [isEditMode, assignment])
+  }, [isEditMode, contribution])
 
   useEffect(() => {
     const fetchCourses = async () => {
