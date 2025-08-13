@@ -163,8 +163,8 @@ function Assignments() {
       </div>
 
       {/* Filter Section - Only for facilitators */}
+      {isFacilitator && (
       <div className="cohort-filter-section">
-        {isFacilitator && (
           <div className="cohort-filter">
             <div className="filter-label">
               <FontAwesomeIcon icon={faFilter} className="filter-icon" />
@@ -183,8 +183,8 @@ function Assignments() {
               ))}
             </select>
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
       {loading ? (<div className="loading">Loading assignments...</div>)  : (
       <div className="assignments-list">

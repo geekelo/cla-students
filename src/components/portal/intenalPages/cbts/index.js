@@ -109,8 +109,8 @@ function Cbts() {
       </div>
 
       {/* Filter Section - Only for facilitators */}
+      {isFacilitator && (
       <div className="cohort-filter-section">
-        {isFacilitator && (
           <div className="cohort-filter">
             <div className="filter-label">
               <FontAwesomeIcon icon={faFilter} className="filter-icon" />
@@ -129,8 +129,8 @@ function Cbts() {
               ))}
             </select>
           </div>
-        )}
-      </div>
+        </div>
+      )}
       {loading ? (<div className="loading">Loading cbts...</div>)  : (
       <div className="assignments-list">
         {currCbts?.length > 0 ? (

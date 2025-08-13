@@ -109,8 +109,8 @@ function Contributions() {
       </div>
 
       {/* Filter Section - Only for facilitators */}
+      {isFacilitator && (
       <div className="cohort-filter-section">
-        {isFacilitator && (
           <div className="cohort-filter">
             <div className="filter-label">
               <FontAwesomeIcon icon={faFilter} className="filter-icon" />
@@ -129,8 +129,8 @@ function Contributions() {
               ))}
             </select>
           </div>
-        )}
-      </div>
+        </div>
+      )}
       {loading ? (<div className="loading">Loading contributions...</div>)  : (
       <div className="assignments-list">
         {currContributions?.length > 0 ? (
