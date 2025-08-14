@@ -12,7 +12,6 @@
   display: none; 
 }
 
-
 /* Left Side Nav */
 .student-side-nav {
   width: 250px;
@@ -25,37 +24,46 @@
   justify-content: flex-start;
   position: absolute;
   height: 100%;
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .student-nav-list {
   list-style-type: none;
   width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .student-nav-list li {
-  margin: 20px 0;
+  margin: 8px 0;
 }
 
 .student-nav-link {
   color: white;
-  font-size: 18px;
+  font-size: 16px;
   text-transform: capitalize;
-  display: block;
-  padding: 10px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
   background-color: rgba(0, 0, 0, 0);
   border: none;
   width: 100%;
   text-align: left;
   font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
 }
-
 
 /* Both hover and active states will use the same color */
 .student-nav-link:hover,
 .student-nav-link.active {
   background-color: rgba(140, 109, 207, 0.771);
+  transform: translateX(5px);
 }
 
 .student-nav-link:hover{
@@ -69,7 +77,7 @@
   flex: 1;
   background-color: rgb(246, 244, 249);
   height: 100%;
-
+  transition: margin-left 0.3s ease-in-out;
 }
 
 .student-display-title {
@@ -81,25 +89,70 @@
   font-size: 18px;
 }
 
+.nav-icon {
+  margin-right: 12px;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* Mobile Menu Toggle Button */
+.mobile-menu-toggle {
+  display: none;
+  position: fixed;
+  top: 80px;
+  left: 25px;
+  z-index: 999;
+  background: rgba(68, 46, 121, 0.9);
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-menu-toggle:hover {
+  background: rgba(68, 46, 121, 1);
+  transform: scale(1.05);
+}
+
+.mobile-menu-toggle.active {
+  background: rgb(173, 158, 208);
+  transform: scale(1.05);
+}
+
+.mobile-menu-toggle .nav-icon {
+  font-size: 18px;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-toggle.active .nav-icon {
+  transform: rotate(180deg);
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
-  .student-area-container {
-    flex-direction: column;
+  .mobile-menu-toggle {
+    display: block;
   }
 
   .student-side-nav {
-    width: 100%;
-    position: relative;
-    flex-direction: row;
-    justify-content: space-around;
-    height: auto;
-    padding: 10px 0;
+    transform: translateX(-100%);
+    width: 280px;
+    padding: 60px 20px 20px 20px;
+  }
+
+  .student-side-nav.mobile-open {
+    transform: translateX(0);
   }
 
   .student-nav-list {
     display: flex;
-    justify-content: space-around;
-    width: 100%;
+    flex-direction: column;
+    gap: 8px;
   }
 
   .student-nav-list li {
@@ -107,17 +160,94 @@
   }
 
   .student-nav-link {
-    font-size: 14px;
-    padding: 8px;
+    font-size: 16px;
+    padding: 16px 20px;
+    border-radius: 10px;
+    margin: 2px 0;
+    font-weight: 500;
+  }
+
+  .student-nav-link:hover,
+  .student-nav-link.active {
+    transform: translateX(8px);
+    background-color: rgba(140, 109, 207, 0.9);
   }
 
   .student-display-area {
     margin-left: 0;
     padding: 20px;
+    padding-top: 80px;
+  }
+
+  .nav-icon {
+    margin: 0;
+    width: 20px;
+    height: 20px;
   }
 }
 
-.nav-icon {
-  margin-right: 10px;
-  width: 16px;
+/* Tablet Responsiveness */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .student-side-nav {
+    width: 220px;
+    padding: 20px 15px;
+  }
+
+  .student-nav-link {
+    font-size: 15px;
+    padding: 10px 12px;
+  }
+
+  .student-display-area {
+    margin-left: 220px;
+    padding: 25px;
+  }
+
+  .nav-icon {
+    margin-right: 10px;
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Large Screen Responsiveness */
+@media (min-width: 1025px) {
+  .student-side-nav {
+    width: 280px;
+    padding: 25px;
+  }
+
+  .student-nav-link {
+    font-size: 17px;
+    padding: 14px 18px;
+  }
+
+  .student-display-area {
+    margin-left: 280px;
+    padding: 35px;
+  }
+
+  .nav-icon {
+    margin-right: 15px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .student-nav-link {
+    min-height: 44px; /* Minimum touch target size */
+    display: flex;
+    align-items: center;
+  }
+
+  .student-nav-link:hover {
+    transform: none; /* Disable hover effects on touch devices */
+  }
+
+  .student-nav-link:active {
+    background-color: rgba(140, 109, 207, 0.9);
+    transform: scale(0.98);
+  }
 }
