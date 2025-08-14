@@ -130,6 +130,7 @@ const Sidebar = () => {
             </button>
           </li>
 
+          {sessionStorage.getItem('userRole') === 'facilitator' && (
           <li>
             <button
               onClick={() => handleNavigation('announcements')}
@@ -139,6 +140,7 @@ const Sidebar = () => {
               <FontAwesomeIcon icon={faBullhorn} className="nav-icon" />&nbsp; Announcements
             </button>
           </li>
+          )}
 
           <li>
             <button

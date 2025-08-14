@@ -16,7 +16,7 @@
   margin-left: auto;
   display: flex;
   align-self: center;
- justify-content: center;
+  justify-content: center;
   width: 50%;
 }
 
@@ -25,7 +25,6 @@
   height: 300px;
   border-radius: 50%;
   object-fit: cover;
-  
 }
 
 .profile-details {
@@ -61,7 +60,21 @@
   border-radius: 5px;
   cursor: pointer;
   margin-right: 10px;
+  width: 100%;
+  margin-bottom: 10px;
   transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.profile-btn svg {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
 }
 
 .profile-btn:hover {
@@ -85,23 +98,109 @@
 }
 
 /* Mobile Responsiveness */
-@media (max-width: 768px) {
+@media (max-width: 926px) {
   .profile-container {
     flex-direction: column;
     align-items: center;
+    padding: 15px;
+    margin-top: 10px;
   }
 
   .profile-image {
-    margin-right: 0;
-    margin-bottom: 20px;
+    margin: 0 auto 20px auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .profile-pic {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto;
   }
 
   .profile-details {
     text-align: center;
+    width: 100%;
+  }
+
+  .profile-name {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .profile-cohort,
+  .profile-email,
+  .profile-phone {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .profile-actions {
+    width: 100%;
+    margin-top: 20px;
   }
 
   .profile-btn {
     width: 100%;
     margin-bottom: 10px;
+    margin-right: 0;
+    padding: 12px 15px;
+    font-size: 14px;
+  }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+  .profile-container {
+    padding: 10px;
+    margin: 5px;
+  }
+
+  .profile-image {
+    margin-bottom: 15px;
+  }
+
+  .profile-pic {
+    width: 150px;
+    height: 150px;
+  }
+
+  .profile-name {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+
+  .profile-cohort,
+  .profile-email,
+  .profile-phone {
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+
+  .profile-btn {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .profile-btn {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .profile-btn:active {
+    transform: scale(0.98);
+  }
+
+  .profile-btn:hover {
+    background-color: rgb(68, 44, 123);
   }
 }

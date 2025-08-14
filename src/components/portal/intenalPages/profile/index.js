@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../../../stylesheets/profile.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faEdit, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -156,10 +156,10 @@ function Profile() {
           </a>
           <div>
             <button type="button" className="profile-btn" onClick={handleEdit}>
-              Edit Profile
+              <FontAwesomeIcon icon={faEdit} /> Edit Profile
             </button>
             <button type="button" className="profile-btn" onClick={handleLogout}>
-              Logout
+              <FontAwesomeIcon icon={faSignOutAlt} /> Logout
             </button>
           </div>
         </div>
