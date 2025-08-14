@@ -74,7 +74,7 @@ const Sidebar = () => {
               className={getButtonClass('dashboard')}
               aria-label="View Dashboard"
             >
-              <FontAwesomeIcon icon={faHome} className="nav-icon" /> Dashboard
+              <FontAwesomeIcon icon={faHome} className="nav-icon" />&nbsp; Dashboard
             </button>
           </li>)}
 
