@@ -195,11 +195,7 @@ function InstructorDesk() {
           <p>{deskStats.total_live_classes}</p>
         </div>
         <div className="stat-card">
-          <h2>Pending Submissions</h2>
-          <p>{deskStats.total_submissions_without_score}</p>
-        </div>
-        <div className="stat-card">
-          <h2>Total Users</h2>
+          <h2>Total Students</h2>
           <p>{deskStats.total_users}</p>
         </div>
       </div>
