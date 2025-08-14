@@ -72,7 +72,9 @@ function SignUp() {
         user: {
           ...userData.user,
           birthday: userData.user.birthday || '',
-          phone_number: userData.user.phone_number || ''
+          phone_number: userData.user.phone_number || '',
+          cla_cohort_id: userData.user.cla_cohort_id || '',
+          cla_role_id: userData.user.cla_role_id || ''
         }
       });
     }
