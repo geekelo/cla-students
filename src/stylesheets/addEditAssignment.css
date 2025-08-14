@@ -213,7 +213,7 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: 926px) {
   .task-editor-main {
     padding: 1rem;
   }
@@ -245,7 +245,7 @@
 }
 
 /* Mobile responsive for radio options */
-@media (max-width: 768px) {
+@media (max-width: 926px) {
   .announcement-type-options {
     gap: 8px;
   }

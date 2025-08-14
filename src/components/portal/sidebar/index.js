@@ -11,7 +11,7 @@ import {
   faSignOutAlt,
   faBullhorn,
   faLaptop,
-  faSchool,
+  faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
 import '../../../stylesheets/studentArea.css';
 
@@ -60,7 +60,7 @@ const Sidebar = () => {
           onClick={toggleMobileMenu}
           aria-label="Toggle mobile menu"
         >
-          <FontAwesomeIcon icon={faSchool} className="nav-icon" />
+          <FontAwesomeIcon icon={faChevronRight} className="nav-icon" />
         </button>
       )}
 

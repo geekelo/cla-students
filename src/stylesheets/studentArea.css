@@ -100,12 +100,12 @@
 .mobile-menu-toggle {
   display: none;
   position: fixed;
-  top: 80px;
-  left: 25px;
-  z-index: 999;
+  top: 88px;
+  left: 0;
+  z-index: 1001;
   background: rgba(68, 46, 121, 0.9);
   border: none;
-  border-radius: 8px;
+  border-radius: 0 8px 8px 0;
   padding: 12px;
   color: white;
   cursor: pointer;
@@ -143,6 +143,8 @@
     transform: translateX(-100%);
     width: 280px;
     padding: 60px 20px 20px 20px;
+    position: fixed;
+    top: 0;
   }
 
   .student-side-nav.mobile-open {

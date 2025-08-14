@@ -72,7 +72,7 @@
 }
 
 /* Mobile Responsiveness */
-@media (max-width: 768px) {
+@media (max-width: 926px) {
   .add-topic-container {
     padding: 1rem;
   }

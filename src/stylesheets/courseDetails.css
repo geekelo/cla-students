@@ -3,7 +3,7 @@
 .course-details {
   padding: 2rem;
   font-family: 'Poppins', sans-serif;
-  min-width: 100vh;
+  min-width: 100%;
    overflow-y: auto;
   scrollbar-width: none; 
   -ms-overflow-style: none; 
@@ -353,7 +353,7 @@
 }
 
 /* Mobile responsive styles */
-@media (max-width: 768px) {
+@media (max-width: 926px) {
   .course-header {
     padding: 1rem;
   }

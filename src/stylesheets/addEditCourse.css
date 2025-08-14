@@ -155,7 +155,7 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: 926px) {
   .student-display-area {
     padding: 1rem;
   }

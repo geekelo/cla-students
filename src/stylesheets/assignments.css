@@ -351,7 +351,7 @@
 }
 
 /* Mobile Styles */
-@media (max-width: 768px) {
+@media (max-width: 926px) {
   .assignments-section {
     margin: 10px;
     padding: 15px;

@@ -1,60 +1,81 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+/* Courses Page Styles */
 .courses-page {
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  font-family: 'Poppins', sans-serif;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.courses-content {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .courses-nav {
   display: flex;
-  gap: 1rem;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .courses-nav-btn {
-  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, rgba(68, 46, 121, 1) 0%, rgba(68, 46, 121, 0.9) 100%);
+  color: white;
   border: none;
-  border-radius: 5px;
-  background-color: rgba(184, 163, 229, 0.2);
-  color: #000;
+  padding: 10px 20px;
+  border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  width: 100%;
+}
+
+.courses-nav-btn:hover {
+  background: linear-gradient(135deg, rgba(68, 46, 121, 0.9) 0%, rgba(68, 46, 121, 0.8) 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(68, 46, 121, 0.3);
 }
 
 .courses-nav-btn.active {
-  background-color: rgba(68,46,121,255);
-  color: white;
-}
-
-.courses-content {
-  padding: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #ffffff;
+  background: linear-gradient(135deg, rgba(68, 46, 121, 0.8) 0%, rgba(68, 46, 121, 0.7) 100%);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: translateY(0);
 }
 
 .course-status-nav {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .status-btn {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 5px;
+  background: #f8f9fa;
+  color: #495057;
+  border: 1px solid #dee2e6;
+  padding: 8px 16px;
+  border-radius: 6px;
   cursor: pointer;
-  background-color: #f0f0f0;
   transition: all 0.3s ease;
-  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  width: 100%;
+}
+
+.status-btn:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
 }
 
 .status-btn.active {
-  background-color: rgba(152, 132, 198, 0.871);
-  color: white;
+  background: rgba(68, 46, 121, 0.1);
+  color: rgba(68, 46, 121, 1);
+  border-color: rgba(68, 46, 121, 0.3);
 }
 
 .status-btn .me-2 {
@@ -142,24 +163,6 @@
   border-radius: 2px;
 }
 
-/* Mobile responsive for courses title */
-@media (max-width: 768px) {
-  .assignments-title-container {
-    padding: 15px 20px;
-    margin-bottom: 20px;
-  }
-  
-  .assignments-title {
-    font-size: 1.5rem;
-  }
-  
-  .assignments-title::after {
-    width: 50px;
-    height: 2px;
-    bottom: -3px;
-  }
-}
-
 /* Cohort Filter Section */
 .cohort-filter-section {
   margin-bottom: 25px;
@@ -213,25 +216,102 @@
   border-color: rgba(68, 46, 121, 0.3);
 }
 
-/* Mobile responsive for filter section */
+/* Mobile Responsive Design */
 @media (max-width: 768px) {
+  .assignments-section {
+    padding: 10px;
+    margin: 0;
+  }
+
+  .assignments-title-container {
+    padding: 15px 20px;
+    margin-bottom: 20px;
+  }
+
+  .assignments-title {
+    font-size: 1.4rem;
+  }
+
+  .assignments-title::after {
+    width: 40px;
+    height: 2px;
+    bottom: -2px;
+  }
+
   .cohort-filter-section {
     padding: 15px;
     margin-bottom: 20px;
   }
-  
+
   .cohort-filter {
     flex-direction: column;
     align-items: stretch;
     gap: 10px;
   }
-  
+
   .filter-label {
     justify-content: center;
+    font-size: 0.9rem;
   }
-  
+
   .cohort-select {
-    min-width: auto;
     width: 100%;
+    min-width: auto;
+    padding: 12px 15px;
+    font-size: 1rem;
+  }
+
+  .courses-nav-btn,
+  .status-btn {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .assignments-section {
+    padding: 8px;
+  }
+
+  .assignments-title-container {
+    padding: 12px 16px;
+    margin-bottom: 15px;
+  }
+
+  .assignments-title {
+    font-size: 1.2rem;
+  }
+
+  .cohort-filter-section {
+    padding: 12px;
+    margin-bottom: 15px;
+  }
+
+  .filter-label {
+    font-size: 0.85rem;
+  }
+
+  .cohort-select {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .cohort-select,
+  .courses-nav-btn,
+  .status-btn {
+    min-height: 44px;
+  }
+
+  .courses-nav-btn:active,
+  .status-btn:active {
+    transform: scale(0.98);
+  }
+
+  .courses-nav-btn:hover,
+  .status-btn:hover {
+    transform: none;
   }
 }
