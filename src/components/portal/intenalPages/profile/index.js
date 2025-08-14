@@ -28,7 +28,7 @@ function Profile() {
     if (storedData) {
       setUserData({
         studentId: sessionStorage.getItem('userId'),
-        cohort: sessionStorage.getItem('cohortId'),
+        cohortId: sessionStorage.getItem('cohortId'),
         email: sessionStorage.getItem('email'),
         name: sessionStorage.getItem('userName'),
         roleId: sessionStorage.getItem('roleId'),
