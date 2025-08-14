@@ -428,6 +428,13 @@
     word-break: break-word;
   }
 
+  .topic-number {
+    width: 5%;
+    height: 5%;
+    font-size: 0.8rem;
+    padding: 2% 5%;
+  }
+
   .resource-list {
     flex-direction: column;
     gap: 0.5rem;
@@ -481,9 +488,7 @@
   }
 
   .topic-number {
-    width: 24px;
-    height: 24px;
-    font-size: 0.8rem;
+    display: none;
   }
 
   .topic-title {
