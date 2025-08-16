@@ -398,7 +398,7 @@ function CourseDetails() {
 
             <div className='course-description'>
               <h3>Description :</h3>
-              <p>{course.description ? course.description : 'No description available for this course.'}</p>
+              <p style={{ whiteSpace: 'pre-wrap' }}>{course.description ? course.description : 'No description available for this course.'}</p>
             </div>
           </div>
 
