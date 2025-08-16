@@ -31,7 +31,7 @@ const ScheduleLiveClass = () => {
       duration: liveClass?.duration || '',
       zoom_link: liveClass?.zoom_link || '',
       cla_course_id: courseId || liveClass?.cla_course_id || '',
-      cohort_id: sessionStorage.getItem('cohortId') || liveClass?.cohort_id || '',
+      cla_cohort_id: liveClass?.cla_cohort_id || '',
       cla_user_id: sessionStorage.getItem('userId') || liveClass?.cla_user_id || ''
     }
   });
@@ -101,11 +101,6 @@ const ScheduleLiveClass = () => {
     const { name, value } = e.target;
     let finalValue = value;
   
-    if (name === 'cla_cohort_id') {
-      finalValue = parseInt(value);
-      // Store cohort ID in session storage when selected
-      sessionStorage.setItem('cohortId', finalValue);
-    }
     setFormData(prev => ({
       ...prev,
       cla_live_class: {
@@ -114,6 +109,8 @@ const ScheduleLiveClass = () => {
       }
     }));
   };
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();

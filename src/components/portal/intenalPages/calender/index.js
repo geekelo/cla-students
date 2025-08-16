@@ -7,7 +7,8 @@ import {
   faCalendarAlt,
   faClock,
   faHistory,
-  faCalendarDay
+  faCalendarDay,
+  faCamera
 } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { createAxiosInstance } from '../../../../config';
@@ -204,6 +205,11 @@ function Calendar() {
           getFilteredEvents().map(event => (
             <div key={event.id} className="event-card">
               <div className="event-details">
+                <div className="event-course">
+                  <FontAwesomeIcon icon={faCamera} className="datetime-icon" /> 
+                  {' '}
+                  <span className="datetime-text">{event.name}</span>
+                </div>
                 <div className="event-datetime">
                   <div className="event-date">
                     <FontAwesomeIcon icon={faCalendarAlt} className="datetime-icon" /> 
@@ -219,7 +225,6 @@ function Calendar() {
                   </div>
                 </div>
                 <h3 className="event-title">{event.courseName}</h3>
-                <div className="event-course">Facilitator: {event.facilitator || 'Not Assigned'}</div>
               </div>
               <div className="event-actions">
                 <button type="button" className="action-icon" onClick={() => handleViewClass(event.zoom_link)} title="Join Class">
