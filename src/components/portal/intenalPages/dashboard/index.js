@@ -191,7 +191,7 @@ function Dashboard() {
             announcements.map((announcement) => (
             <li key={announcement.id} className="notice-item">
               <h3 className="notice-title">{announcement.title}</h3>
-              <p className="notice-content">{announcement.content}</p>
+              <p className="notice-content" style={{ whiteSpace: 'pre-wrap' }}>{announcement.content}</p>
             </li>
           ))
           ) : (

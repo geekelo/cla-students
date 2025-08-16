@@ -9,7 +9,7 @@ function AnnouncementsItem({ announcement, handleEditAnnouncement, handleDeleteA
     <div key={announcement.id} className="assignment-item announcement-item">
       <div className="announcement-content">
         <h3 className="announcement-title">{announcement.title}</h3>
-        <p className="announcement-message">{announcement.content}</p>
+        <p className="announcement-message" style={{ whiteSpace: 'pre-wrap' }}>{announcement.content}</p>
         <div className="announcement-meta">
           <span className="announcement-date">
             {new Date(announcement.created_at).toLocaleDateString()}
