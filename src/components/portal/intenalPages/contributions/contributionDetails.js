@@ -238,7 +238,7 @@ const ContributionDetails = () => {
                 </div>
               )}
             </div>
-            <p className="assignment-description">{location.state?.contribution?.description || 'No description available.'}</p>
+            <p className="assignment-description" style={{ whiteSpace: 'pre-wrap' }}>{location.state?.contribution?.description || 'No description available.'}</p>
           </div>
 
           <div className="assignment-info-grid">
