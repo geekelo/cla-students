@@ -101,6 +101,15 @@ const AddEditAssignment = () => {
     }))
   }
 
+  const handleCohortChange = (e) => {
+    const { value } = e.target
+    const cohortIds = courses.find((course) => course.id === value)?.cla_cohort_id
+    setFormData((prev) => ({
+      ...prev,
+      cla_assignment: { ...prev.cla_assignment, cla_cohort_id: cohortIds, cla_course_id: value },
+    }))
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
@@ -148,7 +157,18 @@ const AddEditAssignment = () => {
           errorMessage = error.response.data.error
         } else if (error.response.data.errors) {
           errorMessage = Object.entries(error.response.data.errors)
-            .map(([field, messages]) => `${field}: ${messages.join(',')}`)
+            .map(([field, messages]) => {
+              let messageText = '';
+              if (Array.isArray(messages)) {
+                messageText = messages.join(', ');
+              } else if (typeof messages === 'string') {
+                messageText = messages;
+              } else {
+                messageText = String(messages);
+              }
+              // Only show field name if it's not a numeric index
+              return isNaN(field) ? `${field}: ${messageText}` : messageText;
+            })
             .join('\n')
         }
       }
@@ -248,7 +268,7 @@ const AddEditAssignment = () => {
               <select
                 name="cla_course_id"
                 value={formData.cla_assignment.cla_course_id}
-                onChange={handleChange}
+                onChange={handleCohortChange}
                 required
                 disabled={loading}
                 className="task-editor-dropdown"
