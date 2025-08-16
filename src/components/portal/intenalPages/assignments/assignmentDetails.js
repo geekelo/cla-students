@@ -28,6 +28,32 @@ const AssignmentDetails = () => {
     score: '',
   });
 
+  // Function to convert text with URLs to clickable links
+  const renderTextWithLinks = (text) => {
+    if (!text) return 'No description available.';
+    
+    // URL regex pattern to match http/https URLs
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const parts = text.split(urlRegex);
+    
+    return parts.map((part, index) => {
+      if (urlRegex.test(part)) {
+        return (
+          <a 
+            key={index}
+            href={part} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ color: '#442e79', textDecoration: 'underline' }}
+          >
+            {part}
+          </a>
+        );
+      }
+      return part;
+    });
+  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -231,7 +257,9 @@ const AssignmentDetails = () => {
                 </div>
               )}
             </div>
-            <p className="assignment-description" style={{ whiteSpace: 'pre-wrap' }}>{location.state?.assignment?.description || 'No description available.'}</p>
+            <p className="assignment-description" style={{ whiteSpace: 'pre-wrap' }}>
+              {renderTextWithLinks(location.state?.assignment?.description)}
+            </p>
           </div>
 
           <div className="assignment-info-grid">
