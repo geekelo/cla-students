@@ -184,7 +184,11 @@ const CbtDetails = () => {
         toastId: 'Deleting Cbt'
       });
 
-      await api.delete(`/api/v1/cla_cbts/${location.state?.cbt?.id}`);
+      await api.delete(`/api/v1/cla_cbts/${location.state?.cbt?.id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
 
       toast.dismiss('Deleting Cbt');
       toast.success('Cbt deleted successfully!');

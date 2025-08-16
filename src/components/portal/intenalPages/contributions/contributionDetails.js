@@ -184,7 +184,11 @@ const ContributionDetails = () => {
         toastId: 'Deleting Contribution'
       });
 
-      await api.delete(`/api/v1/cla_contributions/${location.state?.contribution?.id}`);
+      await api.delete(`/api/v1/cla_contributions/${location.state?.contribution?.id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
 
       toast.dismiss('Deleting Contribution');
       toast.success('Contribution deleted successfully!');

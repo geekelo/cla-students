@@ -170,7 +170,11 @@ const AssignmentDetails = () => {
         toastId: 'deletingAssignment'
       });
 
-      await api.delete(`/api/v1/cla_assignments/${location.state?.assignment?.id}`);
+      await api.delete(`/api/v1/cla_assignments/${location.state?.assignment?.id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
 
       toast.dismiss('deletingAssignment');
       toast.success('Assignment deleted successfully!');
