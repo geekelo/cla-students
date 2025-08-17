@@ -269,7 +269,21 @@ const AssignmentDetails = () => {
             </div>
             <div className="info-item">
               <FontAwesomeIcon icon={faBookOpen} />
-              <span>Course: <strong>{location.state?.assignment?.course_name || 'Not specified'}</strong></span>
+              <span>Course: <strong 
+                style={{ 
+                  cursor: 'pointer', 
+                  color: '#442e79', 
+                  textDecoration: 'underline' 
+                }}
+                onClick={() => navigate('/portal/courses', {
+                  state: { 
+                    courseId: location.state?.assignment?.cla_course_id,
+                    courseName: location.state?.assignment?.course_name 
+                  }
+                })}
+              >
+                {location.state?.assignment?.course_name || 'Not specified'}
+              </strong></span>
             </div>
           </div>
 
