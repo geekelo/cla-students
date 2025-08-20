@@ -117,16 +117,16 @@ function Dashboard() {
               <h2 className="stat-title">{stat.course_name}</h2>
               <div className="stat-details">
                 <p className="stat-percentage">
-                  Assignment: {stat.course_stats?.user_submission_percentage?.submission_points || 0}%
+                  Assignment: {stat.course_stats?.user_submission_percentage?.submission_points || 0} / 25
                 </p>
                 <p className="stat-percentage">
-                  Attendance: {stat.course_stats?.user_attendance_percentage?.attendance_points || 0}%
+                  Attendance: {stat.course_stats?.user_attendance_percentage?.attendance_points || 0} / 30
                 </p>
                 <p className="stat-percentage">
-                  Contributions: {stat.course_stats?.user_contribution_stats?.contributions_points || 0}%
+                  Contributions: {stat.course_stats?.user_contribution_stats?.contributions_points || 0} / 25
                 </p>
                 <p className="stat-percentage">
-                  CBT: {stat.course_stats?.user_cbt_stats?.cbt_points || 0}%
+                  CBT: {stat.course_stats?.user_cbt_stats?.cbt_points || 0} / 20
                 </p>
               </div>
               <div className="stat-details">
