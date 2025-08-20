@@ -243,19 +243,19 @@ function InstructorDesk() {
                       <div className="course-stats-grid">
                         <div className="stat-box assignment">
                           <span className="stat-label">Assignment</span>
-                          <span className="stat-value">{course.course_stats.user_submission_percentage.submission_points}%</span>
+                          <span className="stat-value">{course.course_stats.user_submission_percentage.submission_points} / 25</span>
                         </div>
                         <div className="stat-box attendance">
                           <span className="stat-label">Attendance</span>
-                          <span className="stat-value">{course.course_stats.user_attendance_percentage.attendance_points}%</span>
+                          <span className="stat-value">{course.course_stats.user_attendance_percentage.attendance_points} / 30</span>
                         </div>
                         <div className="stat-box contributions">
                           <span className="stat-label">Contributions</span>
-                          <span className="stat-value">{course.course_stats.user_contribution_stats.contributions_points}%</span>
+                          <span className="stat-value">{course.course_stats.user_contribution_stats.contributions_points} / 25</span>
                         </div>
                         <div className="stat-box cbt">
                           <span className="stat-label">CBT</span>
-                          <span className="stat-value">{course.course_stats.user_cbt_stats.cbt_points}%</span>
+                          <span className="stat-value">{course.course_stats.user_cbt_stats.cbt_points} / 20</span>
                         </div>
                       </div>
                     </div>

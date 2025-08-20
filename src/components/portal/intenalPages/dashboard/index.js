@@ -151,25 +151,25 @@ function Dashboard() {
             <div className="dashboard-stat">
               <h2 className="stat-title">Assignments</h2>
               <p className="stat-value">
-                {stats.studentDashboardStats.user_submission_percentage?.submission_points || 0}%
+                {stats.studentDashboardStats.user_submission_percentage?.submission_points || 0} / 25
               </p>
             </div>
             <div className="dashboard-stat">
               <h2 className="stat-title">Attendance</h2>
               <p className="stat-value">
-                {stats.studentDashboardStats.user_attendance_percentage?.attendance_points || 0}%
+                {stats.studentDashboardStats.user_attendance_percentage?.attendance_points || 0} / 30
               </p>
             </div>
             <div className="dashboard-stat">
               <h2 className="stat-title">Contributions</h2>
               <p className="stat-value">
-                {stats.studentDashboardStats.user_contribution_stats?.contributions_points || 0}%
+                {stats.studentDashboardStats.user_contribution_stats?.contributions_points || 0} / 25
               </p>
             </div>
             <div className="dashboard-stat">
               <h2 className="stat-title">CBT</h2>
               <p className="stat-value">
-                {stats.studentDashboardStats.user_cbt_stats?.cbt_points || 0}%
+                {stats.studentDashboardStats.user_cbt_stats?.cbt_points || 0} / 20
               </p>
             </div>
             <div className="dashboard-stat">
