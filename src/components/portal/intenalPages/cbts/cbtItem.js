@@ -26,7 +26,7 @@ function CbtItem({ cbt }) {
       <span className="assignment-name">{cbt.name}</span>
       {handlePastDue() ? 
         <span className="lock-icon">🌑 Past Due</span> : 
-        <span className="lock-icon">🌕 New</span>
+        cbt.due_date < new Date().toISOString() ? (<span className="lock-icon"> 🚨 Due today </span>) : (<span className="lock-icon"> 🌕 New</span>)
       }
     </div>
   );

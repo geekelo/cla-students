@@ -24,7 +24,7 @@ function AssignmentItem({ assignment }) {
       onKeyDown={(e) => (e.key === 'Enter' ?  handleView(assignment) : null)}
     >
       <span className="assignment-name">{assignment.name}</span>
-      {handlePastDue() ? (<span className="lock-icon"> 🌑 Past Due</span>) : (<span className="lock-icon"> 🌕 New</span>)}
+      {handlePastDue() ? (<span className="lock-icon"> 🌑 Past Due</span>) : assignment.due_date < new Date().toISOString() ? (<span className="lock-icon"> 🚨 Due today </span>) : (<span className="lock-icon"> 🌕 New</span>)}
     </div>
   );
 }
