@@ -23,18 +23,23 @@ function Cbts() {
     const userRole = sessionStorage.getItem('userRole');
     setIsFacilitator(userRole === 'facilitator');
     
+    // If Cbts are passed through location state, use those
+    if (location.state?.cbts && location.state.cbts.length > 0) {
+      setCbts(location.state.cbts);
+      setLoading(false);
+      return;
+    }
+    
     // Fetch cohorts if facilitator and set cohort if student
     if (userRole === 'facilitator') {
       fetchCohorts();
     } else {
       const cla_cohort_id = sessionStorage.getItem('cohortId');
       setSelectedCohort(cla_cohort_id);
-    }
-    // If Cbts are passed through location state, use those
-    if (location.state?.cbts && location.state.cbts.length > 0) {
-      setCbts(location.state.cbts);
-      setLoading(false);
-      return;
+      // Fetch CBTs for the student's cohort
+      if (cla_cohort_id) {
+        fetchCbts(cla_cohort_id);
+      }
     }
   }, [location.state, navigate]);
 
@@ -59,22 +64,7 @@ function Cbts() {
     }
   };
 
-  const handleCohortChange = (e) => {
-    const newCohortId = e.target.value;
-    setSelectedCohort(newCohortId);
-    
-    // Use the new cohort ID directly instead of relying on state
-    if (newCohortId) {
-      applyCohortFilter(newCohortId);
-    }
-  };
-
-  const applyCohortFilter = async (cohortId = selectedCohort) => {
-    if (!cohortId) {
-      toast.warning('Please select a cohort first.');
-      return;
-    }
-
+  const fetchCbts = async (cohortId) => {
     setLoading(true);
     try {
       const token = sessionStorage.getItem('authToken');
@@ -92,13 +82,32 @@ function Cbts() {
       });
       
       setCbts(cbtsResponse.data);
-      toast.success('Filtered cbts for selected cohort');
     } catch (error) {
-      console.error('Error fetching filtered cbts:', error);
-      toast.error('Failed to fetch cbts for selected cohort');
+      console.error('Error fetching cbts:', error);
+      toast.error('Failed to fetch cbts');
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleCohortChange = (e) => {
+    const newCohortId = e.target.value;
+    setSelectedCohort(newCohortId);
+    
+    // Use the new cohort ID directly instead of relying on state
+    if (newCohortId) {
+      applyCohortFilter(newCohortId);
+    }
+  };
+
+  const applyCohortFilter = async (cohortId = selectedCohort) => {
+    if (!cohortId) {
+      toast.warning('Please select a cohort first.');
+      return;
+    }
+
+    await fetchCbts(cohortId);
+    toast.success('Filtered cbts for selected cohort');
   };
 
   return (
