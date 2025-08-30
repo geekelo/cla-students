@@ -23,18 +23,23 @@ function Contributions() {
     const userRole = sessionStorage.getItem('userRole');
     setIsFacilitator(userRole === 'facilitator');
     
+    // If Contributions are passed through location state, use those
+    if (location.state?.contributions && location.state.contributions.length > 0) {
+      setContributions(location.state.contributions);
+      setLoading(false);
+      return;
+    }
+    
     // Fetch cohorts if facilitator and set cohort if student
     if (userRole === 'facilitator') {
       fetchCohorts();
     } else {
       const cla_cohort_id = sessionStorage.getItem('cohortId');
       setSelectedCohort(cla_cohort_id);
-    }
-    // If Contributions are passed through location state, use those
-    if (location.state?.contributions && location.state.contributions.length > 0) {
-      setContributions(location.state.contributions);
-      setLoading(false);
-      return;
+      // Fetch contributions for the student's cohort
+      if (cla_cohort_id) {
+        fetchContributions(cla_cohort_id);
+      }
     }
   }, [location.state, navigate]);
 
@@ -59,22 +64,7 @@ function Contributions() {
     }
   };
 
-  const handleCohortChange = (e) => {
-    const newCohortId = e.target.value;
-    setSelectedCohort(newCohortId);
-    
-    // Use the new cohort ID directly instead of relying on state
-    if (newCohortId) {
-      applyCohortFilter(newCohortId);
-    }
-  };
-
-  const applyCohortFilter = async (cohortId = selectedCohort) => {
-    if (!cohortId) {
-      toast.warning('Please select a cohort first.');
-      return;
-    }
-
+  const fetchContributions = async (cohortId) => {
     setLoading(true);
     try {
       const token = sessionStorage.getItem('authToken');
@@ -92,13 +82,32 @@ function Contributions() {
       });
       
       setContributions(contributionsResponse.data);
-      toast.success('Filtered contributions for selected cohort');
     } catch (error) {
-      console.error('Error fetching filtered contributions:', error);
-      toast.error('Failed to fetch contributions for selected cohort');
+      console.error('Error fetching contributions:', error);
+      toast.error('Failed to fetch contributions');
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleCohortChange = (e) => {
+    const newCohortId = e.target.value;
+    setSelectedCohort(newCohortId);
+    
+    // Use the new cohort ID directly instead of relying on state
+    if (newCohortId) {
+      applyCohortFilter(newCohortId);
+    }
+  };
+
+  const applyCohortFilter = async (cohortId = selectedCohort) => {
+    if (!cohortId) {
+      toast.warning('Please select a cohort first.');
+      return;
+    }
+
+    await fetchContributions(cohortId);
+    toast.success('Filtered contributions for selected cohort');
   };
 
   return (
