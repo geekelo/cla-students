@@ -70,7 +70,7 @@ function Cbts() {
   };
 
   const applyCohortFilter = async (cohortId = selectedCohort) => {
-    if (!selectedCohort) {
+    if (!cohortId) {
       toast.warning('Please select a cohort first.');
       return;
     }
