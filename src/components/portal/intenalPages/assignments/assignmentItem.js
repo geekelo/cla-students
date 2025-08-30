@@ -8,6 +8,13 @@ function AssignmentItem({ assignment }) {
     navigate(`/portal/assignments/${assignment.id}`, { state: { assignment } });
   };
 
+  const handlePastDue = () => {
+    const due = new Date(assignment.due_date);
+    due.setHours(23, 59, 59, 999);
+    const isPastDue = due < new Date();
+    return isPastDue;
+  };
+
   return (
     <div
       className="assignment-item"
@@ -17,7 +24,7 @@ function AssignmentItem({ assignment }) {
       onKeyDown={(e) => (e.key === 'Enter' ?  handleView(assignment) : null)}
     >
       <span className="assignment-name">{assignment.name}</span>
-      {assignment.due_date < new Date().toISOString() ? (<span className="lock-icon"> 🌑 Past Due</span>) : (<span className="lock-icon"> 🌕 New</span>)}
+      {handlePastDue() ? (<span className="lock-icon"> 🌑 Past Due</span>) : (<span className="lock-icon"> 🌕 New</span>)}
     </div>
   );
 }

@@ -8,6 +8,13 @@ function CbtItem({ cbt }) {
     navigate(`/portal/cbts/${cbt.id}`, { state: { cbt } });
   };
 
+  const handlePastDue = () => {
+    const due = new Date(cbt.due_date);
+    due.setHours(23, 59, 59, 999);
+    const isPastDue = due < new Date();
+    return isPastDue;
+  };
+
   return (
     <div
       className="assignment-item"
@@ -17,7 +24,7 @@ function CbtItem({ cbt }) {
       onKeyDown={(e) => (e.key === 'Enter' ?  handleView(cbt) : null)}
     >
       <span className="assignment-name">{cbt.name}</span>
-      {cbt.due_date < new Date().toISOString() ? 
+      {handlePastDue() ? 
         <span className="lock-icon">🌑 Past Due</span> : 
         <span className="lock-icon">🌕 New</span>
       }

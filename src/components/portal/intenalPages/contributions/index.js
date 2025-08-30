@@ -122,7 +122,7 @@ function Contributions() {
               onChange={handleCohortChange}
             >
               <option value="">Select a cohort</option>
-              {cohorts.map((cohort) => (
+              {cohorts?.length > 0 && cohorts?.map((cohort) => (
                 <option key={cohort.id} value={cohort.id}>
                   {cohort.name}
                 </option>

@@ -8,6 +8,13 @@ function ContributionItem({ contribution }) {
     navigate(`/portal/contributions/${contribution.id}`, { state: { contribution } });
   };
 
+  const handlePastDue = () => {
+    const due = new Date(contribution.due_date);
+    due.setHours(23, 59, 59, 999);
+    const isPastDue = due < new Date();
+    return isPastDue;
+  };
+
   return (
     <div
       className="assignment-item"
@@ -17,7 +24,7 @@ function ContributionItem({ contribution }) {
       onKeyDown={(e) => (e.key === 'Enter' ?  handleView(contribution) : null)}
     >
       <span className="assignment-name">{contribution.name}</span>
-      {contribution.due_date < new Date().toISOString() ? 
+      {handlePastDue() ? 
         <span className="lock-icon">🌑 Past Due</span> : 
         <span className="lock-icon">🌕 New</span>
       }
