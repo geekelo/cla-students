@@ -7,11 +7,14 @@ import {
   faFilter,
   faUser,
   faEnvelope,
-  faGraduationCap 
+  faGraduationCap,
+  faDownload
 } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
 import '../../../../stylesheets/instructorDesk.css';
 import { createAxiosInstance } from '../../../../config';
+import { jsPDF } from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 const api = createAxiosInstance();
 
@@ -112,6 +115,136 @@ function InstructorDesk() {
            course.course_stats.user_cbt_stats.cbt_points;
   }
 
+  const generatePerformancePDF = () => {
+    console.log('🔍 PDF generation started');
+    console.log('🔍 Selected cohort:', selectedCohort);
+    console.log('🔍 Students data:', students);
+    
+    // Simple test alert to verify function is called
+    // alert('PDF generation function called! Check console for details.');
+    
+    if (!selectedCohort || students.length === 0) {
+      console.log('⚠️ Validation failed - no cohort or students');
+      toast.warning('Please select a cohort and load student data first.');
+      return;
+    }
+
+    try {
+      // Test if jsPDF is available
+      console.log('🔍 jsPDF available:', typeof jsPDF);
+      console.log('🔍 jsPDF constructor:', jsPDF);
+      
+      // Get cohort name
+      const cohortName = cohorts.find(c => c.id === selectedCohort) || 'Unknown Cohort';
+      console.log('🔍 Cohort name:', cohortName);
+      
+      // Create PDF document
+      console.log('🔍 Creating PDF document...');
+      const doc = new jsPDF('landscape', 'mm', 'a4');
+      console.log('🔍 PDF document created');
+      
+      // Add title
+      doc.setFontSize(20);
+      doc.setFont('helvetica', 'bold');
+      doc.text(`Cohort ${selectedCohort} Performance Sheet`, 140, 20, { align: 'center' });
+      
+      // Add date
+      doc.setFontSize(12);
+      doc.setFont('helvetica', 'normal');
+      doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 140, 30, { align: 'center' });
+      
+      // Prepare table data
+      const tableData = [];
+      
+      // Add headers
+      const headers = [
+        'No.',
+        'Student Name',
+        'Student ID',
+        'Course Name',
+        'Assignment (25)',
+        'Attendance (30)',
+        'Contributions (25)',
+        'CBT (20)',
+        'Total (100)'
+      ];
+      
+      // Add student data with numbering
+      let rowNumber = 1;
+      students.forEach(student => {
+        student.courses.forEach((course) => {
+          const assignmentPoints = course.course_stats.user_submission_percentage.submission_points;
+          const attendancePoints = course.course_stats.user_attendance_percentage.attendance_points;
+          const contributionPoints = course.course_stats.user_contribution_stats.contributions_points;
+          const cbtPoints = course.course_stats.user_cbt_stats.cbt_points;
+          const totalPoints = getTotalPoints(course);
+          
+          tableData.push([
+            rowNumber,
+            student.student.name,
+            student.student.user_id,
+            course.course_name,
+            assignmentPoints,
+            attendancePoints,
+            contributionPoints,
+            cbtPoints,
+            totalPoints
+          ]);
+          rowNumber++;
+        });
+      });
+      
+      console.log('🔍 Table data prepared:', tableData);
+      
+      // Generate table
+      console.log('🔍 Generating table...');
+      autoTable(doc, {
+        head: [headers],
+        body: tableData,
+        startY: 40,
+        styles: {
+          fontSize: 10,
+          cellPadding: 3,
+        },
+        headStyles: {
+          fillColor: [68, 46, 121], // Purple color matching your theme
+          textColor: 255,
+          fontStyle: 'bold',
+        },
+        alternateRowStyles: {
+          fillColor: [245, 245, 245],
+        },
+        columnStyles: {
+          0: { cellWidth: 15 }, // No.
+          1: { cellWidth: 35 }, // Student Name
+          2: { cellWidth: 35 }, // Student ID
+          3: { cellWidth: 40 }, // Course Name
+          4: { cellWidth: 30 }, // Assignment
+          5: { cellWidth: 30 }, // Attendance
+          6: { cellWidth: 40 }, // Contributions
+          7: { cellWidth: 25 }, // CBT
+          8: { cellWidth: 25 }, // Total
+        },
+        margin: { top: 40, right: 10, left: 10, bottom: 20 },
+      });
+      
+      console.log('🔍 Table generated, saving PDF...');
+      
+      // Save PDF
+      const fileName = `Cohort${selectedCohort.replace(/\s+/g, '_')}_Performance_Sheet_${new Date().toISOString().split('T')[0]}.pdf`;
+      console.log('🔍 File name:', fileName);
+      doc.save(fileName);
+      
+      console.log('✅ PDF saved successfully');
+      toast.success('Performance sheet downloaded successfully!');
+    } catch (error) {
+      console.error('❌ Error generating PDF:', error);
+      console.error('❌ Error details:', error.message);
+      console.error('❌ Error stack:', error.stack);
+      toast.error('Failed to generate PDF. Please try again.');
+    }
+  };
+
   return (
     <div className="instructor-desk">
       <h1 className="desk-title">My Desk</h1>
@@ -177,6 +310,18 @@ function InstructorDesk() {
           disabled={!selectedCohort}
         >
           Apply Filter
+        </button>
+        
+        {/* Download Performance Sheet Button */}
+        <button
+          type="button"
+          className="download-button"
+          onClick={generatePerformancePDF}
+          disabled={!selectedCohort || students.length === 0}
+          title="Download performance sheet as PDF"
+        >
+          <FontAwesomeIcon icon={faDownload} className="button-icon" />
+          Performance Sheet
         </button>
       </div>
 

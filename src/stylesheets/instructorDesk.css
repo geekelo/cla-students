@@ -188,6 +188,34 @@
   transform: none;
 }
 
+.download-button {
+  background-color: #937dce;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  min-width: 180px;
+}
+
+.download-button:hover {
+  background-color: #60518a;
+  transform: translateY(-2px);
+}
+
+.download-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
 /* Mobile responsive adjustments */
 @media (max-width: 768px) {
   .cohort-filter {
@@ -211,6 +239,11 @@
     width: 100%;
     padding: 0.75rem;
   }
+  
+  .download-button {
+    width: 100%;
+    padding: 0.75rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -229,6 +262,11 @@
   }
   
   .filter-button {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+  
+  .download-button {
     padding: 0.6rem;
     font-size: 0.9rem;
   }
