@@ -19,6 +19,15 @@ function Header() {
     navigate('/');
   };
 
+  const handleNavItemClick = () => {
+    setIsMenuOpen(false);
+  };
+
+  const handleLogoutClick = () => {
+    setIsMenuOpen(false);
+    handleLogout();
+  };
+
   // Create a function to check login status
   const checkLoginStatus = () => {
     const token = sessionStorage.getItem('authToken');
@@ -57,42 +66,42 @@ function Header() {
       <nav className={`nav ${isMenuOpen ? 'nav-open' : ''}`}>
         <ul className="nav-list">
           <li className="nav-item">
-            <Link to="/" className="nav-link">
+            <Link to="/" className="nav-link" onClick={handleNavItemClick}>
               Home
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/about" className="nav-link">
+            <Link to="/about" className="nav-link" onClick={handleNavItemClick}>
               About
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/programs" className="nav-link">
+            <Link to="/programs" className="nav-link" onClick={handleNavItemClick}>
               Programs
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/faculty" className="nav-link">
+            <Link to="/faculty" className="nav-link" onClick={handleNavItemClick}>
               Faculty
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/faq" className="nav-link">
+            <Link to="/faq" className="nav-link" onClick={handleNavItemClick}>
               FAQs
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/contact" className="nav-link">
+            <Link to="/contact" className="nav-link" onClick={handleNavItemClick}>
               Contact
             </Link>
           </li>
           <li className="nav-item">
             {isLoggedIn ? (
-              <Link to="/" onClick={handleLogout} className="nav-link login">
+              <Link to="/" onClick={handleLogoutClick} className="nav-link login">
                 Logout
               </Link>
             ) : (
-              <Link to="/login" className="nav-link login">
+              <Link to="/login" className="nav-link login" onClick={handleNavItemClick}>
                 Login
               </Link>
             )}
