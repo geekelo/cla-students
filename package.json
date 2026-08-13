@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "ajv": "^8.17.1",
     "axios": "^1.7.9",
+    "caniuse-lite": "^1.0.30001809",
     "dotenv": "^16.4.7",
     "jspdf": "^3.0.2",
     "jspdf-autotable": "^5.0.2",
