@@ -1,147 +1,103 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faLinkedin,
   faYoutube,
 } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope, faGlobe } from '@fortawesome/free-solid-svg-icons';
+import {
+  faEnvelope,
+  faGlobe,
+  faPhone,
+  faCross,
+} from '@fortawesome/free-solid-svg-icons';
 import '../stylesheets/footer.css';
-// import footerlogo from '../../assets/footerlogo.png';
 
-// FooterSection component
 function FooterSection() {
   return (
     <footer className="site-footer">
-      {/* Main container for the footer */}
-      <div className="container">
-        <div className="row">
-          {/* First column: Information for guests */}
-          <div className="column-one-text">
-            <h6 className="footer-headers">About</h6>
-            <p className="text-justify">
-              Christian Leadership Academy (CLA) is an academy committed to
-              providing high-quality, faith-based training to students
-              worldwide. In the first year of running this program, all our
-              courses will be free for all students. We aim to foster a
-              supportive environment where believers can grow spiritually.
-            </p>
-          </div>
-
-          {/* Second column: Information for organizers */}
-          <div className="mission-vision">
-            <div className="">
-              <h6 className="footer-headers">Vision</h6>
-              <p className="text-justify">
-                To produce servant-transformational leaders who bring true
-                change in every endeavour of life.
-              </p>
-            </div>
-            <div>
-            <h6 className="footer-headers">Mission</h6>
-              <p className="text-justify">
-                Our Mission is to develop Christian-driven leaders who are
-                adaptive in bringing change and influential in advancing God&apos;s
-                kingdom on earth.
-              </p>
-            </div>
-          </div>
-
-          {/* Third column: Quick links to other pages */}
-          <div className="column-one-link">
-            <h6 className="footer-headers">Quick Links</h6>
-            <ul className="footer-links">
-              <li>
-                <Link to="/about" className="links">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link to="/facaulty" className="links">
-                  Faculties
-                </Link>
-              </li>
-              <li>
-                <Link to="/faq" className="links">
-                  Help | FAQs
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="links">
-                  Contact
-                </Link>
-              </li>
-            <li>
-     💡<a href="https://wa.me/+2347070392387" target="_blank" rel="noopener noreferrer" style={{ color: 'white', textDecoration: 'none' }}
->
-      Contact Developer
-       </a>
-            </li>
-            </ul>
-          </div>
+      <div className="footer-main">
+        <div className="footer-brand">
+          <img src="/JJRSF purple.png" alt="JJRSF Christian Leadership Academy" className="footer-logo" />
+          <p>
+            Christian Leadership Academy is committed to providing high-quality,
+            faith-based training that equips believers to become servant-
+            transformational leaders.
+          </p>
         </div>
-        <hr />
+
+        <div className="footer-links-block">
+          <h6>Quick Links</h6>
+          <ul className="footer-links">
+            <li><Link to="/about">About</Link></li>
+            <li><Link to="/programs">Programs</Link></li>
+            <li><Link to="/faculty">Faculty</Link></li>
+            <li><Link to="/faq">FAQs</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
+            <li><Link to="/login">Student Login</Link></li>
+          </ul>
+        </div>
+
+        <div className="footer-connect">
+          <h6>Connect With Us</h6>
+          <ul className="footer-contact-list">
+            <li>
+              <FontAwesomeIcon icon={faEnvelope} />
+              <a href="mailto:jjrsfoundation@gmail.com">jjrsfoundation@gmail.com</a>
+            </li>
+            <li>
+              <FontAwesomeIcon icon={faPhone} />
+              <a href="https://wa.me/+2347070392387" target="_blank" rel="noopener noreferrer">
+                +234 707 039 2387
+              </a>
+            </li>
+            <li>
+              <FontAwesomeIcon icon={faGlobe} />
+              <a href="https://cla.jjrsf.org" target="_blank" rel="noopener noreferrer">
+                cla.jjrsf.org
+              </a>
+            </li>
+          </ul>
+          <ul className="social-icons">
+            <li>
+              <a
+                href="https://www.linkedin.com/showcase/jjrsf-cla/?viewAsMember=true"
+                aria-label="LinkedIn"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FontAwesomeIcon icon={faLinkedin} />
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.youtube.com/@jesusjirehrapha4725"
+                aria-label="YouTube"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FontAwesomeIcon icon={faYoutube} />
+              </a>
+            </li>
+            <li>
+              <a href="mailto:jjrsfoundation@gmail.com" aria-label="Email">
+                <FontAwesomeIcon icon={faEnvelope} />
+              </a>
+            </li>
+            <li>
+              <a href="https://cla.jjrsf.org" aria-label="Website" target="_blank" rel="noopener noreferrer">
+                <FontAwesomeIcon icon={faGlobe} />
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
 
-      {/* Container for footer bottom section */}
-      <div className="container">
-        <div className="row">
-          {/* Footer logo and copyright text */}
-          <div className="column-two">
-            <div>
-              {/* <img src={footerlogo} className="footerlogo" alt="logo" /> */}
-              <p className="copyright-text">
-                Copyright &copy; 2025 All Rights Reserved by &nbsp;
-                <a href="https://geekelo.com.ng">JJRSF CLA</a>
-              </p>
-            </div>
-          </div>
-
-          {/* Social media icons for developer connection */}
-          <div className="column-two">
-            <div className="social-icons">
-              <p>Connect with Us:</p>
-              <ul className="social-icons">
-                <li>
-                  <a
-                    className="linkedin"
-                    href="https://www.linkedin.com/showcase/jjrsf-cla/?viewAsMember=true"
-                    aria-label="LinkedIn"
-                  >
-                    <FontAwesomeIcon icon={faLinkedin} />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="email"
-                    href="https://www.youtube.com/@jesusjirehrapha4725"
-                    aria-label="YouTube"
-                  >
-                    <FontAwesomeIcon icon={faYoutube} />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="globe"
-                    href="cla.jjrsf.org"
-                    aria-label="Website"
-                  >
-                    <FontAwesomeIcon icon={faGlobe} />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="facebook"
-                    href="jjrsfoundation@gmail.com"
-                    aria-label="Email"
-                  >
-                    <FontAwesomeIcon icon={faEnvelope} />
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      <div className="footer-bottom">
+        <p>© {new Date().getFullYear()} JJRSF Christian Leadership Academy. All Rights Reserved.</p>
+        <p className="footer-tagline">
+          Empowered by Faith. Driven by Purpose.
+          <FontAwesomeIcon icon={faCross} />
+        </p>
       </div>
     </footer>
   );
