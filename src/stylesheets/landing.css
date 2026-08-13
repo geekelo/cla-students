@@ -30,7 +30,7 @@
   min-height: 72vh;
   display: flex;
   align-items: center;
-  background-image: url('/bible-study.jpg');
+  background-image: url('../../public/bible-study.jpg');
   background-size: cover;
   background-position: center;
   color: #fff;
