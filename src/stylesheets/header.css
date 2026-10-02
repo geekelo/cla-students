@@ -25,6 +25,17 @@
   display: block;
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-auth {
+  display: flex;
+  align-items: center;
+}
+
 .nav {
   display: flex;
 }
@@ -168,8 +179,32 @@
 }
 
 @media (max-width: 900px) {
+  .header-auth {
+    order: 1;
+    position: relative;
+    z-index: 1003;
+  }
+
   .mobile-menu-btn {
     display: block;
+    order: 2;
+  }
+
+  .header-auth .auth-btn {
+    display: inline-flex;
+    width: auto;
+    margin: 0;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #442e79;
+    border-color: #442e79;
+    background: #fff;
+    white-space: nowrap;
+  }
+
+  .header-auth .auth-btn:hover {
+    background-color: #f3effa;
+    color: #442e79;
   }
 
   .logo {
@@ -250,20 +285,6 @@
   .apply-btn:hover {
     background: #f3effa;
     color: #442e79 !important;
-  }
-
-  .auth-btn {
-    margin-top: 0;
-    width: 100%;
-    justify-content: center;
-    text-align: center;
-    border-color: #ffffff;
-    color: #ffffff;
-  }
-
-  .auth-btn:hover {
-    background-color: #ffffff;
-    color: rgba(68, 46, 121, 1);
   }
 
   .menu-icon,

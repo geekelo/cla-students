@@ -19,6 +19,19 @@
   overflow-x: hidden;
 }
 
+.home p,
+.home-hero-kicker,
+.home-hero-text,
+.home li {
+  text-align: justify;
+}
+
+.home h1,
+.home h2,
+.home h3 {
+  text-align: left;
+}
+
 .home-container {
   width: min(1140px, calc(100% - 40px));
   margin: 0 auto;
@@ -30,7 +43,7 @@
   min-height: 72vh;
   display: flex;
   align-items: center;
-  background-image: url('../../public/bible-study.jpg');
+  background-image: url('../../public/home-hero.jpg');
   background-size: cover;
   background-position: center;
   color: #fff;
@@ -248,7 +261,7 @@
 }
 
 .home-program-item {
-  text-align: center;
+  text-align: left;
 }
 
 .home-program-icon {
@@ -267,6 +280,7 @@
   margin: 0 0 8px;
   font-size: 1rem;
   color: var(--home-text);
+  text-align: center;
 }
 
 .home-program-item p {

@@ -68,6 +68,7 @@ function Header() {
           <img src="/JJRSF purple.png" alt="JJRSF Christian Leadership Academy" className="logo" />
         </Link>
       </div>
+      <div className="header-right">
       <button type="button" className="mobile-menu-btn" onClick={toggleMenu} aria-label="Toggle menu">
         <span className={`menu-icon ${isMenuOpen ? 'open' : ''}`} />
       </button>
@@ -137,19 +138,22 @@ function Header() {
             >
               Apply Now
             </a>
-            {isLoggedIn ? (
-              <button type="button" onClick={handleLogoutClick} className="nav-link auth-btn">
-                <FontAwesomeIcon icon={faPowerOff} />
-                Logout
-              </button>
-            ) : (
-              <Link to="/login" className="nav-link auth-btn" onClick={handleNavItemClick}>
-                Login
-              </Link>
-            )}
           </li>
         </ul>
       </nav>
+      <div className="header-auth">
+        {isLoggedIn ? (
+          <button type="button" onClick={handleLogoutClick} className="nav-link auth-btn">
+            <FontAwesomeIcon icon={faPowerOff} />
+            Logout
+          </button>
+        ) : (
+          <Link to="/login" className="nav-link auth-btn" onClick={handleNavItemClick}>
+            Login
+          </Link>
+        )}
+      </div>
+      </div>
     </header>
   );
 }
