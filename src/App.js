@@ -12,6 +12,7 @@ import Faculty from './components/pages/Faculty';
 import FacultyDetail from './components/pages/FacultyDetail';
 import FAQ from './components/pages/FAQ';
 import Contact from './components/pages/Contact';
+import Apply from './components/pages/Apply';
 import ForgotPassword from './components/auth/forgotPassword';
 import ResetPassword from './components/auth/resetPassword';
 
@@ -32,6 +33,7 @@ function App() {
         <Route path="/faculty/:id" element={<FacultyDetail />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/apply" element={<Apply />} />
       </Routes>
       <Footer />
     </Router>

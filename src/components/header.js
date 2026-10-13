@@ -4,8 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
 import '../stylesheets/header.css';
 
-const APPLY_URL = 'https://forms.gle/LPTgtCnJDonnXkgh6';
-
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -129,15 +127,13 @@ function Header() {
             </Link>
           </li>
           <li className="nav-item nav-actions">
-            <a
-              href={APPLY_URL}
-              className="nav-link apply-btn"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/apply"
+              className={`nav-link apply-btn ${isActive('/apply') ? 'active' : ''}`}
               onClick={handleNavItemClick}
             >
               Apply Now
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

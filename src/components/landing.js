@@ -16,8 +16,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import '../stylesheets/landing.css';
 
-const APPLY_URL = 'https://forms.gle/LPTgtCnJDonnXkgh6';
-
 function Landing() {
   return (
     <main className="home">
@@ -34,10 +32,10 @@ function Landing() {
             training to students worldwide.
           </p>
           <div className="home-hero-actions">
-            <a href={APPLY_URL} className="home-btn home-btn-primary" target="_blank" rel="noopener noreferrer">
+            <Link to="/apply" className="home-btn home-btn-primary">
               Apply Now
               <FontAwesomeIcon icon={faArrowRight} />
-            </a>
+            </Link>
             <Link to="/about" className="home-btn home-btn-outline">
               Learn More
             </Link>
@@ -188,10 +186,10 @@ function Landing() {
                 </p>
               </div>
             </div>
-            <a href={APPLY_URL} className="home-btn home-btn-light" target="_blank" rel="noopener noreferrer">
+            <Link to="/apply" className="home-btn home-btn-light">
               Apply Now
               <FontAwesomeIcon icon={faArrowRight} />
-            </a>
+            </Link>
           </div>
         </div>
       </section>

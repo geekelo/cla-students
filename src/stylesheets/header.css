@@ -92,6 +92,11 @@
   border-bottom: none !important;
 }
 
+.apply-btn.active {
+  color: #fff !important;
+  border-bottom: none !important;
+}
+
 .apply-btn:hover {
   background: #35235f;
   color: #fff !important;
