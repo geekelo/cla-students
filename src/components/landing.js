@@ -26,7 +26,7 @@ function Landing() {
             <FontAwesomeIcon icon={faCross} className="home-hero-cross" />
             JJRS FOUNDATION EDUCATION SUPPORT INITIATIVE
           </p>
-          <h1 className="home-hero-title">Christian Leadership Academy</h1>
+          <h1 className="home-hero-title">JJRSF Christian Leadership Academy</h1>
           <p className="home-hero-text">
             Our academy is committed to providing high-quality, faith-based
             training to students worldwide.
@@ -51,7 +51,7 @@ function Landing() {
             </div>
             <h2>About Us</h2>
             <p>
-              Christian Leadership Academy equips believers with faith-based
+              JJRSF Christian Leadership Academy equips believers with faith-based
               knowledge and skills to lead with integrity in every sphere of
               influence.
             </p>
@@ -181,8 +181,8 @@ function Landing() {
               <div>
                 <h2>Ready to answer your calling?</h2>
                 <p>
-                  Take the next step in your leadership journey with JJRSF
-                  Christian Leadership Academy.
+                  Take the next step in your leadership journey with
+                  JJRSF Christian Leadership Academy.
                 </p>
               </div>
             </div>

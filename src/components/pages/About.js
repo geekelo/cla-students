@@ -13,7 +13,7 @@ function About() {
           <div className='about-text'>
             <h1 className='about-title'>About Our Program</h1>
             <p className='about-description'>
-              Christian Leadership Academy (CLA) is an academy committed to
+              JJRSF Christian Leadership Academy (CLA) is an academy committed to
               providing high-quality, faith-based training to students
               worldwide. The academy&apos;s mission is to equip believers with
               the necessary knowledge and skills to become effective leaders in

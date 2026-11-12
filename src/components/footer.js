@@ -19,7 +19,7 @@ function FooterSection() {
         <div className="footer-brand">
           <img src="/JJRSF purple.png" alt="JJRSF Christian Leadership Academy" className="footer-logo" />
           <p>
-            Christian Leadership Academy is committed to providing high-quality,
+            JJRSF Christian Leadership Academy is committed to providing high-quality,
             faith-based training that equips believers to become servant-
             transformational leaders.
           </p>
