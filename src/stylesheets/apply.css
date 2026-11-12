@@ -62,7 +62,7 @@
   display: flex;
   justify-content: center;
   overflow-x: auto;
-}
+} 
 
 .apply-embed iframe {
   max-width: 100%;
