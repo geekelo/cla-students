@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import '../../stylesheets/apply.css';
 
 const SURVEY_ACTIVITY = 'inCMwsYs9';
@@ -32,6 +33,8 @@ function Apply() {
           <h1 className="apply-title">Application Form</h1>
           <p className="apply-subtitle">
             Complete the form below to apply to JJRSF Christian Leadership Academy.
+            Please review our{' '}
+            <Link to="/admission-policy">Admission Policy</Link> before applying.
           </p>
         </div>
         <div className="apply-embed" ref={embedRef} />

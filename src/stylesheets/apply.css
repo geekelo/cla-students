@@ -46,6 +46,16 @@
   line-height: 1.6;
 }
 
+.apply-subtitle a {
+  color: #442e79;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.apply-subtitle a:hover {
+  text-decoration: underline;
+}
+
 .apply-embed {
   width: 100%;
   min-height: 520px;

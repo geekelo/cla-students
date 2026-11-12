@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+.admission-page-background {
+  background: linear-gradient(135deg, rgba(68, 46, 121, 0.05) 0%, rgba(107, 76, 166, 0.05) 100%),
+    url('../../public/css-pattern.png');
+  background-repeat: repeat;
+  background-size: 400px;
+  background-position: center;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  opacity: 0.9;
+}
+
+.admission-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 40px 36px 48px;
+  font-family: 'Poppins', sans-serif;
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(68, 46, 121, 0.12);
+  color: #444;
+}
+
+.admission-header {
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #eee8f7;
+}
+
+.admission-header h1 {
+  margin: 0 0 10px;
+  color: #442e79;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.admission-header p {
+  margin: 0;
+  color: #666;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.admission-section {
+  margin-bottom: 28px;
+}
+
+.admission-section h2 {
+  margin: 0 0 12px;
+  color: #442e79;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.admission-section p,
+.admission-section li {
+  margin: 0 0 10px;
+  line-height: 1.7;
+  font-size: 0.95rem;
+  text-align: justify;
+}
+
+.admission-section ul,
+.admission-section ol {
+  margin: 8px 0 0;
+  padding-left: 1.35rem;
+}
+
+.admission-section li {
+  margin-bottom: 10px;
+}
+
+.admission-section a {
+  color: #442e79;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.admission-section a:hover {
+  text-decoration: underline;
+}
+
+.admission-contact {
+  list-style: none;
+  padding-left: 0;
+}
+
+.admission-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+  padding-top: 24px;
+  border-top: 1px solid #eee8f7;
+}
+
+.admission-apply-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  background: #442e79;
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.admission-apply-btn:hover {
+  background: #35235f;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+  .admission-container {
+    margin: 16px;
+    padding: 24px 18px 32px;
+  }
+}

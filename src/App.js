@@ -13,6 +13,7 @@ import FacultyDetail from './components/pages/FacultyDetail';
 import FAQ from './components/pages/FAQ';
 import Contact from './components/pages/Contact';
 import Apply from './components/pages/Apply';
+import AdmissionPolicy from './components/pages/AdmissionPolicy';
 import ForgotPassword from './components/auth/forgotPassword';
 import ResetPassword from './components/auth/resetPassword';
 
@@ -34,6 +35,7 @@ function App() {
         <Route path="/faq" element={<FAQ />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/apply" element={<Apply />} />
+        <Route path="/admission-policy" element={<AdmissionPolicy />} />
       </Routes>
       <Footer />
     </Router>

@@ -92,6 +92,15 @@ function Header() {
           </li>
           <li className="nav-item">
             <Link
+              to="/admission-policy"
+              className={`nav-link ${isActive('/admission-policy') ? 'active' : ''}`}
+              onClick={handleNavItemClick}
+            >
+              Admissions
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link
               to="/programs"
               className={`nav-link ${isActive('/programs') ? 'active' : ''}`}
               onClick={handleNavItemClick}

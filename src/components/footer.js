@@ -29,10 +29,12 @@ function FooterSection() {
           <h6>Quick Links</h6>
           <ul className="footer-links">
             <li><Link to="/about">About</Link></li>
+            <li><Link to="/admission-policy">Admissions</Link></li>
             <li><Link to="/programs">Programs</Link></li>
             <li><Link to="/faculty">Faculty</Link></li>
             <li><Link to="/faq">FAQs</Link></li>
             <li><Link to="/contact">Contact</Link></li>
+            <li><Link to="/apply">Apply</Link></li>
             <li><Link to="/login">Student Login</Link></li>
           </ul>
         </div>
